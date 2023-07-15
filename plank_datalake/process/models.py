@@ -1,6 +1,6 @@
 from django.db import models
 
-class Tabela(models.Model):
+class Tables(models.Model):
     """
     Model that represents a table in the metadata table.
 
@@ -60,8 +60,8 @@ class Tabela(models.Model):
     str_desc = models.TextField()
     str_owner = models.CharField(max_length=200)
     str_owner_email = models.EmailField()
-    dth_start_at = models.DateField()
-    dth_last_updated = models.DateTimeField(auto_now=True)
+    dth_start_at = models.DateField(auto_now=True)
+    dth_last_updated = models.DateTimeField()
     int_size = models.IntegerField()
     int_number_of_rows = models.IntegerField()
     float_perc_growth = models.FloatField()

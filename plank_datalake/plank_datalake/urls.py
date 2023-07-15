@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from process.views import TablesView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add-table/', TablesView.as_view(),name='table_add'),
+    path('view-table/<str:argument>',TablesView.as_view(),name='table_view')
 ]
