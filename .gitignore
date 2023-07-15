@@ -1,0 +1,12 @@
+# Ignorar tudo dentro da pasta venv
+myvenv/
+
+# Ignorar as migrações
+**/migrations/
+
+# Ignorar os caches
+**/__pycache__/
+
+*.log
+*.pot
+*.pyc
