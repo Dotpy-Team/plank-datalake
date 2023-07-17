@@ -19,6 +19,9 @@ from process.views import TablesView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', TablesView.as_view(), name='login'),
+    path('logout/', TablesView.as_view(), name='logout'),
     path('add-table/', TablesView.as_view(),name='table_add'),
-    path('view-table/<str:argument>',TablesView.as_view(),name='table_view')
+    path('view-table/<str:argument>',TablesView.as_view(),name='table_view'),
+    path('view-tables/',TablesView.as_view(),name='table_view')
 ]

@@ -1,0 +1,24 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<h1>Tabela de Dados</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <!-- Adicione mais colunas conforme necessário -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for table in tables %}
+            <tr>
+                <td>{{ table.id_table }}</td>
+                <td>{{ table.str_name }}</td>
+                <td>{{ table.str_desc }}</td>
+                <!-- Adicione mais colunas conforme necessário -->
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -15,7 +15,7 @@ def uncrip(crip):
 
 class TablesView(View):
     def __init__(self):
-        self.template_path = 'tables/'
+        self.template_path = 'process/tables/'
 
     def parse_html_path(self,page):
         html_location = self.template_path + f'{page}.html'
@@ -29,12 +29,11 @@ class TablesView(View):
         }
         return render(request, html_location, dict_form)
     
-    # @login_required
-    # def get_profiles(self, request):
-    #     company = Tables.objects.all()
-    #     html_location = self.parse_html_path('list_profiles')
-    #     response_dict = {'companies': company}
-    #     return render(request, html_location, response_dict)
+    def get_tables(self, request):
+        tables = Tables.objects.all()
+        html_location = self.parse_html_path('list')
+        response_dict = {'tables': tables}
+        return render(request, html_location, response_dict)
     
     def get_table(self,request,id_table):
         try:
@@ -51,6 +50,8 @@ class TablesView(View):
         elif argument is not None:
             id_tabela = uncrip(argument)
             return self.get_table(request,id_tabela)
+        elif argument is None:
+            return self.get_tables(request)
 
 
     def post(self, request):

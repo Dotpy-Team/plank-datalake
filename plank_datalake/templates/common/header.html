@@ -6,6 +6,7 @@
         <div class="logo">
             <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo">
         </div>
+        
         {% comment %} DIV NAV-MENU  {% endcomment %}
 
         <ul class="nav-menu">
@@ -14,8 +15,9 @@
             <li><a href="view-workloads/">Workloads</a></li>
             <li><a href="view-jobs/">Jobs</a></li>
         </ul>
+
         {% comment %} DIV LOGIN {% endcomment %}
-        
+
         <div class="login">
             {% if user.is_authenticated %}
                 <p>Bem-vindo, {{ user.username }}!</p>

@@ -1,6 +1,5 @@
-<!-- detail_table.html -->
-<!DOCTYPE html>
-<html>
+{% extends 'common/base.html' %}
+{% block content %}
 <head>
     <title>Detalhes da Tabela</title>
 </head>
@@ -10,7 +9,6 @@
         <li>Id: {{ table.id_table }}</li>
         <li>Nome: {{ table.str_name }}</li>
         <li>Descrição: {{ table.str_ }}</li>
-        <!-- Adicione mais campos conforme necessário -->
     </ul>
 </body>
-</html>
+{% endblock %}
