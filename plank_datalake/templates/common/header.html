@@ -1,0 +1,28 @@
+{% load static %}
+<header>
+    <nav class="navbar">
+        {% comment %}  DIV LOGO DENTRO DA NAVBAR {% endcomment %}
+
+        <div class="logo">
+            <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo">
+        </div>
+        {% comment %} DIV NAV-MENU  {% endcomment %}
+
+        <ul class="nav-menu">
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="view-tables/">Tabelas</a></li>
+            <li><a href="view-workloads/">Workloads</a></li>
+            <li><a href="view-jobs/">Jobs</a></li>
+        </ul>
+        {% comment %} DIV LOGIN {% endcomment %}
+        
+        <div class="login">
+            {% if user.is_authenticated %}
+                <p>Bem-vindo, {{ user.username }}!</p>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
