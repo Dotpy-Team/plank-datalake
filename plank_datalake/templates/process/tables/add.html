@@ -1,10 +1,106 @@
 {% extends 'common/base.html' %}
-
 {% block content %}
-<h1>Adicionar Tabela</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Salvar</button>
-</form>
+
+<div class="container">
+    <h1>Adicionar Tabela</h1>
+
+    <form method="post" class="form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_customer">id_customer</label>
+            {{ form.id_customer }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_workload">ID Workload</label>
+            {{ form.id_workload }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_name">str_name</label>
+            {{ form.str_name }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_system">Str System</label>
+            {{ form.str_system }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_dataset">str_dataset</label>
+            {{ form.str_dataset }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_desc">str_desc</label>
+            {{ form.str_desc }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_frequency">Str Frequency</label>
+            {{ form.str_frequency }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_mode">Mode</label>
+            {{ form.str_mode }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_type">type</label>
+            {{ form.str_type }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_owner">str_owner</label>
+            {{ form.str_owner }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_owner_email">str_owner_email</label>
+            {{ form.str_owner_email }}
+        </div>
+
+        <div class="form-group">
+            <label for="int_hour_of">Int Hour Of</label>
+            {{ form.int_hour_of }}
+        </div>
+
+        <div class="form-group">
+            <label for="dth_last_updated">dth_last_updated</label>
+            {{ form.dth_last_updated }}
+        </div>
+
+        <div class="form-group">
+            <label for="int_size">int_size</label>
+            {{ form.int_size }}
+        </div>
+
+        <div class="form-group">
+            <label for="int_number_of_rows">int_number_of_rows</label>
+            {{ form.int_number_of_rows }}
+        </div>
+
+        <div class="form-group">
+            <label for="float_perc_growth">float_perc_growth</label>
+            {{ form.float_perc_growth }}
+        </div>
+
+        <div class="form-group">
+            <label for="float_perc_growth">float_perc_growth</label>
+            {{ form.float_perc_growth }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_id_version">str_id_version</label>
+            {{ form.str_id_version }}
+        </div>
+
+        <!-- Adicione os demais campos do formulário aqui -->
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
+
 {% endblock %}

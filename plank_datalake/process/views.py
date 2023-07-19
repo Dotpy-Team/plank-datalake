@@ -56,7 +56,7 @@ class TablesView(View):
 
     def post(self, request):
         form = TablesForm(request.POST)
-        
+        print(form.errors)
         html_location = self.parse_html_path('add')
 
         if form.is_valid():

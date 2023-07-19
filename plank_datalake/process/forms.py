@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tables
+from .models import Tables,Columns,WorkLoads,Dependencies,JobRun
 
 
 class TablesForm(forms.ModelForm):
@@ -23,4 +23,57 @@ class TablesForm(forms.ModelForm):
             "int_number_of_rows",
             "float_perc_growth",
             "str_id_version"
+        ]
+
+
+class ColumnsForm(forms.ModelForm):
+    class Meta:
+        model = Columns
+        fields = [
+        'id_table',
+        'str_source_name',
+        'str_rename',
+        'str_from_datatype',
+        'str_datatype_to_apply',
+        'str_pattern_format',
+        'str_primary_key',
+        'str_change_data_capture',
+        'str_desc'
+        ]
+
+class WorkLoadsForm(forms.ModelForm):
+    class Meta:
+        model = WorkLoads
+        fields = [
+            'id_workload', 
+            'id_customer',
+            'id_table',
+            'str_project',
+            'str_relative_import',
+            'dth_last_updated',
+            'dth_start_at'
+        ]
+
+
+class DependenciesForm(forms.ModelForm):
+    class Meta:
+        model = Dependencies
+        fields = [
+            'id_workload_node',
+            'id_workload_edge',
+            'str_status',
+            'dth_start_at'
+    ]
+
+
+class JobRunForm(forms.ModelForm):
+    class Meta:
+        model = JobRun
+        fields = [
+            'id_job',
+            'id_workload',
+            'dth_last_updated',
+            'dth_start_at',
+            'int_total_size',
+            'int_total_rows'
         ]

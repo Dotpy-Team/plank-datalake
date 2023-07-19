@@ -1,29 +1,44 @@
 {% load static %}
+{% load bootstrap4 %}
 <header>
-    <nav class="navbar">
-        {% comment %}  DIV LOGO DENTRO DA NAVBAR {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-        <div class="logo">
+        <a class="navbar-brand" href="/">
             <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo">
-        </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         
-        {% comment %} DIV NAV-MENU  {% endcomment %}
-
-        <ul class="nav-menu">
-            <li><a href="/">Página Inicial</a></li>
-            <li><a href="view-tables/">Tabelas</a></li>
-            <li><a href="view-workloads/">Workloads</a></li>
-            <li><a href="view-jobs/">Jobs</a></li>
-        </ul>
-
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/add-table/">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/add-table/">Table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view-tables/">Workload</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view-tables/">Job</a>
+            </li>
+            </ul>
+        </div>
         {% comment %} DIV LOGIN {% endcomment %}
 
         <div class="login">
+
             {% if user.is_authenticated %}
                 <p>Bem-vindo, {{ user.username }}!</p>
                 <a href="{% url 'logout' %}">Logout</a>
+
             {% else %}
+
                 <a href="{% url 'login' %}">Login</a>
+
             {% endif %}
         </div>
     </nav>
