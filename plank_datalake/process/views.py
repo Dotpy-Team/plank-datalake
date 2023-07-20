@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.urls import reverse
 from django.http import Http404
 from django.views import View
 from .models import Tables
@@ -15,7 +16,7 @@ def uncrip(crip):
 
 class TablesView(View):
     def __init__(self):
-        self.template_path = 'process/tables/'
+        self.template_path = 'process/Tables/'
 
     def parse_html_path(self,page):
         html_location = self.template_path + f'{page}.html'
@@ -30,7 +31,14 @@ class TablesView(View):
         return render(request, html_location, dict_form)
     
     def get_tables(self, request):
+        print(request.user)
         tables = Tables.objects.all()
+        for table in tables:
+            table.detail_url = reverse(
+                'table_view', 
+                args=[crip(str(table.id_table))]
+            )
+            table.save()
         html_location = self.parse_html_path('list')
         response_dict = {'tables': tables}
         return render(request, html_location, response_dict)

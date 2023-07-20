@@ -1,14 +1,51 @@
 {% extends 'common/base.html' %}
 {% block content %}
-<head>
-    <title>Detalhes da Tabela</title>
-</head>
 <body>
-    <h1>Detalhes da Tabela</h1>
+    <h6><b>Detalhes da Tabela:</b></h6>
+    <br>
     <ul>
-        <li>Id: {{ table.id_table }}</li>
-        <li>Nome: {{ table.str_name }}</li>
-        <li>Descrição: {{ table.str_desc }}</li>
+        <h1 class="display-6" style="color:blue;"> <b> {{ table.str_name }} </b> </h1>
+        <h4>{{ table.str_system }}</h4>
+        <h6>{{ table.str_dataset }}</h6>
+        <br>
+        <h6><b>Descrição:</b></h6>
+        <figcaption class="blockquote-footer">
+            {{ table.str_desc }}
+        </figcaption>
+        <br>
+        <h6><b>Configurações:</b></h6>
+        <ul>
+            <li><b>Frequência:</b> {{ table.str_frequency }}</li>
+            <li><b>Mode:</b> {{ table.str_mode }}</li>
+            <li><b>Tipo de Ingestão:</b> {{ table.str_type }}</li>
+        </ul>
+        <br>
+        <h6><b>Colunas:</b></h6>
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Renomear</th>
+                        <th>Datatype</th>
+                        <!-- Adicione mais colunas conforme necessário -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% comment %} {% for column in columns %} {% endcomment %}
+                        <tr>
+                            <!-- deixar a linha grifada com scope="row" -->
+                            <th scope="row"> XPTO </td>
+                            <td> XPTO_Y </td>
+                            <td> STRING </td>
+                            <!-- Adicione mais colunas conforme necessário -->
+                        </tr>
+                    {% comment %} {% endfor %} {% endcomment %}
+                </tbody>
+                <!-- #heading for table -->
+                <caption>Colunas Cadastradas.</caption>                
+            </table>
+
     </ul>
 </body>
 {% endblock %}

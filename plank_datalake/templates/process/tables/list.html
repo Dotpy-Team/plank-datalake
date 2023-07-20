@@ -1,24 +1,31 @@
 {% extends 'common/base.html' %}
 {% block content %}
-<h1>Tabela de Dados</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <!-- Adicione mais colunas conforme necessário -->
-        </tr>
-    </thead>
-    <tbody>
-        {% for table in tables %}
-            <tr>
-                <td>{{ table.id_table }}</td>
-                <td>{{ table.str_name }}</td>
-                <td>{{ table.str_desc }}</td>
-                <!-- Adicione mais colunas conforme necessário -->
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+ <div class="container">
+        <h1>Tabelas Cadastradas</h1>
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Sistema</th>
+                        <!-- Adicione mais colunas conforme necessário -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for table in tables %}
+                        <tr>
+                            <!-- deixar a linha grifada com scope="row" -->
+                            <th scope="row">
+                                <a class="nav-link" href="{{ table.detail_url }}">{{ table.str_name }}</a>
+                            </td>
+                            <td>{{ table.str_desc }}</td>
+                            <td>{{ table.str_system}}</td>
+                            <!-- Adicione mais colunas conforme necessário -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <!-- #heading for table -->
+                <caption>Listagem de tabelas.</caption>                
+            </table>
 {% endblock %}
