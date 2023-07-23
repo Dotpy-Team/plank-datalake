@@ -6,44 +6,23 @@
 <head>
     <title>PLANK</title>
     <!-- Inclua os arquivos CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/darkly.min.css' %}">
     <style>
-        /* Estilo personalizado para o header */
-        header {
-            background-color: white; /* Cor de fundo branca */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra na borda inferior */
-        }
-        /* Estilo personalizado para as informações de atalho */
-        .navbar-nav {
-            margin: 0 auto; /* Centraliza os links */
-            display: flex; /* Exibe os links em uma linha */
-            align-items: center; /* Alinha os links verticalmente no centro */
-        }
-        /* Estilo personalizado para cada link individual (opcional) */
-        .nav-item {
-            margin: 0 10px; /* Espaçamento entre os links */
-        }
-        /* Estilo personalizado para o logo */
-        .navbar-brand {
-            margin-right: auto; /* Move o logo para o lado direito */
-        }
-        /* Estilo para adicionar espaçamento ao conteúdo para evitar sobreposição pelo header */
         body {
-            padding-top: 80px; /* Ajuste o valor conforme necessário */
+            padding-top: 80px; /* Ajuste para o corpo do conteudo ficar abaixo do header */
         }
     </style>
 </head>
 <body>
 
-
     {% include 'common/header.html' %}
 
-    <div class="container mt-5">
+    <div class="containe mt-5">
         {% block content %}
 
         {% endblock %}
     </div>
-    
+
     {% include 'common/footer.html' %}
 
 </body>

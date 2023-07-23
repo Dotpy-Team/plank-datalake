@@ -2,105 +2,94 @@
 {% block content %}
 
 <div class="container">
-    <h1>Adicionar Tabela</h1>
 
+    <h1>Adicionar Tabela</h1>
     <form method="post" class="form">
         {% csrf_token %}
 
-        <div class="form-group">
-            <label for="id_customer">id_customer</label>
-            {{ form.id_customer }}
+
+        <div class="row bg-warning">
+            <div class="form-group col-md-2">
+                <label class="col-form-label col-form-label-sm mt-1" for="id_customer">Customer:</label>
+                <input class="form-control form-control-sm mt-1" type="text" placeholder=".form-control-sm" id="id_customer" name="id_customer">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="col-form-label col-form-label-sm mt-1" for="id_workload">Workload:</label>
+                <input class="form-control form-control-sm mt-1" type="text" placeholder=".form-control-sm" id="id_workload" name="id_workload">
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="id_workload">ID Workload</label>
-            {{ form.id_workload }}
+        <div class="form-group col-md-3">
+            <label class="col-form-label col-form-label-sm mt-1" for="str_name">Nome:</label>
+            <input class="form-control form-control-sm mt-1" type="text" placeholder=".form-control-sm" id="str_name" name="str_name">
         </div>
 
-        <div class="form-group">
-            <label for="str_name">str_name</label>
-            {{ form.str_name }}
+        <div class="row">        
+            <div class="form-group col-md-2">
+                <label class="col-form-label col-form-label-sm mt-1" for="str_system">Sistema:</label>
+                <input class="form-control form-control-sm mt-1" type="text" placeholder=".form-control-sm" id="str_system" name="str_system">
+            </div>
+            <div class="form-group col-md-2">
+                <label class="col-form-label col-form-label-sm mt-1" for="str_dataset">DataSet:</label>
+                <input class="form-control form-control-sm mt-1" type="text" placeholder=".form-control-sm" id="str_dataset" name="str_dataset">
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="str_system">Str System</label>
-            {{ form.str_system }}
+        <div class="row">
+            <div class="form-group col-md-2">
+            <label for="str_frequency" class="form-label">Frequencia:</label>
+            <select class="form-select" id="str_frequency" name="str_frequency">
+                {% for value, label in form.fields.str_frequency.choices %}
+                    <option value="{{ value }}" {% if value == form.instance.str_frequency %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="col-form-label col-form-label-sm mt-1" for="int_hour_of">Horario da Execução:</label>
+                <input class="form-control form-control-sm mt-1" type="text" placeholder=".form-control-sm" id="int_hour_of" name="int_hour_of">
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="str_dataset">str_dataset</label>
-            {{ form.str_dataset }}
+        <div class="row">
+            <div class="form-group col-md-2">
+            <label for="str_mode" class="form-label">Modo de Carga:</label>
+            <select class="form-select" id="str_mode" name="str_mode">
+                {% for value, label in form.fields.str_mode.choices %}
+                    <option value="{{ value }}" {% if value == form.instance.str_mode %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <div class="form-group col-md-2">
+            <label for="str_type" class="form-label">Tipo de Processamento:</label>
+            <select class="form-select" id="str_type" name="str_type">
+                {% for value, label in form.fields.str_type.choices %}
+                    <option value="{{ value }}" {% if value == form.instance.str_type %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="str_desc">str_desc</label>
-            {{ form.str_desc }}
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label class="col-form-label col-form-label-sm mt-1" for="str_owner">Responsável:</label>
+                <input class="form-control form-control-sm mt-1" type="text" placeholder=".form-control-sm" id="str_owner" name="str_owner">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="str_owner_email" class="form-label mt-1">Email:</label>
+                <input type="email" class="form-control form-control-sm mt-1" id="str_owner_email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="str_owner_email" class="form-text text-muted">Email do responsável por essa tabela.</small>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="str_frequency">Str Frequency</label>
-            {{ form.str_frequency }}
+        <div class="form-group col-md-6">
+            <label for="str_desc" class="form-label mt-4">Descrição:</label>
+            <textarea class="form-control" id="str_desc" name="str_desc" rows="3"></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="str_mode">Mode</label>
-            {{ form.str_mode }}
-        </div>
+        <button class="btn btn-lg btn-success" type="submit">Salvar!</button>
 
-        <div class="form-group">
-            <label for="str_type">type</label>
-            {{ form.str_type }}
-        </div>
-
-        <div class="form-group">
-            <label for="str_owner">str_owner</label>
-            {{ form.str_owner }}
-        </div>
-
-        <div class="form-group">
-            <label for="str_owner_email">str_owner_email</label>
-            {{ form.str_owner_email }}
-        </div>
-
-        <div class="form-group">
-            <label for="int_hour_of">Int Hour Of</label>
-            {{ form.int_hour_of }}
-        </div>
-
-        <div class="form-group">
-            <label for="dth_last_updated">dth_last_updated</label>
-            {{ form.dth_last_updated }}
-        </div>
-
-        <div class="form-group">
-            <label for="int_size">int_size</label>
-            {{ form.int_size }}
-        </div>
-
-        <div class="form-group">
-            <label for="int_number_of_rows">int_number_of_rows</label>
-            {{ form.int_number_of_rows }}
-        </div>
-
-        <div class="form-group">
-            <label for="float_perc_growth">float_perc_growth</label>
-            {{ form.float_perc_growth }}
-        </div>
-
-        <div class="form-group">
-            <label for="float_perc_growth">float_perc_growth</label>
-            {{ form.float_perc_growth }}
-        </div>
-
-        <div class="form-group">
-            <label for="str_id_version">str_id_version</label>
-            {{ form.str_id_version }}
-        </div>
-
-        <!-- Adicione os demais campos do formulário aqui -->
-        <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>
-
 
 {% endblock %}
