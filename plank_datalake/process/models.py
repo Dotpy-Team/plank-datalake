@@ -34,13 +34,15 @@ class Tables(models.Model):
     str_system = models.CharField(max_length=200)
     str_frequency = models.CharField(
         max_length=20, choices=[
-            ('daily', 'Daily'), 
-            ('monthly', 'Monthly'), 
-            ('hourly', 'Hourly'), 
-            ('weekly', 'Weekly')
+            ('diario', 'Diário'), 
+            ('mensal', 'Mensal'), 
+            ('hora', 'A cada 1 hora'), 
+            ('semanal', 'Semanal')
         ]
     )
-    int_hour_of = models.IntegerField()
+
+    str_hour_of = models.CharField(max_length=200, null=True, blank=True)
+
     str_mode = models.CharField(
         max_length=20, 
         choices=[
@@ -51,8 +53,8 @@ class Tables(models.Model):
     str_type = models.CharField(
         max_length=20, 
         choices=[
-            ('cdc', 'CDC'), 
-            ('full', 'Full')
+            ('cdc', 'Detecte as Mudanças'), 
+            ('full', 'Ultima fotografia')
         ]
     )
     str_dataset = models.CharField(max_length=200)
@@ -60,12 +62,12 @@ class Tables(models.Model):
     str_desc = models.TextField()
     str_owner = models.CharField(max_length=200)
     str_owner_email = models.EmailField()
-    dth_start_at = models.DateField(auto_now=True)
-    dth_last_updated = models.DateTimeField()
-    int_size = models.IntegerField()
-    int_number_of_rows = models.IntegerField()
-    float_perc_growth = models.FloatField()
-    str_id_version = models.CharField(max_length=200)
+    dth_start_at = models.DateTimeField(auto_now=True)
+    dth_last_updated = models.DateTimeField(null=True, blank=True)
+    int_size = models.IntegerField(null=True, blank=True)
+    int_number_of_rows = models.IntegerField(null=True, blank=True)
+    float_perc_growth = models.FloatField(null=True, blank=True)
+    str_id_version = models.CharField(max_length=200, null=True, blank=True)
 
 class Columns(models.Model):
     """
