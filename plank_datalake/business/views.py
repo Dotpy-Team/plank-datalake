@@ -104,15 +104,15 @@ class CustomUserView(View):
 
 class CustomerView(View):
     def __init__(self):
-        self.template_path = 'business/customer/'
+        self.template_path = 'business/Customer/'
 
     def parse_html_path(self,page):
         html_location = self.template_path + f'{page}.html'
         return html_location
 
-    def add(self, request):
+    def signup(self, request):
         form = CustomerForm()
-        html_location = self.parse_html_path('add')
+        html_location = self.parse_html_path('signup')
         dict_form = {
             'form': form
         }
@@ -128,21 +128,24 @@ class CustomerView(View):
     # @login_required
     def get_profile(self,request,id_customer):
         try:
-            company = get_object_or_404(Customer, id_customer=id_customer)
+            customer = get_object_or_404(Customer, id_customer=id_customer)
             html_location = self.parse_html_path('profile')
-            response_dict = {'company': company}
+            response_dict = {'customer': customer}
             return render(request, html_location, response_dict)
         except Http404:
             return redirect('signup_company')
     
     def get(self, request, argument=None):
-        if request.path == '/company/signup/':
-            return self.add(request)
+        if request.path == '/customer/':
+            return self.signup(request)
+        
         elif argument is not None:
             id_customer = uncrip(argument)
             return self.get_profile(request,id_customer)
+        
         elif argument is None:
             return self.get_profiles(request)
+                
         else:
             return redirect('signup_company')
 
@@ -153,13 +156,13 @@ class CustomerView(View):
 
         if form.is_valid():
             company = form.save()
-            return redirect('view_company', company.id_company)
+            return redirect('profile_customer', crip(str(company.id_customer)))
         else:
             response_dict = {'form': form}
             return render(request, html_location, response_dict)
 
-    def put(self, request, id_company=None):
-        company = get_object_or_404(Customer, id_company=id_company)
+    def put(self, request, id_customer=None):
+        company = get_object_or_404(Customer, id_customer=id_customer)
         form = CustomerForm(request.POST, instance=company)
         html_location = self.parse_html_path('profile')
         
@@ -169,5 +172,5 @@ class CustomerView(View):
 
         if form.is_valid():
             form.save()
-            return redirect('details_company', id=id_company)
+            return redirect('details_company', id=id_customer)
         return render(request, html_location, response_dict)

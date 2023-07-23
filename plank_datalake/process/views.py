@@ -25,6 +25,7 @@ class TablesView(View):
     def render_add(self, request):
         form = TablesForm()
         html_location = self.parse_html_path('add')
+
         dict_form = {
             'form': form
         }

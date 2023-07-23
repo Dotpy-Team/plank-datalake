@@ -29,7 +29,7 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = [
-            'id_customer_type',
+            'str_customer_type',
             'str_name',
             'str_cnpj',
             'str_address',

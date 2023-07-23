@@ -39,12 +39,12 @@ class Customer(models.Model):
     
     """
     id_customer = models.AutoField(primary_key=True)
-    id_customer_type = models.CharField(
+    str_customer_type = models.CharField(
         max_length=20, choices=[
-            ('cliente_ativo', 'cliente_ativo'),
-            ('cliente_inativo', 'cliente_inativo'), 
-            ('prospeccao', 'prospeccao'),
-            ('teste', 'teste'),
+            ('ativo', 'Ativo'),
+            ('inativo', 'Inativo'), 
+            ('prospeccao', 'Prospeccao'),
+            ('teste', 'Teste'),
             ('adm', 'adm')
         ]
     )

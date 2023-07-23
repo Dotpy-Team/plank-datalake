@@ -1,0 +1,93 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Adicionar Cliente</h1>
+
+    <form method="post" class="form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="str_customer_type">str_customer_type</label>
+            {{ form.str_customer_type }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_name">str_name</label>
+            {{ form.str_name }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_cnpj">str_cnpj</label>
+            {{ form.str_cnpj }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_address">str_address</label>
+            {{ form.str_address }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_telefone">str_telefone</label>
+            {{ form.str_telefone }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_email">str_email</label>
+            {{ form.str_email }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_site">str_site</label>
+            {{ form.str_site }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_linkedin_profile">str_linkedin_profile</label>
+            {{ form.str_linkedin_profile }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_contact">str_contact</label>
+            {{ form.str_contact }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_setor">str_setor</label>
+            {{ form.str_setor }}
+        </div>
+
+
+        <div class="form-group">
+            <label for="str_size">str_size</label>
+            {{ form.str_size }}
+        </div>
+
+        <div class="form-group">
+            <label for="dth_create">dth_create</label>
+            {{ form.dth_create }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_finance_complement">str_finance_complement</label>
+            {{ form.str_finance_complement }}
+        </div>
+
+
+        <div class="form-group">
+            <label for="str_documents">str_documents</label>
+            {{ form.str_documents }}
+        </div>
+
+        <div class="form-group">
+            <label for="str_comments">str_comments</label>
+            {{ form.str_comments }}
+        </div>
+
+        <!-- Adicione os demais campos do formulário aqui -->
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
+
+{% endblock %}

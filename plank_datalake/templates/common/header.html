@@ -1,45 +1,54 @@
 {% load static %}
 {% load bootstrap4 %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Adicione a classe "fixed-top" para tornar o header fixo no topo -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <!-- Inclua o seu logo aqui -->
+                <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 70px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/add-table/">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/view-tables/">Table</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/view-tables/">Workload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/view-tables/">Job</a>
+                    </li>
+                </ul>
+            </div>
 
-        <a class="navbar-brand" href="/">
-            <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/add-table/">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/view-tables/">Table</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/view-tables/">Workload</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/view-tables/">Job</a>
-            </li>
-            </ul>
-        </div>
-        {% comment %} DIV LOGIN {% endcomment %}
-
-        <div class="login">
-
-            {% if user.is_authenticated %}
-                <p>Bem-vindo, {{ user.username }}!</p>
-                <a href="{% url 'logout' %}">Logout</a>
-
-            {% else %}
-
-                <a href="{% url 'login' %}">Login</a>
-
-            {% endif %}
+            {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                        <i class="fa fa-search"></i> <!-- Ícone de lupa do Bootstrap -->
+                    </button>
+                </form>
+            {% comment %} {% else %} {% endcomment %}
+            {% comment %} {% endif %} {% endcomment %}
+            
+            
+            <div class="login ml-2">
+                {% if user.is_authenticated %}
+                    <p>Bem-vindo, {{ user.username }}!</p>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                {% endif %}
+            </div>
         </div>
     </nav>
 </header>

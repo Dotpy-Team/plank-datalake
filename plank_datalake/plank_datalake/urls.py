@@ -16,25 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from process.views import TablesView
-from business.views import CustomUserView
+from business.views import CustomUserView, CustomerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #home page
     path('',CustomUserView.as_view(), name='home'),
-
     #CUSTOMER: adm
-    path('customer/', CustomUserView.as_view(), name='add'),
-    path('customer-profile/<str:argument>', CustomUserView.as_view(), name='signup'),
-    path('customer-profiles/', CustomUserView.as_view(), name='signup'),
-
+    path('customer/', CustomerView.as_view(), name='add'),
+    path('customer-profile/<str:argument>', CustomerView.as_view(), name='profile_customer'),
+    path('customer-profiles/', CustomerView.as_view(), name='list_customers'),
     #USER: adm
     path('signup/', CustomUserView.as_view(), name='signup'),
     path('login/', CustomUserView.as_view(), name='login'),
     # path('login/', TablesView.as_view(), name='login'),
     # path('logout/', TablesView.as_view(), name='logout'),
     path('profile/<str:argument>', CustomUserView.as_view(), name='user_profile'),
-
     #TABLE adm
     path('add-table/', TablesView.as_view(),name='table_add'),
     path('view-table/<str:argument>',TablesView.as_view(),name='table_view'),
