@@ -2,51 +2,66 @@
 {% block content %}
 
 <div class="container">
-    <h6><b>Detalhes da Tabela:</b></h6>
-    <br>
-    <ul>
-        <h1 class="display-6" style="color:blue;"> <b> {{ table.str_name }} </b> </h1>
-        <h4>{{ table.str_system }}</h4>
-        <h6>{{ table.str_dataset }}</h6>
-        <br>
-        <h6><b>Descrição:</b></h6>
-        <figcaption class="blockquote-footer">
-            {{ table.str_desc }}
-        </figcaption>
-        <br>
-        <h6><b>Configurações:</b></h6>
-        <ul>
-            <li><b>Frequência:</b> {{ table.str_frequency }}</li>
-            <li><b>Mode:</b> {{ table.str_mode }}</li>
-            <li><b>Tipo de Ingestão:</b> {{ table.str_type }}</li>
-        </ul>
-        <br>
-        <h6><b>Colunas:</b></h6>
-        <div class="table-responsive">
-            <table class="table table-sm">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Renomear</th>
-                        <th>Datatype</th>
-                        <!-- Adicione mais colunas conforme necessário -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% comment %} {% for column in columns %} {% endcomment %}
-                        <tr>
-                            <!-- deixar a linha grifada com scope="row" -->
-                            <th scope="row"> XPTO </td>
-                            <td> XPTO_Y </td>
-                            <td> STRING </td>
-                            <!-- Adicione mais colunas conforme necessário -->
-                        </tr>
-                    {% comment %} {% endfor %} {% endcomment %}
-                </tbody>
-                <!-- #heading for table -->
-                <caption>Colunas Cadastradas.</caption>                
-            </table>
+    <ul class="nav nav-pills">
 
+        <li class="nav-item">
+            <a class="nav-link active" href="#config">Configurações</a>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#cols" role="button" aria-haspopup="true" aria-expanded="false">Colunas</a>
+            <div class="dropdown-menu" style="">
+                <a class="dropdown-item" href="{{ add }}">Adicionar</a>
+                <a class="dropdown-item" href="{{ exclude }}">Excluir</a>
+            <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ look_all }}">Ver Todas</a>
+            </div>
+        </li>
     </ul>
+
+    <div class="card border-info mb-1" style="margin: 20px; max-width: 50rem;">
+        <div class="card-header justify-content-center">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <h1 class="text-info"><b>{{ table.str_name }}</b>
+                        <small class="text-primary">{{ table.str_system }}</small>
+                    </h1>
+                </div>
+                <div class="col-4 ms-auto">
+                    <button type="button" class="btn btn-danger">Editar</button>            
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="text-body-tertiary">{{ table.str_dataset }}</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Frequência: {{ table.str_frequency }}</li>
+                <li class="list-group-item">Modo: {{ table.str_mode }}</li>
+                <li class="list-group-item">Descrição: {{ table.str_desc }}</li>
+                <li class="list-group-item">Tipo de Ingestão: {{ table.str_type }}</li>
+                <li class="list-group-item">Data de Cadastro: {{ table.dth_start_at }}</li>
+                
+                <li class="list-group-item">
+                    Tamanho em GB: 
+                    {% if table.int_size is None %}
+                        0
+                    {% else %}
+                        {{ table.int_size }}
+                    {% endif %}
+                </li>
+                
+                <li class="list-group-item">
+                    Quantidade de linhas: 
+                    {% if table.int_number_of_rows is None %}
+                        0
+                    {% else %}
+                        {{ table.int_number_of_rows }}
+                    {% endif %}
+                    
+                </li>
+            
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -48,7 +48,13 @@ class TablesView(View):
         try:
             table = get_object_or_404(Tables, id_table=id_table)
             html_location = self.parse_html_path('detail')
-            response_dict = {'table': table}
+            response_dict = {
+                'add': reverse('column_add',args=[crip(str(table.id_table))]),
+                'look_all': reverse('columns_list',args=[crip(str(table.id_table))]),
+                'exclude': reverse('column_add',args=[crip(str(table.id_table))]),
+                'table': table
+            }
+            print(response_dict)
             return render(request, html_location, response_dict)
         except Http404:
             return redirect('table_add')

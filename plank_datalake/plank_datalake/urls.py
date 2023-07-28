@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #home page
     path('',CustomUserView.as_view(), name='home'),
+
+    path('admin-login/', CustomUserView.as_view(), name='admin_login'),
     #CUSTOMER: adm
     path('customer/', CustomerView.as_view(), name='add'),
     path('customer-profile/<str:argument>', CustomerView.as_view(), name='profile_customer'),
@@ -35,5 +37,10 @@ urlpatterns = [
     #TABLE adm
     path('add-table/', TablesView.as_view(),name='table_add'),
     path('view-table/<str:argument>',TablesView.as_view(),name='table_view'),
-    path('view-tables/',TablesView.as_view(),name='table_view')
+    path('view-tables/',TablesView.as_view(),name='table_view'),
+    #COLUMNS adm
+    path('add-column/<str:argument>', TablesView.as_view(),name='column_add'),
+    path('view-column/<str:argument>',TablesView.as_view(),name='column_detail'),
+    path('view-columns/<str:argument>',TablesView.as_view(),name='columns_list')
+
 ]

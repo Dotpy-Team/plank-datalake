@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.views import View
 from .models import CustomUser,Customer
 from .forms import CustomUserForm, CustomerForm
@@ -17,16 +18,12 @@ def uncrip(crip):
 
 class CustomUserView(View):
     def __init__(self):
-        self.authenticate_path = 'authenticate/'
         self.common_path = 'common/'
         self.template_path = 'business/CustomUser/'
 
     def parse_common_path(self,page):
         return self.common_path + f'{page}.html'
-    
-    def parse_authenticate_path(self,page):
-        return self.authenticate_path + f'{page}.html'
-    
+
     def parse_html_path(self,page):
         html_location = self.template_path + f'{page}.html'
         return html_location
@@ -58,6 +55,12 @@ class CustomUserView(View):
         }
         return render(request,html_location, response_dict)
     
+    def get_login_admin(self,request):
+        html_location = self.parse_html_path('admin_login')
+        response_dict = {
+        }
+        return render(request,html_location, response_dict)
+
     def home(self,request):
         html_location = self.parse_common_path('home')
         return render(request,html_location)
@@ -72,10 +75,13 @@ class CustomUserView(View):
             return redirect('table_add')
 
     def get(self, request, argument=None):
+        print(request.path)
         if request.path == '/':
             return self.home(request)
         elif request.path == '/signup/':
             return self.render_add(request)
+        elif request.path == '/admin-login/':
+            return self.get_login_admin(request)
         elif request.path == '/login/':
             return self.login(request)
         elif argument is not None:
@@ -84,22 +90,35 @@ class CustomUserView(View):
         elif argument is None:
             return self.get_profiles(request)
 
+    def post_login_admin(self,request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        html_location = self.parse_html_path('admin_login')
+        if user is not None:
+            login(request, user)
+            return redirect('seu_url_de_sucesso')
+        else:
+            messages.error(request, 'Credenciais inválidas. Tente novamente.')
+        return render(request, html_location)
 
     def post(self, request):
+        print(request)
         form = CustomUserForm(request.POST)
-        print(form)
         html_location = self.parse_html_path('signup')
-        print(form.errors)
-        if form.is_valid():
-            print('valid')
-            user = form.save()
-            return redirect('user_profile', crip(str(user.username)))
+        print(request.path)
+
+        if request.path == '/admin-login/':
+            return self.post_login_admin(request)   
         else:
-            print('invalid')
-            response_dict = {
-                'form': form
-            }
-            return render(request, html_location, response_dict)
+            if form.is_valid():
+                user = form.save()
+                return redirect('user_profile', crip(str(user.username)))
+            else:
+                response_dict = {
+                    'form': form
+                }
+                return render(request, html_location, response_dict)
 
 
 class CustomerView(View):

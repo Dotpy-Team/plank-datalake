@@ -1,27 +1,25 @@
 {% extends 'common/base.html' %}
 {% block content %}
  <div class="container">
-        <h1>Tabelas Cadastradas</h1>
+        <h1 class="text-info">Tabelas Cadastradas</h1>
         <div class="table-responsive">
-            <table class="table table-sm">
-                <thead class="table-dark">
+            <table class="table">
+                <thead class="table-primary col-6">
                     <tr>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Sistema</th>
+                        <th class="col-1">Nome</th>
+                        <th class="col-4">Descrição</th>
+                        <th class="col-1">Sistema</th>
                         <!-- Adicione mais colunas conforme necessário -->
                     </tr>
                 </thead>
                 <tbody>
                     {% for table in tables %}
-                        <tr>
-                            <!-- deixar a linha grifada com scope="row" -->
+                        <tr class="table-light">
                             <th scope="row">
                                 <a class="nav-link" href="{{ table.detail_url }}">{{ table.str_name }}</a>
                             </td>
                             <td>{{ table.str_desc }}</td>
                             <td>{{ table.str_system}}</td>
-                            <!-- Adicione mais colunas conforme necessário -->
                         </tr>
                     {% endfor %}
                 </tbody>
