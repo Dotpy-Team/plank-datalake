@@ -7,7 +7,6 @@ class TablesForm(forms.ModelForm):
         model = Tables
         fields = [
             "id_customer",
-            "id_workload",
             "str_system",
             "str_frequency",
             "str_hour_of",

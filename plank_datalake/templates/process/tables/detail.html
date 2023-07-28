@@ -2,36 +2,26 @@
 {% block content %}
 
 <div class="container">
-    <ul class="nav nav-pills">
 
-        <li class="nav-item">
-            <a class="nav-link active" href="#config">Configurações</a>
-        </li>
+    <div class="card border-info mt-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h1 class="text-info"><b>{{ table.str_name }}</b>
+                <small class="text-primary">{{ table.str_system }}</small>
+            </h1>
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#cols" role="button" aria-haspopup="true" aria-expanded="false">Colunas</a>
-            <div class="dropdown-menu" style="">
-                <a class="dropdown-item" href="{{ add }}">Adicionar</a>
-                <a class="dropdown-item" href="{{ exclude }}">Excluir</a>
-            <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ look_all }}">Ver Todas</a>
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-success">Mais</button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop4" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
+                    <a class="dropdown-item" href="{{ exclude }}">Excluir Colunas</a>
+                    <a class="dropdown-item" href="{{ look_all }}">Ver Todas</a>
+                </div>
             </div>
-        </li>
-    </ul>
-
-    <div class="card border-info mb-1" style="margin: 20px; max-width: 50rem;">
-        <div class="card-header justify-content-center">
-            <div class="row justify-content-center">
-                <div class="col-4">
-                    <h1 class="text-info"><b>{{ table.str_name }}</b>
-                        <small class="text-primary">{{ table.str_system }}</small>
-                    </h1>
-                </div>
-                <div class="col-4 ms-auto">
-                    <button type="button" class="btn btn-danger">Editar</button>            
-                </div>
             </div>
         </div>
+
         <div class="card-body">
             <h5 class="text-body-tertiary">{{ table.str_dataset }}</h5>
             <ul class="list-group list-group-flush">

@@ -7,21 +7,40 @@
     <title>PLANK</title>
     <!-- Inclua os arquivos CSS do Bootstrap -->
     <link rel="stylesheet" href="{% static 'css/darkly.min.css' %}">
-
     <style>
         body {
-            padding-top: 80px; /* Ajuste para o corpo do conteudo ficar abaixo do header */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-content {
+            flex: 1;
+            padding: 100px;
+        }
+
+        .footer {
+            padding: 20px;
         }
     </style>
+
 </head>
 <body>
 
     {% include 'common/header.html' %}
 
-    <div class="container mt-5">
-        {% block content %}
+    <div class="site-content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
 
-        {% endblock %}
+                    {% block content %}
+
+                    {% endblock %}
+
+                </div>
+            </div>
+        </div>
     </div>
 
     {% include 'common/footer.html' %}

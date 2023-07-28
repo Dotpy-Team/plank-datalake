@@ -7,7 +7,6 @@ class Tables(models.Model):
     # id_customer = models.ForeignKey('Empresa', on_delete=models.CASCADE)
     # id_workload = models.ForeignKey('Workload', null=True, blank=True, on_delete=models.CASCADE)
     id_customer = models.IntegerField()
-    id_workload = models.IntegerField()
     str_system = models.CharField(max_length=200)
     str_frequency = models.CharField(
         max_length=20, choices=[
@@ -50,7 +49,7 @@ class Tables(models.Model):
             ('ULP', 'Considere a Ultima Particao')
         ]
     )
-    
+
     str_dataset = models.CharField(
             max_length=20, 
             choices=[
