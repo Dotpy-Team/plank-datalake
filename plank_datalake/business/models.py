@@ -61,10 +61,26 @@ class Customer(models.Model):
     str_site = models.CharField(max_length=200)
     str_linkedin_profile = models.CharField(max_length=200)
     str_contact = models.CharField(max_length=200)
-    str_setor = models.CharField(max_length=200)
-    str_size = models.CharField(max_length=200)
+    str_setor = models.CharField(
+        max_length=20, choices=[
+            ('TECH', 'TECH'),
+            ('ADM', 'ADM'), 
+            ('JUR', 'JUR'),
+            ('FIN', 'FIN'),
+            ('LOG', 'LOG')
+        ]
+    )
+    str_size = models.CharField(
+        max_length=20, choices=[
+            ('PEQ', 'PEQ'),
+            ('PEQ MEDIA', 'PEQ MEDIA'), 
+            ('MEDIA', 'MEDIA'),
+            ('MEDIA GRANDE', 'MEDIA GRANDE'),
+            ('GRANDE', 'GRANDE')
+        ]
+    )
     dth_create = models.DateField()
-    dth_start_at = models.DateField(auto_now=True) 
+    dth_start_at = models.DateField(auto_now=True)
     str_finance_complement = models.CharField(max_length=500)
     str_documents = models.CharField(max_length=200)
     str_comments = models.CharField(max_length=200)

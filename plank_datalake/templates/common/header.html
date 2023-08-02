@@ -1,78 +1,60 @@
 {% load static %}
 {% load bootstrap4 %}
 
-<link rel="stylesheet" href="{% static 'css/darkly.min.css' %}">
 
 <header>
-    <!-- Adicione a classe "fixed-top" para tornar o header fixo no topo -->
-      
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <!-- Inclua o seu logo aqui -->
-                <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 50px;">
+<div class="px-3 py-2 text-bg-dark border-bottom">
+    <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 50px;">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <li>
+            <a href="#" class="nav-link text-secondary">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
+            Home
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+        </li>
+        <li>
+            <a href="#" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+            Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
+            Orders
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
+            Products
+            </a>
+        </li>
+        <li>
+            <a href="#" class="nav-link text-white">
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+            Customers
+            </a>
+        </li>
+        </ul>
+    </div>
+    </div>
+</div>
+<div class="px-3 py-2 border-bottom mb-3">
+    <div class="container d-flex flex-wrap justify-content-center">
+    <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+    </form>
 
-                    <a class="nav-link active" href="/add-table/">Inicio
-                        <span class="visually-hidden">(current)</span>
-                    </a>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/view-tables/">Table</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/view-tables/">Jobs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/view-tables/">DashBoards</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Suporte</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Nova Solicitação de Workload</a>
-                            <a class="dropdown-item" href="#">Nova Solicitação de Reprocessamento</a>
-                            <a class="dropdown-item" href="#">Nova Solicitação de Campo em tabela</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Sugestões de Uso</a>
-                        </div>
-                    </li>
-
-                    <form class="d-flex">   
-                    <div class="form-group has-success">
-                        <input type="text" value="" class="form-control is-valid" id="inputValid">
-                    </div>
-                        
-                        <button type="button" class="btn btn-success">Pesquisar</button>
-                    </form>
-
-                    </div>
-                </ul>
-
-
-      {% comment %} <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form> {% endcomment %}
- 
-            {% comment %} {% if user.is_authenticated %} {% endcomment %}
-
-            {% comment %} {% else %} {% endcomment %}
-            {% comment %} {% endif %} {% endcomment %}
-            
-            
-            <div class="login ml-2">
-                {% if user.is_authenticated %}
-                    <p>Bem-vindo, {{ user.username }}!</p>
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-info">Login</a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
+    <div class="text-end">
+        <button type="button" class="btn btn-light text-dark me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
+    </div>
+</div>
 </header>

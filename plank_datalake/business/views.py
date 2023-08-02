@@ -170,6 +170,7 @@ class CustomerView(View):
 
     def post(self, request):
         form = CustomerForm(request.POST)
+        print(form.errors)
         
         html_location = self.parse_html_path('signup')
 

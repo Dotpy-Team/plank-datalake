@@ -26,6 +26,7 @@ class CustomUserForm(forms.ModelForm):
         ]
 
 class CustomerForm(forms.ModelForm):
+    
     class Meta:
         model = Customer
         fields = [
