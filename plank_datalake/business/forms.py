@@ -1,11 +1,14 @@
 from django import forms
-from .models import CustomUser, Customer
+from .models import Customer
+from django.contrib.auth import get_user_model
+
+CustomUser = get_user_model()
 
 class CustomUserForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput
     )
-
+    email = forms.CharField(required=False)
     str_cpf = forms.CharField(required=False)
     str_telefone = forms.CharField(required=False)
     str_cargo = forms.CharField(required=False)
@@ -24,6 +27,14 @@ class CustomUserForm(forms.ModelForm):
             'id_company',
             'str_cargo'
         ]
+
+    def save(self, commit=True):
+        user = super(CustomUserForm, self).save(commit=False)
+        password = self.cleaned_data['password']
+        user.set_password(password)
+        if commit:
+            user.save()
+        return user
 
 class CustomerForm(forms.ModelForm):
     

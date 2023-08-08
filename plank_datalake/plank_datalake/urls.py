@@ -20,24 +20,26 @@ from business.views import CustomUserView, CustomerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #home page
-    path('',CustomUserView.as_view(), name='home'),
 
-    path('admin-login/', CustomUserView.as_view(), name='admin_login'),
     #CUSTOMER: adm
+
     path('customer/', CustomerView.as_view(), name='add'),
     path('customer-profile/<str:argument>', CustomerView.as_view(), name='profile_customer'),
     path('customer-profiles/', CustomerView.as_view(), name='list_customers'),
+
     #USER: adm
     path('signup/', CustomUserView.as_view(), name='signup'),
     path('login/', CustomUserView.as_view(), name='login'),
-    # path('login/', TablesView.as_view(), name='login'),
-    # path('logout/', TablesView.as_view(), name='logout'),
     path('profile/<str:argument>', CustomUserView.as_view(), name='user_profile'),
+
+
     #TABLE adm
     path('add-table/', TablesView.as_view(),name='table_add'),
+
     path('view-table/<str:argument>',TablesView.as_view(),name='table_view'),
     path('view-tables/',TablesView.as_view(),name='table_view'),
+    path('view-tables/<str:argument>',TablesView.as_view(),name='table_view'),
+
     #COLUMNS adm
     path('add-column/<str:argument>', TablesView.as_view(),name='column_add'),
     path('view-column/<str:argument>',TablesView.as_view(),name='column_detail'),

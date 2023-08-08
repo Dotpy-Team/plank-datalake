@@ -1,31 +1,64 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Login
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Enter username">
+{% load static %}
+
+
+<div class="container-fluid">
+    <!-- row content -->
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <!-- card -->
+            <div class="card border-info">
+                <!-- card header -->
+                <div class="card-header">
+                    Login
+                </div>
+                <!-- card body -->
+                <div class="card-body">
+                    {% if error_message %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error_message }}
+                        </div>
+                    {% else %}
+                        
+                    {% endif %}
+
+                    <form method="POST" class="form">
+                        {% csrf_token %}
+                        <!-- row username -->
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-md-6">
+                                <label for="username" class="col-form-label col-form-label-sm mt-1">usuario</label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text sm mt-1">@</span>
+                                    <input type="text" class="form-control form-control-sm mt-1" id="username" name="username" placeholder="@user">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+
+                        <!-- row password -->
+                        <div class ="row justify-content-center mt-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">Senha</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="123%dotpy">
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div>
+                        </div>
+                        
+                        <!-- row button -->
+                        <div class="row justify-content-center mt-4">
+                            <div class="col-md-3">
+                                <button class="btn btn-lg btn-primary" type="submit">entrar!</button>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</body>
+</div>
 
 {% endblock %}

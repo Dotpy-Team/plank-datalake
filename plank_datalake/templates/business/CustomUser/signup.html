@@ -1,40 +1,95 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cadastro de Usuário</title>
-    <!-- Incluir o Bootstrap CSS (caso esteja usando) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Cadastro de Usuário</h1>
-        <form method="post">
-            {% csrf_token %}
-            <!-- Incluir o Bootstrap para estilização do formulário -->
-            <div class="form-group">
-                <label for="username">Usuário:</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="id_company">empressa:</label>
-                {{ form.id_company }}
-            </div>
-            <!-- Adicione mais campos conforme necessário -->
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </form>
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <!-- row content -->
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <h1 class="text-info">Cadastrar Usuário</h1>
+            <!-- form content -->
+            <form method="POST" class="form">
+                {% csrf_token %}
+                <!-- email and username content -->
+                <div class="row">
+                {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_forms }}
+                    </div>
+                {% else %}
+                    
+                {% endif %}
+                    <div class="col-12">
+                        <label for="username" class="col-form-label col-form-label-sm mt-1">Username</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text sm mt-1">@</span>
+                            <input type="text" class="form-control form-control-sm mt-1" id="username" name="username" placeholder="Username" required="">
+                        </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="123%dotpy">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="email" class="col-form-label col-form-label-sm mt-1">Email</label>
+                        <input type="email" class="form-control form-control-sm mt-1" id="email" name="email" placeholder="you@dotpy.com">
+                    </div>
+
+                </div>
+
+                <!-- firstname and lastname content -->
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="first_name" class="col-form-label col-form-label-sm mt-1">Primeiro Nome</label>
+                        <input type="text" class="form-control form-control-sm mt-1" id="first_name" name="first_name">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="last_name" class="col-form-label col-form-label-sm mt-1">Sobrenome</label>
+                        <input type="text" class="form-control form-control-sm mt-1" id="last_name" name="last_name">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="id_company" class="col-form-label col-form-label-sm mt-1">company</label>
+                        <input type="text" class="form-control form-control-sm mt-1" id="id_company" name="id_company">
+                    </div>
+
+                </div>
+
+                <!-- another info content -->
+                
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <label for="str_telefone" class="col-form-label col-form-label-sm mt-1">Telefone</label>
+                        <input type="text" class="form-control form-control-sm mt-1" id="str_telefone" name="str_telefone">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="str_cargo" class="col-form-label col-form-label-sm mt-1">Cargo</label>
+                        <input type="text" class="form-control form-control-sm mt-1" id="str_cargo" name="str_cargo">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="str_address" class="col-form-label col-form-label-sm mt-1">Endereço</label>
+                        <input type="text" class="form-control form-control-sm mt-1" id="str_address" name="str_address" placeholder="avenida paulista 123">
+                    </div>
+                
+                </div>
+
+            <button class="btn btn-primary mt-4" type="submit">Cadastrar!</button>
+
+            </form>
+
+        </div>
     </div>
 
-    <!-- Incluir o Bootstrap JS (caso esteja usando) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>
+
+
+{% endblock %}

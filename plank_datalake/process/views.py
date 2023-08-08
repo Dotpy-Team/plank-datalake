@@ -31,17 +31,30 @@ class TablesView(View):
         }
         return render(request, html_location, dict_form)
     
-    def get_tables(self, request):
-        print(request.user)
+    def get_tables(self, request, id_table=None):
         tables = Tables.objects.all()
         for table in tables:
+            if id_table == str(table.id_table):
+                table.selected = True
+            else:
+                table.selected = False
+
             table.detail_url = reverse(
                 'table_view', 
                 args=[crip(str(table.id_table))]
             )
             table.save()
+
+        if id_table == None:
+            card_table = tables[0]
+        else:
+            card_table = Tables.objects.get(id_table=id_table)
+
         html_location = self.parse_html_path('list')
-        response_dict = {'tables': tables}
+        response_dict = {
+            'tables': tables,
+            'card_table': card_table
+        }
         return render(request, html_location, response_dict)
     
     def get_table(self,request,id_table):
@@ -60,13 +73,17 @@ class TablesView(View):
             return redirect('table_add')
     
     def get(self, request, argument=None):
-        if request.path == '/add-table/':
+        if '/add-table/' in request.path:
             return self.render_add(request)
-        elif argument is not None:
+        elif '/view-tables/' in request.path:
+            if argument is None:
+                return self.get_tables(request)
+            else:
+                id_tabela = uncrip(argument)
+                return self.get_tables(request, id_tabela)
+        elif '/view-table/' in request.path:
             id_tabela = uncrip(argument)
-            return self.get_table(request,id_tabela)
-        elif argument is None:
-            return self.get_tables(request)
+            return self.get_table(request, id_tabela)
 
 
     def post(self, request):

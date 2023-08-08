@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from django.views import View
 from .models import CustomUser,Customer
@@ -28,7 +28,7 @@ class CustomUserView(View):
         html_location = self.template_path + f'{page}.html'
         return html_location
 
-    def render_add(self, request):
+    def get_signup(self, request):
         form = CustomUserForm()
         html_location = self.parse_html_path('signup')
         dict_form = {
@@ -36,32 +36,15 @@ class CustomUserView(View):
         }
         return render(request, html_location, dict_form)
     
-    # def get_profiles(self, request):
-    #     tables = User.objects.all()
-    #     for table in tables:
-    #         table.detail_url = reverse(
-    #             'table_view', 
-    #             args=[crip(str(table.id_table))]
-    #         )
-    #         table.save()
-    #     html_location = self.parse_html_path('list')
-    #     response_dict = {'tables': tables}
-    #     return render(request, html_location, response_dict)
-    
-    def login(self,request):
+    def get_login_page(self, request, message=None):
         html_location = self.parse_html_path('login')
-        response_dict = {
-
-        }
-        return render(request,html_location, response_dict)
-    
-    def get_login_admin(self,request):
-        html_location = self.parse_html_path('admin_login')
-        response_dict = {
-        }
+        if message is not None:
+            response_dict = {'error_message': message}
+        else:
+            response_dict = {}
         return render(request,html_location, response_dict)
 
-    def home(self,request):
+    def get_homepage(self,request):
         html_location = self.parse_common_path('home')
         return render(request,html_location)
 
@@ -70,55 +53,57 @@ class CustomUserView(View):
             custom_user = get_object_or_404(CustomUser, username=username)
             html_location = self.parse_html_path('profile')
             response_dict = {'user': custom_user}
+            print(response_dict)
             return render(request, html_location, response_dict)
         except Http404:
             return redirect('table_add')
 
-    def get(self, request, argument=None):
-        print(request.path)
-        if request.path == '/':
-            return self.home(request)
-        elif request.path == '/signup/':
-            return self.render_add(request)
-        elif request.path == '/admin-login/':
-            return self.get_login_admin(request)
-        elif request.path == '/login/':
-            return self.login(request)
-        elif argument is not None:
-            id_tabela = uncrip(argument)
-            return self.get_profile(request,id_tabela)
-        elif argument is None:
-            return self.get_profiles(request)
-
-    def post_login_admin(self,request):
+    def post_user_auth(self,request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        html_location = self.parse_html_path('admin_login')
         if user is not None:
             login(request, user)
-            return redirect('seu_url_de_sucesso')
+            return redirect('user_profile',crip(username))
         else:
-            messages.error(request, 'Credenciais inválidas. Tente novamente.')
-        return render(request, html_location)
+            error_message = 'Credenciais inválidas. Por favor, tente novamente.'                
+            return self.get_login_page(request,message=error_message)
+        
+    def post_create_user(self,request):
+        form = CustomUserForm(request.POST)            
+        html_location = self.parse_html_path('signup')
+        
+        if form.is_valid():
+            user = form.save()
+            return redirect('user_profile', crip(str(user.username)))
+        else:
+            error_message = 'Credenciais inválidas. Por favor, tente novamente.'
+            response_dict = {
+                'form': form,
+                'error_message':error_message,
+                'error_forms':form.errors
+
+            }
+            return render(request, html_location, response_dict)
+
+    def get(self, request, argument=None):
+        if request.path == '/':
+            return self.get_homepage(request)
+        elif request.path == '/signup/':
+            return self.get_signup(request)
+        elif request.path == '/login/':
+            return self.get_login_page(request)
+        elif argument is not None:
+            id_tabela = uncrip(argument)
+            return self.get_profile(request,id_tabela)
 
     def post(self, request):
-        print(request)
-        form = CustomUserForm(request.POST)
-        html_location = self.parse_html_path('signup')
-        print(request.path)
-
-        if request.path == '/admin-login/':
-            return self.post_login_admin(request)   
+        #if access is login page, render with.
+        if request.path == '/login/':
+            return self.post_user_auth(request)
+        #else, is a created user.
         else:
-            if form.is_valid():
-                user = form.save()
-                return redirect('user_profile', crip(str(user.username)))
-            else:
-                response_dict = {
-                    'form': form
-                }
-                return render(request, html_location, response_dict)
+            return self.post_create_user(request)
 
 
 class CustomerView(View):
@@ -155,6 +140,7 @@ class CustomerView(View):
             return redirect('signup_company')
     
     def get(self, request, argument=None):
+        print(request)
         if request.path == '/customer/':
             return self.signup(request)
         

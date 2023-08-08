@@ -1,28 +1,24 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<body>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header">
-                        Perfil
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Name:</strong> John Doe</p>
-                        <p><strong>Email:</strong> john@example.com</p>
-                        <p><strong>Username:</strong> johndoe</p>
-                        <p><strong>Phone:</strong> (123) 456-7890</p>
-                    </div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    Perfil
+                </div>
+                <div class="card-body">
+                    <p><strong>UserName:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Username:</strong> {{ user.password }}</p>
+                    <p><strong>Phone:</strong> {{ user.str_telefone }}</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
 
 {% endblock %}

@@ -1,29 +1,140 @@
 {% extends 'common/base.html' %}
+
+{% load static %}
+
 {% block content %}
- <div class="container">
-        <h1 class="text-info">Tabelas Cadastradas</h1>
-        <div class="table-responsive">
-            <table class="table">
-                <thead class="table-primary col-6">
-                    <tr>
-                        <th class="col-1">Nome</th>
-                        <th class="col-4">Descrição</th>
-                        <th class="col-1">Sistema</th>
-                        <!-- Adicione mais colunas conforme necessário -->
-                    </tr>
-                </thead>
-                <tbody>
+
+
+
+{% comment %} 
+<div class="list-group">
+    {% for table in tables %}
+        <a href="#" class="list-group-item list-group-item-action table-link" data-content="{{ table.str_desc }}">
+            {{ table.str_name }}
+        </a>
+    {% endfor %}
+</div>
+
+<div class="card mt-4">
+    <div class="card-body" id="content-placeholder">
+        {{ card_table.str_name }}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".table-link").on("click", function(event) {
+            event.preventDefault();
+
+            var content = $(this).data("content");
+            $("#content-placeholder").html(content);
+        });
+    });
+</script> 
+{% endcomment %}
+
+<div class="container-fluid md-5">
+
+    <div class="row">
+
+        <div class="nav col-md-3 d-none d-md-block bg-dark sidebar" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
+            <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 365px;">
+
+                <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
+                
+                    <img src="{% static 'icons/table.svg' %}" alt="table" width="24" height="24" style="margin-right: 10px;">            
+                    <span class="fs-5 fw-semibold">Tabelas</span>
+                </a>
+
+                <div class="list-group list-group-flush border-bottom scrollarea">                    
                     {% for table in tables %}
-                        <tr class="table-light">
-                            <th scope="row">
-                                <a class="nav-link" href="{{ table.detail_url }}">{{ table.str_name }}</a>
-                            </td>
-                            <td>{{ table.str_desc }}</td>
-                            <td>{{ table.str_system}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-                <!-- #heading for table -->
-                <caption>Listagem de tabelas.</caption>                
-            </table>
+                        {% if table.selected %}
+                            <a href="{{table.detail_url}}" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <strong class="mb-1"> {{table.str_name }} </strong>
+                                    <small> {{table.str_system}} </small>
+                                </div>
+                                <div class="col-10 mb-1 small"> {{table.str_desc}} </div>
+                            </a>
+                        {% else %}
+                            <a href="{{table.detail_url}}" class="list-group-item list-group-item-action py-3 lh-sm">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <strong class="mb-1"> {{table.str_name}} </strong>
+                                    <small class="text-body-secondary"> {{table.str_system}} </small>
+                                </div>
+                                <div class="col-10 mb-1 small"> {{table.str_desc}} </div>
+                            </a>
+                        {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
+            <div class="card border-info mt-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 class="text-info"><b>{{ card_table.str_name }}</b>
+                        <small class="text-primary">{{ card_table.str_system }}</small>
+                    </h1>
+        
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-success">Mais</button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop4" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                            <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
+                            <a class="dropdown-item" href="{{ exclude }}">Excluir Colunas</a>
+                            <a class="dropdown-item" href="{{ look_all }}">Ver Todas</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        
+                <div class="card-body">
+                    <h5 class="text-body-tertiary">{{ card_table.str_dataset }}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Frequência: {{ card_table.str_frequency }}</li>
+                        <li class="list-group-item">Modo: {{ card_table.str_mode }}</li>
+                        <li class="list-group-item">Descrição: {{ card_table.str_desc }}</li>
+                        <li class="list-group-item">Tipo de Ingestão: {{ card_table.str_type }}</li>
+                        <li class="list-group-item">Data de Cadastro: {{ card_table.dth_start_at }}</li>
+                        
+                        <li class="list-group-item">
+                            Tamanho em GB: 
+                            {% if card_table.int_size is None %}
+                                0
+                            {% else %}
+                                {{ card_table.int_size }}
+                            {% endif %}
+                        </li>
+                        
+                        <li class="list-group-item">
+                            Quantidade de linhas: 
+                            {% if card_table.int_number_of_rows is None %}
+                                0
+                            {% else %}
+                                {{ card_table.int_number_of_rows }}
+                            {% endif %}
+                            
+                        </li>
+                    
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".table-link").on("click", function(event) {
+            event.preventDefault();
+
+            var content = $(this).data("content");
+            $("#content-placeholder").html(content);
+        });
+    });
+</script>
+
 {% endblock %}
