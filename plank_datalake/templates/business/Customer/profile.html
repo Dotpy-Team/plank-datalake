@@ -1,48 +1,43 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<h6><b>Detalhes sobre o Cliente:</b></h6>
-<br>
-<ul>
-    <h1 class="display-6" style="color:blue;"> <b> {{ customer.str_name }} </b> </h1>
-    <h4>{{ customer.str_cnpj }}</h4>
-    <h6>{{ customer.str_setor }}</h6>
-    <h6>{{ customer.str_customer_type}}</h6>
-    <br>
-    <h6><b>Comentários:</b></h6>
-    <figcaption class="blockquote-footer">
-        {{ customer.str_comments }}
-    </figcaption>
-    <br/>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastrar Usuário</button>
-    <h6><b>Comentários:</b></h6>
-    <div class="container mt-4">
-        <div class="table-responsive">
-            <table class="table table-sm">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nome</th>
-                        <th>UserName</th>
-                        <th>CPF</th>
-                        <!-- Adicione mais colunas conforme necessário -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% comment %} {% for column in columns %} {% endcomment %}
-                        <tr>
-                            <!-- deixar a linha grifada com scope="row" -->
-                            <th scope="row"> Luiz Cairo </td>
-                            <td> luiz.cairo </td>
-                            <td> 453.316.298-30 </td>
-                            <!-- Adicione mais colunas conforme necessário -->
-                        </tr>
-                    {% comment %} {% endfor %} {% endcomment %}
-                </tbody>
-                <!-- #heading for table -->
-                <caption>Colunas Cadastradas.</caption>
-            </table>
+<div class="container d-flex justify-content-center">
+    <div class="card col-md-10">
+        <div class="card-body">
+            <h3 class="text-light-emphasis"><b>Detalhes:</b></h3>
+                <ul>
+                    <h1 class="text-primary"> <b> {{ customer.str_name }}</b></h1>
+                    <h4 class="text-secondary-emphasis">{{ customer.str_cnpj }}</h4>
+                    <h6 class="text-light">{{ customer.str_setor }}</h6>
+                    <h6 class="text-light">{{ customer.str_customer_type}}</h6>
+                    <h3 class="text-light"><b>Comentários:</b></h6>
+                    <p class="text-light">{{ customer.str_comments }}</p>
+                    <br/>
+                    <h3 class="text-light"><b>Comentários:</b></h3>
+
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr class="border-primary">
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>UserName</th>
+                                <th>CPF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <th scope="row"> 1. </td>
+                                    <td> Luiz Cairo </td>
+                                    <td> luiz.cairo </td>
+                                    <td> 453.316.298-30 </td>
+                                </tr>
+                        </tbody>
+                        <caption class="text-light">Colunas Cadastradas.</caption>
+                    </table>
+                </ul>
+            </div>
         </div>
     </div>
-</ul>
+</div>
 
 {% endblock %}

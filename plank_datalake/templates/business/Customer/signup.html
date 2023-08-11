@@ -1,105 +1,177 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container">
-    <h1>Adicionar Cliente</h1>
+<div class="container d-flex justify-content-center">
+    <div class="card col-md-10">
+        <div class="card-body">
+            <h3 class="text-primary">Novo Cliente</h1>
+            <form method="post" class="form">
+                {% csrf_token %}
+                <!-- row status -->
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
 
-    <form method="post" class="form">
-        {% csrf_token %}
+                            <label for="str_customer_type" class="col-form-label mt-1">Status:</label>
+                            <select class="form-select mt-1" id="str_customer_type" name="str_customer_type">
+                                {% for value, label in form.fields.str_customer_type.choices %}
+                                    <option value="{{ value }}" {% if value == form.instance.str_customer_type %}selected{% endif %}> {{ label }} </option>
+                                {% endfor %}
+                            </select>
 
-        <div class="form-group col-md-2 col-mt-1">
-            <label for="str_customer_type" class="col-form-label col-form-label-sm mt-1">Status:</label>
-            <select class="form-select col-form-label-sm mt-1" id="str_customer_type" name="str_customer_type">
-                {% for value, label in form.fields.str_customer_type.choices %}
-                    <option value="{{ value }}" {% if value == form.instance.str_customer_type %}selected{% endif %}> {{ label }} </option>
-                {% endfor %}
-            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- row name and cnpj -->
+                <div class="row mt-2 justify-content-center">
+                    <div class="col-md-5">
+
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_name">Nome:</label>
+                            <input type="text" class="form-control mt-1" placeholder="Default input" id="str_name" name="str_name">
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_cnpj">CNPJ:</label>
+                            <input type="text" class="form-control mt-1" placeholder="Default input" id="str_cnpj" name="str_cnpj">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Atividade e ramo. -->
+                <div class="row mt-2 justify-content-center">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="str_setor" class="col-form-label">Setor:</label>
+                            <select class="form-select" id="str_setor" name="str_setor">
+                                {% for value, label in form.fields.str_setor.choices %}
+                                    <option value="{{ value }}" {% if value == form.instance.str_setor %}selected{% endif %}> {{ label }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-form-label" for="str_size">Tamanho:</label>
+                            <select class="form-select" id="str_size" name="str_size">
+                                {% for value, label in form.fields.str_size.choices %}
+                                    <option value="{{ value }}" {% if value == form.instance.str_size %}selected{% endif %}> {{ label }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="col-form-label" for="dth_create">Criação:</label>
+                            <input type="date" class="form-control" placeholder="Default input" id="dth_create" name="dth_create">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- atividade complemento -->
+                <div class="row mt-2 justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_finance_complement">Complemento Financeiro:</label>
+                            <textarea class="form-control"  id="str_finance_complement" name="str_finance_complement" rows=5></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- row contact -->
+                <div class="row mt-2 justify-content-center">
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="col-form-label" for="str_telefone">Telefone:</label>
+                            <input type="text" class="form-control" placeholder="Default input" id="str_telefone" name="str_telefone">
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="col-form-label" for="str_email">Email:</label>
+                            <input type="email" class="form-control" id="str_email" name="str_email" placeholder="Enter email">
+                        </div>
+                    </div>
+                </div>
+                <!-- row address -->
+                <div class="row mt-2 justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="form-label" for="str_address">Endereço:</label>
+                            <input type="text" class="form-control" placeholder="Default input" id="str_address" name="str_address">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- rede social e site -->
+                <div class="row mt-2 justify-content-center">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_site">Site:</label>
+                            <input type="text" class="form-control" placeholder="Default input" id="str_site" name="str_site">
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_linkedin_profile">LINKEDIN:</label>
+                            <input type="text" class="form-control" placeholder="Default input" id="str_linkedin_profile" name="str_linkedin_profile">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- contato complement -->
+                <div class="row mt-2 justify-content-center">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_contact">Contato:</label>
+                            <textarea class="form-control"  id="str_contact" name="str_contact" rows=5></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_comments">Comentários:</label>
+                            <textarea class="form-control"  id="str_comments" name="str_comments" rows=5></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-form-label mt-1" for="str_documents">Outros complementos:</label>
+                            <input type="file" class="form-control" id="str_documents" name="str_documents">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+
+
+                    <div class="col-md-10">
+                        <!-- Adicione os demais campos do formulário aqui -->
+                        <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+                    </div>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_name">Nome:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_name" name="str_name">
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_cnpj">CNPJ:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_cnpj" name="str_cnpj">
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_address">Endereço:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_address" name="str_address">
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_telefone">Telefone:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_telefone" name="str_telefone">
-        </div>
-
-        <div class="form-group">
-            <label for="str_email" class="form-label mt-4">Email:</label>
-            <input type="email" class="form-control" id="str_email" name="str_email" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">Coloque aqui o email porra!</small>
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_site">Site:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_site" name="str_site">
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_linkedin_profile">LINKEDIN:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_linkedin_profile" name="str_linkedin_profile">
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_contact">Contato:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_contact" name="str_contact">
-        </div>
-
-
-        <div class="form-group col-md-2 col-mt-1">
-            <label for="str_setor" class="col-form-label col-form-label-sm mt-1">Setor:</label>
-            <select class="form-select col-form-label-sm mt-1" id="str_setor" name="str_setor">
-                {% for value, label in form.fields.str_setor.choices %}
-                    <option value="{{ value }}" {% if value == form.instance.str_setor %}selected{% endif %}> {{ label }} </option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="form-group col-md-2 col-mt-1">
-            <label for="str_size" class="col-form-label col-form-label-sm mt-1">Tamanho:</label>
-            <select class="form-select col-form-label-sm mt-1" id="str_size" name="str_size">
-                {% for value, label in form.fields.str_size.choices %}
-                    <option value="{{ value }}" {% if value == form.instance.str_size %}selected{% endif %}> {{ label }} </option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="dth_create">Criação:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="dth_create" name="dth_create">
-        </div>
-
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_finance_complement">Complemento Financeiro:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_finance_complement" name="str_finance_complement">
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_documents">Outros complementos:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_documents" name="str_documents">
-        </div>
-
-        <div class="form-group">
-            <label class="col-form-label mt-1" for="str_comments">Comentários:</label>
-            <input type="text" class="form-control" placeholder="Default input" id="str_comments" name="str_comments">
-        </div>
-
-        <!-- Adicione os demais campos do formulário aqui -->
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
+    </div>
 </div>
 
 
