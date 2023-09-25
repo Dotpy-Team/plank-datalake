@@ -9,8 +9,7 @@
             <!-- form content -->
             <form method="POST" class="form">
                 {% csrf_token %}
-                <!-- email and username content -->
-                <div class="row">
+
                 {% if error_message %}
                     <div class="alert alert-danger" role="alert">
                         {{ error_message }}
@@ -20,66 +19,52 @@
                         {{ error_forms }}
                     </div>
                 {% else %}
-                    
+                
                 {% endif %}
-                    <div class="col-12">
-                        <label for="username" class="col-form-label col-form-label-sm mt-1">Username</label>
-                        <div class="input-group has-validation">
-                            <span class="input-group-text sm mt-1">@</span>
-                            <input type="text" class="form-control form-control-sm mt-1" id="username" name="username" placeholder="Username" required="">
-                        </div>
 
-                    <div class="form-group">
-                        <label for="password">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="123%dotpy">
-                    </div>
-
-                    <div class="col-12">
-                        <label for="email" class="col-form-label col-form-label-sm mt-1">Email</label>
-                        <input type="email" class="form-control form-control-sm mt-1" id="email" name="email" placeholder="you@dotpy.com">
-                    </div>
-
-                </div>
 
                 <!-- firstname and lastname content -->
                 
                 <div class="row">
-                    <div class="col-sm-6">
-                        <label for="first_name" class="col-form-label col-form-label-sm mt-1">Primeiro Nome</label>
-                        <input type="text" class="form-control form-control-sm mt-1" id="first_name" name="first_name">
+                    <div class='col'>
+                        {{ form.first_name.label_tag }} {{ form.first_name }}
                     </div>
-
-                    <div class="col-sm-6">
-                        <label for="last_name" class="col-form-label col-form-label-sm mt-1">Sobrenome</label>
-                        <input type="text" class="form-control form-control-sm mt-1" id="last_name" name="last_name">
+                    <div class='col'>
+                        {{ form.last_name.label_tag }} {{ form.last_name }}
                     </div>
-
-                    <div class="col-sm-6">
-                        <label for="id_company" class="col-form-label col-form-label-sm mt-1">company</label>
-                        <input type="text" class="form-control form-control-sm mt-1" id="id_company" name="id_company">
-                    </div>
-
                 </div>
 
                 <!-- another info content -->
                 
                 <div class="row">
-
+                    <div class='col'>
+                        {{ form.str_cpf.label_tag }} {{ form.str_cpf }}
+                    </div>
                     <div class="col-sm-6">
-                        <label for="str_telefone" class="col-form-label col-form-label-sm mt-1">Telefone</label>
-                        <input type="text" class="form-control form-control-sm mt-1" id="str_telefone" name="str_telefone">
+                        {{ form.str_telefone.label_tag }} {{ form.str_telefone }}
                     </div>
+                </div>
 
-                    <div class="col-sm-6">
-                        <label for="str_cargo" class="col-form-label col-form-label-sm mt-1">Cargo</label>
-                        <input type="text" class="form-control form-control-sm mt-1" id="str_cargo" name="str_cargo">
+                <div class='row'>
+                    <div class="col">
+                        {{ form.str_cargo.label_tag }} {{ form.str_cargo }}
                     </div>
-
-                    <div class="col-12">
-                        <label for="str_address" class="col-form-label col-form-label-sm mt-1">Endereço</label>
-                        <input type="text" class="form-control form-control-sm mt-1" id="str_address" name="str_address" placeholder="avenida paulista 123">
+                    <div class="col">
+                        {{ form.str_address.label_tag }} {{ form.str_address }}
                     </div>
+                </div>
                 
+                <!-- email and username content -->
+                <div class="row">
+                    {{ form.id_customer.label_tag }} {{ form.id_customer }
+                    <div class="col-12">
+                        {{ form.email.label_tag }} {{ form.email }}
+                        {{ form.password.label_tag }} {{ form.password }}
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="123%dotpy">
+                        </div>    
+                    </div>
                 </div>
 
             <button class="btn btn-primary mt-4" type="submit">Cadastrar!</button>

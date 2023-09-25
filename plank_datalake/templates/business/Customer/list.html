@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1>Lista de Clientes</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop através dos clientes e crie uma linha para cada um -->
+            {% for customer in customers %}
+            <tr>
+                <td><a href="{{customer.detail_url}}">{{ customer.id_customer }}</a></td>
+                <td>{{ customer.str_name }}</td>
+                <td>{{ customer.str_email }}</td>
+                <td>{{ customer.str_site }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

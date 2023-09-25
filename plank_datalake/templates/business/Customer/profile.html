@@ -1,42 +1,23 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container d-flex justify-content-center">
-    <div class="card col-md-10">
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'><b>Detalhes:</b></div>
         <div class="card-body">
-            <h3 class="text-light-emphasis"><b>Detalhes:</b></h3>
-                <ul>
-                    <h1 class="text-primary"> <b> {{ customer.str_name }}</b></h1>
-                    <h4 class="text-secondary-emphasis">{{ customer.str_cnpj }}</h4>
-                    <h6 class="text-light">{{ customer.str_setor }}</h6>
-                    <h6 class="text-light">{{ customer.str_customer_type}}</h6>
-                    <h3 class="text-light"><b>Comentários:</b></h6>
-                    <p class="text-light">{{ customer.str_comments }}</p>
-                    <br/>
-                    <h3 class="text-light"><b>Comentários:</b></h3>
-
-                    <table class="table table-hover">
-                        <thead class="table-dark">
-                            <tr class="border-primary">
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>UserName</th>
-                                <th>CPF</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr>
-                                    <th scope="row"> 1. </td>
-                                    <td> Luiz Cairo </td>
-                                    <td> luiz.cairo </td>
-                                    <td> 453.316.298-30 </td>
-                                </tr>
-                        </tbody>
-                        <caption class="text-light">Colunas Cadastradas.</caption>
-                    </table>
-                </ul>
-            </div>
+            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
+            <h3 class="card-text-secondary-emphasis">CNPJ:</h3>
+            <p class="card-text">{{ customer.str_cnpj }}</p>
+            <h3 class="card-text-secondary-emphasis">Setor:</h3>
+            <p class="card-text">{{ customer.str_setor }}</p>
+            <h3 class="card-text-secondary-emphasis">TIPO:</h3>
+            <p class="card-text">{{ customer.str_customer_type }}</p>
+            <h3 class="card-text"><b>Comentários:</b></h3>
+            <p class="card-text">{{ customer.str_comments }}</p>
         </div>
+
+        <a href="{{users}}" class="btn btn-primary mt-2">Verificar Usuários</a></td>
+
     </div>
 </div>
 

@@ -24,16 +24,15 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(username, password, **extra_fields)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(unique=True, max_length=30)
     password = models.CharField(max_length=30)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.EmailField(max_length=30)
+    email = models.EmailField(max_length=30, unique=True)
     str_cpf = models.CharField(max_length=14, null=True, blank=True) #TODO: adicionar o cpf como unico. unique=True,)
-    id_company = models.IntegerField()
+    id_customer = models.IntegerField()
     str_telefone = models.CharField(max_length=15, null=True, blank=True)
     str_cargo = models.CharField(max_length=100, null=True, blank=True)
-    str_adress = models.CharField(max_length=100, null=True, blank=True)
+    str_address = models.CharField(max_length=100, null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -43,11 +42,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
-        return self.username
+        return self.email
 
 
 class Customer(models.Model):
@@ -62,14 +61,14 @@ class Customer(models.Model):
             ('Admin', 'Admin')
         ]
     )
-    str_name = models.CharField(max_length=200)
-    str_cnpj = models.CharField(max_length=200)
-    str_address = models.CharField(max_length=200)
-    str_telefone = models.CharField(max_length=200)
+    str_name = models.CharField(max_length=200, null=True, blank=True)
+    str_cnpj = models.CharField(max_length=200, null=True, blank=True)
+    str_address = models.CharField(max_length=200, null=True, blank=True)
+    str_telefone = models.CharField(max_length=200, null=True, blank=True)
     str_email = models.CharField(max_length=200)
     str_site = models.CharField(max_length=200)
-    str_linkedin_profile = models.CharField(max_length=200)
-    str_contact = models.CharField(max_length=200)
+    str_linkedin_profile = models.CharField(max_length=200, null=True, blank=True)
+    str_contact = models.CharField(max_length=200, null=True, blank=True)
     str_setor = models.CharField(
         max_length=20, choices=[
             ('TECH', 'TECH'),
@@ -91,5 +90,5 @@ class Customer(models.Model):
     dth_create = models.DateField()
     dth_start_at = models.DateField(auto_now=True)
     str_finance_complement = models.CharField(max_length=500)
-    str_documents = models.CharField(max_length=200)
-    str_comments = models.CharField(max_length=200)
+    str_documents = models.CharField(max_length=200, null=True, blank=True)
+    str_comments = models.CharField(max_length=200, null=True, blank=True)
