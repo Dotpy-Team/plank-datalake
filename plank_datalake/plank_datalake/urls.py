@@ -21,27 +21,24 @@ from business import views as b
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    
+    path('admin/', admin.site.urls),    
     path('', b.home_page , name='new_user'),
     #USER: adm
     path('signup/<str:id_customer>', b.new_user , name='new_user'),
     path('login/', b.user_login, name='user_login'),
     path('user-profile/<str:email>', b.user_profile, name='user_profile'),
     path('users/<str:id_customer>', b.users_list_by_id_customer, name='users_list_by_id_customer'),
-    path('all-users/', b.users_list_by_id_customer, name='all_users'),
+    path('all-users/', b.all_users, name='all_users'),
     # #CUSTOMER: adm
 
     path('customer/', b.new_customer , name='new_customer'),
     path('customer-profile/<str:id_customer>', b.customer_profile, name='profile_customer'),
     path('customer-profiles/', b.customers_list, name='list_customers'),
 
-
-
     # #TABLE adm
-    path('add-table/', p.new_table,name='table_add'),
-    path('detail-table/<str:argument>',p.get_table,name='table_view'),
-    path('search-tables/<str:argument>',p.get_tables,name='table_view'),
+    path('add-table/<str:id_customer>', p.new_table,name='new_table'),
+    path('detail-table/<str:id_table>',p.get_table,name='table_view'),
+    path('search-tables/<str:id_customer>',p.get_tables,name='view_tables'),
 
     # #COLUMNS adm
     # path('add-column/<str:argument>', TablesView.as_view(),name='column_add'),

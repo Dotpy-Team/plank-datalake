@@ -10,90 +10,127 @@
 
                 <div class="row mt-1 justify-content-center">
                     <div class="col-md-10">
-                        <div class="form-group">
-                            <label class="col-form-label" for="id_customer">Customer:</label>
-                            <input class="form-control" type="text" placeholder="" id="id_customer" name="id_customer">
-                        </div>
+                        {{ form.id_customer.label_tag }} {{ form.id_customer }}
+
+                        {% if form.id_customer.errors %}
+                            <div class="text-danger">
+                                {{ form.id_customer.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label" for="str_name">Nome:</label>
-                        <input class="form-control" type="text" placeholder="" id="str_name" name="str_name">
+                    <div class="col-md-6">
+                        {{ form.str_name.label_tag }} {{ form.str_name }}
+
+                        {% if form.str_name.errors %}
+                            <div class="text-danger">
+                                {{ form.str_name.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="form-group col-md-2">
-                        <label class="col-form-label" for="str_system">Sistema:</label>
-                        <input class="form-control" type="text" placeholder="" id="str_system" name="str_system">
+                        {{ form.str_system.label_tag }} {{ form.str_system }}
+
+                        {% if form.str_system.errors %}
+                            <div class="text-danger">
+                                {{ form.str_system.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
-                    <div class="form-group col-md-2">
-                    <label for="str_dataset" class="col-form-label col-form-label-sm mt-1">DataSet:</label>
-                    <select class="form-select col-form-label-sm mt-1" id="str_dataset" name="str_dataset">
-                        {% for value, label in form.fields.str_dataset.choices %}
-                            <option value="{{ value }}" {% if value == form.instance.str_dataset %}selected{% endif %}> {{ label }} </option>
-                        {% endfor %}
-                    </select>
+                    <div class="col-md-2">
+
+                        {{ form.str_dataset.label_tag }} {{ form.str_dataset }}
+
+                        {% if form.str_dataset.errors %}
+                            <div class="text-danger">
+                                {{ form.str_dataset.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
                     <div class="form-group col-md-3">
-                        <label for="str_frequency" class="col-form-label">Frequencia:</label>
-                        <select class="form-select" id="str_frequency" name="str_frequency">
-                            {% for value, label in form.fields.str_frequency.choices %}
-                                <option value="{{ value }}" {% if value == form.instance.str_frequency %}selected{% endif %}> {{ label }} </option>
-                            {% endfor %}
-                        </select>
+
+                        {{ form.str_frequency.label_tag }} {{ form.str_frequency }}
+
+                        {% if form.str_frequency.errors %}
+                            <div class="text-danger">
+                                {{ form.str_frequency.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
 
-                    <div class="form-group col-md-3">
-                        <label for="str_mode" class="col-form-label">Modo de Carga:</label>
-                        <select class="form-select" id="str_mode" name="str_mode">
-                            {% for value, label in form.fields.str_mode.choices %}
-                                <option value="{{ value }}" {% if value == form.instance.str_mode %}selected{% endif %}>{{ label }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="col-md-3">
+
+                        {{ form.str_mode.label_tag }} {{ form.str_mode }}
+
+                        {% if form.str_mode.errors %}
+                            <div class="text-danger">
+                                {{ form.str_mode.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
-                    <div class="form-group col-md-4">
-                        <label for="str_type" class="col-form-label">Tipo de Processamento:</label>
-                        <select class="form-select" id="str_type" name="str_type">
-                            {% for value, label in form.fields.str_type.choices %}
-                                <option value="{{ value }}" {% if value == form.instance.str_type %}selected{% endif %}>{{ label }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="col-md-4">
+                        {{ form.str_type.label_tag }} {{ form.str_type }}
+
+                        {% if form.str_type.errors %}
+                            <div class="text-danger">
+                                {{ form.str_type.errors }}
+                            </div>
+                        {% endif %}
+                   </div>
+
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        {{ form.str_hour_of.label_tag }} {{ form.str_hour_of }}
+                        {% if form.str_hour_of.errors %}
+                            <div class="text-danger">
+                                {{ form.str_hour_of.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+
+                    <div class="col-md-5">
+                        {{ form.str_owner.label_tag }} {{ form.str_owner }}
+                        {% if form.str_owner.errors %}
+                            <div class="text-danger">
+                                {{ form.str_owner.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-5">
+                        {{ form.str_owner_email.label_tag }} {{ form.str_owner_email }}
+                        {% if form.str_owner_email.errors %}
+                            <div class="text-danger">
+                                {{ form.str_owner_email.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="form-group col-md-4">
-                        <label class="col-form-label" for="str_hour_of">Horario da Execução:</label>
-                        <input class="form-control" type="text" placeholder="" id="str_hour_of" name="int_hour_of">
-                    </div>
-                </div>
+                    <div class="col-md-10">
+                        {{ form.str_desc.label_tag }} {{ form.str_desc }}
+                        {% if form.str_desc.errors %}
+                            <div class="text-danger">
+                                {{ form.str_desc.errors }}
+                            </div>
+                        {% endif %}
 
-                <div class="row justify-content-center">
-
-                    <div class="form-group col-md-5">
-                        <label class="col-form-label" for="str_owner">Responsável:</label>
-                        <input class="form-control" type="text" placeholder="" id="str_owner" name="str_owner">
-                    </div>
-
-                    <div class="form-group col-md-5">
-                        <label for="str_owner_email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control" id="str_owner_email" name="str_owner_email" aria-describedby="emailHelp" placeholder="">
-                    </div>
-
-                </div>
-
-                <div class="row justify-content-center">
-
-                    <div class="form-group col-md-10">
-                        <label for="str_desc" class="col-form-label">Descrição:</label>
-                        <textarea class="form-control" id="str_desc" name="str_desc" rows="3"></textarea>
                     </div>
                 </div>
 

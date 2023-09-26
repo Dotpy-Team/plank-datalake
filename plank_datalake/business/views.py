@@ -60,6 +60,7 @@ def new_user(request, id_customer):
         form = CustomUserForm(
                 initial={'id_customer': id_customer}
             )
+        print(form)
         html_location = parse_html_path(CUSTOMUSER_PATH,'signup')
         response_dict = {
             'form':form
@@ -96,9 +97,14 @@ def users_list_by_id_customer(request,id_customer):
             'user_profile',
             args=[crip(str(user.email))]
         )
+        
         user.save()
 
-    response_dict = {'users': users}
+    response_dict = {
+        'users': users
+    }
+
+    print(response_dict)
     return render(request, html_location, response_dict)
 
 
@@ -178,11 +184,10 @@ def customer_profile(request,id_customer):
         html_location = parse_html_path(CUSTUMER_PATH,'profile')
         response_dict = {
             'customer': customer,
-            'users':reverse(
-                'users_list_by_id_customer',
-                args=[crip(str(customer.id_customer))]
-            )
-        
+            'users':reverse('users_list_by_id_customer',args=[crip(str(customer.id_customer))]),
+            'new_user': reverse('new_user',args=[crip(str(id_customer))]),
+            'new_table': reverse('new_table',args=[crip(str(id_customer))]),
+            'view_tables': reverse('view_tables',args=[crip(str(id_customer))]) 
         }
         return render(request, html_location, response_dict)
     except Http404:

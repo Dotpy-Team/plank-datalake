@@ -22,15 +22,28 @@
                 
                 {% endif %}
 
+                {{ form.id_customer }}
 
                 <!-- firstname and lastname content -->
                 
                 <div class="row">
                     <div class='col'>
                         {{ form.first_name.label_tag }} {{ form.first_name }}
+
+                        {% if form.first_name.errors %}
+                            <div class="text-danger">
+                                {{ form.first_name.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
                     <div class='col'>
                         {{ form.last_name.label_tag }} {{ form.last_name }}
+                        {% if form.last_name.errors %}
+                            <div class="text-danger">
+                                {{ form.last_name.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -39,24 +52,51 @@
                 <div class="row">
                     <div class='col'>
                         {{ form.str_cpf.label_tag }} {{ form.str_cpf }}
+
+                        {% if form.str_cpf.errors %}
+                            <div class="text-danger">
+                                {{ form.str_cpf.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
                     <div class="col-sm-6">
                         {{ form.str_telefone.label_tag }} {{ form.str_telefone }}
+
+                        {% if form.str_telefone.errors %}
+                            <div class="text-danger">
+                                {{ form.str_telefone.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
                 </div>
 
                 <div class='row'>
                     <div class="col">
                         {{ form.str_cargo.label_tag }} {{ form.str_cargo }}
+
+                        {% if form.str_cargo.errors %}
+                            <div class="text-danger">
+                                {{ form.str_cargo.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
                     <div class="col">
                         {{ form.str_address.label_tag }} {{ form.str_address }}
+
+                        {% if form.str_address.errors %}
+                            <div class="text-danger">
+                                {{ form.str_address.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
                 </div>
                 
                 <!-- email and username content -->
-                <div class="row">
-                    {{ form.id_customer.label_tag }} {{ form.id_customer }
+                <div class="row">                    
                     <div class="col-12">
                         {{ form.email.label_tag }} {{ form.email }}
                         {{ form.password.label_tag }} {{ form.password }}

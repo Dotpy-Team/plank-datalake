@@ -21,22 +21,41 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
-def new_table(request):
-    form = TablesForm()
-    html_location = parse_html_path(TABLE_PATH,'add')
-
-    dict_form = {
-        'form': form
-    }
-    return render(request, html_location, dict_form)
-
-def get_tables(request, id_table=None):
-    tables = Tables.objects.all()
-    for table in tables:
-        if id_table == str(table.id_table):
-            table.selected = True
+def new_table(request, id_customer):
+    id_customer = uncrip(id_customer)
+    
+    if request.method == 'POST':
+        form = TablesForm(request.POST)
+        html_location = parse_html_path(TABLE_PATH,'add')
+        if form.is_valid():
+            table = form.save()
+            return redirect('table_view', crip(str(table.id_table)))
         else:
-            table.selected = False
+            error_message = 'Credenciais inválidas. Por favor, tente novamente.'
+            response_dict = {
+                'form': form,
+                'error_message':error_message,
+                'error_forms':form.errors
+            }
+            return render(request, html_location, response_dict)
+    else:
+        form = TablesForm(
+                initial={'id_customer': id_customer}
+            )
+        html_location = parse_html_path(TABLE_PATH,'add')
+        response_dict = {
+            'form':form
+        }
+        return render(request, html_location, response_dict)
+
+def get_tables(request, id_customer):
+    id_customer = uncrip(id_customer)
+    tables = Tables.objects.filter(id_customer=id_customer)
+    for table in tables:
+        # if id_table == str(table.id_table):
+        #     table.selected = True
+        # else:
+        table.selected = False
 
         table.detail_url = reverse(
             'table_view', 
@@ -44,26 +63,28 @@ def get_tables(request, id_table=None):
         )
         table.save()
 
-    if id_table == None:
-        card_table = tables[0]
-    else:
-        card_table = Tables.objects.get(id_table=id_table)
+    # if id_table == None:
+    #     card_table = tables[0]
+    # else:
+    #     card_table = Tables.objects.get(id_table=id_table)
 
     html_location = parse_html_path(TABLE_PATH,'list')
     response_dict = {
-        'tables': tables,
-        'card_table': card_table
+        'tables': tables
+        # ,
+        # 'card_table': card_table
     }
     return render(request, html_location, response_dict)
 
 def get_table(request,id_table):
     try:
+        id_table = uncrip(id_table)
         table = get_object_or_404(Tables, id_table=id_table)
         html_location = parse_html_path(TABLE_PATH,'detail')
         response_dict = {
-            'add': reverse('column_add',args=[crip(str(table.id_table))]),
-            'look_all': reverse('columns_list',args=[crip(str(table.id_table))]),
-            'exclude': reverse('column_add',args=[crip(str(table.id_table))]),
+            # 'add': reverse('column_add',args=[crip(str(table.id_table))]),
+            # 'look_all': reverse('columns_list',args=[crip(str(table.id_table))]),
+            # 'exclude': reverse('column_add',args=[crip(str(table.id_table))]),
             'table': table
         }
         print(response_dict)
@@ -71,30 +92,4 @@ def get_table(request,id_table):
     except Http404:
         return redirect('table_add')
 
-def post(request):
-    form = TablesForm(request.POST)
-    print(form.errors)
-    html_location = parse_html_path(TABLE_PATH,'add')
 
-    if form.is_valid():
-        table = form.save()
-        return redirect('table_view', crip(str(table.id_table)))
-    else:
-        response_dict = {
-            'form': form
-        }
-        return render(request, html_location, response_dict)
-
-    # def put(self, request, id_company=None):
-    #     company = get_object_or_404(Tables, id_company=id_company)
-    #     form = TablesForm(request.POST, instance=company)
-    #     html_location = self.parse_html_path('profile')
-        
-    #     response_dict = {
-    #         'companies': form
-    #     }
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('details_company', id=id_company)
-    #     return render(request, html_location, response_dict)
-    

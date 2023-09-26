@@ -10,37 +10,34 @@
                 <!-- row status -->
                 <div class="row mt-1 justify-content-center">
                     <div class="col-md-10">
-                        <div class="form-group">
-
-                            <label for="str_customer_type" class="col-form-label mt-1">Status:</label>
-                            <select class="form-select mt-1" id="str_customer_type" name="str_customer_type">
-                                {% for value, label in form.fields.str_customer_type.choices %}
-                                    <option value="{{ value }}" {% if value == form.instance.str_customer_type %}selected{% endif %}> {{ label }} </option>
-                                {% endfor %}
-                            </select>
-
-                        </div>
+                        {{ form.str_customer_type.label_tag }} {{ form.str_customer_type }}
+                        
+                        {% if form.str_customer_type.errors %}
+                            <div class="text-danger">
+                                {{ form.str_customer_type.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 
                 <!-- row name and cnpj -->
                 <div class="row mt-2 justify-content-center">
                     <div class="col-md-5">
-
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_name">Nome:</label>
-                            <input type="text" class="form-control mt-1" placeholder="Default input" id="str_name" name="str_name">
-                        </div>
-
+                        {{ form.str_name.label_tag }} {{ form.str_name }}
+                        {% if form.str_name.errors %}
+                            <div class="text-danger">
+                                {{ form.str_name.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-5">
-
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_cnpj">CNPJ:</label>
-                            <input type="text" class="form-control mt-1" placeholder="Default input" id="str_cnpj" name="str_cnpj">
-                        </div>
-
+                        {{ form.str_cnpj.label_tag }} {{ form.str_cnpj }}
+                        {% if form.str_cnpj.errors %}
+                            <div class="text-danger">
+                                {{ form.str_cnpj.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                 </div>
@@ -49,43 +46,44 @@
                 <div class="row mt-2 justify-content-center">
 
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="str_setor" class="col-form-label">Setor:</label>
-                            <select class="form-select" id="str_setor" name="str_setor">
-                                {% for value, label in form.fields.str_setor.choices %}
-                                    <option value="{{ value }}" {% if value == form.instance.str_setor %}selected{% endif %}> {{ label }} </option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        {{ form.str_setor.label_tag }} {{ form.str_setor }}
+                        {% if form.str_setor.errors %}
+                            <div class="text-danger">
+                                {{ form.str_setor.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-form-label" for="str_size">Tamanho:</label>
-                            <select class="form-select" id="str_size" name="str_size">
-                                {% for value, label in form.fields.str_size.choices %}
-                                    <option value="{{ value }}" {% if value == form.instance.str_size %}selected{% endif %}> {{ label }} </option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        {{ form.str_size.label_tag }} {{ form.str_size }}
+                        {% if form.str_size.errors %}
+                            <div class="text-danger">
+                                {{ form.str_size.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="col-form-label" for="dth_create">Criação:</label>
-                            <input type="date" class="form-control" placeholder="Default input" id="dth_create" name="dth_create">
-                        </div>
+                        {{ form.dth_create.label_tag }} {{ form.dth_create }}
+                        {% if form.dth_create.errors %}
+                            <div class="text-danger">
+                                {{ form.dth_create.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                 </div>
 
                 <!-- atividade complemento -->
                 <div class="row mt-2 justify-content-center">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_finance_complement">Complemento Financeiro:</label>
-                            <textarea class="form-control"  id="str_finance_complement" name="str_finance_complement" rows=5></textarea>
+                    <div class='col-md-10'>
+                    {{ form.str_finance_complement.label_tag }} {{ form.str_finance_complement }}
+                    {% if form.str_finance_complement.errors %}
+                        <div class="text-danger">
+                            {{ form.str_finance_complement.errors }}
                         </div>
+                    {% endif %}
+
                     </div>
                 </div>
 
@@ -93,77 +91,97 @@
                 <div class="row mt-2 justify-content-center">
 
                     <div class="col-md-5">
-                        <div class="form-group">
-                            <label class="col-form-label" for="str_telefone">Telefone:</label>
-                            <input type="text" class="form-control" placeholder="Default input" id="str_telefone" name="str_telefone">
-                        </div>
+                        {{ form.str_telefone.label_tag }} {{ form.str_telefone }}
+                        {% if form.str_telefone.errors %}
+                            <div class="text-danger">
+                                {{ form.str_telefone.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-5">
-                        <div class="form-group">
-                            <label class="col-form-label" for="str_email">Email:</label>
-                            <input type="email" class="form-control" id="str_email" name="str_email" placeholder="Enter email">
-                        </div>
+                        {{ form.str_email.label_tag }} {{ form.str_email }}
+                        {% if form.str_email.errors %}
+                            <div class="text-danger">
+                                {{ form.str_email.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <!-- row address -->
                 <div class="row mt-2 justify-content-center">
                     <div class="col-md-10">
-                        <div class="form-group">
-                            <label class="form-label" for="str_address">Endereço:</label>
-                            <input type="text" class="form-control" placeholder="Default input" id="str_address" name="str_address">
-                        </div>
+                        {{ form.str_address.label_tag }} {{ form.str_address }}
+
+                        {% if form.str_address.errors %}
+                            <div class="text-danger">
+                                {{ form.str_address.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
                 <!-- rede social e site -->
                 <div class="row mt-2 justify-content-center">
+                    
                     <div class="col-md-5">
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_site">Site:</label>
-                            <input type="text" class="form-control" placeholder="Default input" id="str_site" name="str_site">
-                        </div>
+                        {{ form.str_site.label_tag }} {{ form.str_site }}
+
+                        {% if form.str_site.errors %}
+                            <div class="text-danger">
+                                {{ form.str_site.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-5">
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_linkedin_profile">LINKEDIN:</label>
-                            <input type="text" class="form-control" placeholder="Default input" id="str_linkedin_profile" name="str_linkedin_profile">
-                        </div>
+                        {{ form.str_linkedin_profile.label_tag }} {{ form.str_linkedin_profile }}
+
+                        {% if form.str_linkedin_profile.errors %}
+                            <div class="text-danger">
+                                {{ form.str_linkedin_profile.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
                 <!-- contato complement -->
                 <div class="row mt-2 justify-content-center">
                     <div class="col-md-5">
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_contact">Contato:</label>
-                            <textarea class="form-control"  id="str_contact" name="str_contact" rows=5></textarea>
-                        </div>
+                        {{ form.str_contact.label_tag }} {{ form.str_contact }}
+
+                        {% if form.str_contact.errors %}
+                            <div class="text-danger">
+                                {{ form.str_contact.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-5">
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_comments">Comentários:</label>
-                            <textarea class="form-control"  id="str_comments" name="str_comments" rows=5></textarea>
-                        </div>
+                        {{ form.str_comments.label_tag }} {{ form.str_comments }}
+                        {% if form.str_comments.errors %}
+                            <div class="text-danger">
+                                {{ form.str_comments.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col-md-10">
-                        <div class="form-group">
-                            <label class="col-form-label mt-1" for="str_documents">Outros complementos:</label>
-                            <input type="file" class="form-control" id="str_documents" name="str_documents">
-                        </div>
+                        {{ form.str_documents.label_tag }} {{ form.str_documents }}
+
+                        {% if form.str_documents.errors %}
+                            <div class="text-danger">
+                                {{ form.str_documents.errors }}
+                            </div>
+                        {% endif %}
                     </div>
 
 
                 </div>
 
                 <div class="row mt-2 justify-content-center">
-
-
                     <div class="col-md-10">
                         <!-- Adicione os demais campos do formulário aqui -->
                         <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
