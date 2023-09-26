@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from .models import CustomUser,Customer
-from .forms import CustomUserForm, CustomerForm
+from .models import CustomUser, Customer, System, DataSet
+from .forms import CustomUserForm, CustomerForm, SystemForm, DataSetForm
 import base64
 
 def crip(text):
@@ -164,7 +164,7 @@ def new_customer(request):
         }
     return render(request, html_location, dict_form)
 
-def customers_list(request):
+def list_customers(request):
     customers = Customer.objects.all()
     html_location = parse_html_path(CUSTUMER_PATH,'list')
     for customer in customers:
@@ -177,7 +177,7 @@ def customers_list(request):
     response_dict = {'customers': customers}
     return render(request, html_location, response_dict)
     
-def customer_profile(request,id_customer):
+def profile_customer(request,id_customer):
     id_customer = uncrip(id_customer)
     try:
         customer = get_object_or_404(Customer, id_customer=id_customer)
@@ -187,23 +187,97 @@ def customer_profile(request,id_customer):
             'users':reverse('users_list_by_id_customer',args=[crip(str(customer.id_customer))]),
             'new_user': reverse('new_user',args=[crip(str(id_customer))]),
             'new_table': reverse('new_table',args=[crip(str(id_customer))]),
+            'new_system': reverse('new_system',args=[crip(str(id_customer))]),
             'view_tables': reverse('view_tables',args=[crip(str(id_customer))]) 
         }
         return render(request, html_location, response_dict)
     except Http404:
         return redirect('signup_company')
 
+#######################################
+"""
+SYSTEM NEW_SYSTEM
+SYSTEM PROFILE
 
-# def put(self, request, id_customer=None):
-#     company = get_object_or_404(Customer, id_customer=id_customer)
-#     form = CustomerForm(request.POST, instance=company)
-#     html_location = self.parse_html_path('profile')
-    
-#     response_dict = {
-#         'companies': form
-#     }
+"""
+#######################################
 
-#     if form.is_valid():
-#         form.save()
-#         return redirect('details_company', id=id_customer)
-#     return render(request, html_location, response_dict)
+SYSTEM_PATH = 'business/System/'
+
+def new_system(request,id_customer):
+    id_customer = uncrip(id_customer)
+    if request.method == 'POST':
+        form = SystemForm(request.POST)
+        html_location = parse_html_path(SYSTEM_PATH,'new_system')
+
+        if form.is_valid():
+            system = form.save()
+            return redirect('profile_system', crip(str(system.id_system)))
+        else:
+            print(form.errors)
+            response_dict = {'form': form}
+            return render(request, html_location, response_dict)
+    else:
+        form = SystemForm(initial={'id_customer': id_customer})
+        html_location = parse_html_path(SYSTEM_PATH,'new_system')
+        dict_form = {
+            'form': form
+        }
+    return render(request, html_location, dict_form)
+
+def profile_system(request,id_system):
+    id_system = uncrip(id_system)
+    # try:
+    system = get_object_or_404(System, id_system=id_system)
+    html_location = parse_html_path(SYSTEM_PATH,'profile_system')
+    response_dict = {
+        'system': system,
+        'new_dataset':reverse('new_dataset',args=[crip(str(system.id_system))])
+    }
+    return render(request, html_location, response_dict)
+    # except Http404:
+    #     return redirect('signup_company')
+
+
+#######################################
+"""
+DATASET NEW_DATASET
+DATASET PROFILE
+
+"""
+#######################################
+
+DATASET_PATH = 'business/DataSet/'
+
+def new_dataset(request,id_system):
+    id_system = uncrip(id_system)
+    if request.method == 'POST':
+        form = DataSetForm(request.POST)
+        html_location = parse_html_path(DATASET_PATH,'new_dataset')
+        print(form.errors)
+        if form.is_valid():
+            dataset = form.save()
+            return redirect('profile_dataset', crip(str(dataset.id_dataset)))
+        else:
+            response_dict = {'form': form}
+            return render(request, html_location, response_dict)
+    else:
+        form = DataSetForm(initial={'id_system': id_system})
+        html_location = parse_html_path(DATASET_PATH,'new_dataset')
+        dict_form = {
+            'form': form
+        }
+    return render(request, html_location, dict_form)
+
+def profile_dataset(request,id_dataset):
+    id_dataset = uncrip(id_dataset)
+    # try:
+    dataset = get_object_or_404(DataSet, id_dataset=id_dataset)
+    html_location = parse_html_path(DATASET_PATH,'profile_dataset')
+    response_dict = {
+        'dataset': dataset,
+        'new_dataset':reverse('new_dataset',args=[crip(str(dataset.id_system))])
+    }
+    return render(request, html_location, response_dict)
+    # except Http404:
+    #     return redirect('signup_company')

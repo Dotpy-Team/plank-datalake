@@ -1,0 +1,21 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'><b>Detalhes:</b></div>
+        <div class="card-body">
+            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
+            <h3 class="card-text-secondary-emphasis">Nome:</h3>
+            <p class="card-text">{{ dataset.str_title }}</p>
+            <h3 class="card-text-secondary-emphasis">Status:</h3>
+            <p class="card-text">{{ dataset.str_status }}</p>
+            <h3 class="card-text-secondary-emphasis">Descrição:</h3>
+            <p class="card-text">{{ dataset.str_desc }}</p>
+            <a href="{{new_dataset}}" class="btn btn-primary mt-2">Adicionar DataSet</a></td>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container">
+    <!-- row content -->
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <h1 class="text-info">Cadastrar Novo DataSet</h1>
+            <!-- form content -->
+            <form method="POST" class="form">
+            {% csrf_token %}
+
+                {{ form.id_system }}
+
+                <!-- firstname and lastname content -->
+                
+                <div class="row">
+                    <div class='col'>
+                        {{ form.str_title.label_tag }} {{ form.str_title }}
+
+                        {% if form.str_title.errors %}
+                            <div class="text-danger">
+                                {{ form.str_title.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <div class='col'>
+                        {{ form.str_status.label_tag }} {{ form.str_status }}
+                        {% if form.str_status.errors %}
+                            <div class="text-danger">
+                                {{ form.str_status.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- another info content -->
+                
+                <div class="row">
+                    <div class='col'>
+                        {{ form.str_desc.label_tag }} {{ form.str_desc }}
+
+                        {% if form.str_desc.errors %}
+                            <div class="text-danger">
+                                {{ form.str_desc.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+
+            <button class="btn btn-primary mt-4" type="submit">Cadastrar!</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

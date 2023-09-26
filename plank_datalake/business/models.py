@@ -1,12 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission, AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
         if not username:
             raise ValueError('O usuário deve ser fornecido')
-        
         user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -15,12 +13,10 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-
         if extra_fields.get('is_staff') is not True:
             raise ValueError('O superusuário deve ter is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('O superusuário deve ter is_superuser=True.')
-
         return self.create_user(username, password, **extra_fields)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -33,24 +29,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     str_telefone = models.CharField(max_length=15, null=True, blank=True)
     str_cargo = models.CharField(max_length=100, null=True, blank=True)
     str_address = models.CharField(max_length=100, null=True, blank=True)
-
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
     groups = models.ManyToManyField(Group, related_name='custom_users')    
     user_permissions = models.ManyToManyField(Permission, related_name='custom_users')
-
     objects = CustomUserManager()
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
-
     def __str__(self):
         return self.email
 
-
 class Customer(models.Model):
-
     id_customer = models.AutoField(primary_key=True)
     str_customer_type = models.CharField(
         max_length=20, choices=[
@@ -92,3 +81,70 @@ class Customer(models.Model):
     str_finance_complement = models.CharField(max_length=500)
     str_documents = models.CharField(max_length=200, null=True, blank=True)
     str_comments = models.CharField(max_length=200, null=True, blank=True)
+
+class System(models.Model):
+    id_system = models.AutoField(primary_key=True)
+    id_customer = models.IntegerField()
+    str_status = models.CharField(
+        max_length=20, choices=[
+            ('Ativo', 'Ativo'),
+            ('Inativo', 'Inativo')
+        ]
+    )
+    str_title = models.CharField(max_length=200, null=True, blank=True)
+    str_desc = models.CharField(max_length=200, null=True, blank=True)
+    str_desc_ia = models.CharField(max_length=200, null=True, blank=True)
+    dth_start_at = models.DateField(auto_now=True)
+
+class DataSet(models.Model):
+    id_dataset = models.AutoField(primary_key=True)
+    id_system = models.IntegerField()
+    str_status = models.CharField(
+        max_length=20, choices=[
+            ('Ativo', 'Ativo'),
+            ('Inativo', 'Inativo')
+        ]
+    )
+    str_title = models.CharField(max_length=200, null=True, blank=True)
+    str_desc = models.CharField(max_length=200, null=True, blank=True)
+    str_desc_ia = models.CharField(max_length=200, null=True, blank=True)
+    dth_start_at = models.DateField(auto_now=True)
+
+class Layer(models.Model):
+    id_layer = models.AutoField(primary_key=True)
+    str_title = models.CharField(max_length=200, null=True, blank=True)
+    str_desc = models.CharField(max_length=200, null=True, blank=True)
+    str_status = models.CharField(
+        max_length=20, choices=[
+            ('Ativo', 'Ativo'),
+            ('Inativo', 'Inativo')
+        ]
+    )
+
+class ConfCluster(models.Model):
+    #configure to start_job_run
+    #https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue/client/start_job_run.html
+    id_cluster = models.AutoField(primary_key=True)
+    str_worker_type = models.CharField(max_length=200, null=True, blank=True)
+    str_numer_of_workers = models.CharField(max_length=200, null=True, blank=True)
+    int_time_out = models.IntegerField()
+    int_max_capacity = models.IntegerField()
+    str_status = models.CharField(
+        max_length=20, choices=[
+            ('Ativo', 'Ativo'),
+            ('Inativo', 'Inativo')
+        ]
+    )
+
+# class Trigger(models.Model):
+#     id_cluster = models.AutoField(primary_key=True)
+#     str_worker_type = models.CharField(max_length=200, null=True, blank=True)
+#     str_numer_of_workers = models.CharField(max_length=200, null=True, blank=True)
+#     int_time_out = models.IntegerField()
+
+#     str_status = models.CharField(
+#         max_length=20, choices=[
+#             ('Ativo', 'Ativo'),
+#             ('Inativo', 'Inativo')
+#         ]
+#     )

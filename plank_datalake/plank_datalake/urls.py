@@ -1,4 +1,5 @@
-"""plank_datalake URL Configuration
+"""
+plank_datalake URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -23,19 +24,35 @@ from business import views as b
 urlpatterns = [
     path('admin/', admin.site.urls),    
     path('', b.home_page , name='new_user'),
-    #USER: adm
+    # USER:
+
     path('signup/<str:id_customer>', b.new_user , name='new_user'),
     path('login/', b.user_login, name='user_login'),
     path('user-profile/<str:email>', b.user_profile, name='user_profile'),
     path('users/<str:id_customer>', b.users_list_by_id_customer, name='users_list_by_id_customer'),
     path('all-users/', b.all_users, name='all_users'),
-    # #CUSTOMER: adm
+    
+    # CUSTOMER:
 
     path('customer/', b.new_customer , name='new_customer'),
-    path('customer-profile/<str:id_customer>', b.customer_profile, name='profile_customer'),
-    path('customer-profiles/', b.customers_list, name='list_customers'),
+    path('customer-profile/<str:id_customer>', b.profile_customer, name='profile_customer'),
+    path('customer-profiles/', b.list_customers, name='list_customers'),
 
-    # #TABLE adm
+
+    # SYSTEM:
+
+    path('system/<str:id_customer>', b.new_system , name='new_system'),
+    path('system-details/<str:id_system>', b.profile_system, name='profile_system'),
+
+    # DATASET:
+    path('dataset/<str:id_system>', b.new_dataset , name='new_dataset'),
+    path('dataset-details/<str:id_dataset>', b.profile_dataset, name='profile_dataset'),
+
+
+
+    # #TABLE
+
+
     path('add-table/<str:id_customer>', p.new_table,name='new_table'),
     path('detail-table/<str:id_table>',p.get_table,name='table_view'),
     path('search-tables/<str:id_customer>',p.get_tables,name='view_tables'),
