@@ -1,194 +1,192 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container d-flex justify-content-center">
-    <div class="card col-md-10">
-        <div class="card-body">
-            <h3 class="text-primary">Novo Cliente</h1>
-            <form method="post" class="form">
-                {% csrf_token %}
-                <!-- row status -->
-                <div class="row mt-1 justify-content-center">
-                    <div class="col-md-10">
-                        {{ form.str_customer_type.label_tag }} {{ form.str_customer_type }}
-                        
-                        {% if form.str_customer_type.errors %}
-                            <div class="text-danger">
-                                {{ form.str_customer_type.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-                
-                <!-- row name and cnpj -->
-                <div class="row mt-2 justify-content-center">
-                    <div class="col-md-5">
-                        {{ form.str_name.label_tag }} {{ form.str_name }}
-                        {% if form.str_name.errors %}
-                            <div class="text-danger">
-                                {{ form.str_name.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="col-md-5">
-                        {{ form.str_cnpj.label_tag }} {{ form.str_cnpj }}
-                        {% if form.str_cnpj.errors %}
-                            <div class="text-danger">
-                                {{ form.str_cnpj.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                </div>
-
-                <!-- Atividade e ramo. -->
-                <div class="row mt-2 justify-content-center">
-
-                    <div class="col-md-4">
-                        {{ form.str_setor.label_tag }} {{ form.str_setor }}
-                        {% if form.str_setor.errors %}
-                            <div class="text-danger">
-                                {{ form.str_setor.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="col-md-4">
-                        {{ form.str_size.label_tag }} {{ form.str_size }}
-                        {% if form.str_size.errors %}
-                            <div class="text-danger">
-                                {{ form.str_size.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="col-md-2">
-                        {{ form.dth_create.label_tag }} {{ form.dth_create }}
-                        {% if form.dth_create.errors %}
-                            <div class="text-danger">
-                                {{ form.dth_create.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                </div>
-
-                <!-- atividade complemento -->
-                <div class="row mt-2 justify-content-center">
-                    <div class='col-md-10'>
-                    {{ form.str_finance_complement.label_tag }} {{ form.str_finance_complement }}
-                    {% if form.str_finance_complement.errors %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="text-primary">Novo Cliente</h1>
+        <form method="post" class="form">
+            {% csrf_token %}
+            <!-- row status -->
+            <div class="row mt-1 justify-content-center">
+                <div class="col">
+                    {{ form.str_customer_type.label_tag }} {{ form.str_customer_type }}
+                    
+                    {% if form.str_customer_type.errors %}
                         <div class="text-danger">
-                            {{ form.str_finance_complement.errors }}
+                            {{ form.str_customer_type.errors }}
                         </div>
                     {% endif %}
-
-                    </div>
+                </div>
+            </div>
+            
+            <!-- row name and cnpj -->
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                    {{ form.str_name.label_tag }} {{ form.str_name }}
+                    {% if form.str_name.errors %}
+                        <div class="text-danger">
+                            {{ form.str_name.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
-                <!-- row contact -->
-                <div class="row mt-2 justify-content-center">
-
-                    <div class="col-md-5">
-                        {{ form.str_telefone.label_tag }} {{ form.str_telefone }}
-                        {% if form.str_telefone.errors %}
-                            <div class="text-danger">
-                                {{ form.str_telefone.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="col-md-5">
-                        {{ form.str_email.label_tag }} {{ form.str_email }}
-                        {% if form.str_email.errors %}
-                            <div class="text-danger">
-                                {{ form.str_email.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <!-- row address -->
-                <div class="row mt-2 justify-content-center">
-                    <div class="col-md-10">
-                        {{ form.str_address.label_tag }} {{ form.str_address }}
-
-                        {% if form.str_address.errors %}
-                            <div class="text-danger">
-                                {{ form.str_address.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+                <div class="col">
+                    {{ form.str_cnpj.label_tag }} {{ form.str_cnpj }}
+                    {% if form.str_cnpj.errors %}
+                        <div class="text-danger">
+                            {{ form.str_cnpj.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
-                <!-- rede social e site -->
-                <div class="row mt-2 justify-content-center">
-                    
-                    <div class="col-md-5">
-                        {{ form.str_site.label_tag }} {{ form.str_site }}
+            </div>
 
-                        {% if form.str_site.errors %}
-                            <div class="text-danger">
-                                {{ form.str_site.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+            <!-- Atividade e ramo. -->
+            <div class="row mt-2 justify-content-center">
 
-                    <div class="col-md-5">
-                        {{ form.str_linkedin_profile.label_tag }} {{ form.str_linkedin_profile }}
-
-                        {% if form.str_linkedin_profile.errors %}
-                            <div class="text-danger">
-                                {{ form.str_linkedin_profile.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+                <div class="col">
+                    {{ form.str_setor.label_tag }} {{ form.str_setor }}
+                    {% if form.str_setor.errors %}
+                        <div class="text-danger">
+                            {{ form.str_setor.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
-                <!-- contato complement -->
-                <div class="row mt-2 justify-content-center">
-                    <div class="col-md-5">
-                        {{ form.str_contact.label_tag }} {{ form.str_contact }}
-
-                        {% if form.str_contact.errors %}
-                            <div class="text-danger">
-                                {{ form.str_contact.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="col-md-5">
-                        {{ form.str_comments.label_tag }} {{ form.str_comments }}
-                        {% if form.str_comments.errors %}
-                            <div class="text-danger">
-                                {{ form.str_comments.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+                <div class="col">
+                    {{ form.str_size.label_tag }} {{ form.str_size }}
+                    {% if form.str_size.errors %}
+                        <div class="text-danger">
+                            {{ form.str_size.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
-                <div class="row mt-2 justify-content-center">
-                    <div class="col-md-10">
-                        {{ form.str_documents.label_tag }} {{ form.str_documents }}
-
-                        {% if form.str_documents.errors %}
-                            <div class="text-danger">
-                                {{ form.str_documents.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-
+                <div class="col">
+                    {{ form.dth_create.label_tag }} {{ form.dth_create }}
+                    {% if form.dth_create.errors %}
+                        <div class="text-danger">
+                            {{ form.dth_create.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
-                <div class="row mt-2 justify-content-center">
-                    <div class="col-md-10">
-                        <!-- Adicione os demais campos do formulário aqui -->
-                        <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+            </div>
+
+            <!-- atividade complemento -->
+            <div class="row mt-2 justify-content-center">
+                <div class='col'>
+                {{ form.str_finance_complement.label_tag }} {{ form.str_finance_complement }}
+                {% if form.str_finance_complement.errors %}
+                    <div class="text-danger">
+                        {{ form.str_finance_complement.errors }}
                     </div>
+                {% endif %}
+
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <!-- row contact -->
+            <div class="row mt-2 justify-content-center">
+
+                <div class="col">
+                    {{ form.str_telefone.label_tag }} {{ form.str_telefone }}
+                    {% if form.str_telefone.errors %}
+                        <div class="text-danger">
+                            {{ form.str_telefone.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col">
+                    {{ form.str_email.label_tag }} {{ form.str_email }}
+                    {% if form.str_email.errors %}
+                        <div class="text-danger">
+                            {{ form.str_email.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- row address -->
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                    {{ form.str_address.label_tag }} {{ form.str_address }}
+
+                    {% if form.str_address.errors %}
+                        <div class="text-danger">
+                            {{ form.str_address.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- rede social e site -->
+            <div class="row mt-2 justify-content-center">
+                
+                <div class="col">
+                    {{ form.str_site.label_tag }} {{ form.str_site }}
+
+                    {% if form.str_site.errors %}
+                        <div class="text-danger">
+                            {{ form.str_site.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col">
+                    {{ form.str_linkedin_profile.label_tag }} {{ form.str_linkedin_profile }}
+
+                    {% if form.str_linkedin_profile.errors %}
+                        <div class="text-danger">
+                            {{ form.str_linkedin_profile.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- contato complement -->
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                    {{ form.str_contact.label_tag }} {{ form.str_contact }}
+
+                    {% if form.str_contact.errors %}
+                        <div class="text-danger">
+                            {{ form.str_contact.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col">
+                    {{ form.str_comments.label_tag }} {{ form.str_comments }}
+                    {% if form.str_comments.errors %}
+                        <div class="text-danger">
+                            {{ form.str_comments.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                    {{ form.str_documents.label_tag }} {{ form.str_documents }}
+
+                    {% if form.str_documents.errors %}
+                        <div class="text-danger">
+                            {{ form.str_documents.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+
+            </div>
+
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                    <!-- Adicione os demais campos do formulário aqui -->
+                    <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

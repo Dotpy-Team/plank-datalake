@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from process import views as p
-# from business.views import CustomerView
 from business import views as b
 
 
@@ -57,9 +56,7 @@ urlpatterns = [
     path('dataset-details/<str:id_dataset>', b.profile_dataset, name='profile_dataset'),
 
 
-
     #TABLE
-
 
     path('add-table/<str:id_customer>', p.new_table,name='new_table'),
     path('detail-table/<str:id_table>',p.get_table,name='table_view'),
