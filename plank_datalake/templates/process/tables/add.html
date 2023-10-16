@@ -1,17 +1,18 @@
 {% extends 'common/base.html' %}
 {% block content %}
-<div class="container d-flex justify-content-center">
-    <div class="card col-md-10">
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="text-center">Nova Tabela</h3>
+        </div>
         <div class="card-body">
-            <h3 class="text-primary">Adicionar Tabela</h3>
-
             <form method="post" class="form">
                 {% csrf_token %}
 
-                <div class="row mt-1 justify-content-center">
-                    <div class="col-md-10">
-                        {{ form.id_customer.label_tag }} {{ form.id_customer }}
-
+                <div class="form-group row">
+                    <label for="{{ form.id_customer.id_for_label }}" class="col-sm-2 col-form-label">ID do Cliente:</label>
+                    <div class="col-sm-10">
+                        {{ form.id_customer }}
                         {% if form.id_customer.errors %}
                             <div class="text-danger">
                                 {{ form.id_customer.errors }}
@@ -20,20 +21,22 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        {{ form.str_name.label_tag }} {{ form.str_name }}
-
+                <div class="form-group row">
+                    <label for="{{ form.str_name.id_for_label }}" class="col-sm-2 col-form-label">Nome:</label>
+                    <div class="col-sm-10">
+                        {{ form.str_name }}
                         {% if form.str_name.errors %}
                             <div class="text-danger">
                                 {{ form.str_name.errors }}
                             </div>
                         {% endif %}
                     </div>
+                </div>
 
-                    <div class="form-group col-md-2">
-                        {{ form.str_system.label_tag }} {{ form.str_system }}
-
+                <div class="form-group row">
+                    <label for="{{ form.str_system.id_for_label }}" class="col-sm-2 col-form-label">Sistema:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_system }}
                         {% if form.str_system.errors %}
                             <div class="text-danger">
                                 {{ form.str_system.errors }}
@@ -41,10 +44,9 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-md-2">
-
-                        {{ form.str_dataset.label_tag }} {{ form.str_dataset }}
-
+                    <label for="{{ form.str_dataset.id_for_label }}" class="col-sm-2 col-form-label">Dataset:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_dataset }}
                         {% if form.str_dataset.errors %}
                             <div class="text-danger">
                                 {{ form.str_dataset.errors }}
@@ -53,45 +55,42 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="form-group col-md-3">
-
-                        {{ form.str_frequency.label_tag }} {{ form.str_frequency }}
-
+                <div class="form-group row">
+                    <label for="{{ form.str_frequency.id_for_label }}" class="col-sm-2 col-form-label">Frequência:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_frequency }}
                         {% if form.str_frequency.errors %}
                             <div class="text-danger">
                                 {{ form.str_frequency.errors }}
                             </div>
                         {% endif %}
-
                     </div>
 
-                    <div class="col-md-3">
-
-                        {{ form.str_mode.label_tag }} {{ form.str_mode }}
-
+                    <label for="{{ form.str_mode.id_for_label }}" class="col-sm-2 col-form-label">Modo:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_mode }}
                         {% if form.str_mode.errors %}
                             <div class="text-danger">
                                 {{ form.str_mode.errors }}
                             </div>
                         {% endif %}
                     </div>
+                </div>
 
-                    <div class="col-md-4">
-                        {{ form.str_type.label_tag }} {{ form.str_type }}
-
+                <div class="form-group row">
+                    <label for="{{ form.str_type.id_for_label }}" class="col-sm-2 col-form-label">Tipo:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_type }}
                         {% if form.str_type.errors %}
                             <div class="text-danger">
                                 {{ form.str_type.errors }}
                             </div>
                         {% endif %}
-                   </div>
+                    </div>
 
-                </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        {{ form.str_hour_of.label_tag }} {{ form.str_hour_of }}
+                    <label for="{{ form.str_hour_of.id_for_label }}" class="col-sm-2 col-form-label">Hora de:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_hour_of }}
                         {% if form.str_hour_of.errors %}
                             <div class="text-danger">
                                 {{ form.str_hour_of.errors }}
@@ -100,10 +99,10 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-
-                    <div class="col-md-5">
-                        {{ form.str_owner.label_tag }} {{ form.str_owner }}
+                <div class="form-group row">
+                    <label for="{{ form.str_owner.id_for_label }}" class="col-sm-2 col-form-label">Proprietário:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_owner }}
                         {% if form.str_owner.errors %}
                             <div class="text-danger">
                                 {{ form.str_owner.errors }}
@@ -111,32 +110,32 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-md-5">
-                        {{ form.str_owner_email.label_tag }} {{ form.str_owner_email }}
+                    <label for="{{ form.str_owner_email.id_for_label }}" class="col-sm-2 col-form-label">Email do Proprietário:</label>
+                    <div class="col-sm-4">
+                        {{ form.str_owner_email }}
                         {% if form.str_owner_email.errors %}
                             <div class="text-danger">
                                 {{ form.str_owner_email.errors }}
                             </div>
                         {% endif %}
                     </div>
-
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        {{ form.str_desc.label_tag }} {{ form.str_desc }}
+                <div class="form-group row">
+                    <label for="{{ form.str_desc.id_for_label }}" class="col-sm-2 col-form-label">Descrição:</label>
+                    <div class="col-sm-10">
+                        {{ form.str_desc }}
                         {% if form.str_desc.errors %}
                             <div class="text-danger">
                                 {{ form.str_desc.errors }}
                             </div>
                         {% endif %}
-
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-8 mt-5">
-                        <button class="btn btn-primary" type="submit">Salvar!</button>
+                <div class="form-group row justify-content-center">
+                    <div class="col-sm-6">
+                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
                     </div>
                 </div>
 

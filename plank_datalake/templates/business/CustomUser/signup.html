@@ -2,119 +2,143 @@
 {% block content %}
 
 <div class="container">
-    <!-- row content -->
     <div class="row justify-content-center">
-        <div class="col-md-7">
-            <h1 class="text-info">Cadastrar Usuário</h1>
-            <!-- form content -->
-            <form method="POST" class="form">
-                {% csrf_token %}
-
-                {% if error_message %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error_message }}
-                    </div>
-
-                    <div class="alert alert-danger" role="alert">
-                        {{ error_forms }}
-                    </div>
-                {% else %}
-                
-                {% endif %}
-
-                {{ form.id_customer }}
-
-                <!-- firstname and lastname content -->
-                
-                <div class="row">
-                    <div class='col'>
-                        {{ form.first_name.label_tag }} {{ form.first_name }}
-
-                        {% if form.first_name.errors %}
-                            <div class="text-danger">
-                                {{ form.first_name.errors }}
-                            </div>
-                        {% endif %}
-
-                    </div>
-                    <div class='col'>
-                        {{ form.last_name.label_tag }} {{ form.last_name }}
-                        {% if form.last_name.errors %}
-                            <div class="text-danger">
-                                {{ form.last_name.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-info">Cadastrar Usuário</h1>
                 </div>
+                <div class="card-body">
+                    <form method="POST" class="form">
+                        {% csrf_token %}
 
-                <!-- another info content -->
-                
-                <div class="row">
-                    <div class='col'>
-                        {{ form.str_cpf.label_tag }} {{ form.str_cpf }}
+                        {% if error_message %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error_message }}
+                            </div>
 
-                        {% if form.str_cpf.errors %}
-                            <div class="text-danger">
-                                {{ form.str_cpf.errors }}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error_forms }}
                             </div>
                         {% endif %}
 
-                    </div>
-                    <div class="col-sm-6">
-                        {{ form.str_telefone.label_tag }} {{ form.str_telefone }}
-
-                        {% if form.str_telefone.errors %}
-                            <div class="text-danger">
-                                {{ form.str_telefone.errors }}
+                        <div class="form-group row">
+                            <label for="{{ form.id_customer.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.id_customer.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.id_customer }}
                             </div>
-                        {% endif %}
+                        </div>
 
-                    </div>
+                        <div class="form-group row">
+                            <label for="{{ form.first_name.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.first_name.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                    <div class="text-danger">
+                                        {{ form.first_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="{{ form.last_name.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.last_name.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                    <div class="text-danger">
+                                        {{ form.last_name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="{{ form.str_cpf.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.str_cpf.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.str_cpf }}
+                                {% if form.str_cpf.errors %}
+                                    <div class="text-danger">
+                                        {{ form.str_cpf.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="{{ form.str_telefone.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.str_telefone.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.str_telefone }}
+                                {% if form.str_telefone.errors %}
+                                    <div class="text-danger">
+                                        {{ form.str_telefone.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="{{ form.str_cargo.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.str_cargo.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.str_cargo }}
+                                {% if form.str_cargo.errors %}
+                                    <div class="text-danger">
+                                        {{ form.str_cargo.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="{{ form.str_address.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.str_address.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.str_address }}
+                                {% if form.str_address.errors %}
+                                    <div class="text-danger">
+                                        {{ form.str_address.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="{{ form.email.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.email.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger">
+                                        {{ form.email.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="{{ form.password.id_for_label }}" class="col-md-4 col-form-label text-md-right">{{ form.password.label }}</label>
+                            <div class="col-md-6">
+                                {{ form.password }}
+                                {% if form.password.errors %}
+                                    <div class="text-danger">
+                                        {{ form.password.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Cadastrar!
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-                <div class='row'>
-                    <div class="col">
-                        {{ form.str_cargo.label_tag }} {{ form.str_cargo }}
-
-                        {% if form.str_cargo.errors %}
-                            <div class="text-danger">
-                                {{ form.str_cargo.errors }}
-                            </div>
-                        {% endif %}
-
-                    </div>
-                    <div class="col">
-                        {{ form.str_address.label_tag }} {{ form.str_address }}
-
-                        {% if form.str_address.errors %}
-                            <div class="text-danger">
-                                {{ form.str_address.errors }}
-                            </div>
-                        {% endif %}
-
-                    </div>
-                </div>
-                
-                <!-- email and username content -->
-                <div class="row">                    
-                    <div class="col-12">
-                        {{ form.email.label_tag }} {{ form.email }}
-                        {{ form.password.label_tag }} {{ form.password }}
-                        <div class="form-group">
-                            <label for="password">Senha</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="123%dotpy">
-                        </div>    
-                    </div>
-                </div>
-
-            <button class="btn btn-primary mt-4" type="submit">Cadastrar!</button>
-
-            </form>
-
+            </div>
         </div>
     </div>
-
 </div>
+
 
 
 {% endblock %}

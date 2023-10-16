@@ -26,6 +26,7 @@ def new_customer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
         html_location = parse_html_path(CUSTUMER_PATH,'signup')
+        print(form.errors)
 
         if form.is_valid():
             company = form.save()

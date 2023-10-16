@@ -15,42 +15,51 @@
 
     </head>
     <body>
+        <div class='wrapper'>
+            {% include 'common/sidebar.html' %}
+            <!-- Page Content  -->
+                <div id="content">
 
-        {% include 'common/sidebar.html' %}
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
 
-        <div id="content">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid" style="min-width: 1200px;">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                <i class="fas fa-align-left"></i>
+                                <span>Menu</span>
+                            </button>
+                            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <i class="fas fa-align-justify"></i>
+                            </button>
 
-                    <div class="navbar-header">
-                        <button type="button" id="sidebarCollapse" class="btn btn-primary navbar-btn">
-                            <i class="glyphicon glyphicon-align-left"></i>
-                            <span>Menu</span>
-                        </button>
-                    </div>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="nav navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Page</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Page</a></li>
-                            <li><a href="#">Page</a></li>
-                            <li><a href="#">Page</a></li>
-                            <li><a href="#">Page</a></li>
-                        </ul>
-                    </div>
+                    {% comment %} <h2>Collapsible Sidebar Using Bootstrap 4asydtgaysgdyagdyagsdysagdygasydgasydgyasdgyasgd</h2> {% endcomment %}
+
+                    {% block content %}
+                    
+                    {% endblock %}
+
+                    {% if request.path != '/' and request.path != '/view-tables/' %}
+                        {% include 'common/footer.html' %}
+                    {% endif %} 
                 </div>
-            </nav>
-
-            <div class="line"></div>
-
-            {% block content %}
-
-            {% endblock %}
-
-                
-            {% if request.path != '/' and request.path != '/view-tables/' %}
-                {% include 'common/footer.html' %}
-            {% endif %}
-
         </div>
 
         {% comment %} <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script> {% endcomment %}

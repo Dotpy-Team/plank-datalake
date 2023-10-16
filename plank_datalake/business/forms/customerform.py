@@ -5,7 +5,7 @@ from business.models import Customer
 class CustomerForm(forms.ModelForm):
 
     str_name = forms.CharField(
-        label='Nome *',
+        label='Nome completo *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
@@ -15,7 +15,7 @@ class CustomerForm(forms.ModelForm):
         required=True
     )
     str_address = forms.CharField(
-        label='Endereço *',
+        label='Endereço completo *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
@@ -25,12 +25,12 @@ class CustomerForm(forms.ModelForm):
         required=True
     )
     str_email = forms.EmailField(
-        label='Email *',
+        label='Email',
         widget=forms.EmailInput(attrs={'class': 'form-control'}),
         required=False
     )
     str_site = forms.CharField(
-        label='Site *',
+        label='Site',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=False
     )
@@ -40,29 +40,29 @@ class CustomerForm(forms.ModelForm):
         required=True
     )
     str_contact = forms.CharField(
-        label='Outros Contatos *',
+        label='Outros contatos *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
     dth_create = forms.DateField(
-        label='Data de Criação *',  # Rótulo personalizado
+        label='Data de criação *',
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         required=True
     )
     str_finance_complement = forms.CharField(
-        label='Complementos Financeiros *',
+        label='Complementos financeiros *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
     str_comments = forms.CharField(
-        label='Outros Comentários *',
+        label='Outros comentários *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
     str_documents = forms.FileField(
-        label='Outros complementos:',
+        label='Outros complementos',
         widget=forms.ClearableFileInput(attrs={'class': 'form-control'}),
-        required=False  # Se necessário, dependendo da sua lógica
+        required=False
     )
 
 
