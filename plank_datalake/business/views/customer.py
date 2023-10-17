@@ -19,7 +19,6 @@ def parse_html_path(template_path,page):
     html_location = template_path + f'{page}.html'
     return html_location
 
-
 CUSTUMER_PATH = 'business/Customer/'
 
 def new_customer(request):
@@ -47,7 +46,7 @@ def list_customers(request):
     html_location = parse_html_path(CUSTUMER_PATH,'list')
     for customer in customers:
         customer.detail_url = reverse(
-            'profile_customer',
+            'profile_customer_by_id',
             args=[crip(str(customer.id_customer))]
         )
         customer.save()
@@ -55,7 +54,7 @@ def list_customers(request):
     response_dict = {'customers': customers}
     return render(request, html_location, response_dict)
     
-def profile_customer(request,id_customer):
+def profile_customer_by_id(request,id_customer):
     id_customer = uncrip(id_customer)
     try:
         customer = get_object_or_404(Customer, id_customer=id_customer)
@@ -64,7 +63,26 @@ def profile_customer(request,id_customer):
             'customer': customer,
             'users':reverse('users_list_by_id_customer',args=[crip(str(customer.id_customer))]),
             'new_user': reverse('new_user',args=[crip(str(id_customer))]),
-            'new_table': reverse('new_table',args=[crip(str(id_customer))]),
+            'new_table': reverse('new_table_by_id',args=[crip(str(id_customer))]),
+            'new_system': reverse('new_system',args=[crip(str(id_customer))]),
+            'new_task': reverse('new_task',args=[crip(str(id_customer))]),
+            'view_tables': reverse('view_tables',args=[crip(str(id_customer))]) 
+        }
+        return render(request, html_location, response_dict)
+    except Http404:
+        return redirect('signup_company')
+
+def profile_customer(request):
+    id_customer = request.user.id_customer
+    # id_customer = uncrip(id_customer)
+    try:
+        customer = get_object_or_404(Customer, id_customer=id_customer)
+        html_location = parse_html_path(CUSTUMER_PATH,'profile')
+        response_dict = {
+            'customer': customer,
+            'users':reverse('users_list_by_id_customer',args=[crip(str(customer.id_customer))]),
+            'new_user': reverse('new_user',args=[crip(str(id_customer))]),
+            'new_table': reverse('new_table_by_id',args=[crip(str(id_customer))]),
             'new_system': reverse('new_system',args=[crip(str(id_customer))]),
             'new_task': reverse('new_task',args=[crip(str(id_customer))]),
             'view_tables': reverse('view_tables',args=[crip(str(id_customer))]) 

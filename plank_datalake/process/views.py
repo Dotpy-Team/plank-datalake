@@ -16,14 +16,39 @@ def uncrip(crip):
 
 TABLE_PATH = 'process/Tables/'
 
-
 def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
-def new_table(request, id_customer):
+def new_table_by_id(request, id_customer):
     id_customer = uncrip(id_customer)
     
+    if request.method == 'POST':
+        form = TablesForm(request.POST)
+        html_location = parse_html_path(TABLE_PATH,'add')
+        if form.is_valid():
+            table = form.save()
+            return redirect('table_view', crip(str(table.id_table)))
+        else:
+            error_message = 'Credenciais inválidas. Por favor, tente novamente.'
+            response_dict = {
+                'form': form,
+                'error_message':error_message,
+                'error_forms':form.errors
+            }
+            return render(request, html_location, response_dict)
+    else:
+        form = TablesForm(
+                initial={'id_customer': id_customer}
+            )
+        html_location = parse_html_path(TABLE_PATH,'add')
+        response_dict = {
+            'form':form
+        }
+        return render(request, html_location, response_dict)
+
+def new_table(request):
+    id_customer = request.user.id_customer
     if request.method == 'POST':
         form = TablesForm(request.POST)
         html_location = parse_html_path(TABLE_PATH,'add')
@@ -91,5 +116,3 @@ def get_table(request,id_table):
         return render(request, html_location, response_dict)
     except Http404:
         return redirect('table_add')
-
-

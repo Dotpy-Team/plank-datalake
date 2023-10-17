@@ -51,14 +51,15 @@
                     </nav>
 
                     {% comment %} <h2>Collapsible Sidebar Using Bootstrap 4asydtgaysgdyagdyagsdysagdygasydgasydgyasdgyasgd</h2> {% endcomment %}
+                    <div class='container-fluid'>
+                        {% block content %}
+                        
+                        {% endblock %}
 
-                    {% block content %}
-                    
-                    {% endblock %}
-
-                    {% if request.path != '/' and request.path != '/view-tables/' %}
-                        {% include 'common/footer.html' %}
-                    {% endif %} 
+                        {% if request.path != '/' and request.path != '/view-tables/' %}
+                            {% include 'common/footer.html' %}
+                        {% endif %} 
+                    </div>
                 </div>
         </div>
 

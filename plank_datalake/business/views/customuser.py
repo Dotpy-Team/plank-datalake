@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from business.models import CustomUser
 from business.forms import CustomUserForm
@@ -15,7 +16,6 @@ def uncrip(crip):
     text = base64.b64decode(crip).decode()
     return text
 
-
 common_path = 'common/'
 CUSTOMUSER_PATH = 'business/CustomUser/'
 
@@ -28,6 +28,7 @@ def parse_html_path(template_path,page):
 
 def home_page(request):
     html_location = parse_common_path('home')
+    print(request.user)
     return render(request,html_location)
 
 def new_user(request, id_customer):
@@ -51,7 +52,7 @@ def new_user(request, id_customer):
         form = CustomUserForm(
                 initial={'id_customer': id_customer}
             )
-        print(form)
+        
         html_location = parse_html_path(CUSTOMUSER_PATH,'signup')
         response_dict = {
             'form':form
@@ -60,12 +61,24 @@ def new_user(request, id_customer):
 
 def user_login(request, message=None):
     html_location = parse_html_path(CUSTOMUSER_PATH,'login')
+    
     if message is not None:
         response_dict = {
             'error_message': message
         }
     else:
         response_dict = {}
+    
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home_page')
+        else:
+            response_dict['errors'] = 'Credenciais inválidas. Por favor, tente novamente.'
+    
     return render(request,html_location, response_dict)
 
 def user_profile(request,email):
@@ -90,13 +103,12 @@ def users_list_by_id_customer(request,id_customer):
             'user_profile',
             args=[crip(str(user.email))]
         )
-        
         user.save()
 
     response_dict = {
-        'users': users
+        'users': users,
+        'new_user': reverse('new_user',args=[crip(str(id_customer))])
     }
-
     return render(request, html_location, response_dict)
 
 
@@ -112,3 +124,9 @@ def all_users(request):
 
     response_dict = {'users': users}
     return render(request, html_location, response_dict)
+
+
+def user_logout(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home_page')
