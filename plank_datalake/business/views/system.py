@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from business.models import System
+from business.models import System, DataSet
 from business.forms import SystemForm
 import base64
 
@@ -55,11 +55,35 @@ def profile_system(request,id_system):
     id_system = uncrip(id_system)
     # try:
     system = get_object_or_404(System, id_system=id_system)
+    datasets = DataSet.objects.filter(id_system=id_system)
+
+    for dataset in datasets:
+        dataset.detail_url = reverse(
+            'profile_dataset',
+            args=[crip(str(dataset.id_dataset))]
+        )
+        dataset.save()
+
     html_location = parse_html_path(SYSTEM_PATH,'profile_system')
     response_dict = {
         'system': system,
+        'datasets':datasets,
         'new_dataset':reverse('new_dataset',args=[crip(str(system.id_system))])
     }
+
     return render(request, html_location, response_dict)
     # except Http404:
     #     return redirect('signup_company')
+
+def list_system(request):
+    systems = System.objects.all()
+    html_location = parse_html_path(SYSTEM_PATH,'list_system')
+    for system in systems:
+        system.detail_url = reverse(
+            'profile_system',
+            args=[crip(str(system.id_system))]
+        )
+        system.save()
+    response_dict = {'systems': systems}
+    
+    return render(request, html_location, response_dict)

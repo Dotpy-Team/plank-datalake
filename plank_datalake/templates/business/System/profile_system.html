@@ -15,6 +15,28 @@
 
             <a href="{{new_dataset}}" class="btn btn-primary mt-2">Adicionar DataSet</a></td>
 
+            <p> datasets deste sistema: </p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#id</th>
+                        <th>Nome</th>
+                        <th>Descricao</th>
+                        <th>Descricao IA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dataset in datasets %}
+                    <tr>
+                        <td><a href="{{dataset.detail_url}}">{{ dataset.id_system }}</a></td>
+                        <td>{{ dataset.str_title }}</td>
+                        <td>{{ dataset.str_desc }}</td>
+                        <td>{{ dataset.str_desc_ia }}</td>                    
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
         </div>
     </div>

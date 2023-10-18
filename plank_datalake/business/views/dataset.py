@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from business.models import DataSet
+from business.models import DataSet, System
 from business.forms import DataSetForm
 import base64
 
@@ -32,18 +32,27 @@ DATASET_PATH = 'business/DataSet/'
 
 def new_dataset(request,id_system):
     id_system = uncrip(id_system)
+    try:
+        system_instance = System.objects.get(id_system=id_system)
+    except System.DoesNotExist:
+        # Lide com o caso em que o sistema não existe
+        return redirect('pagina_de_erro')
+    
     if request.method == 'POST':
         form = DataSetForm(request.POST)
         html_location = parse_html_path(DATASET_PATH,'new_dataset')
-        print(form.errors)
         if form.is_valid():
-            dataset = form.save()
+            dataset = form.save(commit=False)
+            dataset.id_system = system_instance
+            dataset.save()
+
             return redirect('profile_dataset', crip(str(dataset.id_dataset)))
         else:
+            print(form.errors)
             response_dict = {'form': form}
             return render(request, html_location, response_dict)
     else:
-        form = DataSetForm(initial={'id_system': id_system})
+        form = DataSetForm()
         html_location = parse_html_path(DATASET_PATH,'new_dataset')
         dict_form = {
             'form': form
@@ -57,7 +66,7 @@ def profile_dataset(request,id_dataset):
     html_location = parse_html_path(DATASET_PATH,'profile_dataset')
     response_dict = {
         'dataset': dataset,
-        'new_dataset':reverse('new_dataset',args=[crip(str(dataset.id_system))])
+        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.id_system))])
     }
     return render(request, html_location, response_dict)
     # except Http404:

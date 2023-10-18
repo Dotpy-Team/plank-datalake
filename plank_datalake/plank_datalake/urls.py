@@ -42,22 +42,22 @@ urlpatterns = [
     path('users/<str:id_customer>', b.users_list_by_id_customer, name='users_list_by_id_customer'),
     path('all-users/', b.all_users, name='all_users'),    
 
-    #TASK
+    #TASK:
     path('task/<str:id_customer>', b.new_task_by_id_customer , name='new_task'),
     path('task-details/<str:id_task>', b.profile_task, name='profile_task'),
 
     #SYSTEM:
     path('system/<str:id_customer>', b.new_system , name='new_system'),
     path('system-details/<str:id_system>', b.profile_system, name='profile_system'),
+    path('all-system/', b.list_system, name='list_system'),
 
     #DATASET:
     path('dataset/<str:id_system>', b.new_dataset , name='new_dataset'),
     path('dataset-details/<str:id_dataset>', b.profile_dataset, name='profile_dataset'),
 
-
     #TABLE
     path('add-table/', p.new_table,name='new_table'),
-    path('add-table/<str:id_customer>', p.new_table_by_id,name='new_table_by_id'),
+    path('add-table/<str:id_dataset>', p.new_table_by_id,name='new_table_by_id'),
     path('detail-table/<str:id_table>',p.get_table,name='table_view'),
     path('search-tables/<str:id_customer>',p.get_tables,name='view_tables'),
 

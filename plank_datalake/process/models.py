@@ -1,13 +1,11 @@
 from django.db import models
+from business.models import DataSet, Customer
 
 class Tables(models.Model):
 
     id_table = models.AutoField(primary_key=True)
-    #TODO: adicionar os campos como forenkey (esta como numérico para teste)
-    # id_customer = models.ForeignKey('Empresa', on_delete=models.CASCADE)
-    # id_workload = models.ForeignKey('Workload', null=True, blank=True, on_delete=models.CASCADE)
-    id_customer = models.IntegerField()
-    str_system = models.CharField(max_length=200)
+    id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    id_dataset = models.ForeignKey(DataSet, on_delete=models.CASCADE)
     str_frequency = models.CharField(
         max_length=20, choices=[
             ('Daily', 'Diario'), 
@@ -19,10 +17,6 @@ class Tables(models.Model):
         blank=True
     )
 
-    str_project = models.CharField(max_length=200, null=True, blank=True)
-    str_event_bridge = models.CharField(max_length=200, null=True, blank=True)
-
-    str_relative_import = models.CharField(max_length=200)
     str_type_of = models.CharField(
         max_length=20, 
         choices=[
@@ -31,8 +25,6 @@ class Tables(models.Model):
             ('Copy', 'Copy')
         ]
     )
-
-    str_hour_of = models.CharField(max_length=200, null=True, blank=True)
 
     str_mode = models.CharField(
         max_length=20, 
@@ -46,36 +38,23 @@ class Tables(models.Model):
         max_length=20, 
         choices=[
             ('CDC', 'Detecte as Mudanças'),
-            ('ULP', 'Considere a Ultima Particao')
+            ('FULL', 'Considere a Ultima Particao')
         ]
     )
 
-    str_dataset = models.CharField(
-            max_length=20, 
-            choices=[
-                ('CAD', 'Cadastro'),
-                ('TRAN', 'Transacional'),
-                ('LOG', 'Traking'),
-                ('JUD', 'Juridico'),
-                ('TECH', 'Tecnologia'),
-                ('ADM', 'Administrativo'),
-                ('FUP', 'Follow Up'),
-                ('IOT', 'Sensores'),
-                ('MED', 'Registros Medicos'),
-                ('FAT', 'Faturamento')
-            ]
-        )
-
     str_name = models.CharField(max_length=200)
     str_desc = models.TextField()
-    str_owner = models.CharField(max_length=200)
+    str_desc_ia = models.TextField()
+
+    str_owner_name = models.CharField(max_length=200)
     str_owner_email = models.EmailField()
+
     dth_start_at = models.DateTimeField(auto_now=True)
     dth_last_updated = models.DateTimeField(null=True, blank=True)
+    
     int_size = models.IntegerField(null=True, blank=True)
     int_number_of_rows = models.IntegerField(null=True, blank=True)
     float_perc_growth = models.FloatField(null=True, blank=True)
-    str_id_version = models.CharField(max_length=200, null=True, blank=True)
 
 class Columns(models.Model):
 

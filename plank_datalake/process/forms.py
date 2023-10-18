@@ -9,9 +9,8 @@ class TablesForm(forms.ModelForm):
         required=True
     )
 
-    str_system = forms.CharField(
-        label='Systema *',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    id_dataset = forms.IntegerField(
+        widget=forms.HiddenInput(),
         required=True
     )
 
@@ -29,11 +28,19 @@ class TablesForm(forms.ModelForm):
         required=True
     )
 
-    str_hour_of = forms.CharField(
-        label='Horário *',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
+    CHOICES_TYPE_OF = (
+        ('Procedure', 'Procedure'), 
+        ('Ingestion', 'Ingestion'), 
+        ('Copy', 'Copy')
+    )
+
+    str_type_of = forms.ChoiceField(
+        label='Modo:',
+        choices=CHOICES_TYPE_OF,
+        widget=forms.Select(attrs={'class': 'form-select mt-1'}),
         required=True
     )
+
 
     CHOICES_MODE = (
         ('Batch', 'Batch'), 
@@ -59,27 +66,6 @@ class TablesForm(forms.ModelForm):
         required=True
     )
 
-    CHOICES_DATASET = (
-        ('CAD', 'Cadastro'),
-        ('TRAN', 'Transacional'),
-        ('LOG', 'Traking'),
-        ('JUD', 'Juridico'),
-        ('TECH', 'Tecnologia'),
-        ('ADM', 'Administrativo'),
-        ('FUP', 'Follow Up'),
-        ('IOT', 'Sensores'),
-        ('MED', 'Registros Medicos'),
-        ('FAT', 'Faturamento')
-    )
-
-    str_dataset = forms.ChoiceField(
-        label='Dataset:',
-        choices=CHOICES_DATASET,
-        widget=forms.Select(attrs={'class': 'form-select mt-1'}),
-        required=True
-    )
-
-
     str_name = forms.CharField(
         label='Nome *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
@@ -92,8 +78,14 @@ class TablesForm(forms.ModelForm):
         required=True
     )
 
-    str_owner = forms.CharField(
-        label='owner *',
+    str_desc_ia = forms.CharField(
+        label='Descricao *',
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        required=False
+    )
+
+    str_owner_name = forms.CharField(
+        label='Nome *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
@@ -108,18 +100,17 @@ class TablesForm(forms.ModelForm):
         model = Tables
         fields = [
             "id_customer",
-            "str_system",
+            "id_dataset",
             "str_frequency",
-            "str_hour_of",
+            "str_type_of",
             "str_mode",
             "str_type",
-            "str_dataset",
             "str_name",
             "str_desc",
-            "str_owner",
+            "str_desc_ia",
+            "str_owner_name",
             "str_owner_email"
         ]
-
 
 class ColumnsForm(forms.ModelForm):
     class Meta:

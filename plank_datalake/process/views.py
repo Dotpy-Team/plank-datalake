@@ -20,8 +20,9 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
-def new_table_by_id(request, id_customer):
-    id_customer = uncrip(id_customer)
+def new_table_by_id(request, id_dataset):
+    id_dataset = uncrip(id_dataset)
+    id_customer = request.user.id_customer
     
     if request.method == 'POST':
         form = TablesForm(request.POST)
@@ -39,7 +40,10 @@ def new_table_by_id(request, id_customer):
             return render(request, html_location, response_dict)
     else:
         form = TablesForm(
-                initial={'id_customer': id_customer}
+                initial={
+                    'id_customer': id_customer,
+                    'id_dataset': id_dataset
+                }
             )
         html_location = parse_html_path(TABLE_PATH,'add')
         response_dict = {

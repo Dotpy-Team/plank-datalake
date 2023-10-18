@@ -2,10 +2,7 @@ from django import forms
 from business.models import  DataSet
 
 class DataSetForm(forms.ModelForm):
-    id_system = forms.IntegerField(
-        widget=forms.HiddenInput(),
-        required=True
-    )
+    
     CHOICES_STATUS = (
         ('Ativo', 'Ativo'),
         ('Inativo', 'Inativo')
@@ -31,7 +28,6 @@ class DataSetForm(forms.ModelForm):
     class Meta:
         model = DataSet
         fields = [
-            'id_system',
             'str_status',
             'str_title',
             'str_desc',
