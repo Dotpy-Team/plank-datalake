@@ -1,18 +1,7 @@
 from django import forms
-from .models import Tables,Columns,Dependencies,JobRun
-
+from process.models import Tables
 
 class TablesForm(forms.ModelForm):
-
-    id_customer = forms.IntegerField(
-        widget=forms.HiddenInput(),
-        required=True
-    )
-
-    id_dataset = forms.IntegerField(
-        widget=forms.HiddenInput(),
-        required=True
-    )
 
     CHOICES_FREQUENCY = (
         ('Daily', 'Diario'), 
@@ -99,8 +88,6 @@ class TablesForm(forms.ModelForm):
     class Meta:
         model = Tables
         fields = [
-            "id_customer",
-            "id_dataset",
             "str_frequency",
             "str_type_of",
             "str_mode",
@@ -110,41 +97,4 @@ class TablesForm(forms.ModelForm):
             "str_desc_ia",
             "str_owner_name",
             "str_owner_email"
-        ]
-
-class ColumnsForm(forms.ModelForm):
-    class Meta:
-        model = Columns
-        fields = [
-        'id_table',
-        'str_source_name',
-        'str_rename',
-        'str_datatype',
-        'str_pattern_format',
-        'str_type'
-        ]
-
-
-class DependenciesForm(forms.ModelForm):
-    class Meta:
-        model = Dependencies
-        fields = [
-            'id_table_node',
-            'id_table_edge',
-            'str_status',
-            'dth_start_at',
-            'dth_last_update',
-    ]
-
-
-class JobRunForm(forms.ModelForm):
-    class Meta:
-        model = JobRun
-        fields = [
-            'id_job',
-            'id_table',
-            'dth_last_updated',
-            'dth_start_at',
-            'int_total_size',
-            'int_total_rows'
         ]

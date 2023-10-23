@@ -5,3 +5,4 @@ from .dataset import *
 from .layer import *
 from .system import *
 from .task import *
+from .contract import *

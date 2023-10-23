@@ -26,12 +26,12 @@ urlpatterns = [
     # CUSTOMER:
     path('customer/', b.new_customer , name='new_customer'),
     path('customer-profile/', b.profile_customer, name='profile_customer'),
-    path('customer-profile/<str:id_customer>', b.profile_customer_by_id, name='profile_customer_by_id'),
-    path('customer-profiles/', b.list_customers, name='list_customers'),
+    path('admin-customer-profile/<str:id_customer>', b.admin_profile_customer, name='admin_profile_customer'),
+    path('admin-customer-profiles/', b.admin_list_customers, name='admin_list_customers'),
 
     #CONTRACT
-    path('contract/<str:id_customer>', b.new_customer , name='new_customer'),
-
+    path('contract/<str:id_customer>', b.new_contract , name='new_contract'),
+    path('contract-details/<str:id_contract>', b.profile_contract , name='profile_contract'),
 
     #USER:
     path('signup/<str:id_customer>', b.new_user , name='new_user'),
@@ -54,12 +54,12 @@ urlpatterns = [
     #DATASET:
     path('dataset/<str:id_system>', b.new_dataset , name='new_dataset'),
     path('dataset-details/<str:id_dataset>', b.profile_dataset, name='profile_dataset'),
+    path('datasets/', b.all_dataset, name='profile_dataset'),
 
-    #TABLE
-    path('add-table/', p.new_table,name='new_table'),
+    #TABLES:
     path('add-table/<str:id_dataset>', p.new_table_by_id,name='new_table_by_id'),
     path('detail-table/<str:id_table>',p.get_table,name='table_view'),
-    path('search-tables/<str:id_customer>',p.get_tables,name='view_tables'),
+    path('search-tables/',p.get_tables,name='view_tables'),
 
     # #COLUMNS adm
     # path('add-column/<str:argument>', TablesView.as_view(),name='column_add'),

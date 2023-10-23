@@ -14,4 +14,4 @@ class DataSet(models.Model):
     str_desc = models.CharField(max_length=200, null=True, blank=True)
     str_desc_ia = models.CharField(max_length=200, null=True, blank=True)
     dth_start_at = models.DateField(auto_now=True)
-    
+

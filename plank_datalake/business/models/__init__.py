@@ -5,3 +5,6 @@ from .dataset import DataSet
 from .layer import Layer
 from .system import System
 from .task import Task
+from .contract import Contract
+from .contractitem import ContractItem
+from .service import Service

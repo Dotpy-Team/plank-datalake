@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from business.models import DataSet, System
+from business.models import DataSet, System, Customer
 from business.forms import DataSetForm
 import base64
 
@@ -31,12 +31,12 @@ DATASET PROFILE
 DATASET_PATH = 'business/DataSet/'
 
 def new_dataset(request,id_system):
-    id_system = uncrip(id_system)
     try:
+        id_system = uncrip(id_system)
         system_instance = System.objects.get(id_system=id_system)
     except System.DoesNotExist:
         # Lide com o caso em que o sistema não existe
-        return redirect('pagina_de_erro')
+        return redirect('home')
     
     if request.method == 'POST':
         form = DataSetForm(request.POST)
@@ -59,14 +59,33 @@ def new_dataset(request,id_system):
         }
     return render(request, html_location, dict_form)
 
+def all_dataset(request):
+    try:
+        id_customer = request.user.id_customer
+        system = System.objects.filter(id_customer=id_customer)
+        datasets = DataSet.objects.filter(id_system__in=system)
+    except Customer.DoesNotExist:
+        return redirect('home')
+    html_location = parse_html_path(DATASET_PATH,'all_dataset')
+
+    for dataset in datasets:
+        dataset.detail_url = reverse('profile_dataset',args=[crip(str(dataset.id_dataset))])
+        dataset.save()
+
+    response_dict = {
+        'datasets': datasets
+    }
+    return render(request, html_location, response_dict)
+
+
 def profile_dataset(request,id_dataset):
-    id_dataset = uncrip(id_dataset)
     # try:
+    id_dataset = uncrip(id_dataset)
     dataset = get_object_or_404(DataSet, id_dataset=id_dataset)
     html_location = parse_html_path(DATASET_PATH,'profile_dataset')
     response_dict = {
         'dataset': dataset,
-        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.id_system))])
+        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.id_dataset))])
     }
     return render(request, html_location, response_dict)
     # except Http404:

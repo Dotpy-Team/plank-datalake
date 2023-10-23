@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from .models import Tables
-from .forms import TablesForm
+from process.models import Tables
+from business.models import Customer,DataSet
+from process.forms import TablesForm
 import base64
 
 def crip(text):
@@ -21,14 +22,22 @@ def parse_html_path(path,page):
     return html_location
 
 def new_table_by_id(request, id_dataset):
-    id_dataset = uncrip(id_dataset)
-    id_customer = request.user.id_customer
+    try:
+        id_dataset = uncrip(id_dataset)
+        id_customer = request.user.id_customer
+        customer_instance = Customer.objects.get(id_customer=id_customer)
+        dataset_instance = DataSet.objects.get(id_dataset=id_dataset)
+    except Customer.DoesNotExist:
+        return redirect('home')
     
     if request.method == 'POST':
         form = TablesForm(request.POST)
         html_location = parse_html_path(TABLE_PATH,'add')
         if form.is_valid():
-            table = form.save()
+            table = form.save(commit=False)
+            table.id_customer = customer_instance
+            table.id_dataset = dataset_instance
+            table.save()
             return redirect('table_view', crip(str(table.id_table)))
         else:
             error_message = 'Credenciais inválidas. Por favor, tente novamente.'
@@ -39,53 +48,18 @@ def new_table_by_id(request, id_dataset):
             }
             return render(request, html_location, response_dict)
     else:
-        form = TablesForm(
-                initial={
-                    'id_customer': id_customer,
-                    'id_dataset': id_dataset
-                }
-            )
+        form = TablesForm()
         html_location = parse_html_path(TABLE_PATH,'add')
         response_dict = {
             'form':form
         }
         return render(request, html_location, response_dict)
 
-def new_table(request):
+def get_tables(request):
     id_customer = request.user.id_customer
-    if request.method == 'POST':
-        form = TablesForm(request.POST)
-        html_location = parse_html_path(TABLE_PATH,'add')
-        if form.is_valid():
-            table = form.save()
-            return redirect('table_view', crip(str(table.id_table)))
-        else:
-            error_message = 'Credenciais inválidas. Por favor, tente novamente.'
-            response_dict = {
-                'form': form,
-                'error_message':error_message,
-                'error_forms':form.errors
-            }
-            return render(request, html_location, response_dict)
-    else:
-        form = TablesForm(
-                initial={'id_customer': id_customer}
-            )
-        html_location = parse_html_path(TABLE_PATH,'add')
-        response_dict = {
-            'form':form
-        }
-        return render(request, html_location, response_dict)
-
-def get_tables(request, id_customer):
-    id_customer = uncrip(id_customer)
     tables = Tables.objects.filter(id_customer=id_customer)
     for table in tables:
-        # if id_table == str(table.id_table):
-        #     table.selected = True
-        # else:
         table.selected = False
-
         table.detail_url = reverse(
             'table_view', 
             args=[crip(str(table.id_table))]
