@@ -14,3 +14,6 @@ class Service(models.Model):
     )
     dth_created_at = models.DateField(auto_now=True)
     dth_updated_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.str_title

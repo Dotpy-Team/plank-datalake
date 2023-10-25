@@ -32,6 +32,11 @@ urlpatterns = [
     #CONTRACT
     path('contract/<str:id_customer>', b.new_contract , name='new_contract'),
     path('contract-details/<str:id_contract>', b.profile_contract , name='profile_contract'),
+    path('admin-contract-list/', b.admin_list_contracts, name='admin_list_contracts'),
+
+    #CONTRACT_ITEM
+    path('contract-item/<str:id_contract>', b.new_contract_item, name='new_contract_item'),
+
 
     #USER:
     path('signup/<str:id_customer>', b.new_user , name='new_user'),
@@ -45,6 +50,9 @@ urlpatterns = [
     #TASK:
     path('task/<str:id_customer>', b.new_task_by_id_customer , name='new_task'),
     path('task-details/<str:id_task>', b.profile_task, name='profile_task'),
+
+    #SERVICE:
+    path('service/', b.new_service , name='new_service'),
 
     #SYSTEM:
     path('system/<str:id_customer>', b.new_system , name='new_system'),

@@ -1,0 +1,51 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<div class="container mt-8">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="text-center">Novo Servico</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" class="form">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+
+                <div class="form-group row justify-content-center">
+                    <div class="col-sm-6">
+                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#id</th>
+                    <th>Titulo</th>
+                    <th>Descricao</th>
+                    <th>Valor monetario</th>
+                    <th>Quantidade</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for service in service_all %}    
+                <tr>
+                    <td><a href="{{service.detail_url}}">{{ service.id_service }}</a></td>
+                    <td>{{ service.str_title }}</td>
+                    <td>{{ service.str_descr }}</td>
+                    <td>{{ service.int_price }}</td>
+                    <td>{{ service.int_qnt }}</td>
+                    <td>{{ service.str_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

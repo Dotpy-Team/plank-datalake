@@ -1,0 +1,50 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'><b>Detalhes:</b></div>
+        <div class="card-body">
+            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
+            <h3 class="card-text-secondary-emphasis">Nome:</h3>
+            <p class="card-text">{{ contract.str_title }}</p>
+            <h3 class="card-text-secondary-emphasis">Status:</h3>
+            <p class="card-text">{{ contract.str_status }}</p>
+            <h3 class="card-text-secondary-emphasis">Descrição:</h3>
+            <p class="card-text">{{ contract.str_object }}</p>
+
+            <a href="{{new_contract_item}}" class="btn btn-primary mt-2">Adicionar Item ao Contrato</a></td>
+
+            <p> Itens deste contrato</p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#id</th>
+                        <th>Titulo</th>
+                        <th>Descricao</th>
+                        <th>Valor monetario</th>
+                        <th>Quantidade</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in contract.contractitem_set.all %}
+                    <tr>
+                        <td><a href="{{item.detail_url}}">{{ item.id_service.id_service }}</a></td>
+                        <td>{{ item.id_service.str_title }}</td>
+                        <td>{{ item.id_service.str_descr }}</td>
+                        <td>{{ item.id_service.int_price }}</td>
+                        <td>{{ item.id_service.int_qnt }}</td>
+                        <td>{{ item.id_service.str_status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

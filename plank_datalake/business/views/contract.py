@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from business.models import Customer, Contract
+from business.models import Customer, Contract, ContractItem, Service
 from business.forms import ContractForm
 import base64
 
@@ -58,15 +58,31 @@ def new_contract(request,id_customer):
         }
     return render(request, html_location, dict_form)
 
-def  profile_contract(request,id_dataset):
+def  profile_contract(request,id_contract):
     # try:
-    id_dataset = uncrip(id_dataset)
-    contract = get_object_or_404(Contract, id_dataset=id_dataset)
-    html_location = parse_html_path(DATASET_PATH,'profile_dataset')
+    id_contract = uncrip(id_contract)
+    contract = get_object_or_404(Contract, id_contract=id_contract)
+    contract_item = ContractItem.objects.select_related('contractitem__service').filter(id_contract=id_contract)
+
+    html_location = parse_html_path(CONTRACT_PATH,'profile_contract')
     response_dict = {
-        'dataset': dataset,
-        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.id_dataset))])
+        'contract': contract,
+        'contractitem': contract_item,
+        'new_contract_item':reverse('new_contract_item',args=[crip(str(contract.id_contract))])
     }
     return render(request, html_location, response_dict)
     # except Http404:
     #     return redirect('signup_company')
+
+def admin_list_contracts(request):
+    contracts = Contract.objects.all()
+    html_location = parse_html_path(CONTRACT_PATH,'list_contract')
+    for contract in contracts:
+        contract.detail_url = reverse(
+            'profile_contract',
+            args=[crip(str(contract.id_contract))]
+        )
+        contract.save()
+
+    response_dict = {'contracts': contracts}
+    return render(request, html_location, response_dict)
