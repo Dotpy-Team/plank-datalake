@@ -29,7 +29,7 @@ def new_customer(request):
 
         if form.is_valid():
             company = form.save()
-            return redirect('profile_customer_by_id', crip(str(company.id_customer)))
+            return redirect('admin_profile_customer', crip(str(company.id_customer)))
         else:
             response_dict = {'form': form}
             return render(request, html_location, response_dict)

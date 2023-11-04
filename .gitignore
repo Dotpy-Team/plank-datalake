@@ -1,6 +1,10 @@
 # Ignorar tudo dentro da pasta venv
 myvenv/
 
+# Ignorar tudo dentro da pasta venv
+.venv/
+
+
 # Ignorar as migrações
 **/migrations/
 
@@ -11,3 +15,4 @@ myvenv/
 *.pot
 *.pyc
 **/*.sqlite3
+
