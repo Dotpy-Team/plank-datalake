@@ -113,10 +113,8 @@ def formDataSet(url_arg):
         url = f"http://127.0.0.1:8000/dataset/{url_arg}"
         driver.get(url)
         time.sleep(3)
-
         str_title = driver.find_element("xpath", '//*[@id="id_str_title"]')
         str_title.send_keys(system)
-
         str_desc = driver.find_element("xpath", '//*[@id="id_str_desc"]')
         str_desc.send_keys('Dataset de teste')
         button = driver.find_element('xpath',"/html/body/div/div/div/div/div/div/form/button")
@@ -128,11 +126,5 @@ for i in range(1, 5):
     formCustomer()
 
 time.sleep(5)
-
-# Clique no botão de cadastro
-
-
-# Feche o navegador
-# driver.quit()
 
 
