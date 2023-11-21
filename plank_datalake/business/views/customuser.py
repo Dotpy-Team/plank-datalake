@@ -4,7 +4,7 @@ from django.http import Http404
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from business.models import CustomUser
+from business.models import CustomUser, Customer
 from business.forms import CustomUserForm
 import base64
 
@@ -32,13 +32,21 @@ def home_page(request):
     return render(request,html_location)
 
 def new_user(request, id_customer):
-    id_customer = uncrip(id_customer)
+    
+    try:
+        id_customer = uncrip(id_customer)
+        customer_instance = Customer.objects.get(id_customer=id_customer)
+    except Customer.DoesNotExist:
+        # Lide com o caso em que o sistema não existe
+        return redirect('home')
     
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
         html_location = parse_html_path(CUSTOMUSER_PATH,'signup')
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.id_customer = customer_instance
+            user.save()
             return redirect('user_profile', crip(str(user.email)))
         else:
             error_message = 'Credenciais inválidas. Por favor, tente novamente.'
@@ -49,9 +57,7 @@ def new_user(request, id_customer):
             }
             return render(request, html_location, response_dict)
     else:
-        form = CustomUserForm(
-                initial={'id_customer': id_customer}
-            )
+        form = CustomUserForm()
         
         html_location = parse_html_path(CUSTOMUSER_PATH,'signup')
         response_dict = {

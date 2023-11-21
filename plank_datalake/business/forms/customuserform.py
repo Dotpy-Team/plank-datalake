@@ -4,10 +4,6 @@ from django.contrib.auth import get_user_model
 CustomUser = get_user_model()
 
 class CustomUserForm(forms.ModelForm):
-    id_customer = forms.IntegerField(
-        widget=forms.HiddenInput(),
-        required=True
-    )
     first_name = forms.CharField(
         label='Nome *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
@@ -54,7 +50,6 @@ class CustomUserForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = [
-            'id_customer',
             'first_name', 
             'last_name',
             'str_cpf', 

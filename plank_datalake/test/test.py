@@ -13,6 +13,8 @@ def crip(text):
     crip = base64.b64encode(text.encode()).decode()
     return crip
 
+
+
 def formCustomer():
 
     driver.get("http://127.0.0.1:8000/customer/")

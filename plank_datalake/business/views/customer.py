@@ -76,8 +76,9 @@ def admin_profile_customer(request,id_customer):
 # @login_required(login_url='user_login')
 def profile_customer(request):
     try:
-        id_customer = request.user.id_customer
+        id_customer = request.user.id_customer.id_customer
         customer = get_object_or_404(Customer, id_customer=id_customer)
+        print(customer)
         html_location = parse_html_path(CUSTUMER_PATH,'profile')
         response_dict = {
             'customer': customer,
