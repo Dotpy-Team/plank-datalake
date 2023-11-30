@@ -30,10 +30,10 @@ DATASET PROFILE
 
 DATASET_PATH = 'business/DataSet/'
 
-def new_dataset(request,id_system):
+def new_dataset(request,system_id):
     try:
-        id_system = uncrip(id_system)
-        system_instance = System.objects.get(id_system=id_system)
+        system_id = uncrip(system_id)
+        system_instance = System.objects.get(system_id=system_id)
     except System.DoesNotExist:
         # Lide com o caso em que o sistema não existe
         return redirect('home')
@@ -43,10 +43,10 @@ def new_dataset(request,id_system):
         html_location = parse_html_path(DATASET_PATH,'new_dataset')
         if form.is_valid():
             dataset = form.save(commit=False)
-            dataset.id_system = system_instance
+            dataset.system_id = system_instance
             dataset.save()
 
-            return redirect('profile_dataset', crip(str(dataset.id_dataset)))
+            return redirect('profile_dataset', crip(str(dataset.dataset_id)))
         else:
             print(form.errors)
             response_dict = {'form': form}
@@ -61,15 +61,15 @@ def new_dataset(request,id_system):
 
 def all_dataset(request):
     try:
-        id_customer = request.user.id_customer
-        system = System.objects.filter(id_customer=id_customer)
-        datasets = DataSet.objects.filter(id_system__in=system)
+        customer_id = request.user.customer.customer_id
+        system = System.objects.filter(customer_id=customer_id)
+        datasets = DataSet.objects.filter(system_id__in=system)
     except Customer.DoesNotExist:
         return redirect('home')
     html_location = parse_html_path(DATASET_PATH,'all_dataset')
 
     for dataset in datasets:
-        dataset.detail_url = reverse('profile_dataset',args=[crip(str(dataset.id_dataset))])
+        dataset.detail_url = reverse('profile_dataset',args=[crip(str(dataset.dataset_id))])
         dataset.save()
 
     response_dict = {
@@ -78,14 +78,14 @@ def all_dataset(request):
     return render(request, html_location, response_dict)
 
 
-def profile_dataset(request,id_dataset):
+def profile_dataset(request,dataset_id):
     # try:
-    id_dataset = uncrip(id_dataset)
-    dataset = get_object_or_404(DataSet, id_dataset=id_dataset)
+    dataset_id = uncrip(dataset_id)
+    dataset = get_object_or_404(DataSet, dataset_id=dataset_id)
     html_location = parse_html_path(DATASET_PATH,'profile_dataset')
     response_dict = {
         'dataset': dataset,
-        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.id_dataset))])
+        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.dataset_id))])
     }
     return render(request, html_location, response_dict)
     # except Http404:

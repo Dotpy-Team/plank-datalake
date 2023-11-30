@@ -31,15 +31,15 @@ TASK PROFILE_TASK
 
 TASK_PATH = 'business/Task/'
 
-def new_task_by_id_customer(request,id_customer):
-    id_customer = uncrip(id_customer)
+def new_task_by_id_customer(request,customer_id):
+    customer_id = uncrip(customer_id)
     if request.method == 'POST':
         form = TaskForm(request.POST)
         html_location = parse_html_path(TASK_PATH,'new_task')
 
         if form.is_valid():
             task = form.save()
-            return redirect('profile_task', crip(str(task.id_task)))
+            return redirect('profile_task', crip(str(task.task_id)))
         else:
             print(form.errors)
             response_dict = {'form': form}
@@ -47,7 +47,7 @@ def new_task_by_id_customer(request,id_customer):
     else:
         form = TaskForm(
             initial={
-                'id_customer': id_customer,
+                'customer_id': customer_id,
                 'id_table':0})
         html_location = parse_html_path(TASK_PATH,'new_task')
         dict_form = {
@@ -55,10 +55,10 @@ def new_task_by_id_customer(request,id_customer):
         }
     return render(request, html_location, dict_form)
 
-def profile_task(request,id_task):
-    id_task = uncrip(id_task)
+def profile_task(request,task_id):
+    task_id = uncrip(task_id)
     # try:
-    task = get_object_or_404(Task, id_task=id_task)
+    task = get_object_or_404(Task, task_id=task_id)
     html_location = parse_html_path(TASK_PATH,'profile_task')
     response_dict = {
         'task': task

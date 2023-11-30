@@ -26,7 +26,7 @@ urlpatterns = [
     # CUSTOMER:
     path('customer/', b.new_customer , name='new_customer'),
     path('customer-profile/', b.profile_customer, name='profile_customer'),
-    path('admin-customer-profile/<str:id_customer>', b.admin_profile_customer, name='admin_profile_customer'),
+    path('admin-customer-profile/<str:customer_id>', b.admin_profile_customer, name='admin_profile_customer'),
     path('admin-customer-profiles/', b.admin_list_customers, name='admin_list_customers'),
 
     #CONTRACT
@@ -43,7 +43,8 @@ urlpatterns = [
     path('login/', b.user_login, name='user_login'),
     path('logout/', b.user_logout, name='user_logout'),
 
-    path('user-profile/<str:email>', b.user_profile, name='user_profile'),
+    path('user-profile/', b.user_profile, name='user_profile'),
+    path('user-profile/<str:email>', b.admin_user_profile, name='admin_user_profile'),
     path('users/<str:id_customer>', b.users_list_by_id_customer, name='users_list_by_id_customer'),
     path('all-users/', b.all_users, name='all_users'),    
 
@@ -55,14 +56,16 @@ urlpatterns = [
     path('service/', b.new_service , name='new_service'),
 
     #SYSTEM:
+    path('system/', b.new_system , name='new_system'),
     path('system/<str:id_customer>', b.new_system , name='new_system'),
+
     path('system-details/<str:id_system>', b.profile_system, name='profile_system'),
     path('all-system/', b.list_system, name='list_system'),
 
     #DATASET:
     path('dataset/<str:id_system>', b.new_dataset , name='new_dataset'),
     path('dataset-details/<str:id_dataset>', b.profile_dataset, name='profile_dataset'),
-    path('datasets/', b.all_dataset, name='profile_dataset'),
+    path('all-dataset/', b.all_dataset, name='profile_dataset'),
 
     #TABLES:
     path('add-table/<str:id_dataset>', p.new_table_by_id,name='new_table_by_id'),

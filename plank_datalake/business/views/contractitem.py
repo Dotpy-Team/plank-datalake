@@ -32,10 +32,10 @@ ContractItem PROFILE
 
 CONTRACTITEM_PATH = 'business/ContractItem/'
 
-def new_contract_item(request,id_contract):
+def new_contract_item(request,contract_id):
     try:
-        id_contract = uncrip(id_contract)
-        contract_instance = Contract.objects.get(id_contract=id_contract)
+        contract_id = uncrip(contract_id)
+        contract_instance = Contract.objects.get(contract_id=contract_id)
     except Contract.DoesNotExist:
         # Lide com o caso em que o sistema não existe
         return redirect('home')
@@ -45,9 +45,9 @@ def new_contract_item(request,id_contract):
         html_location = parse_html_path(CONTRACTITEM_PATH,'new_contract_item')
         if form.is_valid():
             contractitem = form.save(commit=False)
-            contractitem.id_contract = contract_instance
+            contractitem.contract_id = contract_instance
             contractitem.save()
-            return redirect('profile_contract', crip(str(id_contract)))
+            return redirect('profile_contract', crip(str(contract_id)))
         else:
             print(form.errors)
             response_dict = {'form': form}

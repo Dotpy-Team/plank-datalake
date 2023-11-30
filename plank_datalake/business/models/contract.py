@@ -2,8 +2,8 @@ from django.db import models
 from .customer import Customer
 
 class Contract(models.Model):
-    id_contract = models.AutoField(primary_key=True)
-    id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    contract_id = models.AutoField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     str_title = models.CharField(max_length=200, null=True, blank=True)
     str_object = models.CharField(max_length=200, null=True, blank=True)
     str_status = models.CharField(

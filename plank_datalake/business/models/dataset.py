@@ -2,8 +2,8 @@ from django.db import models
 from .system import System
 
 class DataSet(models.Model):
-    id_dataset = models.AutoField(primary_key=True)
-    id_system = models.ForeignKey(System, on_delete=models.CASCADE)
+    dataset_id = models.AutoField(primary_key=True)
+    system = models.ForeignKey(System, on_delete=models.CASCADE)
     str_status = models.CharField(
         max_length=20, choices=[
             ('Ativo', 'Ativo'),

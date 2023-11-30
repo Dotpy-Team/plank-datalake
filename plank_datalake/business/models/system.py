@@ -1,8 +1,9 @@
 from django.db import models
+from .customer import Customer
 
 class System(models.Model):
-    id_system = models.AutoField(primary_key=True)
-    id_customer = models.IntegerField()
+    system_id = models.AutoField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     str_status = models.CharField(
         max_length=20, choices=[
             ('Ativo', 'Ativo'),

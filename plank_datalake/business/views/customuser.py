@@ -31,11 +31,10 @@ def home_page(request):
     print(request.user)
     return render(request,html_location)
 
-def new_user(request, id_customer):
-    
+def new_user(request, customer_id):
     try:
-        id_customer = uncrip(id_customer)
-        customer_instance = Customer.objects.get(id_customer=id_customer)
+        customer_id = uncrip(customer_id)
+        customer_instance = Customer.objects.get(customer_id=customer_id)
     except Customer.DoesNotExist:
         # Lide com o caso em que o sistema não existe
         return redirect('home')
@@ -87,22 +86,36 @@ def user_login(request, message=None):
     
     return render(request,html_location, response_dict)
 
-def user_profile(request,email):
+def user_profile(request):
+    email = request.user.email
+    try:
+        custom_user = get_object_or_404(CustomUser, email=email)
+        html_location = parse_html_path(CUSTOMUSER_PATH,'profile')
+        response_dict = {
+            'user': custom_user,
+            'new_user': reverse('new_user',args=[crip(str(custom_user.customer_id))])
+        }
+        return render(request, html_location, response_dict)
+    except Http404:
+        return redirect('table_add')
+
+def admin_user_profile(request,email):
     email = uncrip(email)
     try:
         custom_user = get_object_or_404(CustomUser, email=email)
         html_location = parse_html_path(CUSTOMUSER_PATH,'profile')
         response_dict = {
             'user': custom_user,
-            'new_user': reverse('new_user',args=[crip(str(custom_user.id_customer))])
+            'new_user': reverse('new_user',args=[crip(str(custom_user.customer_id))])
         }
         return render(request, html_location, response_dict)
     except Http404:
         return redirect('table_add')
 
-def users_list_by_id_customer(request,id_customer):
-    id_customer = uncrip(id_customer)
-    users = CustomUser.objects.filter(id_customer=id_customer)
+
+def users_list_by_id_customer(request,customer_id):
+    customer_id = uncrip(customer_id)
+    users = CustomUser.objects.filter(customer_id=customer_id)
     html_location = parse_html_path(CUSTOMUSER_PATH,'list')
     for user in users:
         user.detail_url = reverse(
@@ -113,7 +126,7 @@ def users_list_by_id_customer(request,id_customer):
 
     response_dict = {
         'users': users,
-        'new_user': reverse('new_user',args=[crip(str(id_customer))])
+        'new_user': reverse('new_user',args=[crip(str(customer_id))])
     }
     return render(request, html_location, response_dict)
 

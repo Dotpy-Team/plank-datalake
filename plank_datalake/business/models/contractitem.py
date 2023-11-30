@@ -3,8 +3,8 @@ from .contract import Contract
 from .service import Service
 
 class ContractItem(models.Model):
-    id_contractitem = models.AutoField(primary_key=True)
-    id_contract = models.ForeignKey(Contract, on_delete=models.CASCADE)
-    id_service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    contractitem_id = models.AutoField(primary_key=True)
+    contract = models.ForeignKey(Contract, on_delete=models.CASCADE,db_column='id_contract')
+    service = models.ForeignKey(Service, on_delete=models.CASCADE,db_column='id_service')
     dth_created_at = models.DateField(auto_now=True)
     dth_updated_at = models.DateField(auto_now=True)

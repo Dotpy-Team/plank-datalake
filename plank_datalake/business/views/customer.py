@@ -28,8 +28,8 @@ def new_customer(request):
         print(form.errors)
 
         if form.is_valid():
-            company = form.save()
-            return redirect('admin_profile_customer', crip(str(company.id_customer)))
+            customer = form.save()
+            return redirect('admin_profile_customer', crip(str(customer.customer_id)))
         else:
             response_dict = {'form': form}
             return render(request, html_location, response_dict)
@@ -47,27 +47,27 @@ def admin_list_customers(request):
     for customer in customers:
         customer.detail_url = reverse(
             'admin_profile_customer',
-            args=[crip(str(customer.id_customer))]
+            args=[crip(str(customer.customer_id))]
         )
         customer.save()
 
     response_dict = {'customers': customers}
     return render(request, html_location, response_dict)
 
-def admin_profile_customer(request,id_customer):
+def admin_profile_customer(request,customer_id):
     try:
-        id_customer = uncrip(id_customer)
-        customer = get_object_or_404(Customer, id_customer=id_customer)
+        customer_id = uncrip(customer_id)
+        customer = get_object_or_404(Customer, customer_id=customer_id)
         html_location = parse_html_path(CUSTUMER_PATH,'profile')
         response_dict = {
             'customer': customer,
-            'users':reverse('users_list_by_id_customer',args=[crip(str(customer.id_customer))]),
-            'new_user': reverse('new_user',args=[crip(str(id_customer))]),
-            'new_table': reverse('new_table_by_id',args=[crip(str(id_customer))]),
-            'new_system': reverse('new_system',args=[crip(str(id_customer))]),
-            'new_task': reverse('new_task',args=[crip(str(id_customer))]),
+            'users':reverse('users_list_by_id_customer',args=[crip(str(customer.customer_id))]),
+            'new_user': reverse('new_user',args=[crip(str(customer_id))]),
+            'new_table': reverse('new_table_by_id',args=[crip(str(customer_id))]),
+            'new_system': reverse('new_system',args=[crip(str(customer_id))]),
+            'new_task': reverse('new_task',args=[crip(str(customer_id))]),
             # 'view_tables': reverse('view_tables',args=[crip(str(id_customer))])
-            'new_contract': reverse('new_contract',args=[crip(str(id_customer))])
+            'new_contract': reverse('new_contract',args=[crip(str(customer_id))])
         }
         return render(request, html_location, response_dict)
     except Http404:
@@ -76,9 +76,8 @@ def admin_profile_customer(request,id_customer):
 # @login_required(login_url='user_login')
 def profile_customer(request):
     try:
-        id_customer = request.user.id_customer.id_customer
-        customer = get_object_or_404(Customer, id_customer=id_customer)
-        print(customer)
+        customer_id = request.user.customer.customer_id
+        customer = get_object_or_404(Customer, customer_id=customer_id)
         html_location = parse_html_path(CUSTUMER_PATH,'profile')
         response_dict = {
             'customer': customer,

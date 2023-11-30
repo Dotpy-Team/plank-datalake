@@ -1,9 +1,10 @@
 from django.db import models
+from .customer import Customer
 
 class Task(models.Model):
-    id_task = models.AutoField(primary_key=True)
-    id_customer = models.IntegerField(null=True, blank=True)
-    id_table = models.IntegerField(null=True, blank=True)
+    task_id = models.AutoField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    table = models.IntegerField(null=True, blank=True)
     str_title = models.CharField(max_length=200, null=True, blank=True)
     str_desc = models.CharField(max_length=200, null=True, blank=True)
     str_documents = models.CharField(max_length=200, null=True, blank=True)

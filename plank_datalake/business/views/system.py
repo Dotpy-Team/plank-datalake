@@ -30,37 +30,59 @@ SYSTEM PROFILE
 
 SYSTEM_PATH = 'business/System/'
 
-def new_system(request,id_customer):
-    id_customer = uncrip(id_customer)
+def new_system(request):
+    print(request.user.customer.customer_id)
+    customer_id = uncrip(customer_id)
     if request.method == 'POST':
         form = SystemForm(request.POST)
         html_location = parse_html_path(SYSTEM_PATH,'new_system')
 
         if form.is_valid():
             system = form.save()
-            return redirect('profile_system', crip(str(system.id_system)))
+            return redirect('profile_system', crip(str(system.system_id)))
         else:
             print(form.errors)
             response_dict = {'form': form}
             return render(request, html_location, response_dict)
     else:
-        form = SystemForm(initial={'id_customer': id_customer})
+        form = SystemForm(initial={'customer_id': customer_id})
         html_location = parse_html_path(SYSTEM_PATH,'new_system')
         dict_form = {
             'form': form
         }
     return render(request, html_location, dict_form)
 
-def profile_system(request,id_system):
-    id_system = uncrip(id_system)
+def new_system_id(request,customer_id):
+    customer_id = uncrip(customer_id)
+    if request.method == 'POST':
+        form = SystemForm(request.POST)
+        html_location = parse_html_path(SYSTEM_PATH,'new_system')
+
+        if form.is_valid():
+            system = form.save()
+            return redirect('profile_system', crip(str(system.system_id)))
+        else:
+            print(form.errors)
+            response_dict = {'form': form}
+            return render(request, html_location, response_dict)
+    else:
+        form = SystemForm(initial={'customer_id': customer_id})
+        html_location = parse_html_path(SYSTEM_PATH,'new_system')
+        dict_form = {
+            'form': form
+        }
+    return render(request, html_location, dict_form)
+
+def profile_system(request,system_id):
+    system_id = uncrip(system_id)
     # try:
-    system = get_object_or_404(System, id_system=id_system)
-    datasets = DataSet.objects.filter(id_system=id_system)
+    system = get_object_or_404(System, system_id=system_id)
+    datasets = DataSet.objects.filter(system_id=system_id)
 
     for dataset in datasets:
         dataset.detail_url = reverse(
             'profile_dataset',
-            args=[crip(str(dataset.id_dataset))]
+            args=[crip(str(dataset.dataset_id))]
         )
         dataset.save()
 
@@ -68,7 +90,7 @@ def profile_system(request,id_system):
     response_dict = {
         'system': system,
         'datasets':datasets,
-        'new_dataset':reverse('new_dataset',args=[crip(str(system.id_system))])
+        'new_dataset':reverse('new_dataset',args=[crip(str(system.system_id))])
     }
 
     return render(request, html_location, response_dict)
@@ -81,7 +103,7 @@ def list_system(request):
     for system in systems:
         system.detail_url = reverse(
             'profile_system',
-            args=[crip(str(system.id_system))]
+            args=[crip(str(system.system_id))]
         )
         system.save()
     response_dict = {'systems': systems}
