@@ -5,10 +5,10 @@ from django import forms
 
 class ContractItemForm(forms.ModelForm):
 
-    id_service = forms.ModelChoiceField(
+    service_id = forms.ModelChoiceField(
         queryset=Service.objects.all()
     )
 
     class Meta:
         model = ContractItem
-        fields = ['id_service']
+        fields = ['service_id']

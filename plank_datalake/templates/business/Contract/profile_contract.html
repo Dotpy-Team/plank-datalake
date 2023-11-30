@@ -32,12 +32,12 @@
                 <tbody>
                     {% for item in contract.contractitem_set.all %}
                     <tr>
-                        <td><a href="{{item.detail_url}}">{{ item.id_service.id_service }}</a></td>
-                        <td>{{ item.id_service.str_title }}</td>
-                        <td>{{ item.id_service.str_descr }}</td>
-                        <td>{{ item.id_service.int_price }}</td>
-                        <td>{{ item.id_service.int_qnt }}</td>
-                        <td>{{ item.id_service.str_status }}</td>
+                        <td><a href="{{item.detail_url}}">{{ item.service.id_service }}</a></td>
+                        <td>{{ item.service.str_title }}</td>
+                        <td>{{ item.service.str_descr }}</td>
+                        <td>{{ item.service.int_price }}</td>
+                        <td>{{ item.service.int_qnt }}</td>
+                        <td>{{ item.service.str_status }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

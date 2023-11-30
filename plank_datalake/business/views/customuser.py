@@ -44,9 +44,9 @@ def new_user(request, customer_id):
         html_location = parse_html_path(CUSTOMUSER_PATH,'signup')
         if form.is_valid():
             user = form.save(commit=False)
-            user.id_customer = customer_instance
+            user.customer = customer_instance
             user.save()
-            return redirect('user_profile', crip(str(user.email)))
+            return redirect('admin_user_profile', crip(str(user.email)))
         else:
             error_message = 'Credenciais inválidas. Por favor, tente novamente.'
             response_dict = {
@@ -119,7 +119,7 @@ def users_list_by_id_customer(request,customer_id):
     html_location = parse_html_path(CUSTOMUSER_PATH,'list')
     for user in users:
         user.detail_url = reverse(
-            'user_profile',
+            'admin_user_profile',
             args=[crip(str(user.email))]
         )
         user.save()

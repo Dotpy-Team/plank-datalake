@@ -28,12 +28,12 @@ class ContractForm(forms.ModelForm):
 
     dth_start_at = forms.DateField(
         label='Data de Início *',
-        widget=forms.DateInput(attrs={'class': 'form-control'}),
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         required=True
     )
     dth_end_at = forms.DateField(
         label='Data de Término *',
-        widget=forms.DateInput(attrs={'class': 'form-control'}),
+        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         required=True
     )
 

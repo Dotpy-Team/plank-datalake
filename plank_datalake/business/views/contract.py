@@ -43,7 +43,7 @@ def new_contract(request,customer_id):
         html_location = parse_html_path(CONTRACT_PATH,'new_contract')
         if form.is_valid():
             contract = form.save(commit=False)
-            contract.customer_id = customer_instance
+            contract.customer = customer_instance
             contract.save()
             return redirect('profile_contract', crip(str(contract.contract_id)))
         else:
@@ -67,7 +67,7 @@ def  profile_contract(request,contract_id):
     html_location = parse_html_path(CONTRACT_PATH,'profile_contract')
     response_dict = {
         'contract': contract,
-        'contractitem': contract_item,
+        # 'contractitem': contract_item,
         'new_contract_item':reverse('new_contract_item',args=[crip(str(contract.contract_id))])
     }
     return render(request, html_location, response_dict)
@@ -76,6 +76,22 @@ def  profile_contract(request,contract_id):
 
 def admin_list_contracts(request):
     contracts = Contract.objects.all()
+    html_location = parse_html_path(CONTRACT_PATH,'admin_list_contract')
+    for contract in contracts:
+        contract.detail_url = reverse(
+            'profile_contract',
+            args=[crip(str(contract.contract_id))]
+        )
+        contract.save()
+
+    response_dict = {'contracts': contracts}
+    return render(request, html_location, response_dict)
+
+def list_contracts(request):
+    customer_id = request.user.customer.customer_id
+    customer = get_object_or_404(Customer, customer_id=customer_id)
+
+    contracts = Contract.objects.filter(customer_id=customer_id)
     html_location = parse_html_path(CONTRACT_PATH,'list_contract')
     for contract in contracts:
         contract.detail_url = reverse(

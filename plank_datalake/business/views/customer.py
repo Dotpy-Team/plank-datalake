@@ -58,7 +58,7 @@ def admin_profile_customer(request,customer_id):
     try:
         customer_id = uncrip(customer_id)
         customer = get_object_or_404(Customer, customer_id=customer_id)
-        html_location = parse_html_path(CUSTUMER_PATH,'profile')
+        html_location = parse_html_path(CUSTUMER_PATH,'admin_profile')
         response_dict = {
             'customer': customer,
             'users':reverse('users_list_by_id_customer',args=[crip(str(customer.customer_id))]),
@@ -81,12 +81,13 @@ def profile_customer(request):
         html_location = parse_html_path(CUSTUMER_PATH,'profile')
         response_dict = {
             'customer': customer,
-            # 'users':reverse('users_list_by_id_customer',args=[crip(str(customer.id_customer))]),
-            # 'new_user': reverse('new_user',args=[crip(str(id_customer))]),
-            # 'new_table': reverse('new_table_by_id',args=[crip(str(id_customer))]),
-            # 'new_system': reverse('new_system',args=[crip(str(id_customer))]),
-            # 'new_task': reverse('new_task',args=[crip(str(id_customer))]),
-            # 'view_tables': reverse('view_tables',args=[crip(str(id_customer))]) 
+            'users':reverse('users_list_by_id_customer',args=[crip(str(customer.customer_id))]),
+            'new_user': reverse('new_user',args=[crip(str(customer.customer_id))]),
+            'new_table': reverse('new_table_by_id',args=[crip(str(customer.customer_id))]),
+            'new_system': reverse('new_system',args=[crip(str(customer.customer_id))]),
+            'new_task': reverse('new_task',args=[crip(str(customer.customer_id))]),
+            # 'view_tables': reverse('view_tables',args=[crip(str(customer.customer_id))])
+            'list_contracts': reverse('list_contracts')
         }
         return render(request, html_location, response_dict)
     except Http404:

@@ -45,7 +45,8 @@ def new_contract_item(request,contract_id):
         html_location = parse_html_path(CONTRACTITEM_PATH,'new_contract_item')
         if form.is_valid():
             contractitem = form.save(commit=False)
-            contractitem.contract_id = contract_instance
+            print(contractitem.service_id)
+            contractitem.contract = contract_instance
             contractitem.save()
             return redirect('profile_contract', crip(str(contract_id)))
         else:
