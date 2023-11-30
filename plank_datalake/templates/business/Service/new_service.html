@@ -34,7 +34,7 @@
             <tbody>
                 {% for service in service_all %}    
                 <tr>
-                    <td><a href="{{service.detail_url}}">{{ service.id_service }}</a></td>
+                    <td><a href="{{service.detail_url}}">{{ service.service_id }}</a></td>
                     <td>{{ service.str_title }}</td>
                     <td>{{ service.str_descr }}</td>
                     <td>{{ service.int_price }}</td>

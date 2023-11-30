@@ -16,6 +16,5 @@ def delete_pycache(root_dir):
                 print(f'Deleted: {db_path}')
 
 if __name__ == "__main__":
-    projeto_django_path = '/Users/DotPy/Desktop/repositorios_dot/plank-datalake/plank_datalake'
-    
+    projeto_django_path = os.getcwd()    
     delete_pycache(projeto_django_path)
