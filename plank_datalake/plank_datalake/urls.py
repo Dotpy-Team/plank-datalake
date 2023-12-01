@@ -58,10 +58,12 @@ urlpatterns = [
 
     #SYSTEM:
     path('system/', b.new_system , name='new_system'),
-    path('system/<str:customer_id>', b.new_system , name='new_system'),
+    path('admin-system/<str:customer_id>', b.new_system , name='new_system'),
 
+    path('systems/', b.list_system, name='profile_system'),
     path('system-details/<str:system_id>', b.profile_system, name='profile_system'),
-    path('all-system/', b.list_system, name='list_system'),
+
+    path('admin-list-system/<str:customer_id>', b.admin_list_system, name='list_system'),
 
     #DATASET:
     path('dataset/<str:system_id>', b.new_dataset , name='new_dataset'),
@@ -72,6 +74,7 @@ urlpatterns = [
     path('add-table/<str:dataset_id>', p.new_table_by_id,name='new_table_by_id'),
     path('detail-table/<str:table_id>',p.get_table,name='table_view'),
     path('search-tables/',p.get_tables,name='view_tables'),
+    path('search-tables/<str:table_id>',p.get_tables,name='view_tables_id'),
 
     # #COLUMNS adm
     # path('add-column/<str:argument>', TablesView.as_view(),name='column_add'),

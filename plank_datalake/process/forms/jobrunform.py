@@ -5,8 +5,7 @@ class JobRunForm(forms.ModelForm):
     class Meta:
         model = JobRun
         fields = [
-            'id_job',
-            'id_table',
+            'table',
             'dth_last_updated',
             'dth_start_at',
             'int_total_size',

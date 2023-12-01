@@ -2,10 +2,6 @@ from django import forms
 from business.models import Customer, System , DataSet , Task
 
 class SystemForm(forms.ModelForm):
-    id_customer = forms.IntegerField(
-        widget=forms.HiddenInput(),
-        required=True
-    )
 
     CHOICES_STATUS = (
         ('Ativo', 'Ativo'),
@@ -32,10 +28,8 @@ class SystemForm(forms.ModelForm):
     class Meta:
         model = System
         fields = [
-            'id_customer',
             'str_status',
             'str_title',
             'str_desc',
             'str_desc_ia'
-
         ]

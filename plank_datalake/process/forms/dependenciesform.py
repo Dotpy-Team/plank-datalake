@@ -6,8 +6,8 @@ class DependenciesForm(forms.ModelForm):
     class Meta:
         model = Dependencies
         fields = [
-            'id_table_node',
-            'id_table_edge',
+            'table_node',
+            # 'table_edge',
             'str_status',
             'dth_start_at',
             'dth_last_update',

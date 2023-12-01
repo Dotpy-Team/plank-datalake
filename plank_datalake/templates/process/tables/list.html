@@ -4,39 +4,8 @@
 
 {% block content %}
 
-
-
-{% comment %} 
-<div class="list-group">
-    {% for table in tables %}
-        <a href="#" class="list-group-item list-group-item-action table-link" data-content="{{ table.str_desc }}">
-            {{ table.str_name }}
-        </a>
-    {% endfor %}
-</div>
-
-<div class="card mt-4">
-    <div class="card-body" id="content-placeholder">
-        {{ card_table.str_name }}
-    </div>
-</div>
-
-<script>
-    $(document).ready(function() {
-        $(".table-link").on("click", function(event) {
-            event.preventDefault();
-
-            var content = $(this).data("content");
-            $("#content-placeholder").html(content);
-        });
-    });
-</script> 
-{% endcomment %}
-
 <div class="container-fluid md-5">
-
     <div class="row">
-
         <div class="nav col-md-3 d-none d-md-block bg-dark sidebar" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 365px;">
 

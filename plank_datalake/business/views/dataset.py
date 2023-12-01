@@ -43,7 +43,7 @@ def new_dataset(request,system_id):
         html_location = parse_html_path(DATASET_PATH,'new_dataset')
         if form.is_valid():
             dataset = form.save(commit=False)
-            dataset.system_id = system_instance
+            dataset.system = system_instance
             dataset.save()
 
             return redirect('profile_dataset', crip(str(dataset.dataset_id)))

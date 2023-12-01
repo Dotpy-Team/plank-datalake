@@ -21,24 +21,24 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
-def new_table_by_id(request, id_dataset):
+def new_table_by_id(request, dataset_id):
     try:
-        id_dataset = uncrip(id_dataset)
-        id_customer = request.user.id_customer
-        customer_instance = Customer.objects.get(id_customer=id_customer)
-        dataset_instance = DataSet.objects.get(id_dataset=id_dataset)
+        dataset_id = uncrip(dataset_id)
+        customer_id = request.user.customer.customer_id
+        customer_instance = Customer.objects.get(customer_id=customer_id)
+        dataset_instance = DataSet.objects.get(dataset_id=dataset_id)
     except Customer.DoesNotExist:
         return redirect('home')
-    
+    print(customer_instance)
     if request.method == 'POST':
         form = TablesForm(request.POST)
         html_location = parse_html_path(TABLE_PATH,'add')
         if form.is_valid():
             table = form.save(commit=False)
-            table.id_customer = customer_instance
-            table.id_dataset = dataset_instance
+            table.customer = customer_instance
+            table.dataset = dataset_instance
             table.save()
-            return redirect('table_view', crip(str(table.id_table)))
+            return redirect('table_view', crip(str(table.table_id)))
         else:
             error_message = 'Credenciais inválidas. Por favor, tente novamente.'
             response_dict = {
@@ -55,34 +55,30 @@ def new_table_by_id(request, id_dataset):
         }
         return render(request, html_location, response_dict)
 
-def get_tables(request):
-    id_customer = request.user.id_customer
-    tables = Tables.objects.filter(id_customer=id_customer)
+def get_tables(request, table_id=None):
+    customer_id = request.user.customer.customer_id
+    tables = Tables.objects.filter(customer_id=customer_id)
     for table in tables:
         table.selected = False
-        table.detail_url = reverse(
-            'table_view', 
-            args=[crip(str(table.id_table))]
-        )
+        table.detail_url = reverse('view_tables_id',args=[crip(str(table.table_id))])
         table.save()
 
-    # if id_table == None:
-    #     card_table = tables[0]
-    # else:
-    #     card_table = Tables.objects.get(id_table=id_table)
+    if table_id == None:
+        card_table = tables[0]
+    else:
+        card_table = Tables.objects.get(table_id=uncrip(table_id))
 
     html_location = parse_html_path(TABLE_PATH,'list')
     response_dict = {
-        'tables': tables
-        # ,
-        # 'card_table': card_table
+        'tables': tables,
+        'card_table': card_table
     }
     return render(request, html_location, response_dict)
 
-def get_table(request,id_table):
+def get_table(request,table_id):
     try:
-        id_table = uncrip(id_table)
-        table = get_object_or_404(Tables, id_table=id_table)
+        table_id = uncrip(table_id)
+        table = get_object_or_404(Tables, table_id=table_id)
         html_location = parse_html_path(TABLE_PATH,'detail')
         response_dict = {
             # 'add': reverse('column_add',args=[crip(str(table.id_table))]),
