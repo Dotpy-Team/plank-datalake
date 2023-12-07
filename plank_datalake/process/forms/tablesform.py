@@ -73,17 +73,6 @@ class TablesForm(forms.ModelForm):
         required=False
     )
 
-    str_owner_name = forms.CharField(
-        label='Nome *',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
-        required=True
-    )
-
-    str_owner_email = forms.EmailField(
-        label='Email *',
-        widget=forms.EmailInput(attrs={'class': 'form-control'}),
-        required=False
-    )
 
     class Meta:
         model = Tables
@@ -95,6 +84,5 @@ class TablesForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
-            "str_owner_name",
-            "str_owner_email"
+            'raci_activity'
         ]

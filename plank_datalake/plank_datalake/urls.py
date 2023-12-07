@@ -70,6 +70,14 @@ urlpatterns = [
     path('dataset-details/<str:dataset_id>', b.profile_dataset, name='profile_dataset'),
     path('all-dataset/', b.all_dataset, name='profile_dataset'),
 
+    #RACI:
+    path('raci/', p.new_raci , name='new_raci'),
+    path('raci-details/<str:activity_id>', p.profile_raci , name='profile_raci'),
+    path('raci-list/', p.list_contracts , name='list_contracts'),
+
+    #RACI-RELATED:
+    path('raci-related/<str:activity_id>', p.new_related , name='new_related'),
+
     #TABLES:
     path('add-table/<str:dataset_id>', p.new_table_by_id,name='new_table_by_id'),
     path('detail-table/<str:table_id>',p.get_table,name='table_view'),

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Tables
+from process.models import Tables, RaciActivity
 from business.models import Customer,DataSet
 from process.forms import TablesForm
 import base64
@@ -29,7 +29,6 @@ def new_table_by_id(request, dataset_id):
         dataset_instance = DataSet.objects.get(dataset_id=dataset_id)
     except Customer.DoesNotExist:
         return redirect('home')
-    print(customer_instance)
     if request.method == 'POST':
         form = TablesForm(request.POST)
         html_location = parse_html_path(TABLE_PATH,'add')
@@ -49,6 +48,9 @@ def new_table_by_id(request, dataset_id):
             return render(request, html_location, response_dict)
     else:
         form = TablesForm()
+        form.fields['raci_activity'].queryset = RaciActivity.objects.filter(customer_id=customer_id)
+        form.fields['raci_activity'].widget.attrs['class'] = 'form-select'
+        form.fields['raci_activity'].label = 'RACI'
         html_location = parse_html_path(TABLE_PATH,'add')
         response_dict = {
             'form':form
@@ -62,11 +64,13 @@ def get_tables(request, table_id=None):
         table.selected = False
         table.detail_url = reverse('view_tables_id',args=[crip(str(table.table_id))])
         table.save()
-
-    if table_id == None:
-        card_table = tables[0]
+    if len(tables) > 0:
+        if table_id == None:
+            card_table = tables[0]
+        else:
+            card_table = Tables.objects.get(table_id=uncrip(table_id))
     else:
-        card_table = Tables.objects.get(table_id=uncrip(table_id))
+        card_table = None
 
     html_location = parse_html_path(TABLE_PATH,'list')
     response_dict = {

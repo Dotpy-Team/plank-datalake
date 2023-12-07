@@ -1,5 +1,6 @@
 from django.db import models
 from business.models import DataSet, Customer
+from .raci import RaciActivity
 
 class Tables(models.Model):
     table_id = models.AutoField(primary_key=True)
@@ -22,7 +23,9 @@ class Tables(models.Model):
             ('Procedure', 'Procedure'), 
             ('Ingestion', 'Ingestion'), 
             ('Copy', 'Copy')
-        ]
+        ],
+        null=True,
+        blank=True
     )
 
     str_mode = models.CharField(
@@ -30,7 +33,9 @@ class Tables(models.Model):
         choices=[
             ('Batch', 'Batch'), 
             ('Incremental', 'Incremental')
-        ]
+        ],
+        null=True,
+        blank=True
     )
 
     str_type = models.CharField(
@@ -38,15 +43,22 @@ class Tables(models.Model):
         choices=[
             ('CDC', 'Detecte as Mudanças'),
             ('FULL', 'Considere a Ultima Particao')
-        ]
+        ],
+        null=True,
+        blank=True
     )
 
     str_name = models.CharField(max_length=200)
     str_desc = models.TextField()
     str_desc_ia = models.TextField()
 
-    str_owner_name = models.CharField(max_length=200)
-    str_owner_email = models.EmailField()
+    raci_activity = models.ForeignKey(
+        RaciActivity, 
+        on_delete=models.CASCADE,
+        related_name='owner',
+        null=True, 
+        blank=True
+    )
 
     dth_start_at = models.DateTimeField(auto_now=True)
     dth_last_updated = models.DateTimeField(null=True, blank=True)

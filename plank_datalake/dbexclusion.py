@@ -4,7 +4,7 @@ import shutil
 def delete_pycache(root_dir):
     for root, dirs, files in os.walk(root_dir):
         for dir in dirs:
-            if dir == '__pycache__':
+            if dir in ('__pycache__','migrations'):
                 pycache_path = os.path.join(root, dir)
                 shutil.rmtree(pycache_path)
                 print(f'Deleted: {pycache_path}')
