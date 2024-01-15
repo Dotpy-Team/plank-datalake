@@ -8,3 +8,4 @@ from .task import Task
 from .contract import Contract
 from .contractitem import ContractItem
 from .service import Service
+from .contact import Contacts

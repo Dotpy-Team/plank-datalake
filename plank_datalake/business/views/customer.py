@@ -89,7 +89,9 @@ def profile_customer(request):
             'new_system': reverse('new_system',args=[crip(str(customer.customer_id))]),
             'new_task': reverse('new_task',args=[crip(str(customer.customer_id))]),
             # 'view_tables': reverse('view_tables',args=[crip(str(customer.customer_id))])
-            'list_contracts': reverse('list_contracts')
+            'list_contracts': reverse('list_contracts'),
+            'new_contract': reverse('new_contract',args=[crip(str(customer.customer_id))]),
+            'new_contact': reverse('new_contact',args=[crip(str(customer.customer_id))])
         }
         return render(request, html_location, response_dict)
     except Http404:

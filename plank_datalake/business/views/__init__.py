@@ -8,3 +8,4 @@ from .task import *
 from .contract import *
 from .service import *
 from .contractitem import *
+from .contact import *
