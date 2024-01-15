@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Tables, RaciActivity
+from process.models import Tables, RaciActivity, Columns
 from business.models import Customer,DataSet
 from process.forms import TablesForm
 import base64
@@ -67,8 +67,10 @@ def get_tables(request, table_id=None):
     if len(tables) > 0:
         if table_id == None:
             card_table = tables[0]
+            card_table.details_url = reverse('table_view',args=[crip(str(card_table.table_id))])
         else:
             card_table = Tables.objects.get(table_id=uncrip(table_id))
+            card_table.details_url = reverse('table_view',args=[crip(str(card_table.table_id))])
     else:
         card_table = None
 
@@ -82,15 +84,15 @@ def get_tables(request, table_id=None):
 def get_table(request,table_id):
     try:
         table_id = uncrip(table_id)
-        table = get_object_or_404(Tables, table_id=table_id)
+        table = Tables.objects.get(table_id=table_id)
+        columns = Columns.objects.filter(table_id=table_id)
         html_location = parse_html_path(TABLE_PATH,'detail')
         response_dict = {
-            # 'add': reverse('column_add',args=[crip(str(table.id_table))]),
-            # 'look_all': reverse('columns_list',args=[crip(str(table.id_table))]),
-            # 'exclude': reverse('column_add',args=[crip(str(table.id_table))]),
+            'add': reverse('new_column',args=[crip(str(table.table_id))]),
+            'new_job': reverse('new_execution',args=[crip(str(table.table_id))]),
+            'columns': columns,
             'table': table
         }
-        print(response_dict)
         return render(request, html_location, response_dict)
     except Http404:
         return redirect('table_add')

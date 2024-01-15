@@ -49,8 +49,32 @@
                     {% endif %}
                     
                 </li>
-            
             </ul>
+
+            <a href="{{ add }}"><button type="button" class="btn btn-info mt-4">Adicionar nova coluna.</button></a>
+
+            <a href="{{ new_job }}"><button type="button" class="btn btn-info mt-4">Adicionar uma nova execução.</button></a>
+                        
+            <table class="table table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Rename</th>
+                        <th scope="col">Datatype</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for column in columns %}
+                        <tr>
+                            <th scope="row">{{column.str_source_name}}</th>
+                            <th scope="row">{{column.str_rename}}</th>
+                            <th scope="row">{{column.str_datatype}}</th>
+                        </tr>
+                    {% empty %}
+                        <p>Não há colunas cadastradas.</p>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

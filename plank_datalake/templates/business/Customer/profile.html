@@ -1,62 +1,226 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="card">
-    <div class='card-header bg-primary text-white'><h4><b>Detalhes:</b></h4></div>
-    <div class="card-body">
-        <h4 class="card-title text-primary">{{ customer.str_name }}</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="card-text-secondary-emphasis"><b>CNPJ:</b></h4>
-                <p class="card-text">{{ customer.str_cnpj }}</p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-text">
+						Usuários Ativos
+					</p>
+          <div class="progress">
+            <div class="progress-bar w-75">
             </div>
-            <div class="col-md-6">
-                <h4 class="card-text-secondary-emphasis"><b>Setor:</b></h4>
-                <p class="card-text">{{ customer.str_setor }}</p>
-            </div>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="card-text-secondary-emphasis"><b>TIPO:</b></h4>
-                <p class="card-text">{{ customer.str_customer_type }}</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-text">
+						Quantidade de tabelas
+					</p>
+          <div class="progress">
+            <div class="progress-bar w-75">
             </div>
-            <div class="col-md-6">
-                <h4 class="card-text"><b>Comentários:</b></h4>
-                <p class="card-text">{{ customer.str_comments }}</p>
+          </div>          
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-text">
+						Execuções hoje
+					</p>
+          <div class="progress">
+            <div class="progress-bar w-75">
             </div>
+          </div>          
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-text">
+						Execuções em alerta
+					</p>
+          <div class="progress">
+            <div class="progress-bar w-75">
+            </div>
+          </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row mt-4">
+		<div class="col-md-4">
+			<div class="card">
+				<div class="card-body">
+					<p class="card-text">
+            {{customer.str_name}}
+					</p>
+					<p class="card-text">
+            {{customer.str_setor}}
+					</p>
+          <p class="card-text">
+            {{customer.str_cnpj}}
+					</p>
+          <p class="card-text">
+            {{customer.str_telefone}}
+					</p>
+				</div>
+			</div>
+
+			<div class="list-group mt-4">
+				 <a href="#" class="list-group-item list-group-item-action">Informações do contrato</a>
+				<div class="list-group-item">
+          {% for contrato in contract %}
+            <p class="list-group-item-text">{{ contrato.str_title }}</p>
+          {% endfor %}
+				</div>
+			</div> 
+		</div>
+		<div class="col-md-8">
+			<div class="list-group">
+				 <a href="#" class="list-group-item list-group-item-action">complementos da empresa</a>
+				<div class="list-group-item">
+					<p class="list-group-item-text">
+						Telefone: {{customer.str_telefone}}
+					</p>
+					<p class="list-group-item-text">
+						Endereço: {{customer.str_address}}
+					</p>
+					<p class="list-group-item-text">
+						Site: {{customer.str_site}}
+					</p>
+          <p class="list-group-item-text">
+						Linkedin: {{customer.str_linkedin_profile}}
+					</p>
+
         </div>
-    </div>
-            
-    <div class="card-footer">
-        <div class="row justify-content-center">
-            <div class="col">
-                <a href="{{users}}" class="btn btn-primary btn-block">Verificar Usuários</a>
-            </div>
-            <div class="col">
-                <a href="{{new_table}}" class="btn btn-primary btn-block">Adicionar nova tabela</a>
-            </div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-md-6">
+					<img src="https://media.licdn.com/dms/image/D4D3DAQFgzsgFUSV1tQ/image-scale_191_1128/0/1661290627577/dotpy_cover?e=1705701600&v=beta&t=dhbowdci1tyZmM9hKJeEpo4uZbMLpstPE8-6Bv72t_8" alt="Descrição da Imagem">			
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="card mt-4">
+				<h5 class="card-header">
+					Pagamentos
+				</h5>
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product</th>
+								<th>Payment Taken</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+						</tbody>
+					</table>
 
-            <div class="col">
-                <a href="{{new_system}}" class="btn btn-primary btn-block">Adicionar um novo sistema</a>
-            </div>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card mt-4">
+				<h5 class="card-header">
+					Chamados abertos
+				</h5>
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Product</th>
+								<th>Payment Taken</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>TB - Monthly</td>
+								<td>01/04/2012</td>
+								<td>Default</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
 
-            <div class="col">
-                <a href="{{new_user}}" class="btn btn-primary btn-block">Adicionar um novo usuário</a>
-            </div> 
 
-            <div class="col">
-                <a href="{{new_task}}" class="btn btn-primary btn-block">Adicionar uma nova tarefa</a>
-            </div>
-
-            <div class="col">
-                <a href="{{view_tables}}" class="btn btn-primary btn-block">Verificar as tabelas</a>
-            </div>
-
-            <div class="col">
-                <a href="{{list_contracts}}" class="btn btn-primary btn-block">Contratos</a>
-            </div>
-
-    </div>
+	</div>
 </div>
-
 {% endblock %}

@@ -1,21 +1,77 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container justify-content-center">
-    <div class="card border-primary" style="max-width: 100rem;">
-        <div class='card-header'><b>Detalhes:</b></div>
-        <div class="card-body">
-            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
-            <h3 class="card-text-secondary-emphasis">Nome:</h3>
-            <p class="card-text">{{ dataset.str_title }}</p>
-            <h3 class="card-text-secondary-emphasis">Status:</h3>
-            <p class="card-text">{{ dataset.str_status }}</p>
-            <h3 class="card-text-secondary-emphasis">Descrição:</h3>
-            <p class="card-text">{{ dataset.str_desc }}</p>
-            <a href="{{new_table}}" class="btn btn-primary mt-2">Adicionar uma nova tabela</a></td>
+<div class="container">
+	<div class="row">
 
+		<div class="col-md-4">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Sistema
+				</h5>
+				<div class="card-body">
+					<p class="card-text">Nome do sistema: {{ dataset.system.str_title }}</p>
+                    <p class="card-text">Descrição: {{ dataset.system.str_desc }}</p>
+                    <p class="card-text">Status: {{ dataset.system.str_status }}</p>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+
+            <div class="card border-primary" style="max-width: 100rem;">
+                <div class='card-header'><b>Detalhes:</b></div>
+                <div class="card-body">
+                    <p class="card-text">Nome do Dataset: {{ dataset.str_title }}</p>
+                    <p class="card-text">Descrição:{{ dataset.str_desc }}</p>
+                    <p class="card-text">Status: {{ dataset.str_status }}</p>        
+                </div>
+                <div class="card-footer">
+				</div>
+            </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <a href="{{new_table}}" class="btn btn-primary mt-2">Adicionar uma nova tabela</a></td>
+        </div>
+    </div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card mt-4 border-primary">
+				<h5 class="card-header">
+					Ultimas execuções
+				</h5>
+				<div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#id</th>
+                                <th>Dth Inicio execução</th>
+                                <th>Dth Fim execução</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dataset in datasets %}
+                            <tr>
+                                <td><a href="{{dataset.detail_url}}">{{ dataset.system_id }}</a></td>
+                                <td>{{ dataset.str_title }}</td>
+                                <td>{{ dataset.str_desc }}</td>
+                                <td>{{ dataset.str_desc_ia }}</td>                    
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
 
 {% endblock %}

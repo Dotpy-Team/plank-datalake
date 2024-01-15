@@ -47,28 +47,28 @@
         
         <li>
             <a href="/user-profile/">Perfil do Usuário</a>
-        </li>        
-
-        <li>
-            <a href="/customer/">Novo Cliente</a>
         </li>
 
         <li>
-            <a href="/datasets/">Explorar</a>
+            <a href="/raci/">Nova Responsabilidade</a>
         </li>
 
         <li>
-            <a href="/admin-customer-profiles/">Todos os Clientes</a>
+            <a href="/systems/">Sistemas</a>
         </li>
 
         <li>
-            <a href="/admin-contract-list/">Todos os Contratos</a>
+            <a href="/all-dataset/">Dataset</a>
+        </li>
+
+        <li>
+            <a href="/search-tables/">Explorar Tabelas</a>
         </li>
 
         <li>
             <form action="{% url 'user_logout'%}" method="post">
                 {% csrf_token %}
-                    <button type="submit" value="logout">Sair
+                    <button type="button" class="btn btn-danger" value="logout">Sair</button>
                     </button>
             </form>
         </li>

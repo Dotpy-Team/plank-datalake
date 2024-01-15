@@ -1,37 +1,38 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="text-primary text-center">
-            Lista de Datasets
-        </h3>
-        <a href="{{new_user}}" class="btn btn-primary mt-2">Novo Dataset</a></td>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-primary text-center">
+                Lista de Datasets
+            </h3>
+            <a href="{{new_user}}" class="btn btn-primary mt-2">Novo Dataset</a></td>
+        </div>
     </div>
+
+	<div class="row">
+		<div class="col-md-12">
+            {% for dataset in datasets %}
+                <div class='card mt-4 border-primary'>
+                    <div class='card-body'>
+                        <div class="row justify-content-center">
+                            <div class="col justify-content-center">
+                                <a href="{{dataset.detail_url}}"><p>{{ dataset.str_title }}</p></a>
+                            </div>
+                            <div class="col">
+                                <p>{{ dataset.str_desc }}</p>
+                            </div>
+                            <div class="col">
+                                <td>{{ dataset.str_desc_ia }}</td>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+		</div>
+	</div>
 </div>
-<div class="row mt-4">
-    <div class="col-md-12">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#id</th>
-                    <th>Nome</th>
-                    <th>Descricao</th>
-                    <th>Descricao IA</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for dataset in datasets %}
-                <tr>
-                    <td><a href="{{dataset.detail_url}}">{{ dataset.dataset_id }}</a></td>
-                    <td>{{ dataset.str_title }}</td>
-                    <td>{{ dataset.str_desc }}</td>
-                    <td>{{ dataset.str_desc_ia }}</td>                    
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+
 
 {% endblock %}

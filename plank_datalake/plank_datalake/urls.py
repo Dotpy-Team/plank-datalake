@@ -84,8 +84,12 @@ urlpatterns = [
     path('search-tables/',p.get_tables,name='view_tables'),
     path('search-tables/<str:table_id>',p.get_tables,name='view_tables_id'),
 
-    # #COLUMNS adm
-    # path('add-column/<str:argument>', TablesView.as_view(),name='column_add'),
+    #COLUMNS:
+    path('add-column/<str:table_id>', p.new_column ,name='new_column'),
+
+    #JOBS: adm
+    path('add-execution/<str:table_id>', p.new_execution ,name='new_execution'),
+    path('detail-execution/<str:job_id>', p.detail_execution ,name='detail_execution'),
     # path('view-column/<str:argument>',TablesView.as_view(),name='column_detail'),
     # path('view-columns/<str:argument>',TablesView.as_view(),name='columns_list')
 

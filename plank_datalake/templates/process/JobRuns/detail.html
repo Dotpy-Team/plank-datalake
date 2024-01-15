@@ -1,0 +1,50 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'><b>Detalhes:</b></div>
+        <div class="card-body">
+            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
+            <h3 class="card-text-secondary-emphasis">Tabela:</h3>
+            <p class="card-text">{{ job.table.str_name }}</p>
+            
+            <h3 class="card-text-secondary-emphasis">Dataset:</h3>
+            <p class="card-text">{{ job.table.dataset.str_title }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Descrição:</h3>
+            <p class="card-text">{{ job.table.str_desc }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Status:</h3>
+            <p class="card-text">{{ job.str_status }}</p>
+
+            {% comment %} <a href="{{new_dataset}}" class="btn btn-primary mt-2">Adicionar DataSet</a></td> {% endcomment %}
+
+            <p> datasets deste sistema: </p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#id</th>
+                        <th>Nome</th>
+                        <th>Descricao</th>
+                        <th>Descricao IA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dataset in datasets %}
+                    <tr>
+                        <td><a href="{{dataset.detail_url}}">{{ dataset.system_id }}</a></td>
+                        <td>{{ dataset.str_title }}</td>
+                        <td>{{ dataset.str_desc }}</td>
+                        <td>{{ dataset.str_desc_ia }}</td>                    
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
