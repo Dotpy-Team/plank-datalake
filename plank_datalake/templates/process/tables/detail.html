@@ -1,6 +1,41 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
+<style>
+thead, tbody { 
+    display: block; 
+}
+
+tbody {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.text-rigth {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.table {
+    border-collapse: collapse;
+    background-color: #fff;
+    width: 100%;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  width:5%;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #999;
+}
+</style>
+
 <div class="container">
 
     <div class="card border-info mt-4">
@@ -11,14 +46,14 @@
 
             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <button type="button" class="btn btn-success">Mais</button>
-            <div class="btn-group" role="group">
-                <button id="btnGroupDrop4" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
-                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
-                    <a class="dropdown-item" href="{{ exclude }}">Excluir Colunas</a>
-                    <a class="dropdown-item" href="{{ look_all }}">Ver Todas</a>
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop4" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                        <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
+                        <a class="dropdown-item" href="{{ exclude }}">Excluir Colunas</a>
+                        <a class="dropdown-item" href="{{ look_all }}">Ver Todas</a>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -54,27 +89,34 @@
             <a href="{{ add }}"><button type="button" class="btn btn-info mt-4">Adicionar nova coluna.</button></a>
 
             <a href="{{ new_job }}"><button type="button" class="btn btn-info mt-4">Adicionar uma nova execução.</button></a>
-                        
-            <table class="table table mt-4">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Rename</th>
-                        <th scope="col">Datatype</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for column in columns %}
+
+            <a href="{{ view_job }}"><button type="button" class="btn btn-info mt-4">Ver uma execução.</button></a>
+             
+
+            <div class="card border-info mt-2 justify-content-center">
+                <table class="table table mt-4">
+                    <thead>
                         <tr>
-                            <th scope="row">{{column.str_source_name}}</th>
-                            <th scope="row">{{column.str_rename}}</th>
-                            <th scope="row">{{column.str_datatype}}</th>
+                            <th class="text-center" scope="col">Name</th>
+                            <th class="text-center" scope="col">Rename</th>
+                            <th class="text-center" scope="col">Datatype</th>
                         </tr>
-                    {% empty %}
-                        <p>Não há colunas cadastradas.</p>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for column in columns %}
+                            <tr>
+                                <td class="text-center" scope="row">{{column.str_source_name}}</td>
+                                <td class="text-center" scope="row">{{column.str_rename}}</td>
+                                <td class="text-center" scope="row">{{column.str_datatype}}</td>
+                            </tr>
+                        {% empty %}
+                            <p>Não há colunas cadastradas.</p>
+                        {% endfor %}
+                    </tbody>
+                </table> 
+            </div>
+  
+
         </div>
     </div>
 </div>
