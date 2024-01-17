@@ -98,4 +98,14 @@ urlpatterns = [
     # path('view-column/<str:argument>',TablesView.as_view(),name='column_detail'),
     # path('view-columns/<str:argument>',TablesView.as_view(),name='columns_list')
 
+    #DEPENDENCIES:
+    path('add-dependencies/', p.new_dependencies ,name='new_dependencies'),
+    path('list-dependencies/', p.list_dependecies ,name='list_dependecies'),
+    path('detail-dependencies/<str:dependency_id>', p.detail_dependencies ,name='detail_dependencies'),
+
+    #PIPELINE:
+    path('new-pipeline/', p.new_pipeline ,name='new_pipeline'),
+    path('detail-pipeline/<str:pipeline_id>', p.detail_pipeline ,name='detail_pipeline'),
+    path('list-pipeline/', p.list_pipeline ,name='list_pipeline'),
+
 ]

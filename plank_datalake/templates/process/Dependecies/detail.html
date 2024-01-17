@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'>
+            <b>Detalhes:</b>
+        </div>
+
+        <div class="card-body">
+            <h3 class="card-title text-primary">{{ dependency.customer }}</h3>
+            <h3 class="card-text-secondary-emphasis">Atividade:</h3>
+            <p class="card-text">{{ dependency.table_node }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Descricao:</h3>
+            <p class="card-text">{{ dependency.table_edge }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Aprovador:</h3>
+            <p class="card-text">{{ dependency.str_status }}</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

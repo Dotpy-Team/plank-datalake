@@ -6,6 +6,7 @@ class Tables(models.Model):
     table_id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     dataset = models.ForeignKey(DataSet, on_delete=models.CASCADE)
+    layer = models.CharField(max_length=20)
     str_frequency = models.CharField(
         max_length=20, choices=[
             ('Daily', 'Diario'), 
@@ -66,3 +67,6 @@ class Tables(models.Model):
     int_size = models.IntegerField(null=True, blank=True)
     int_number_of_rows = models.IntegerField(null=True, blank=True)
     float_perc_growth = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return self.str_name

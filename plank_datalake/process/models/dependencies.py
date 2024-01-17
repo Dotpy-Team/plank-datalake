@@ -4,9 +4,7 @@ from process.models import Tables
 
 class Dependencies(models.Model):
 
-    dependencie_id = models.AutoField(primary_key=True)
-    table_node = models.ForeignKey(Tables, on_delete=models.CASCADE)
-    # table_edge = models.ForeignKey(Tables, on_delete=models.CASCADE)
-    str_status = models.CharField(max_length=200)
-    dth_start_at = models.DateTimeField()
-    dth_last_update = models.DateTimeField()
+    dependency_id = models.AutoField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    table_node = models.ForeignKey(Tables, on_delete=models.CASCADE, related_name='table_node')
+    table_edge = models.ForeignKey(Tables, on_delete=models.CASCADE, related_name='table_edge')
