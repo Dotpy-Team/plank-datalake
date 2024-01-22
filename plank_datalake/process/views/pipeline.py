@@ -58,7 +58,8 @@ def detail_pipeline(request, pipeline_id):
     pipeline = get_object_or_404(Pipeline, pipeline_id=pipeline_id)
     html_location = parse_html_path(PIPELINE_PATH, 'detail_pipeline')
     response_dict = {
-        'pipeline': pipeline
+        'pipeline': pipeline,
+        'new_step': reverse('new_step', args=[crip(str(pipeline.pipeline_id))])
     }
 
     return render(request, html_location, response_dict)

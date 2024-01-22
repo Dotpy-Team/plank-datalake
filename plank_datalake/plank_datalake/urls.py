@@ -108,4 +108,10 @@ urlpatterns = [
     path('detail-pipeline/<str:pipeline_id>', p.detail_pipeline ,name='detail_pipeline'),
     path('list-pipeline/', p.list_pipeline ,name='list_pipeline'),
 
+    #STEP:
+    path('new-step/<str:pipeline_id>', p.new_step ,name='new_step'),
+    path('new-child-table/', p.new_child_table ,name='new_child_table'),
+    path('detail-step/<str:step_id>', p.detail_step ,name='detail_step'),
+    path('list-step/', p.list_step ,name='list_step'),
+
 ]

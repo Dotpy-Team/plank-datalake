@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'>
+            <b>Detalhes:</b>
+        </div>
+
+        <div class="card-body">
+            <h3 class="card-title text-primary">{{ step.customer }}</h3>
+            <h3 class="card-text-secondary-emphasis">Pipeline:</h3>
+            <p class="card-text">{{ step.pipeline }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Tabela:</h3>
+            <p class="card-text">{{ step.table }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Query:</h3>
+            <p class="card-text">{{ step.str_query }}</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

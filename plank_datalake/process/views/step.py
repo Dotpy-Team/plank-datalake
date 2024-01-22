@@ -17,12 +17,15 @@ def uncrip(crip):
 
 STEP_PATH = 'process/Step/'
 
+TABLES_PATH = 'process/Tables/'
+
 def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
 
-def new_step(request):
+def new_step(request, pipeline_id):
+
     try:
         customer_id = request.user.customer.customer_id
         customer_instance = get_object_or_404(Customer, customer_id=customer_id)
@@ -58,13 +61,11 @@ def new_child_table(request):
     except Customer.DoesNotExist:
         return redirect('new_step')
     
-    layer = Tables.objects.get('layer')
     form = TablesStepForm(request.POST)
-    html_location = parse_html_path(STEP_PATH, 'new_step_table')
+    html_location = parse_html_path(TABLES_PATH, 'add')
 
     if request.method == 'POST':
         if table.is_valid():
-            layer = 'Process'
             table = form.save(commit=False)
             table.customer = customer_instance
             table.save()
