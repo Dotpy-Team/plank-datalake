@@ -36,6 +36,7 @@ def new_table_by_id(request, dataset_id):
             table = form.save(commit=False)
             table.customer = customer_instance
             table.dataset = dataset_instance
+            table.layer = 'ingestion'
             table.save()
             return redirect('table_view', crip(str(table.table_id)))
         else:
@@ -91,6 +92,7 @@ def get_table(request,table_id):
             'add': reverse('new_column',args=[crip(str(table.table_id))]),
             'new_job': reverse('new_execution',args=[crip(str(table.table_id))]),
             'view_job': reverse('detail_execution', args=[crip(str(table.table_id))]),
+            'new_dependencie': reverse('new_dependencies', args=[crip(str(table.table_id))]),
             'columns': columns,
             'table': table
         }

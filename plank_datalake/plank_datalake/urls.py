@@ -99,7 +99,7 @@ urlpatterns = [
     # path('view-columns/<str:argument>',TablesView.as_view(),name='columns_list')
 
     #DEPENDENCIES:
-    path('add-dependencies/', p.new_dependencies ,name='new_dependencies'),
+    path('add-dependencies/<str:table_id>', p.new_dependencies ,name='new_dependencies'),
     path('list-dependencies/', p.list_dependecies ,name='list_dependecies'),
     path('detail-dependencies/<str:dependency_id>', p.detail_dependencies ,name='detail_dependencies'),
 
@@ -110,7 +110,7 @@ urlpatterns = [
 
     #STEP:
     path('new-step/<str:pipeline_id>', p.new_step ,name='new_step'),
-    path('new-child-table/', p.new_child_table ,name='new_child_table'),
+    path('new-child-table/<str:step_id>', p.new_child_table ,name='new_child_table'),
     path('detail-step/<str:step_id>', p.detail_step ,name='detail_step'),
     path('list-step/', p.list_step ,name='list_step'),
 

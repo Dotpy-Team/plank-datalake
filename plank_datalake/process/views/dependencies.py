@@ -22,7 +22,9 @@ def parse_html_path(path,page):
     return html_location
 
 
-def new_dependencies(request):
+def new_dependencies(request, table_id):
+    table_id=uncrip(table_id)
+
     try:
         customer_id = request.user.customer.customer_id
         customer_instance = Customer.objects.get(customer_id=customer_id)
@@ -47,7 +49,7 @@ def new_dependencies(request):
             }
             return render(request, html_location, response_dict)
     else:
-        form = DependenciesForm()
+        form = DependenciesForm(initial={'table_id':table_id})
         form.fields['table_node'].queryset = customer_instance.tables_set.all()
         form.fields['table_node'].widget.attrs['class'] = 'form-select'
         form.fields['table_node'].label = 'Tabela'

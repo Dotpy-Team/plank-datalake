@@ -17,19 +17,22 @@ def uncrip(crip):
 
 STEP_PATH = 'process/Step/'
 
-TABLES_PATH = 'process/Tables/'
-
 def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
 
 def new_step(request, pipeline_id):
-
     try:
         customer_id = request.user.customer.customer_id
         customer_instance = get_object_or_404(Customer, customer_id=customer_id)
     except Customer.DoesNotExist:
+        return redirect('home')
+    
+    try:
+        pipeline_id = uncrip(pipeline_id)
+        pipeline_instance = get_object_or_404(Pipeline, pipeline_id=pipeline_id)
+    except Pipeline.DoesNotExist:
         return redirect('home')
     
     form = StepForm(request.POST)
@@ -39,7 +42,10 @@ def new_step(request, pipeline_id):
         if form.is_valid():
             step = form.save(commit=False)
             step.customer = customer_instance
+            pipeline  = form.save(commit=False)
+            pipeline.pipeline = pipeline_instance
             step.save()
+            pipeline.save()
             return redirect('new_child_table', crip(str(step.step_id)))
         else:
             error_message = 'Credenciais inválidas. Por favor, tente novamente.'   
@@ -50,11 +56,13 @@ def new_step(request, pipeline_id):
             }
             return render (request, html_location, error_dict)
     else:
-        form = StepForm()
+        form = StepForm(initial={'pipeline_id': pipeline_id})
         response_dict = { 'form': form }
         return render(request, html_location, response_dict)
 
-def new_child_table(request):
+def new_child_table(request, step_id):
+    step_id = uncrip(step_id)
+
     try: 
         customer_id = request.user.customer.customer_id
         customer_instance = get_object_or_404(Customer, customer_id=customer_id)
@@ -62,12 +70,13 @@ def new_child_table(request):
         return redirect('new_step')
     
     form = TablesStepForm(request.POST)
-    html_location = parse_html_path(TABLES_PATH, 'add')
+    html_location = parse_html_path(STEP_PATH, 'new_step_table')
 
     if request.method == 'POST':
-        if table.is_valid():
+        if form.is_valid():
             table = form.save(commit=False)
             table.customer = customer_instance
+            table.layer = 'process'
             table.save()
             return redirect('table_view', crip(str(table.table_id)))
         else:
@@ -78,9 +87,9 @@ def new_child_table(request):
                 'error_form': table.errors 
             }
     else:
-        table = TablesStepForm()
+        form = TablesStepForm(initial={'step_id':step_id})
         response_dict = {
-            'table': table
+            'form': form
         }
         return render(request, html_location, response_dict)
 
