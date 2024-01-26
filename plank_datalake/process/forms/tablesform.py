@@ -2,10 +2,6 @@ from django import forms
 from process.models import Tables
 
 class TablesForm(forms.ModelForm):
-    step = forms.IntegerField(
-        required=False
-    )
-
     CHOICES_FREQUENCY = (
         ('Daily', 'Diario'), 
         ('Montly', 'Mensal'), 

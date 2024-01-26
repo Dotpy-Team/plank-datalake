@@ -1,6 +1,6 @@
 from django.db import models 
 from business.models import Customer 
-from process.models import Tables 
+
 
 
 class Pipeline(models.Model): 

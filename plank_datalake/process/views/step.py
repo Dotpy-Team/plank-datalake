@@ -25,14 +25,10 @@ def parse_html_path(path,page):
 def new_step(request, pipeline_id):
     try:
         customer_id = request.user.customer.customer_id
-        customer_instance = get_object_or_404(Customer, customer_id=customer_id)
-    except Customer.DoesNotExist:
-        return redirect('home')
-    
-    try:
         pipeline_id = uncrip(pipeline_id)
+        customer_instance = get_object_or_404(Customer, customer_id=customer_id)
         pipeline_instance = get_object_or_404(Pipeline, pipeline_id=pipeline_id)
-    except Pipeline.DoesNotExist:
+    except Customer.DoesNotExist:
         return redirect('home')
     
     form = StepForm(request.POST)
@@ -61,11 +57,12 @@ def new_step(request, pipeline_id):
         return render(request, html_location, response_dict)
 
 def new_child_table(request, step_id):
-    step_id = uncrip(step_id)
 
-    try: 
+    try:
+        step_id = uncrip(step_id) 
         customer_id = request.user.customer.customer_id
         customer_instance = get_object_or_404(Customer, customer_id=customer_id)
+        step_instance = get_object_or_404(Step, step_id=step_id)
     except Customer.DoesNotExist:
         return redirect('new_step')
     
@@ -76,6 +73,7 @@ def new_child_table(request, step_id):
         if form.is_valid():
             table = form.save(commit=False)
             table.customer = customer_instance
+            table.step = step_instance
             table.layer = 'process'
             table.save()
             return redirect('table_view', crip(str(table.table_id)))

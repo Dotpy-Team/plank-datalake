@@ -1,13 +1,14 @@
 from django.db import models
 from business.models import DataSet, Customer
 from .raci import RaciActivity
+from .step import Step
 
 
 class Tables(models.Model):
     table_id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     dataset = models.ForeignKey(DataSet, on_delete=models.CASCADE, null=True, blank=True)
-    # step = models.CharField(max_length=20)
+    step = models.ForeignKey(Step, on_delete=models.CASCADE, null=True, blank=True)
     layer = models.CharField(max_length=20)
     str_frequency = models.CharField(
         max_length=20, choices=[
