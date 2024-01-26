@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -21,6 +22,7 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
+@login_required
 def new_pipeline(request):
     try:
         customer_id = request.user.customer.customer_id
@@ -51,7 +53,8 @@ def new_pipeline(request):
             'form': form
         }
         return render(request, html_location, response_dict)
-    
+
+@login_required 
 def detail_pipeline(request, pipeline_id):
     pipeline_id = uncrip(pipeline_id)
 
@@ -64,6 +67,7 @@ def detail_pipeline(request, pipeline_id):
 
     return render(request, html_location, response_dict)
 
+@login_required
 def list_pipeline(request):
     customer_id = request.user.customer.customer_id 
     customer = get_object_or_404(Customer, customer_id=customer_id)
