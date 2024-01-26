@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -21,6 +22,7 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
+@login_required
 def new_table_by_id(request, dataset_id):
     try:
         dataset_id = uncrip(dataset_id)
@@ -58,6 +60,7 @@ def new_table_by_id(request, dataset_id):
         }
         return render(request, html_location, response_dict)
 
+@login_required
 def get_tables(request, table_id=None):
     customer_id = request.user.customer.customer_id
     tables = Tables.objects.filter(customer_id=customer_id)
@@ -82,6 +85,7 @@ def get_tables(request, table_id=None):
     }
     return render(request, html_location, response_dict)
 
+@login_required
 def get_table(request,table_id):
     try:
         table_id = uncrip(table_id)
