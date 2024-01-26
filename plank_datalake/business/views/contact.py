@@ -49,7 +49,7 @@ def new_contact(request, customer_id):
         response_dict = { 'form': 'form'}
         return render(request, html_location, response_dict)
 
- @login_required   
+@login_required   
 def profile_contact(request, contact_id):
     contact_id = uncrip(contact_id)
     contact = get_object_or_404(Contacts, contact_id=contact_id)
