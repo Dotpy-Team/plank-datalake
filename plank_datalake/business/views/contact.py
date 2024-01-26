@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import Contacts, Customer
@@ -21,6 +22,7 @@ def parse_html_path(template_path,page):
 
 CONTACT_PATH = 'business/Contact/'
 
+@login_required
 def new_contact(request, customer_id):
     try:
         customer_id = uncrip(customer_id)
@@ -46,7 +48,8 @@ def new_contact(request, customer_id):
         html_location = parse_html_path(CONTACT_PATH,'new_contact')
         response_dict = { 'form': 'form'}
         return render(request, html_location, response_dict)
-    
+
+ @login_required   
 def profile_contact(request, contact_id):
     contact_id = uncrip(contact_id)
     contact = get_object_or_404(Contacts, contact_id=contact_id)
@@ -54,6 +57,7 @@ def profile_contact(request, contact_id):
     response_dict = {'contact': contact}
     return render(request, html_location, response_dict)
 
+@login_required
 def list_contacts_by_id(request, customer_id):
     customer_id = uncrip(customer_id)
     contacts = Contacts.objects.filter(customer_id=customer_id)
@@ -71,6 +75,7 @@ def list_contacts_by_id(request, customer_id):
     }
     return render(request, html_location, response_dict)
 
+@login_required
 def list_contacts(request):
     contacts = Contacts.objects.all()
     html_location = parse_html_path(CONTACT_PATH,'list_contacts')
