@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -21,7 +22,7 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
-
+@login_required
 def new_step(request, pipeline_id):
     try:
         customer_id = request.user.customer.customer_id
@@ -56,6 +57,7 @@ def new_step(request, pipeline_id):
         response_dict = { 'form': form }
         return render(request, html_location, response_dict)
 
+@login_required
 def new_child_table(request, step_id):
 
     try:
@@ -90,7 +92,8 @@ def new_child_table(request, step_id):
             'form': form
         }
         return render(request, html_location, response_dict)
-
+    
+@login_required
 def detail_step(request, step_id):
     step_id = uncrip(step_id)
     
@@ -101,6 +104,7 @@ def detail_step(request, step_id):
     }
     return render(request, html_location, response_dict)
 
+@login_required
 def list_step(request):
     customer_id = request.user.customer.customer_id
 
