@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -22,6 +23,7 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
+@login_required
 def new_raci(request):
     try:
         customer_id = request.user.customer.customer_id
@@ -62,6 +64,7 @@ def new_raci(request):
         }
         return render(request, html_location, response_dict)
 
+@login_required
 def new_related(request,activity_id):
     try:
         customer_id = request.user.customer.customer_id
@@ -111,7 +114,7 @@ def new_related(request,activity_id):
         }
         return render(request, html_location, response_dict)
 
-
+@login_required
 def profile_raci(request,activity_id):
     # try:
     activity_id = uncrip(activity_id)
@@ -133,7 +136,7 @@ def profile_raci(request,activity_id):
     # except Http404:
     #     return redirect('signup_company')
 
-
+@login_required
 def list_contracts(request):
     customer_id = request.user.customer.customer_id
     customer = get_object_or_404(Customer, customer_id=customer_id)
