@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import DataSet, System, Customer
@@ -30,6 +31,7 @@ DATASET PROFILE
 
 DATASET_PATH = 'business/DataSet/'
 
+@login_required
 def new_dataset(request,system_id):
     try:
         system_id = uncrip(system_id)
@@ -59,6 +61,7 @@ def new_dataset(request,system_id):
         }
     return render(request, html_location, dict_form)
 
+@login_required
 def all_dataset(request):
     try:
         customer_id = request.user.customer.customer_id
@@ -77,7 +80,7 @@ def all_dataset(request):
     }
     return render(request, html_location, response_dict)
 
-
+@login_required
 def profile_dataset(request,dataset_id):
     # try:
     dataset_id = uncrip(dataset_id)
