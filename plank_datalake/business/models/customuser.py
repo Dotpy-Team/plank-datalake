@@ -26,7 +26,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30)
     email = models.EmailField(max_length=30, unique=True)
     str_cpf = models.CharField(max_length=14, null=True, blank=True) #TODO: adicionar o cpf como unico. unique=True,)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
     str_telefone = models.CharField(max_length=15, null=True, blank=True)
     str_cargo = models.CharField(max_length=100, null=True, blank=True)
     str_address = models.CharField(max_length=100, null=True, blank=True)
