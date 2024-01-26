@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from business.models import CustomUser, Customer
@@ -27,11 +27,13 @@ def parse_html_path(template_path,page):
     html_location = template_path + f'{page}.html'
     return html_location
 
+@login_required
 def home_page(request):
     html_location = parse_common_path('home')
     print(request.user)
     return render(request,html_location)
 
+@login_required
 def new_user(request, customer_id):
     try:
         customer_id = uncrip(customer_id)
@@ -64,7 +66,8 @@ def new_user(request, customer_id):
             'form':form
         }
         return render(request, html_location, response_dict)
-
+    
+@login_required
 def user_login(request, message=None):
     html_location = parse_html_path(CUSTOMUSER_PATH,'login')
     
@@ -87,6 +90,7 @@ def user_login(request, message=None):
     
     return render(request,html_location, response_dict)
 
+@login_required
 def user_profile(request):
     email = request.user.email
     try:
@@ -100,6 +104,7 @@ def user_profile(request):
     except Http404:
         return redirect('table_add')
 
+@login_required
 def admin_user_profile(request,email):
     email = uncrip(email)
     try:
@@ -113,7 +118,7 @@ def admin_user_profile(request,email):
     except Http404:
         return redirect('table_add')
 
-
+@login_required
 def users_list_by_id_customer(request,customer_id):
     customer_id = uncrip(customer_id)
     users = CustomUser.objects.filter(customer_id=customer_id)
@@ -131,7 +136,7 @@ def users_list_by_id_customer(request,customer_id):
     }
     return render(request, html_location, response_dict)
 
-
+@login_required
 def all_users(request):
     users = CustomUser.objects.all()
     html_location = parse_html_path(CUSTOMUSER_PATH,'list')
@@ -145,7 +150,7 @@ def all_users(request):
     response_dict = {'users': users}
     return render(request, html_location, response_dict)
 
-
+@login_required
 def user_logout(request):
     if request.method == 'POST':
         logout(request)
