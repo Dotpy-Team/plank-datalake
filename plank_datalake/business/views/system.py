@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import System, DataSet, Customer
@@ -30,6 +31,7 @@ SYSTEM PROFILE
 
 SYSTEM_PATH = 'business/System/'
 
+@login_required
 def new_system(request):
     
     try:
@@ -60,6 +62,7 @@ def new_system(request):
         }
     return render(request, html_location, dict_form)
 
+@login_required
 def profile_system(request,system_id):
     system_id = uncrip(system_id)
     system = get_object_or_404(System, system_id=system_id)
@@ -81,6 +84,7 @@ def profile_system(request,system_id):
 
     return render(request, html_location, response_dict)
 
+@login_required
 def list_system(request):
     customer_id = request.user.customer.customer_id
     systems = System.objects.filter(customer_id=customer_id)
@@ -96,7 +100,7 @@ def list_system(request):
     
     return render(request, html_location, response_dict)
 
-
+@login_required
 def new_system_id(request,customer_id):
     customer_id = uncrip(customer_id)
     if request.method == 'POST':
@@ -118,6 +122,7 @@ def new_system_id(request,customer_id):
         }
     return render(request, html_location, dict_form)
 
+@login_required
 def admin_list_system(request):
     systems = System.objects.all()
     html_location = parse_html_path(SYSTEM_PATH,'list_system')
