@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import ContractItem, Contract, Service
@@ -31,6 +32,7 @@ ContractItem PROFILE
 
 CONTRACTITEM_PATH = 'business/ContractItem/'
 
+@login_required
 def new_contract_item(request,contract_id):
     try:
         contract_id = uncrip(contract_id)
