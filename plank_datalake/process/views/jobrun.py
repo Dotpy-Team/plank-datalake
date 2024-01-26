@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -21,7 +22,7 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
-
+@login_required
 def new_execution(request, table_id):
     try:
         table_id = uncrip(table_id)
@@ -57,6 +58,7 @@ def new_execution(request, table_id):
         }
         return render(request, html_location, response_dict)
 
+@login_required
 def detail_execution(request,job_id):
     try:
         job_id = uncrip(job_id)

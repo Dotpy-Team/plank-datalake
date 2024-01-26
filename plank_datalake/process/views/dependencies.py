@@ -80,7 +80,6 @@ def list_dependecies(request):
         )
 
         dependency.save()
-        
 
     response_dict = {
         'dependency': dependencies    
