@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -21,7 +22,7 @@ def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
 
-
+@login_required
 def new_dependencies(request, table_id):
     table_id=uncrip(table_id)
 
@@ -63,7 +64,8 @@ def new_dependencies(request, table_id):
             'form': form,
         }
         return render(request, html_location, response_dict)
-    
+
+@login_required 
 def list_dependecies(request):
     customer_id = request.user.customer.customer_id
     customer = get_object_or_404(Customer, customer_id=customer_id)
@@ -85,6 +87,7 @@ def list_dependecies(request):
     }
     return render(request, html_location, response_dict)
 
+@login_required
 def detail_dependencies(request,dependency_id):
     dependency_id = uncrip(dependency_id)
     dependency = get_object_or_404(Dependencies, dependency_id=dependency_id)
