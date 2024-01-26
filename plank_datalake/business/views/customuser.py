@@ -67,7 +67,6 @@ def new_user(request, customer_id):
         }
         return render(request, html_location, response_dict)
     
-@login_required
 def user_login(request, message=None):
     html_location = parse_html_path(CUSTOMUSER_PATH,'login')
     
