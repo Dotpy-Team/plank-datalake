@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import Customer, Contract, ContractItem, Service
@@ -30,6 +31,7 @@ Contract PROFILE
 
 CONTRACT_PATH = 'business/Contract/'
 
+@login_required
 def new_contract(request,customer_id):
     try:
         customer_id = uncrip(customer_id)
@@ -58,6 +60,7 @@ def new_contract(request,customer_id):
         }
     return render(request, html_location, dict_form)
 
+@login_required
 def  profile_contract(request,contract_id):
     # try:
     contract_id = uncrip(contract_id)
@@ -74,6 +77,7 @@ def  profile_contract(request,contract_id):
     # except Http404:
     #     return redirect('signup_company')
 
+@login_required
 def admin_list_contracts(request):
     contracts = Contract.objects.all()
     html_location = parse_html_path(CONTRACT_PATH,'admin_list_contract')
@@ -87,6 +91,7 @@ def admin_list_contracts(request):
     response_dict = {'contracts': contracts}
     return render(request, html_location, response_dict)
 
+@login_required
 def list_contracts(request):
     customer_id = request.user.customer.customer_id
     customer = get_object_or_404(Customer, customer_id=customer_id)
