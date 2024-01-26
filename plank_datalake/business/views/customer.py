@@ -21,6 +21,7 @@ def parse_html_path(template_path,page):
 
 CUSTUMER_PATH = 'business/Customer/'
 
+@login_required
 def new_customer(request):
     if request.method == 'POST':
         form = CustomerForm(request.POST)
@@ -41,6 +42,7 @@ def new_customer(request):
         }
     return render(request, html_location, dict_form)
 
+@login_required
 def admin_list_customers(request):
     customers = Customer.objects.all()
     html_location = parse_html_path(CUSTUMER_PATH,'list')
@@ -54,6 +56,7 @@ def admin_list_customers(request):
     response_dict = {'customers': customers}
     return render(request, html_location, response_dict)
 
+@login_required
 def admin_profile_customer(request,customer_id):
     try:
         customer_id = uncrip(customer_id)
@@ -73,7 +76,7 @@ def admin_profile_customer(request,customer_id):
     except Http404:
         return redirect('new_customer')
 
-# @login_required(login_url='user_login')
+@login_required
 def profile_customer(request):
     try:
         customer_id = request.user.customer.customer_id
