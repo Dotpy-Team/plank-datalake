@@ -41,34 +41,50 @@
                 </li>
             </ul>
         </li> {% endcomment %}
-        <li>
-            <a href="/customer-profile/">Perfil do cliente</a>
-        </li>
+
+        {% if user.is_superuser %}
+            <li>
+                <a href="/customer/">Novo cliente</a>
+            </li>
+
+            <li>
+                <a href="/admin-customer-profiles/">Clientes ativos</a>
+            </li>
+
+        {% else %}
+
+            <li>
+                <a href="/customer-profile/">Perfil do cliente</a>
+            </li>
+            
+            <li>
+                <a href="/user-profile/">Perfil do Usuário</a>
+            </li>
+
+            <li>
+                <a href="/raci/">Nova Responsabilidade</a>
+            </li>
+
+            <li>
+                <a href="/systems/">Sistemas</a>
+            </li>
+
+            <li>
+                <a href="/all-dataset/">Dataset</a>
+            </li>
+
+            <li>
+                <a href="/search-tables/">Explorar Tabelas</a>
+            </li>
+
+        {% endif %}
         
-        <li>
-            <a href="/user-profile/">Perfil do Usuário</a>
-        </li>
 
-        <li>
-            <a href="/raci/">Nova Responsabilidade</a>
-        </li>
-
-        <li>
-            <a href="/systems/">Sistemas</a>
-        </li>
-
-        <li>
-            <a href="/all-dataset/">Dataset</a>
-        </li>
-
-        <li>
-            <a href="/search-tables/">Explorar Tabelas</a>
-        </li>
 
         <li>
             <form action="{% url 'user_logout'%}" method="post">
                 {% csrf_token %}
-                    <button type="button" class="btn btn-danger" value="logout">Sair</button>
+                    <button type="submit" class="btn btn-danger" value="logout">Sair</button>
                     </button>
             </form>
         </li>

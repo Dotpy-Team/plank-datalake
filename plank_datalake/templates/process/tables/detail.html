@@ -91,8 +91,6 @@ tbody {
             <a href="{{ new_job }}"><button type="button" class="btn btn-info mt-4">Adicionar uma nova execução.</button></a>
 
             <a href="{{ view_job }}"><button type="button" class="btn btn-info mt-4">Ver uma execução.</button></a>
-
-            <a href="{{ new_dependencie }}"><button type="button" class="btn btn-info mt-4">Nova dependencia.</button></a>
              
 
             <div class="card border-info mt-2 justify-content-center">
@@ -102,6 +100,7 @@ tbody {
                             <th class="text-center" scope="col">Name</th>
                             <th class="text-center" scope="col">Rename</th>
                             <th class="text-center" scope="col">Datatype</th>
+                            <th class="text-center" scope="col">Tipo de infor.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,6 +109,17 @@ tbody {
                                 <td class="text-center" scope="row">{{column.str_source_name}}</td>
                                 <td class="text-center" scope="row">{{column.str_rename}}</td>
                                 <td class="text-center" scope="row">{{column.str_datatype}}</td>
+                                <td class="text-center" scope="row">
+                                    {% if column.str_type == 'CPK' %}
+                                        <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
+                                    {% elif column.str_type == 'CFK' %}
+                                        <span class="badge text-bg-secondary rounded-pill">Chave Extrangeira</span>
+                                    {% elif column.str_type == 'SEN' %}
+                                        <span class="badge text-bg-danger rounded-pill">Dado Sensivel</span>
+                                    {% elif column.str_type == 'KDS' %}
+                                        <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
+                                    {% endif %}
+                                </td>
                             </tr>
                         {% empty %}
                             <p>Não há colunas cadastradas.</p>
