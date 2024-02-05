@@ -83,7 +83,8 @@ class TablesForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
-            'raci_activity'
+            'raci_activity',
+            'conector'
         ]
 
 
@@ -170,5 +171,6 @@ class TablesStepForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
-            'raci_activity'
+            'raci_activity', 
+            'conector'
         ]

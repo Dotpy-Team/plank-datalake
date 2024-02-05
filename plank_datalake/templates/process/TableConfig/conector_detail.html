@@ -1,0 +1,50 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'>
+            <b>Detalhes:</b>
+        </div>
+
+        <div class="card-body">
+            <h3 class="card-title text-primary">{{ conector.project_id }}</h3>
+
+            <h3 class="card-text-secondary-emphasis">Tipo:</h3>
+            <p class="card-text">{{ conector.type }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Id Chave Privada:</h3>
+            <p class="card-text">{{ conector.private_key_id }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Chave Privada:</h3>
+            <p class="card-text">{{ conector.private_key }}</p>
+
+            <h3 class="card-text-secondary-emphasis">E-mail:</h3>
+            <p class="card-text">{{ conector.client_email }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Id Cliente:</h3>
+            <p class="card-text">{{ conector.client_id }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Uri de Autenticação:</h3>
+            <p class="card-text">{{ conector.auth_uri }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Token:</h3>
+            <p class="card-text">{{ conector.token_uri }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Provedor Autenticação:</h3>
+            <p class="card-text">{{ conector.auth_provider_x509_cert_url }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Client:</h3>
+            <p class="card-text">{{ conector.client_x509_cert_url }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Dominio:</h3>
+            <p class="card-text">{{ conector.universe_domain }}</p>
+
+            <a href="{{ new_step }}"><button type="button" class="btn btn-info mt-4">Adicionar novo Step.</button></a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -106,12 +106,16 @@ urlpatterns = [
     #PIPELINE:
     path('new-pipeline/', p.new_pipeline ,name='new_pipeline'),
     path('detail-pipeline/<str:pipeline_id>', p.detail_pipeline ,name='detail_pipeline'),
-    path('list-pipeline/', p.list_pipeline ,name='list_pipeline'),
+    path('list-pipeline/', p.list_pipeline,name='list_pipeline'),
 
     #STEP:
     path('new-step/<str:pipeline_id>', p.new_step ,name='new_step'),
     path('new-child-table/<str:step_id>', p.new_child_table ,name='new_child_table'),
     path('detail-step/<str:step_id>', p.detail_step ,name='detail_step'),
-    path('list-step/', p.list_step ,name='list_step'),
+    path('list-step/', p.list_step,name='list_step'),
 
+    #TABLE CONFIG
+    path('new-conector/', p.new_conector, name="new_conector"),
+    path('list-conector/', p.conector_list, name="conector_list"),
+    path('detail-conector/<str:id_conector>', p.conector_detail, name="conector_detail"),
 ]

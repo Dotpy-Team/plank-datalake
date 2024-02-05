@@ -51,7 +51,7 @@ def new_step(request, pipeline_id):
                 'error_message': error_message,
                 'errors': form.errors
             }
-            return render (request, html_location, error_dict)
+            return render(request, html_location, error_dict)
     else:
         form = StepForm(initial={'pipeline_id': pipeline_id})
         response_dict = { 'form': form }

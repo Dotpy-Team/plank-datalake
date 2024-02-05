@@ -2,6 +2,7 @@ from django.db import models
 from business.models import DataSet, Customer
 from .raci import RaciActivity
 from .step import Step
+from .tableconfig import Conector
 
 
 class Tables(models.Model):
@@ -9,6 +10,7 @@ class Tables(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     dataset = models.ForeignKey(DataSet, on_delete=models.CASCADE, null=True, blank=True)
     step = models.ForeignKey(Step, on_delete=models.CASCADE, null=True, blank=True)
+    conector = models.ForeignKey(Conector, on_delete=models.CASCADE, null=True, blank=True) 
     layer = models.CharField(max_length=20)
     str_frequency = models.CharField(
         max_length=20, choices=[

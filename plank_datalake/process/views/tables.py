@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Tables, RaciActivity, Columns
+from process.models import Tables, RaciActivity, Columns, Conector
 from business.models import Customer,DataSet
 from process.forms import TablesForm
 import base64
@@ -54,6 +54,9 @@ def new_table_by_id(request, dataset_id):
         form.fields['raci_activity'].queryset = RaciActivity.objects.filter(customer_id=customer_id)
         form.fields['raci_activity'].widget.attrs['class'] = 'form-select'
         form.fields['raci_activity'].label = 'RACI'
+        form.fields['conector'].queryset = Conector.objects.filter(customer_id=customer_id)
+        form.fields['conector'].widget.attrs['class'] = 'form-select'
+        form.fields['conector'].label = 'Conector'
         html_location = parse_html_path(TABLE_PATH,'add')
         response_dict = {
             'form':form
