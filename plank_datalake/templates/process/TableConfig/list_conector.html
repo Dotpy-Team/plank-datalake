@@ -6,8 +6,8 @@
         <h3 class="text-primary text-center">
             Lista de atividades
         </h3> 
-        <a href="/raci/" class="btn btn-primary">
-            Adicionar nova atividade
+        <a href="/new-conector/" class="btn btn-primary">
+            Adicionar novo conector
         </a>
     </div>
 </div>
@@ -33,7 +33,7 @@
             <tbody>
                 {% for conector in conectors %}
                 <tr>
-                    <td scope="row"><a href="{{conector.detail_url}}">{{ conector.id_conector }}</a></th>
+                    <td scope="row"><a href="{{conector.detail_url}}">{{ conector.conector_id }}</a></th>
                     <td>{{ conector.type }}</td>
                     <td>{{ conector.project_id }}</td>
                     <td>{{ conector.private_key_id }}</td>

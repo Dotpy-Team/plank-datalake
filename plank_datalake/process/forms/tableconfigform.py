@@ -84,3 +84,51 @@ class SheetConfigForm(forms.ModelForm):
             'client_x509_cert_url',
             'universe_domain'
         ]
+        
+
+class PostConfigForm(forms.ModelForm):
+    engine = forms.CharField(
+        label= 'Engine',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    name = forms.CharField(
+        label= 'Name',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    user = forms.CharField(
+        label= 'User',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+    password = forms.CharField(
+        label= 'Password',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    host = forms.CharField(       
+        label= 'Host',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    port = forms.CharField(
+        label= 'Port',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    class Meta:
+        model = Conector
+        fields = [
+            'engine',
+            'name',
+            'user',
+            'password',
+            'host',
+            'port'
+        ]
