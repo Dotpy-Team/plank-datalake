@@ -3,6 +3,12 @@ from process.models import Conector
 
 
 class SheetConfigForm(forms.ModelForm):
+    conector_name = forms.CharField(
+        label='Nome do conector',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required= True
+    )
+
     type = forms.CharField(
         label= "Type",
         widget= forms.TextInput(attrs={'class': 'form-control'}),
@@ -72,6 +78,7 @@ class SheetConfigForm(forms.ModelForm):
     class Meta:
         model = Conector
         fields= [
+            'conector_name',
             'type', 
             'project_id', 
             'private_key_id',
@@ -87,6 +94,12 @@ class SheetConfigForm(forms.ModelForm):
         
 
 class PostConfigForm(forms.ModelForm):
+    conector_name = forms.CharField(
+        label='Nome do conector',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required= True
+    )
+
     engine = forms.CharField(
         label= 'Engine',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
@@ -104,6 +117,7 @@ class PostConfigForm(forms.ModelForm):
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
+
     password = forms.CharField(
         label= 'Password',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
@@ -125,10 +139,53 @@ class PostConfigForm(forms.ModelForm):
     class Meta:
         model = Conector
         fields = [
+            'conector_name', 
             'engine',
             'name',
             'user',
             'password',
             'host',
             'port'
+        ]
+
+
+class MySqlConfigForm(forms.ModelForm):
+    conector_name = forms.CharField(
+        label='Nome do conector',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required= True
+    )
+
+    host = forms.CharField(       
+        label= 'Host',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    user = forms.CharField(
+        label= 'User',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    passwd = forms.CharField(
+        label='Password',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    database = forms.CharField(
+        label='Database',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    class Meta:
+        model = Conector
+        fields = [
+            'conector_name',
+            'host',
+            'user',
+            'passwd',
+            'database'
         ]

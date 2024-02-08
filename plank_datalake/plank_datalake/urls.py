@@ -118,6 +118,7 @@ urlpatterns = [
     path("new-conector/", p.new_conector, name="new_conector"),
     path('new-sheets-table/', p.new_sheets_table, name="new_sheets_table"),
     path("new-postgree-table/", p.new_postgree_table, name="new_postgree_table"),
+    path("new-mysql-table/", p.new_mysql_conector, name="new_mysql_conector"),
     path('list-conector/', p.conector_list, name="conector_list"),
     path('detail-conector/<str:conector_id>', p.conector_detail, name="conector_detail"),
 ]

@@ -5,7 +5,7 @@ from django.http import Http404
 from django.views import View
 from process.models import Conector 
 from business.models import Customer
-from process.forms import SheetConfigForm, PostConfigForm
+from process.forms import SheetConfigForm, PostConfigForm, MySqlConfigForm
 import json
 import base64
 
@@ -32,6 +32,7 @@ def new_conector(request):
     html_location = parse_html_path(CONFIG_PATH, 'landing')
     return render(request, html_location)
 
+
 @login_required
 def new_sheets_table(request): 
     try: 
@@ -47,6 +48,7 @@ def new_sheets_table(request):
         
         if form.is_valid():
             conector = form.save(commit=False)
+            conector.table_type = 'Google Sheets'
             conector.customer = customer_instance
             conector.save()
             return redirect('conector_detail', crip(str(conector.conector_id)))
@@ -65,9 +67,9 @@ def new_sheets_table(request):
         }
         return render(request, html_location, response_dict)
     
+    
 @login_required
 def new_postgree_table(request): 
-
     try: 
         customer_id = request.user.customer.customer_id
         customer_instance = Customer.objects.get(customer_id=customer_id)
@@ -81,6 +83,7 @@ def new_postgree_table(request):
 
         if form.is_valid():
             conector = form.save(commit=False)
+            conector.table_type = 'PostGre'
             conector.customer = customer_instance
             conector.save()
             return redirect('conector_detail', crip(str(conector.conector_id)))
@@ -99,6 +102,43 @@ def new_postgree_table(request):
             'form': form
         }
         return render(request, html_location, response_dict)
+    
+    
+@login_required
+def new_mysql_conector(request):
+    try:
+        customer_id = request.user.customer.customer_id
+        customer_instance = Customer.objects.get(customer_id=customer_id)
+    except Customer.DoesNotExist:
+        return redirect('home')
+
+    html_location = parse_html_path(CONFIG_PATH, 'new_conector')
+
+    if request.method == 'POST':
+
+        form = MySqlConfigForm(request.POST)
+
+        if form.is_valid():
+            conector = form.save(commit=False)
+            conector.table_type = 'MySql'
+            conector.customer = customer_instance
+            conector.save()
+            return redirect('conector_detail', crip(str(conector.conector_id)))  
+        else: 
+            error_message = 'Os valores estão incorretos, tente novamnete'
+            error_dict = {
+                'form': form,
+                'error_message': error_message,
+                'form_error': form.errors
+            }
+            return render(request, html_location, error_dict)
+    else:
+        form = MySqlConfigForm()
+        response_dict = {
+            'form': form 
+        }
+
+        return render(request, html_location, response_dict)
 
 @login_required
 def conector_detail(request, conector_id):
@@ -110,7 +150,8 @@ def conector_detail(request, conector_id):
         'conector': conector
     }
 
-    return render(request, html_location, response_dict) 
+    return render(request, html_location, response_dict)
+
 
 @login_required
 def conector_list(request):

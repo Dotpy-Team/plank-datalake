@@ -8,7 +8,11 @@
         </div>
 
         <div class="card-body">
-            <h3 class="card-title text-primary">{{ conector.project_id }}</h3>
+            <h3 class="card-title text-primary">{{ conector.conector_name }}</h3>
+
+            {% if conector.table_type == 'Google Sheets' %}
+            <h3 class="card-text-secondary-emphasis">Project Id:</h3>
+            <p class="card-text">{{ conector.project_id }}</p>
 
             <h3 class="card-text-secondary-emphasis">Tipo:</h3>
             <p class="card-text">{{ conector.type }}</p>
@@ -40,24 +44,41 @@
             <h3 class="card-text-secondary-emphasis">Dominio:</h3>
             <p class="card-text">{{ conector.universe_domain }}</p>
 
-            <h3 class="card-text-secondary-emphasis">Dominio:</h3>
+            {% elif conector.table_type == 'PostGre' %}
+
+            <h3 class="card-text-secondary-emphasis">Engine:</h3>
             <p class="card-text">{{ conector.engine }}</p>
 
-            <h3 class="card-text-secondary-emphasis">Dominio:</h3>
+            <h3 class="card-text-secondary-emphasis">Name:</h3>
             <p class="card-text">{{ conector.name }}</p>
 
-            <h3 class="card-text-secondary-emphasis">Dominio:</h3>
+            <h3 class="card-text-secondary-emphasis">User:</h3>
             <p class="card-text">{{ conector.user }}</p>
 
-            <h3 class="card-text-secondary-emphasis">Dominio:</h3>
+            <h3 class="card-text-secondary-emphasis">Password:</h3>
             <p class="card-text">{{ conector.password }}</p>
 
-            <h3 class="card-text-secondary-emphasis">Dominio:</h3>
+            <h3 class="card-text-secondary-emphasis">Host:</h3>
             <p class="card-text">{{ conector.host }}</p>
 
-            <h3 class="card-text-secondary-emphasis">Dominio:</h3>
+            <h3 class="card-text-secondary-emphasis">Port:</h3>
             <p class="card-text">{{ conector.port }}</p>
 
+            {% elif conector.table_type == 'MySql'%}
+
+            <h3 class="card-text-secondary-emphasis">Host:</h3>
+            <p class="card-text">{{ conector.host }}</p>
+
+            <h3 class="card-text-secondary-emphasis">User:</h3>
+            <p class="card-text">{{ conector.user }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Password:</h3>
+            <p class="card-text">{{ conector.passwd }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Database:</h3>
+            <p class="card-text">{{ conector.database }}</p>
+
+            {% endif %}
             {% comment %} <a href="{{ new_step }}"><button type="button" class="btn btn-info mt-4">Adicionar novo Step.</button></a> {% endcomment %}
 
         </div>
