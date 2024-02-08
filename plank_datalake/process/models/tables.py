@@ -10,13 +10,13 @@ class Tables(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     dataset = models.ForeignKey(DataSet, on_delete=models.CASCADE, null=True, blank=True)
     step = models.ForeignKey(Step, on_delete=models.CASCADE, null=True, blank=True)
-    conector = models.ForeignKey(Conector, on_delete=models.CASCADE, null=True, blank=True) 
+    conector = models.ForeignKey(Conector, on_delete=models.CASCADE, null=True, blank=True)
     layer = models.CharField(max_length=20)
     str_frequency = models.CharField(
         max_length=20, choices=[
-            ('Daily', 'Diario'), 
-            ('Montly', 'Mensal'), 
-            ('Hour', 'A cada 1 hora'), 
+            ('Daily', 'Diario'),
+            ('Montly', 'Mensal'),
+            ('Hour', 'A cada 1 hora'),
             ('Weekly', 'Semanal')
         ],
         null=True, 

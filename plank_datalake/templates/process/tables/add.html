@@ -1,5 +1,6 @@
 {% extends 'common/base.html' %}
 {% block content %}
+
 <div class="container mt-5">
     <div class="card">
         <div class="card-header bg-primary text-white">
@@ -9,7 +10,82 @@
             <form method="post" class="form">
                 {% csrf_token %}
                 
-                {{ form.as_p }}
+                <div class='row mt-2 justify-content-center'>
+
+                    {{ form.str_frequency.label_tag }} {{ form.str_frequency }}
+
+                </div>
+
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.str_type_of.label_tag }} {{ form.str_type_of }}
+
+                </div>
+
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.str_mode.label_tag }} {{ form.str_mode }}
+
+                </div>    
+
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.str_type.label_tag }} {{ form.str_type }}
+
+                </div>
+
+
+                <div class='row mt-2 justify-content-center'>
+                    <div class='col'>
+                        <input type="checkbox" id='checkboxSheets'>Sheets
+                    </div>
+                    <div class='col'>
+                        <input type="checkbox" id='checkboxPostGre'>PostGre
+                    </div>
+                    <div class='col'>
+                        <input type="checkbox" id='checkboxMySql'>MySql
+                    </div>
+                </div>
+                
+
+                <div id='sheetsSelect' class='row mt-2 justify-content-center'  style='display: none;'>
+                    {{ form.conector}}
+                </div>
+
+                <div id='postGreSelect' class='row mt-2 justify-content-center'  style='display: none;'>
+                    {{ form.conector}}
+                </div>
+
+                <div id='mySqlSelect' class='row mt-2 justify-content-center'  style='display: none;'>
+                    {{ form.conector}}
+                </div>
+
+
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.str_name.label_tag }} {{ form.str_name }}
+
+                </div>     
+
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.str_desc.label_tag }} {{ form.str_desc }}
+
+                </div>
+
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.str_desc_ia.label_tag }} {{ form.str_desc_ia }}
+
+                </div>  
+
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.raci_activity.label_tag }} {{ form.raci_activity }}
+
+                </div>       
+
+                {% comment %} {{ form.as_p }} {% endcomment %}
 
                 <div class="form-group row justify-content-center">
                     <div class="col-sm-6">
@@ -21,5 +97,38 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#checkboxSheets').change(
+        function() {
+            if ($(this).is(':checked')) {
+                $('#sheetsSelect').show()
+            } else {
+                $('#sheetsSelect').hide()
+            }
+        }
+    );
+
+    $('#checkboxPostGre').change(
+        function() {
+            if ($(this).is(':checked')) {
+                $('#postGreSelect').show()
+            } else {
+                $('#postGreSelect').hide()
+            }
+        }
+    );
+
+    $('#checkboxMySql').change(
+        function() {
+            if ($(this).is(':checked')) {
+                $('#mySqlSelect').show()
+            } else {
+                $('#mySqlSelect').hide()
+            }
+        }
+    );
+</script>
+
 
 {% endblock %}

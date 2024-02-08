@@ -87,7 +87,6 @@ class TablesForm(forms.ModelForm):
             'conector'
         ]
 
-
 class TablesStepForm(forms.ModelForm):
 
     CHOICES_FREQUENCY = (
@@ -160,7 +159,6 @@ class TablesStepForm(forms.ModelForm):
         required=False
     )
 
-
     class Meta:
         model = Tables
         fields = [
@@ -174,3 +172,5 @@ class TablesStepForm(forms.ModelForm):
             'raci_activity', 
             'conector'
         ]
+
+

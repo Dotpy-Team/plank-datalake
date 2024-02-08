@@ -51,12 +51,15 @@ def new_table_by_id(request, dataset_id):
             return render(request, html_location, response_dict)
     else:
         form = TablesForm()
+
         form.fields['raci_activity'].queryset = RaciActivity.objects.filter(customer_id=customer_id)
         form.fields['raci_activity'].widget.attrs['class'] = 'form-select'
         form.fields['raci_activity'].label = 'RACI'
+
         form.fields['conector'].queryset = Conector.objects.filter(customer_id=customer_id)
         form.fields['conector'].widget.attrs['class'] = 'form-select'
         form.fields['conector'].label = 'Conector'
+        
         html_location = parse_html_path(TABLE_PATH,'add')
         response_dict = {
             'form':form
