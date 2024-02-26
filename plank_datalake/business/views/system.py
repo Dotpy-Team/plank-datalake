@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import System, DataSet, Customer
-from business.forms import SystemForm
+from business.forms import SystemForm, GoogleSheetSystemForm, PostGreSytemForm, MySqlSystemForm
 import base64
 
 def crip(text):
@@ -32,8 +32,12 @@ SYSTEM PROFILE
 SYSTEM_PATH = 'business/System/'
 
 @login_required
+def route(request):
+    html_location = parse_html_path(SYSTEM_PATH, 'route')
+    return render(request, html_location)
+
+@login_required
 def new_system(request):
-    
     try:
         customer_id = request.user.customer.customer_id
         customer_instance = Customer.objects.get(customer_id=customer_id)
@@ -122,6 +126,114 @@ def new_system_id(request,customer_id):
         }
     return render(request, html_location, dict_form)
 
+
+@login_required
+def new_sheets_system(request):
+    try:
+        customer_id = request.user.customer.customer_id 
+        customer_instance = Customer.objects.get(customer_id=customer_id)
+    except Customer.DoesNotExist:
+        return redirect('home')
+    
+    html_location = parse_html_path(SYSTEM_PATH, 'new_sheets_system')
+
+    if request.method == 'POST':
+        
+        form =  GoogleSheetSystemForm(request.POST)
+
+        if form.is_valid():
+            conector = form.save(commit=False)
+            conector.table_type = 'Google Sheets'
+            conector.customer =customer_instance
+            conector.save()
+            return redirect('profile_system', crip(str(conector.system_id)))
+        else:
+            error_message = 'Os valores estão incorretos, tente novamente'
+            error_dict = {
+                'form': form,
+                'error_message': error_message,
+                'form_error': form.errors 
+            }
+            return render(request, html_location, error_dict)
+    else:
+        form = GoogleSheetSystemForm()
+        response_dict = {
+            'form': form 
+        }
+        return render(request, html_location, response_dict)
+    
+@login_required 
+def new_postgre_system(request):
+
+    try:
+        customer_id = request.user.customer.customer_id 
+        customer_instance = Customer.objects.get(customer_id=customer_id)
+    except Customer.DoesNotExist:
+        return redirect('home')
+    
+    html_location = parse_html_path(SYSTEM_PATH, 'new_postgre_system')
+
+    if request.method == 'POST':
+
+        form = PostGreSytemForm(request.POST)
+
+        if form.is_valid():
+            conector = form.save(commit=False)
+            conector.table_type = 'PostGre'
+            conector.customer = customer_instance 
+            conector.save()
+            return redirect('profile_system', crip(str(conector.system_id)))
+        else:
+            error_message = 'Os valores estão incorretos, tente novamente'
+            error_dict = {
+                'form': form,
+                'error_message': error_message,
+                'form_error': form.errors
+            }
+            return render(request, html_location, error_dict)
+    else:
+        form = PostGreSytemForm()
+        response_dict = {
+            'form': form
+        }
+        return render(request, html_location, response_dict)
+
+@login_required
+def new_mysql_system(request): 
+
+    try: 
+        customer_id = request.user.customer.customer_id
+        customer_instance = customer_id 
+    except Customer.DoesNotExist:
+        return redirect('home')
+    
+    html_location = parse_html_path(SYSTEM_PATH, 'new_mysql_system')
+
+    if request.method == 'POST':
+
+        form = MySqlSystemForm(request.POST)
+
+        if form.is_valid():
+            conector = form.save(commit=False)
+            conector.table_type = 'MySql'
+            conector.customer = customer_instance
+            conector.save()
+            return redirect('profile_system', crip(str(conector.system_id)))
+        else:
+            error_message = 'Os valores estão incorretos, tente novamente'
+            error_dict = {
+                'form': form,
+                'error_message': error_message,
+                'form_error': form.errors
+            }
+            return render(request, html_location, error_dict)
+    else:
+        form = MySqlSystemForm()
+        response_dict = {
+            'form': form
+        }
+        return render(request, html_location, response_dict)
+
 @login_required
 def admin_list_system(request):
     systems = System.objects.all()
@@ -135,3 +247,4 @@ def admin_list_system(request):
     response_dict = {'systems': systems}
     
     return render(request, html_location, response_dict)
+

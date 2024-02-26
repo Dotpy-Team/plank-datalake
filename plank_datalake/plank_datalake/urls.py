@@ -62,7 +62,11 @@ urlpatterns = [
     path('service/', b.new_service , name='new_service'),
 
     #SYSTEM:
+    path('chose-system/', b.route, name='route'), 
     path('system/', b.new_system , name='new_system'),
+    path('sheets-system/', b.new_sheets_system, name='new_sheets_system'),
+    path('postgre-system/', b.new_postgre_system, name='new_postgre_system'),
+    path('mysql-system/', b.new_mysql_system, name='new_mysql_system'),
     path('admin-system/<str:customer_id>', b.new_system , name='new_system'),
 
     path('systems/', b.list_system, name='profile_system'),
@@ -114,11 +118,4 @@ urlpatterns = [
     path('detail-step/<str:step_id>', p.detail_step ,name='detail_step'),
     path('list-step/', p.list_step,name='list_step'),
 
-    #TABLE CONFIG
-    path("new-conector/", p.new_conector, name="new_conector"),
-    path('new-sheets-table/', p.new_sheets_table, name="new_sheets_table"),
-    path("new-postgree-table/", p.new_postgree_table, name="new_postgree_table"),
-    path("new-mysql-table/", p.new_mysql_conector, name="new_mysql_conector"),
-    path('list-conector/', p.conector_list, name="conector_list"),
-    path('detail-conector/<str:conector_id>', p.conector_detail, name="conector_detail"),
 ]
