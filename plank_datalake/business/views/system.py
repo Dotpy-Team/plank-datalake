@@ -51,6 +51,7 @@ def new_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
+            system.table_type = 'System'
             system.customer = customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -142,11 +143,11 @@ def new_sheets_system(request):
         form =  GoogleSheetSystemForm(request.POST)
 
         if form.is_valid():
-            conector = form.save(commit=False)
-            conector.table_type = 'Google Sheets'
-            conector.customer =customer_instance
-            conector.save()
-            return redirect('profile_system', crip(str(conector.system_id)))
+            system = form.save(commit=False)
+            system.table_type = 'Google Sheets'
+            system.customer =customer_instance
+            system.save()
+            return redirect('profile_system', crip(str(system.system_id)))
         else:
             error_message = 'Os valores estão incorretos, tente novamente'
             error_dict = {
@@ -178,11 +179,11 @@ def new_postgre_system(request):
         form = PostGreSytemForm(request.POST)
 
         if form.is_valid():
-            conector = form.save(commit=False)
-            conector.table_type = 'PostGre'
-            conector.customer = customer_instance 
-            conector.save()
-            return redirect('profile_system', crip(str(conector.system_id)))
+            system = form.save(commit=False)
+            system.table_type = 'PostGre'
+            system.customer = customer_instance 
+            system.save()
+            return redirect('profile_system', crip(str(system.system_id)))
         else:
             error_message = 'Os valores estão incorretos, tente novamente'
             error_dict = {
@@ -203,7 +204,7 @@ def new_mysql_system(request):
 
     try: 
         customer_id = request.user.customer.customer_id
-        customer_instance = customer_id 
+        customer_instance = Customer.objects.get(customer_id=customer_id)
     except Customer.DoesNotExist:
         return redirect('home')
     
@@ -214,11 +215,11 @@ def new_mysql_system(request):
         form = MySqlSystemForm(request.POST)
 
         if form.is_valid():
-            conector = form.save(commit=False)
-            conector.table_type = 'MySql'
-            conector.customer = customer_instance
-            conector.save()
-            return redirect('profile_system', crip(str(conector.system_id)))
+            system = form.save(commit=False)
+            system.table_type = 'MySql'
+            system.customer = customer_instance
+            system.save()
+            return redirect('profile_system', crip(str(system.system_id)))
         else:
             error_message = 'Os valores estão incorretos, tente novamente'
             error_dict = {

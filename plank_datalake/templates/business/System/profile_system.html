@@ -3,6 +3,8 @@
 
 <div class="container">
 	<div class="row">
+		
+		{% if system.table_type == 'System' %}
 		<div class="col-md-4">
 			<div class="card border-primary">
 				<h5 class="card-header">
@@ -50,10 +52,199 @@
 		
 
 				</div>
+
 				<div class="card-footer">
 				</div>
 			</div>
 		</div>
+
+		{% elif system.table_type == 'Google Sheets' %}
+
+		<div class="col-md-4">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Sistema
+				</h5>
+				<div class="card-body">
+					<p class="card-text">Nome do sistema: {{ system.str_title }}</p>
+                    <p class="card-text">Descrição: {{ system.str_desc }}</p>
+                    <p class="card-text">Status: {{ system.str_status }}</p>
+					<p class="card-text">Type: {{ system.type }}</p>
+					<p class="card-text">Project ID: {{ system.project_id }}</p>
+					<p class="card-text">Private Key ID: {{ system.private_key_id }}</p>
+					<p class="card-text">Private Key: {{ system.private_key }}</p>
+					<p class="card-text">Client E-mail: {{ system.client_email }}</p>
+					<p class="card-text">Client ID: {{ system.client_id }}</p>
+					<p class="card-text">Auth Uri: {{ system.auth_uri }}</p>
+					<p class="card-text">Token Uri: {{ system.token_uri }}</p>
+					<p class="card-text">Auth Provider: {{ system.auth_provider_x509_cert_url }}</p>
+					<p class="card-text">Client Cert Url: {{ system.client_x509_cert_url }}</p>
+					<p class="card-text">Universe Domain: {{ system.universe_domain }}</p>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Datasets
+				</h5>
+				<div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#id</th>
+                                <th>Nome</th>
+                                <th>Descricao</th>
+                                <th>Descricao IA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dataset in datasets %}
+                            <tr>
+                                <td><a href="{{dataset.detail_url}}">{{ dataset.system_id }}</a></td>
+                                <td>{{ dataset.str_title }}</td>
+                                <td>{{ dataset.str_desc }}</td>
+                                <td>{{ dataset.str_desc_ia }}</td>                    
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+					<div class="col">
+						<a href="{{new_dataset}}" class="btn btn-primary btn-block">Novo DataSet</a>
+					</div>
+		
+
+				</div>
+
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+
+		{% elif system.table_type == 'PostGre' %}
+
+		<div class="col-md-4">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Sistema
+				</h5>
+				<div class="card-body">
+					<p class="card-text">Nome do sistema: {{ system.str_title }}</p>
+                    <p class="card-text">Descrição: {{ system.str_desc }}</p>
+                    <p class="card-text">Status: {{ system.str_status }}</p>
+					<p class="card-text">Engine: {{ system.engine }}</p>
+					<p class="card-text">Name: {{ system.name }}</p>
+					<p class="card-text">User: {{ system.user }}</p>
+					<p class="card-text">Password: {{ system.password }}</p>
+					<p class="card-text">Host: {{ system.host }}</p>
+					<p class="card-text">Port: {{ system.port }}</p>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Datasets
+				</h5>
+				<div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#id</th>
+                                <th>Nome</th>
+                                <th>Descricao</th>
+                                <th>Descricao IA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dataset in datasets %}
+                            <tr>
+                                <td><a href="{{dataset.detail_url}}">{{ dataset.system_id }}</a></td>
+                                <td>{{ dataset.str_title }}</td>
+                                <td>{{ dataset.str_desc }}</td>
+                                <td>{{ dataset.str_desc_ia }}</td>                    
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+					<div class="col">
+						<a href="{{new_dataset}}" class="btn btn-primary btn-block">Novo DataSet</a>
+					</div>
+		
+
+				</div>
+
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+
+		{% elif system.table_type == 'MySql' %}
+
+		<div class="col-md-4">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Sistema
+				</h5>
+				<div class="card-body">
+					<p class="card-text">Nome do sistema: {{ system.str_title }}</p>
+                    <p class="card-text">Descrição: {{ system.str_desc }}</p>
+                    <p class="card-text">Status: {{ system.str_status }}</p>
+					<p class="card-text">Host: {{ system.host }}</p>
+					<p class="card-text">User: {{ system.user }}</p>
+					<p class="card-text">Password: {{ system.passwd }}</p>
+					<p class="card-text">Database: {{ system.database }}</p>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Datasets
+				</h5>
+				<div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#id</th>
+                                <th>Nome</th>
+                                <th>Descricao</th>
+                                <th>Descricao IA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dataset in datasets %}
+                            <tr>
+                                <td><a href="{{dataset.detail_url}}">{{ dataset.system_id }}</a></td>
+                                <td>{{ dataset.str_title }}</td>
+                                <td>{{ dataset.str_desc }}</td>
+                                <td>{{ dataset.str_desc_ia }}</td>                    
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+					<div class="col">
+						<a href="{{new_dataset}}" class="btn btn-primary btn-block">Novo DataSet</a>
+					</div>
+		
+
+				</div>
+
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
 	</div>
 
 </div>

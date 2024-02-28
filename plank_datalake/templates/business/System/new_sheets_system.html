@@ -1,25 +1,188 @@
 {% extends 'common/base.html' %}
 {% block content %}
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3 class="text-center">Nova Tabela</h3>
-        </div>
-        <div class="card-body">
-            <form method="post" class="form">
-                {% csrf_token %}
-                
-                {{ form.as_p }}
 
-                <div class="form-group row justify-content-center">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
+<div class="container">
+    <!-- row content -->
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <h1 class="text-info">Cadastrar Novo Sistema</h1>
+            <!-- form content -->
+            <form method="POST" class="form">
+            {% csrf_token %}
+
+                {{ form.id_customer }}
+
+                <!-- firstname and lastname content -->
+                
+                <div class="row">
+                    <div class='col'>
+                        {{ form.str_title.label_tag }} {{ form.str_title }}
+
+                        {% if form.str_title.errors %}
+                            <div class="text-danger">
+                                {{ form.str_title.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <div class='col'>
+                        {{ form.str_status.label_tag }} {{ form.str_status }}
+
+                        {% if form.str_status.errors %}
+                            <div class="text-danger">
+                                {{ form.str_status.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
+                <!-- another info content -->
+                
+                <div class="row">
+                    <div class='col'>
+                        {{ form.str_desc.label_tag }} {{ form.str_desc }}
+
+                        {% if form.str_desc.errors %}
+                            <div class="text-danger">
+                                {{ form.str_desc.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class='col'>
+                        {{ form.type.label_tag }} {{ form.type }}
+
+                        {% if form.type.errors %}
+                            <div class="text-danger">
+                                {{ form.type.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.project_id.label_tag }} {{ form.project_id }}
+
+                        {% if form.project_id.errors %}
+                            <div class="text-danger">
+                                {{ form.project_id.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class='col'>
+                        {{ form.private_key_id.label_tag }} {{ form.private_key_id }}
+
+                        {% if form.private_key_id.errors %}
+                            <div class="text-danger">
+                                {{ form.private_key_id.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class='col'>
+                        {{ form.private_key.label_tag }} {{ form.private_key }}
+
+                        {% if form.private_key.errors %}
+                            <div class="text-danger">
+                                {{ form.private_key.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form.client_email.label_tag }} {{ form.client_email }}
+
+                        {% if form.client_email.errors %}
+                            <div class="text-danger">
+                                {{ form.client_email.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                <div class='col'>
+                        {{ form.client_id.label_tag }} {{ form.client_id }}
+
+                        {% if form.client_id.errors %}
+                            <div class="text-danger">
+                                {{ form.client_id.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form.auth_uri.label_tag }} {{ form.auth_uri }}
+
+                        {% if form.auth_uri.errors %}
+                            <div class="text-danger">
+                                {{ form.auth_uri.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class='col'>
+                        {{ form.token_uri.label_tag }} {{ form.token_uri }}
+
+                        {% if form.token_uri.errors %}
+                            <div class="text-danger">
+                                {{ form.token_uri.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form.auth_provider_x509_cert_url.label_tag }} {{ form.auth_provider_x509_cert_url }}
+
+                        {% if form.auth_provider_x509_cert_url.errors %}
+                            <div class="text-danger">
+                                {{ form.auth_provider_x509_cert_url.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class='col'>
+                        {{ form.client_x509_cert_url.label_tag }} {{ form.client_x509_cert_url }}
+
+                        {% if form.client_x509_cert_url.errors %}
+                            <div class="text-danger">
+                                {{ form.client_x509_cert_url.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form.universe_domain.label_tag }} {{ form.universe_domain }}
+
+                        {% if form.universe_domain.errors %}
+                            <div class="text-danger">
+                                {{ form.universe_domain.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            <button class="btn btn-primary mt-4" type="submit">Cadastrar!</button>
+
             </form>
+
         </div>
     </div>
+
 </div>
+
 
 {% endblock %}

@@ -1,25 +1,130 @@
 {% extends 'common/base.html' %}
 {% block content %}
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3 class="text-center">Nova Tabela</h3>
-        </div>
-        <div class="card-body">
-            <form method="post" class="form">
-                {% csrf_token %}
-                
-                {{ form.as_p }}
 
-                <div class="form-group row justify-content-center">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
+<div class="container">
+    <!-- row content -->
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <h1 class="text-info">Cadastrar Novo Sistema</h1>
+            <!-- form content -->
+            <form method="POST" class="form">
+            {% csrf_token %}
+
+                {{ form.id_customer }}
+
+                <!-- firstname and lastname content -->
+                
+                <div class="row">
+                    <div class='col'>
+                        {{ form.str_title.label_tag }} {{ form.str_title }}
+
+                        {% if form.str_title.errors %}
+                            <div class="text-danger">
+                                {{ form.str_title.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <div class='col'>
+                        {{ form.str_status.label_tag }} {{ form.str_status }}
+
+                        {% if form.str_status.errors %}
+                            <div class="text-danger">
+                                {{ form.str_status.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
+                <!-- another info content -->
+                
+                <div class="row">
+                    <div class='col'>
+                        {{ form.str_desc.label_tag }} {{ form.str_desc }}
+
+                        {% if form.str_desc.errors %}
+                            <div class="text-danger">
+                                {{ form.str_desc.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class='col'>
+                        {{ form.engine.label_tag }} {{ form.engine }}
+
+                        {% if form.engine.errors %}
+                            <div class="text-danger">
+                                {{ form.engine.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col">
+                        {{ form.name.label_tag }} {{ form.name }}
+
+                        {% if form.name.errors %}
+                            <div class="text-danger">
+                                {{ form.name.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                 <div class="row">
+                    <div class='col'>
+                        {{ form.user.label_tag }} {{ form.user }}
+
+                        {% if form.user.errors %}
+                            <div class="text-danger">
+                                {{ form.user.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class='col'>
+                        {{ form.password.label_tag }} {{ form.password }}
+
+                        {% if form.password.errors %}
+                            <div class="text-danger">
+                                {{ form.password.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        {{ form.host.label_tag }} {{ form.host }}
+
+                        {% if form.host.errors %}
+                            <div class="text-danger">
+                                {{ form.host.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                <div class='col'>
+                        {{ form.port.label_tag }} {{ form.port }}
+
+                        {% if form.port.errors %}
+                            <div class="text-danger">
+                                {{ form.port.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            <button class="btn btn-primary mt-4" type="submit">Cadastrar!</button>
+
             </form>
+
         </div>
     </div>
+
 </div>
+
 
 {% endblock %}
