@@ -1,5 +1,6 @@
 {% extends 'common/base.html' %}
 {% block content %}
+{% load static %}
 
 <div class="container mt-2 d-flex justify-content-center">
     <div class="card-mt-2">
@@ -7,12 +8,138 @@
             <h3> Adicionar Sistema </h3>
         </div>
         <div class="card-body justify-content-center">
-            <div class="row mt-2">
-                <a href="/system/" class="btn btn-primary mt-2">Adicionar Sistema</a>
-                <a href="/sheets-system/" class="btn btn-primary mt-2">Adicionar Sistema Google Sheets</a>
-                <a href="/postgre-system/" class="btn btn-primary mt-2">Adicionar Sistema Postgre</a>
-                <a href="/mysql-system/" class="btn btn-primary mt-2">Adicionar Sistema MySql</a>
+            <div class="row mt-2 justify-content-center">
+            
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/system_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/sheets_logo.png' %}" alt="" class="card-img" style="max-width: 90px;"></a>
+                        </div>
+
+                        <a href="/sheets-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/postgre_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/postgre-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/mysql_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/mysql-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
             </div>
+
+            <div class="row mt-2 justify-content-center">
+            
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/system_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/sheets_logo.png' %}" alt="" class="card-img" style="max-width: 90px;"></a>
+                        </div>
+
+                        <a href="/sheets-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/postgre_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/postgre-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/mysql_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/mysql-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-2 justify-content-center">
+            
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/system_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/sheets_logo.png' %}" alt="" class="card-img" style="max-width: 90px;"></a>
+                        </div>
+
+                        <a href="/sheets-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/postgre_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/postgre-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+                <div class='col-md-3'>
+                    <div class='card'>
+                        <div class='card-body justify-content-center'>
+                            <a href="#"><img src="{% static 'images/mysql_logo.png' %}" alt="" class="card-img" style="max-width: 100px;"></a>
+                        </div>
+
+                        <a href="/mysql-system/"><button class="btn btn-primary mt-4" type="submit">Adicionar Sistema</button></a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>
