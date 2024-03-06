@@ -83,7 +83,8 @@ class TablesForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
-            'raci_activity'
+            'raci_activity',
+            'trigger'
         ]
 
 class TablesStepForm(forms.ModelForm):
@@ -158,6 +159,7 @@ class TablesStepForm(forms.ModelForm):
         required=False
     )
 
+
     class Meta:
         model = Tables
         fields = [
@@ -168,7 +170,8 @@ class TablesStepForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
-            'raci_activity'
+            'raci_activity',
+            'trigger'
         ]
 
 

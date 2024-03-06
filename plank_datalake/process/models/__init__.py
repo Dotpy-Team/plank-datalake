@@ -4,5 +4,6 @@ from .dependencies import Dependencies
 from .jobrun import JobRun
 from .raci import RaciActivity, RaciRelated
 from .pipeline import Pipeline 
-from .step import Step 
+from .step import Step
+from .trigger import Trigger 
 

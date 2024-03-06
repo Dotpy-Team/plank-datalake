@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="card border-primary" style="max-width: 100rem;">
+        <div class='card-header'>
+            <b>Detalhes:</b>
+        </div>
+
+        <div class="card-body">
+            <h3 class="card-title text-primary">{{ trigger.str_title }}</h3>
+            <h3 class="card-text-secondary-emphasis">Cron:</h3>
+            <p class="card-text">{{ trigger.str_cron }}</p>
+
+            <h3 class="card-text-secondary-emphasis">Status:</h3>
+            <p class="card-text">{{ trigger.str_status }}</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

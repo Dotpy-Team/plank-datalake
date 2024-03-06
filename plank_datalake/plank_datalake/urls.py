@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from process import views as p
 from business import views as b
 
@@ -117,5 +118,15 @@ urlpatterns = [
     path('new-child-table/<str:step_id>', p.new_child_table ,name='new_child_table'),
     path('detail-step/<str:step_id>', p.detail_step ,name='detail_step'),
     path('list-step/', p.list_step,name='list_step'),
+
+    #TRIGGERS:
+    path('add-trigger/', p.add_trigger, name='add_trigger'),
+    path('detail-trigger/<str:trigger_id>', p.detail_trigger, name='detail_trigger'),
+    path('list-trigger/', p.list_trigger, name='list_trigger'),
+
+    #TOKEN URLS 
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('verify/', TokenVerifyView.as_view(), name='token_verify'),
 
 ]

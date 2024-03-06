@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'process',
     'business'
 ]
@@ -75,6 +77,12 @@ WSGI_APPLICATION = 'plank_datalake.wsgi.application'
 #auth user in business app
 
 AUTH_USER_MODEL = 'business.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )   
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

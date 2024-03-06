@@ -33,21 +33,7 @@
                     {{ form.str_type.label_tag }} {{ form.str_type }}
 
                 </div>
-
-
-                <div class='row mt-2 justify-content-center'>
-                    <div class='col'>
-                        <input type="checkbox" id='checkboxSheets'>Sheets
-                    </div>
-                    <div class='col'>
-                        <input type="checkbox" id='checkboxPostGre'>PostGre
-                    </div>
-                    <div class='col'>
-                        <input type="checkbox" id='checkboxMySql'>MySql
-                    </div>
-                </div>
                 
-
                 <div id='sheetsSelect' class='row mt-2 justify-content-center'  style='display: none;'>
                     {{ form.conector}}
                 </div>
@@ -83,7 +69,14 @@
                 
                     {{ form.raci_activity.label_tag }} {{ form.raci_activity }}
 
-                </div>       
+                </div>
+
+                
+                <div class='row mt-2 justify-content-center'>
+                
+                    {{ form.trigger.label_tag }} {{ form.trigger }}
+
+                </div>             
 
                 {% comment %} {{ form.as_p }} {% endcomment %}
 

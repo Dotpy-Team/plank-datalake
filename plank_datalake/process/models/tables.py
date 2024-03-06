@@ -2,6 +2,7 @@ from django.db import models
 from business.models import DataSet, Customer
 from .raci import RaciActivity
 from .step import Step
+from .trigger import Trigger
 
 
 class Tables(models.Model):
@@ -70,6 +71,13 @@ class Tables(models.Model):
     int_size = models.IntegerField(null=True, blank=True)
     int_number_of_rows = models.IntegerField(null=True, blank=True)
     float_perc_growth = models.FloatField(null=True, blank=True)
+
+    trigger = models.ForeignKey(
+        Trigger,
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True
+    )
 
     def __str__(self):
         return self.str_name
