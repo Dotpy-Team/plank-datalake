@@ -3,9 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from process.models import Tables, RaciActivity, Columns, Trigger
 from business.models import Customer,DataSet, System
 from process.forms import TablesForm
+from process.serializers import TablesSerializer
 import base64
 
 def crip(text):

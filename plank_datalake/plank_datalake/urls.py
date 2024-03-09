@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from process import views as p
+from process.routers import *
+from process.viewset import *
+from process.views import GetTableByTrigger
 from business import views as b
 
 urlpatterns = [
@@ -128,5 +131,12 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+    #REST_API
+    path('get_tables_by_trigger/', GetTableByTrigger.as_view() , name='get_tables_by_trigger'),
+    
+    path('api/', include([
+        path("", include(job_router.urls)),
+    ]))
 
 ]

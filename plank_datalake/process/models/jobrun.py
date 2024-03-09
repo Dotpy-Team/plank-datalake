@@ -4,7 +4,7 @@ from process.models import Tables
 
 class JobRun(models.Model):
     job_id = models.AutoField(primary_key=True)
-    table = models.ForeignKey(Tables, on_delete=models.CASCADE)
+    table = models.ForeignKey(Tables, on_delete=models.CASCADE, blank=True, null=True)
     dth_last_updated = models.DateTimeField()
     dth_start_at = models.DateTimeField()
     str_status = models.CharField(max_length=200)
