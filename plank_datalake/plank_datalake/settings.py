@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-1^zo=(6y*j9b&r0^6)5ks#9x^2_ui0ufv5ohmg!obo99x6a8d7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -94,6 +93,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'plank_datalake',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Loki1234',
+#         'HOST': 'plank-datalake.crwdqiftamr0.us-east-1.rds.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
+
 LOGIN_URL = 'user_login'
 LOGIN_REDIRECT_URL = 'home_page'
 
@@ -138,8 +149,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -15,4 +15,4 @@ myvenv/
 *.pot
 *.pyc
 **/*.sqlite3
-
+**.zip
