@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import System, DataSet, Customer
-from business.forms import SystemForm, GoogleSheetSystemForm, PostGreSytemForm, MySqlSystemForm
+from business.forms import SystemForm, GoogleSheetSystemForm, PostGreSytemForm, MySqlSystemForm, SQLiteSystemForm
 import base64
 
 def crip(text):
@@ -230,6 +230,42 @@ def new_mysql_system(request):
             return render(request, html_location, error_dict)
     else:
         form = MySqlSystemForm()
+        response_dict = {
+            'form': form
+        }
+        return render(request, html_location, response_dict)
+    
+@login_required
+def new_sqlite_system(request):
+
+    try:
+        customer_id = request.user.customer.customer_id
+        customer_instance = Customer.objects.get(customer_id=customer_id)
+    except Customer.DoesNotExist:
+        return redirect('home')
+    
+    html_location = parse_html_path(SYSTEM_PATH, 'new_sqlite_system')
+
+    if request.method == 'POST':
+
+        form = SQLiteSystemForm(request.POST)
+
+        if form.is_valid():
+            system = form.save(commit=False)
+            system.table_type = 'SQLite'
+            system.customer = customer_instance
+            system.save()
+            return render('profile_system', crip(str(system.system_id)))
+        else:
+            error_message = 'Os valores estão incorretos, tente novamente'
+            error_dict = {
+                'form': form,
+                'error_message': error_message,
+                'form_error': form.errors
+            }
+            return render(request, html_location, error_dict)
+    else:
+        form = SQLiteSystemForm()
         response_dict = {
             'form': form
         }

@@ -71,6 +71,7 @@ urlpatterns = [
     path('sheets-system/', b.new_sheets_system, name='new_sheets_system'),
     path('postgre-system/', b.new_postgre_system, name='new_postgre_system'),
     path('mysql-system/', b.new_mysql_system, name='new_mysql_system'),
+    path('sqlite-system/', b.new_sqlite_system, name='new_sqlite_system'),
     path('admin-system/<str:customer_id>', b.new_system , name='new_system'),
 
     path('systems/', b.list_system, name='profile_system'),

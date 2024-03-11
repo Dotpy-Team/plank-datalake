@@ -40,3 +40,6 @@ class System(models.Model):
     #MySQL
     passwd = models.CharField(max_length=50, blank=True, null=True)
     database = models.CharField(max_length=80, blank=True, null=True)
+
+    #SQLite
+    database_name = models.CharField(max_length=50, blank=True, null=True)
