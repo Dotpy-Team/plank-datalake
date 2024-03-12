@@ -53,7 +53,7 @@ class Tables(models.Model):
         blank=True
     )
 
-    str_name = models.CharField(max_length=200)
+    str_name = models.CharField(max_length=80)
     str_desc = models.TextField()
     str_desc_ia = models.TextField()
 

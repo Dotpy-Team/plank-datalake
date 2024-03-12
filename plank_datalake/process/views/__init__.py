@@ -6,4 +6,4 @@ from .dependencies import *
 from .pipeline import *
 from .step import *
 from .trigger import *
-from .tables_api import GetTableByTrigger
+from .tables_api import *

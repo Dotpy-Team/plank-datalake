@@ -7,13 +7,22 @@ class TablesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tables 
         fields = [
-            "str_frequency",
-            "str_type_of",
-            "str_mode",
-            "str_type",
-            "str_name",
-            "str_desc",
-            "str_desc_ia",
+            'customer',
+            'dataset',
+            'step', 
+            'layer', 
+            'str_frequency', 
+            'str_type_of',
+            'str_mode',
+            'str_type', 
+            'str_name', 
+            'str_desc', 
+            'str_desc_ia', 
             'raci_activity',
-            'trigger'
+            'dth_start_at',
+            'dth_last_updated', 
+            'int_size', 
+            'int_number_of_rows', 
+            'float_perc_growth',
+            'trigger' 
         ]

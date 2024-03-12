@@ -20,7 +20,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from process import views as p
 from process.routers import *
 from process.viewset import *
-from process.views import GetTableByTrigger
 from business import views as b
 
 urlpatterns = [
@@ -74,7 +73,7 @@ urlpatterns = [
     path('sqlite-system/', b.new_sqlite_system, name='new_sqlite_system'),
     path('admin-system/<str:customer_id>', b.new_system , name='new_system'),
 
-    path('systems/', b.list_system, name='profile_system'),
+    path('systems/', b.list_system, name='list_system'),
     path('system-details/<str:system_id>', b.profile_system, name='profile_system'),
 
     path('admin-list-system/<str:customer_id>', b.admin_list_system, name='list_system'),
@@ -134,7 +133,7 @@ urlpatterns = [
     path('verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     #REST_API
-    path('get_tables_by_trigger/', GetTableByTrigger.as_view() , name='get_tables_by_trigger'),
+    path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger , name='list_table_by_trigger'),
     
     path('api/', include([
         path("", include(job_router.urls)),

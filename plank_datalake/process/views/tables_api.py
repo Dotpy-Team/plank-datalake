@@ -1,16 +1,21 @@
 from rest_framework_simplejwt.tokens import AccessToken, TokenError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from process.models import Tables 
+from process.models import Tables, Trigger 
 from process.serializers import TablesSerializer
 
+@api_view(['GET'])
+def list_table_by_trigger(request, trigger_id):
 
-class GetTableByTrigger(APIView):
+    try:
+        trigger = Trigger.objects.get(trigger_id = trigger_id)
+    except Trigger.DoesNotExist:
+        return Response('Trigger does not exist')
+    
+    tables = Tables.objects.filter(trigger_id=trigger)
+    table_values = tables.values()
+    # table_list = TablesSerializer(table_values).data
 
-    def get_table(self, request): 
-        table = request.table 
-        table = Tables.objects.get(trigger=table)
-        serializer = TablesSerializer(table)
-        return Response(serializer.data)        
+    return Response(table_values)
