@@ -1,25 +1,35 @@
 {% extends 'common/base.html' %}
-
 {% block content %}
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3 class="text-center">Novo Item</h3>
-        </div>
-        <div class="card-body">
-            <form method="post" class="form">
-                {% csrf_token %}
-                
-                {{ form.as_p }}
 
-                <div class="form-group row justify-content-center">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
-                    </div>
+<div class="card">
+    <div class='card-header text-center'>
+        <h3 class="text-primary">Novo Contrato</h3>    
+    </div>
+
+    <div class="card-body">
+        <form method="post" class="form">
+
+            {% csrf_token %}
+            
+            <h4>Informações do contrato:</h4>
+
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                   {{ form.service_id }}
+                   <small><p>Escolha o serviço.</p></small>
+                    {% if form.service_id.errors %}
+                        <div class="text-danger">
+                            {{ form.service_id.errors }}
+                        </div>
+                    {% endif %}
                 </div>
+            </div>
 
-            </form>
-        </div>
+            <div class="col" style="text-align: right;">
+                <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+            </div>
+            
+        </form>
     </div>
 </div>
 

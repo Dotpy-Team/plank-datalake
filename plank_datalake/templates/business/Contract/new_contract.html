@@ -1,24 +1,79 @@
 {% extends 'common/base.html' %}
 {% block content %}
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3 class="text-center">Novo Contrato</h3>
-        </div>
-        <div class="card-body">
-            <form method="post" class="form">
-                {% csrf_token %}
-                
-                {{ form.as_p }}
 
-                <div class="form-group row justify-content-center">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
-                    </div>
+<div class="card">
+    <div class='card-header text-center'>
+        <h3 class="text-primary">Novo Contrato</h3>    
+    </div>
+
+    <div class="card-body">
+        <form method="post" class="form">
+
+            {% csrf_token %}
+            
+            <h4>Informações do contrato:</h4>
+
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                   {{ form.str_title }}
+                   <small><p>Titulo.</p></small>
+                    {% if form.str_title.errors %}
+                        <div class="text-danger">
+                            {{ form.str_title.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.str_object }}
+                    <small><p>Objeto.</p></small>
+                    {% if form.str_object.errors %}
+                        <div class="text-danger">
+                            {{ form.str_object.errors }}
+                        </div>
+                    {% endif %}
+                </div>   
+            </div>
+
+            <div class="row mt-2 justify-content-center">
+                <div class="col">
+                    {{ form.dth_start_at }}
+                    <small><p>Data de inicio.</p></small>
+                    {% if form.dth_start_at.errors %}
+                        <div class="text-danger">
+                            {{ form.dth_start_at.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
-            </form>
-        </div>
+                <div class="col">
+                    {{ form.dth_end_at }}
+                    <small><p>Data do fim.</p></small>
+                    {% if form.dth_end_at.errors %}
+                        <div class="text-danger">
+                            {{ form.dth_end_at.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class='row mt-2 w-25 justify-content-center'>
+                <div class="col">
+                    {{ form.str_status }}
+                    <small><p>Status.</p></small>
+                    {% if form.str_status.errors %}
+                        <div class="text-danger">
+                            {{ form.str_status.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="col" style="text-align: right;">
+                <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+            </div>
+            
+        </form>
     </div>
 </div>
 

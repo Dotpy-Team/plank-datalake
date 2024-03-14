@@ -2,20 +2,74 @@
 {% block content %}
 <div class="container mt-8">
     <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3 class="text-center">Novo Servico</h3>
+        <div class='card-header text-center'>
+            <h3 class="text-primary">Novo Serviço</h3>    
         </div>
+
         <div class="card-body">
             <form method="post" class="form">
+            
                 {% csrf_token %}
                 
-                {{ form.as_p }}
+                <h4>Informações de Serviço:</h4>
 
-                <div class="form-group row justify-content-center">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_title }}
+                        <small><p>Titulo.</p></small>
+                        {% if form.str_title.errors %}
+                            <div class="text-danger">
+                                {{ form.str_title.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_status }}
+                        <small><p>Status.</p></small>
+                        {% if form.str_status.errors %}
+                            <div class="text-danger">
+                                {{ form.str_status.errors }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
+
+               <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.int_price }}
+                        <small><p>Preço.</p></small>
+                        {% if form.int_price.errors %}
+                            <div class="text-danger">
+                                {{ form.int_price.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.int_qnt }}
+                        <small><p>Quantidade.</p></small>
+                        {% if form.int_qnt.errors %}
+                            <div class="text-danger">
+                                {{ form.int_qnt.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_descr }}
+                        <small><p>Descrição.</p></small>
+                        {% if form.str_descr.errors %}
+                            <div class="text-danger">
+                                {{ form.str_descr.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            <div class="col" style="text-align: right;">
+                <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+            </div>
 
             </form>
         </div>
