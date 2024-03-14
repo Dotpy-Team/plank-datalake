@@ -1,89 +1,117 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container mt-5">
+<div class="container">
     <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3 class="text-center">Nova Tabela</h3>
+        <div class='card-header text-center'>
+            <h3 class="text-primary">Adicionar Tabela</h3>    
         </div>
+
         <div class="card-body">
             <form method="post" class="form">
+
                 {% csrf_token %}
                 
-                <div class='row mt-2 justify-content-center'>
+                <h4>Dados da tabela:</h4>
 
-                    {{ form.str_frequency.label_tag }} {{ form.str_frequency }}
-
-                </div>
-
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.str_type_of.label_tag }} {{ form.str_type_of }}
-
-                </div>
-
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.str_mode.label_tag }} {{ form.str_mode }}
-
-                </div>    
-
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.str_type.label_tag }} {{ form.str_type }}
-
-                </div>
-                
-                <div id='sheetsSelect' class='row mt-2 justify-content-center'  style='display: none;'>
-                    {{ form.conector}}
-                </div>
-
-                <div id='postGreSelect' class='row mt-2 justify-content-center'  style='display: none;'>
-                    {{ form.conector}}
-                </div>
-
-                <div id='mySqlSelect' class='row mt-2 justify-content-center'  style='display: none;'>
-                    {{ form.conector}}
-                </div>
-
-
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.str_name.label_tag }} {{ form.str_name }}
-
-                </div>     
-
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.str_desc.label_tag }} {{ form.str_desc }}
-
-                </div>
-
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.str_desc_ia.label_tag }} {{ form.str_desc_ia }}
-
-                </div>  
-
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.raci_activity.label_tag }} {{ form.raci_activity }}
-
-                </div>
-
-                
-                <div class='row mt-2 justify-content-center'>
-                
-                    {{ form.trigger.label_tag }} {{ form.trigger }}
-
-                </div>             
-
-                {% comment %} {{ form.as_p }} {% endcomment %}
-
-                <div class="form-group row justify-content-center">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                    {{ form.str_name }}
+                    <small><p>Nome.</p></small>
+                        {% if form.str_name.errors %}
+                            <div class="text-danger">
+                                {{ form.str_name.errors }}
+                            </div>
+                        {% endif %}
                     </div>
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_desc }}
+                        <small><p>Descrição.</p></small>
+                        {% if form.str_desc.errors %}
+                            <div class="text-danger">
+                                {{ form.str_desc.errors }}
+                            </div>
+                        {% endif %}
+                    </div>   
+                    <div class="col">
+                        {{ form.str_desc_ia }}
+                        <small><p>Descrição Ia.</p></small>
+                        {% if form.str_desc_ia.errors %}
+                            <div class="text-danger">
+                                {{ form.str_desc_ia.errors }}
+                            </div>
+                        {% endif %}
+                    </div>   
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                    {{ form.str_frequency }}
+                    <small><p>Frequência.</p></small>
+                        {% if form.str_frequency.errors %}
+                            <div class="text-danger">
+                                {{ form.str_frequency.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_type_of }}
+                        <small><p>Tipo.</p></small>
+                        {% if form.str_type_of.errors %}
+                            <div class="text-danger">
+                                {{ form.str_type_of.errors }}
+                            </div>
+                        {% endif %}
+                    </div>  
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                    {{ form.str_mode }}
+                    <small><p>Modo.</p></small>
+                        {% if form.str_mode.errors %}
+                            <div class="text-danger">
+                                {{ form.str_mode.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_type }}
+                        <small><p>Modo.</p></small>
+                        {% if form.str_type.errors %}
+                            <div class="text-danger">
+                                {{ form.str_type.errors }}
+                            </div>
+                        {% endif %}
+                    </div>  
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                    {{ form.raci_activity }}
+                    <small><p>Raci.</p></small>
+                        {% if form.raci_activity.errors %}
+                            <div class="text-danger">
+                                {{ form.raci_activity.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.trigger }}
+                        <small><p>Trigger.</p></small>
+                        {% if form.trigger.errors %}
+                            <div class="text-danger">
+                                {{ form.trigger.errors }}
+                            </div>
+                        {% endif %}
+                    </div>  
+                </div>
+
+                <div class="col" style="text-align: right;">
+                    <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
                 </div>
 
             </form>
@@ -91,37 +119,5 @@
     </div>
 </div>
 
-<script>
-    $('#checkboxSheets').change(
-        function() {
-            if ($(this).is(':checked')) {
-                $('#sheetsSelect').show()
-            } else {
-                $('#sheetsSelect').hide()
-            }
-        }
-    );
-
-    $('#checkboxPostGre').change(
-        function() {
-            if ($(this).is(':checked')) {
-                $('#postGreSelect').show()
-            } else {
-                $('#postGreSelect').hide()
-            }
-        }
-    );
-
-    $('#checkboxMySql').change(
-        function() {
-            if ($(this).is(':checked')) {
-                $('#mySqlSelect').show()
-            } else {
-                $('#mySqlSelect').hide()
-            }
-        }
-    );
-</script>
-
-
 {% endblock %}
+

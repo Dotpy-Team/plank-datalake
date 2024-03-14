@@ -1,177 +1,181 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="card">
-    <div class='card-header text-center'>
-        <h3 class="text-primary">Novo Cliente</h3>    
-    </div>
+<div class="container">
+    <div class="card">
+        <div class='card-header text-center'>
+            <h3 class="text-primary">Novo Cliente</h3>    
+        </div>
 
-    <div class="card-body">
-        <form method="post" class="form">
+        <div class="card-body">
+            <form method="post" class="form">
 
-            {% csrf_token %}
-            
-            <h4>Dados da Empresa:</h4>
+                {% csrf_token %}
+                
+                <h4>Dados da Empresa:</h4>
 
-            <div class="row mt-2 justify-content-center">
-                <div class="col">
-                   {{ form.str_name }}
-                   <small><p>Nome.</p></small>
-                    {% if form.str_name.errors %}
-                        <div class="text-danger">
-                            {{ form.str_name.errors }}
-                        </div>
-                    {% endif %}
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                    {{ form.str_name }}
+                    <small><p>Nome.</p></small>
+                        {% if form.str_name.errors %}
+                            <div class="text-danger">
+                                {{ form.str_name.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_cnpj }}
+                        <small><p>CNPJ.</p></small>
+                        {% if form.str_cnpj.errors %}
+                            <div class="text-danger">
+                                {{ form.str_cnpj.errors }}
+                            </div>
+                        {% endif %}
+                    </div>   
                 </div>
-                <div class="col">
-                    {{ form.str_cnpj }}
-                    <small><p>CNPJ.</p></small>
-                    {% if form.str_cnpj.errors %}
-                        <div class="text-danger">
-                            {{ form.str_cnpj.errors }}
-                        </div>
-                    {% endif %}
-                </div>   
-            </div>
 
-            <div class='row mt-2 justify-content-center'>
-                <div class="col">
-                    {{ form.str_customer_type }}
-                    <small><p>Tipo cliente.</p></small>
-                    {% if form.str_customer_type.errors %}
-                        <div class="text-danger">
-                            {{ form.str_customer_type.errors }}
-                        </div>
-                    {% endif %}
+                <div class='row mt-2 justify-content-center'>
+                    <div class="col">
+                        {{ form.str_customer_type }}
+                        <small><p>Tipo cliente.</p></small>
+                        {% if form.str_customer_type.errors %}
+                            <div class="text-danger">
+                                {{ form.str_customer_type.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_address }}
+                        <small><p>Endereço completo.</p></small>
+                        {% if form.str_address.errors %}
+                            <div class="text-danger">
+                                {{ form.str_address.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col">
-                    {{ form.str_address }}
-                    <small><p>Endereço completo.</p></small>
-                    {% if form.str_address.errors %}
-                        <div class="text-danger">
-                            {{ form.str_address.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
 
-            <div  class='row mt-2 justify-content-center'>
-                <div class='col'>
-                    {{ form.str_linkedin_profile }}
-                    <small><p>Linked-in.</p></small>
-                    {% if form.str_linkedin_profile.errors %}
-                        <div class="text-danger">
-                            {{ form.str_linkedin_profile.errors }}
-                        </div>
-                    {% endif %}
+                <div  class='row mt-2 justify-content-center'>
+                    <div class='col'>
+                        {{ form.str_linkedin_profile }}
+                        <small><p>Linked-in.</p></small>
+                        {% if form.str_linkedin_profile.errors %}
+                            <div class="text-danger">
+                                {{ form.str_linkedin_profile.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_site }}
+                        <small><p>Site.</p></small>
+                        {% if form.str_site.errors %}
+                            <div class="text-danger">
+                                {{ form.str_site.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col">
-                    {{ form.str_site }}
-                    <small><p>Site.</p></small>
-                    {% if form.str_site.errors %}
-                        <div class="text-danger">
-                            {{ form.str_site.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
 
-            <div class='row mt-2 justify-content-center'>
-                <div class="col">
-                    {{ form.str_setor }}
-                    <small><p>Setor</p></small>
-                    {% if form.str_setor.errors %}
-                        <div class="text-danger">
-                            {{ form.str_setor.errors }}
-                        </div>
-                    {% endif %}
+                <div class='row mt-2 justify-content-center'>
+                    <div class="col">
+                        {{ form.str_setor }}
+                        <small><p>Setor</p></small>
+                        {% if form.str_setor.errors %}
+                            <div class="text-danger">
+                                {{ form.str_setor.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_size }}
+                        <small><p>Porte</p></small>
+                        {% if form.str_size.errors %}
+                            <div class="text-danger">
+                                {{ form.str_size.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.dth_create }}
+                        <small><p>Data de criação</p></small>
+                        {% if form.dth_create.errors %}
+                            <div class="text-danger">
+                                {{ form.dth_create.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col">
-                    {{ form.str_size }}
-                    <small><p>Porte</p></small>
-                    {% if form.str_size.errors %}
-                        <div class="text-danger">
-                            {{ form.str_size.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="col">
-                    {{ form.dth_create }}
-                    <small><p>Data de criação</p></small>
-                    {% if form.dth_create.errors %}
-                        <div class="text-danger">
-                            {{ form.dth_create.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
 
 
-            <h4>Informações de contato:</h4>
+                <h4>Informações de contato:</h4>
 
-            <div class="row mt-2 justify-content-center">
-                <div class="col">
-                    {{ form.str_email }}
-                    <small><p>E-mail.</p></small>
-                    {% if form.str_email.errors %}
-                        <div class="text-danger">
-                            {{ form.str_email.errors }}
-                        </div>
-                    {% endif %}
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_email }}
+                        <small><p>E-mail.</p></small>
+                        {% if form.str_email.errors %}
+                            <div class="text-danger">
+                                {{ form.str_email.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_telefone }}
+                        <small><p>Telefone.</p></small>
+                        {% if form.str_telefone.errors %}
+                            <div class="text-danger">
+                                {{ form.str_telefone.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col">
-                    {{ form.str_telefone }}
-                    <small><p>Telefone.</p></small>
-                    {% if form.str_telefone.errors %}
-                        <div class="text-danger">
-                            {{ form.str_telefone.errors }}
-                        </div>
-                    {% endif %}
+
+                <h4>Outros.</h4>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class='col'>
+                        {{ form.str_finance_complement }}
+                        <small><p>Complemento financeiro.</p></small>
+                        {% if form.str_finance_complement.errors %}
+                            <div class="text-danger">
+                                {{ form.str_finance_complement.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
 
-            <h4>Outros.</h4>
+                <div class="row mt-2 justify-content-center">
 
-            <div class="row mt-2 justify-content-center">
-                <div class='col'>
-                    {{ form.str_finance_complement }}
-                    <small><p>Complemento financeiro.</p></small>
-                    {% if form.str_finance_complement.errors %}
-                        <div class="text-danger">
-                            {{ form.str_finance_complement.errors }}
-                        </div>
-                    {% endif %}
+                    <div class='col'>
+                        {{ form.str_contact }}
+                        <small><p>Outros contatos.</p></small>
+                        {% if form.str_contact.errors %}
+                            <div class="text-danger">
+                                {{ form.str_contact.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class='col'>
+                        {{ form.str_comments }}
+                        <small><p>Comentário.</p></small>
+                        {% if form.str_comments.errors %}
+                            <div class="text-danger">
+                                {{ form.str_comments.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
 
-            <div class="row mt-2 justify-content-center">
-
-                <div class='col'>
-                    {{ form.str_contact }}
-                    <small><p>Outros contatos.</p></small>
-                    {% if form.str_contact.errors %}
-                        <div class="text-danger">
-                            {{ form.str_contact.errors }}
-                        </div>
-                    {% endif %}
+                <div class="col" style="text-align: right;">
+                    <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
                 </div>
-                <div class='col'>
-                    {{ form.str_comments }}
-                    <small><p>Comentário.</p></small>
-                    {% if form.str_comments.errors %}
-                        <div class="text-danger">
-                            {{ form.str_comments.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
 
-            <div class="col" style="text-align: right;">
-                <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
-            </div>
-
-        </form>
+            </form>
+        </div>
     </div>
 </div>
+
+
 
 {% endblock %}

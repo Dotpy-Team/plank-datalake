@@ -53,9 +53,9 @@ class ColumnsForm(forms.ModelForm):
     class Meta:
         model = Columns
         fields = [
-        'str_source_name',
-        'str_rename',
-        'str_datatype',
-        'str_pattern_format',
-        'str_type'
+            'str_source_name',
+            'str_rename',
+            'str_datatype',
+            'str_pattern_format',
+            'str_type'
         ]
