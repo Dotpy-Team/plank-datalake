@@ -56,27 +56,6 @@
                     </div>
                 </div>
 
-                <div  class='row mt-2 justify-content-center'>
-                    <div class='col'>
-                        {{ form.str_linkedin_profile }}
-                        <small><p>Linked-in.</p></small>
-                        {% if form.str_linkedin_profile.errors %}
-                            <div class="text-danger">
-                                {{ form.str_linkedin_profile.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_site }}
-                        <small><p>Site.</p></small>
-                        {% if form.str_site.errors %}
-                            <div class="text-danger">
-                                {{ form.str_site.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
                 <div class='row mt-2 justify-content-center'>
                     <div class="col">
                         {{ form.str_setor }}
@@ -126,6 +105,27 @@
                         {% if form.str_telefone.errors %}
                             <div class="text-danger">
                                 {{ form.str_telefone.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div  class='row mt-2 justify-content-center'>
+                    <div class='col'>
+                        {{ form.str_linkedin_profile }}
+                        <small><p>Linked-in.</p></small>
+                        {% if form.str_linkedin_profile.errors %}
+                            <div class="text-danger">
+                                {{ form.str_linkedin_profile.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_site }}
+                        <small><p>Site.</p></small>
+                        {% if form.str_site.errors %}
+                            <div class="text-danger">
+                                {{ form.str_site.errors }}
                             </div>
                         {% endif %}
                     </div>
