@@ -1,66 +1,66 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="card">
-    <div class='card-header bg-primary text-white'><h4><b>Detalhes:</b></h4></div>
-    <div class="card-body">
-        <h4 class="card-title text-primary">{{ customer.str_name }}</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="card-text-secondary-emphasis"><b>CNPJ:</b></h4>
-                <p class="card-text">{{ customer.str_cnpj }}</p>
-            </div>
-            <div class="col-md-6">
-                <h4 class="card-text-secondary-emphasis"><b>Setor:</b></h4>
-                <p class="card-text">{{ customer.str_setor }}</p>
+<div class='container'>
+    <div class="card">
+        <div class='card-header text-center'>
+            <h3>Detalhes</h3> 
+        </div>
+        <div class='card-body'>
+            <h4 class="card-title mt-2">{{ customer.str_name }}</h4>
+
+            <div class="row mt-3">
+                <div class="col mt-2">
+                    <h5><b>CNPJ: </b></h5>
+                    <p>{{ customer.str_cnpj }}</p>
+                </div>
+
+                <div class="col mt-2">
+                    <h5><b>Setor:</b></h5>
+                    <p>{{ customer.str_setor }}</p>
+                </div>
+
+                <div class="col mt-2">
+                    <h5>Tipo:</h5>
+                    <p>{{ customer.str_customer_type }}</p>
+                </div>
+
+                <div class="col mt-2">
+                    <h5><b>Comentários:</b></h5>
+                    <p>{{ customer.str_comments }}</p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h4 class="card-text-secondary-emphasis"><b>TIPO:</b></h4>
-                <p class="card-text">{{ customer.str_customer_type }}</p>
-            </div>
-            <div class="col-md-6">
-                <h4 class="card-text"><b>Comentários:</b></h4>
-                <p class="card-text">{{ customer.str_comments }}</p>
-            </div>
-        </div>
-    </div>
-            
-    <div class="card-footer">
-        <div class="row justify-content-center">
-            <div class="col">
-                <a href="{{users}}" class="btn btn-primary btn-block">Verificar Usuários</a>
-            </div>
+        <div class="card-footer">
+            <div class="row mt-2">
+                <div class="col">
+                    <a href="{{users}}">Verificar Usuários</a>
+                </div>
 
-            <div class="col">
-                <a href="/raci/" class="btn btn-primary btn-block">Novo Processo</a>
+                <div class="col">
+                    <a href="{{new_table}}">Adicionar Tabela</a>
+                </div>
+
+                <div class="col">
+                    <a href="{{new_system}}">Novo Sistema</a>
+                </div>
+
+                <div class="col">
+                    <a href="{{new_user}}"> Novo Usuário</a>
+                </div>
+
+                <div class="col">
+                    <a href="{{new_task}}">Nova Tarefa</a>
+                </div>
+
+                <div class="col">
+                    <a href="{{view_tables}}">Verificar Tabelas</a>
+                </div>
+
+                <div class="col">
+                    <a href="{{new_contract}}">Novo Contrato</a>
+                </div>
             </div>
-
-            <div class="col">
-                <a href="{{new_table}}" class="btn btn-primary btn-block">Adicionar nova tabela</a>
-            </div>
-
-            <div class="col">
-                <a href="{{new_system}}" class="btn btn-primary btn-block">Adicionar um novo sistema</a>
-            </div>
-
-            <div class="col">
-                <a href="{{new_user}}" class="btn btn-primary btn-block">Adicionar um novo usuário</a>
-            </div> 
-
-            <div class="col">
-                <a href="{{new_task}}" class="btn btn-primary btn-block">Adicionar uma nova tarefa</a>
-            </div>
-
-            <div class="col">
-                <a href="{{view_tables}}" class="btn btn-primary btn-block">Verificar as tabelas</a>
-            </div>
-
-            <div class="col">
-                <a href="{{new_contract}}" class="btn btn-primary btn-block">Novo Contrato</a>
-            </div>
-
         </div>
     </div>
 </div>
