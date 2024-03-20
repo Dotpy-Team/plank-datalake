@@ -19,7 +19,7 @@ def uncrip(crip):
     text = base64.b64decode(crip).decode()
     return text
 
-TABLE_PATH = 'process/Tables/'
+TABLE_PATH = 'process/tables/'
 
 def parse_html_path(path,page):
     html_location = path + f'{page}.html'
