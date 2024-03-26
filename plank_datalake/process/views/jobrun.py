@@ -16,7 +16,7 @@ def uncrip(crip):
     text = base64.b64decode(crip).decode()
     return text
 
-TABLE_PATH = 'process/JobRuns/'
+JOB_PATH = 'process/JobRuns/'
 
 def parse_html_path(path,page):
     html_location = path + f'{page}.html'
@@ -34,13 +34,13 @@ def new_execution(request, table_id):
     
     if request.method == 'POST':
         form = JobRunForm(request.POST)
-        html_location = parse_html_path(TABLE_PATH,'add')
+        html_location = parse_html_path(JOB_PATH,'add')
         if form.is_valid():
             job = form.save(commit=False)
             job.customer = customer_instance
             job.table = table_instance
             job.save()
-            return redirect('detail_execution', crip(str(job.id)))
+            return redirect('detail_execution', crip(str(job.job_id)))
         else:
             error_message = 'Credenciais inválidas. Por favor, tente novamente.'
             response_dict = {
@@ -52,7 +52,7 @@ def new_execution(request, table_id):
     else:
         form = JobRunForm()
 
-        html_location = parse_html_path(TABLE_PATH,'add')
+        html_location = parse_html_path(JOB_PATH,'add')
         response_dict = {
             'form':form
         }
@@ -60,13 +60,33 @@ def new_execution(request, table_id):
 
 @login_required
 def detail_execution(request,job_id):
-    try:
-        job_id = uncrip(job_id)
-        job = JobRun.objects.get(id=job_id)
-        html_location = parse_html_path(TABLE_PATH,'detail')
-        response_dict = {
-            'job': job
-        }
-        return render(request, html_location, response_dict)
-    except Http404:
-        return redirect('table_add')
+    job_id = uncrip(job_id)
+
+    job = get_object_or_404(JobRun, job_id=job_id)
+    html_location = parse_html_path(JOB_PATH, 'detail')
+    response_dict = {
+        'job': job
+    }
+
+    return render(request, html_location, response_dict)
+    
+@login_required
+def list_execution(request, table_id):
+    customer_id = request.user.customer.customer_id 
+
+    jobs = JobRun.objects.filter(customer_id=customer_id)
+    html_location = parse_html_path(JOB_PATH, 'list')
+
+    for job in jobs:
+        job.detail_url = reverse(
+            'detail_execution',
+            args=[crip(str(job.job_id))]
+        )
+
+        job.save()
+
+    response_dict = {
+        'jobs': jobs
+    }
+
+    return render(request, html_location, response_dict)

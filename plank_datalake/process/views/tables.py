@@ -105,6 +105,7 @@ def get_table(request,table_id):
             'add': reverse('new_column',args=[crip(str(table.table_id))]),
             'new_job': reverse('new_execution',args=[crip(str(table.table_id))]),
             'view_job': reverse('detail_execution', args=[crip(str(table.table_id))]),
+            'list_job': reverse('list_execution', args=[crip(str(table.table_id))]),
             'new_dependencie': reverse('new_dependencies', args=[crip(str(table.table_id))]),
             'columns': columns,
             'table': table

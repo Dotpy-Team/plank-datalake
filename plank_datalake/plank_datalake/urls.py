@@ -17,9 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from process.views import JobRunView
 from process import views as p
-from process.routers import *
-from process.viewset import *
 from business import views as b
 
 urlpatterns = [
@@ -103,6 +102,7 @@ urlpatterns = [
     #JOBS: adm
     path('add-execution/<str:table_id>', p.new_execution ,name='new_execution'),
     path('detail-execution/<str:job_id>', p.detail_execution ,name='detail_execution'),
+    path('list-execution/<str:table_id>', p.list_execution, name="list_execution"),
     # path('view-column/<str:argument>',TablesView.as_view(),name='column_detail'),
     # path('view-columns/<str:argument>',TablesView.as_view(),name='columns_list')
 
@@ -134,9 +134,6 @@ urlpatterns = [
 
     #REST_API
     path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger , name='list_table_by_trigger'),
-    
-    path('api/', include([
-        path("", include(job_router.urls)),
-    ]))
+    path('add-execution-api/', JobRunView.as_view(), name='add_execution'),
 
 ]

@@ -1,1 +1,0 @@
-from .jobviewset import JobViewSet

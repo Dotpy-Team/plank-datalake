@@ -1,0 +1,44 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="text-primary text-center">
+            Lista de pipelines 
+        </h3> 
+        <a href="/add-execution/" class="btn btn-primary">
+            Adicionar nova execução
+        </a>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Data de Inicio</th>
+                    <th scope="col">Data do Fim</th>
+                    <th scope="col">Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td scope="row"><a href="{{job.detail_url}}">{{ job.pipeline_id }}</a></th>
+                    <td>{{ job.dth_start_at }}</td>
+                    <td>{{ job.str_status }}</td>
+                    <td>{{ job.int_total_size }}</td>
+                    <td>{{ job.int_total_rows }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+
