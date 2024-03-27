@@ -1,2 +1,2 @@
 from .tablesserializer import TablesSerializer
-from .jobexecutionserializer import JobExecutionSerializer
+from .job_serializer import JobExecSerializer
