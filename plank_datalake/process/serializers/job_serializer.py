@@ -6,6 +6,7 @@ class JobExecSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobRun
         fields = [
+            'job_id',
             'customer',
             'table',
             'dth_last_updated',

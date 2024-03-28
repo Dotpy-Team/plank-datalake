@@ -6,7 +6,7 @@
         <h3 class="text-primary text-center">
             Lista de pipelines 
         </h3> 
-        <a href="/add-execution/" class="btn btn-primary">
+        <a href="/add-execution/<str:table_id>" class="btn btn-primary">
             Adicionar nova execução
         </a>
     </div>
@@ -18,20 +18,22 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Data de Inicio</th>
-                    <th scope="col">Data do Fim</th>
-                    <th scope="col">Descrição</th>
+                    <th scope="col">Inicio</th>
+                    <th scope="col">Ultima Atualização</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Quantidade de linhas</th>             
+                    <th scope="col">Tamanho total</th>
                 </tr>
             </thead>
             <tbody>
                 {% for job in jobs %}
                 <tr>
-                    <td scope="row"><a href="{{job.detail_url}}">{{ job.pipeline_id }}</a></th>
+                    <td scope="row"><a href="{{job.detail_url}}">{{ job.job_id }}</a></th>
                     <td>{{ job.dth_start_at }}</td>
+                    <td>{{ job.dth_last_updated }}</td>
                     <td>{{ job.str_status }}</td>
-                    <td>{{ job.int_total_size }}</td>
                     <td>{{ job.int_total_rows }}</td>
+                    <td>{{ job.int_total_size }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

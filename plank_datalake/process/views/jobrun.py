@@ -86,7 +86,8 @@ def list_execution(request, table_id):
         job.save()
 
     response_dict = {
-        'jobs': jobs
+        "jobs": jobs
+        # "new-execution": reverse('add_execution', args=[crip(str())])
     }
 
     return render(request, html_location, response_dict)
