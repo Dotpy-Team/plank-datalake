@@ -104,6 +104,7 @@ urlpatterns = [
     path('add-execution/<str:table_id>', p.new_execution ,name='new_execution'),
     path('detail-execution/<str:job_id>', p.detail_execution ,name='detail_execution'),
     path('list-execution/<str:table_id>', p.list_execution, name="list_execution"),
+    path('all-execution/', p.all_execution, name="all-execution"),
     # path('view-column/<str:argument>',TablesView.as_view(),name='column_detail'),
     # path('view-columns/<str:argument>',TablesView.as_view(),name='columns_list')
 
@@ -139,5 +140,6 @@ urlpatterns = [
     ])),
 
     path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger , name='list_table_by_trigger'),
+    path('job-api/<str:table_id>', p.job_api, name="job_api"), 
     
 ]

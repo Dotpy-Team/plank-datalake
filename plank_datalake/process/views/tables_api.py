@@ -12,7 +12,7 @@ def list_table_by_trigger(request, trigger_id):
     try:
         trigger = Trigger.objects.get(trigger_id = trigger_id)
     except Trigger.DoesNotExist:
-        return Response('Trigger does not exist')
+        return Response('Trigger not exist')
     
     tables = Tables.objects.filter(trigger_id=trigger)
     table_values = tables.values()

@@ -72,9 +72,9 @@ def detail_execution(request,job_id):
     
 @login_required
 def list_execution(request, table_id):
-    customer_id = request.user.customer.customer_id 
+    table_id = uncrip(table_id)
 
-    jobs = JobRun.objects.filter(customer_id=customer_id)
+    jobs = JobRun.objects.filter(table_id=table_id)
     html_location = parse_html_path(JOB_PATH, 'list')
 
     for job in jobs:
@@ -87,6 +87,27 @@ def list_execution(request, table_id):
 
     response_dict = {
         'jobs': jobs
+    }
+
+    return render(request, html_location, response_dict)
+
+@login_required
+def all_execution(request):
+    customer_id = request.user.customer.customer_id 
+
+    jobs = JobRun.objects.filter(customer_id=customer_id)
+    html_location = parse_html_path(JOB_PATH, 'list')
+
+    for job in jobs:
+        job.detail_url =  reverse(
+            'detail_execution',
+            args=[crip(str(job.job_id))]
+        )
+
+        job.save()
+
+    response_dict = {
+        "jobs": jobs
     }
 
     return render(request, html_location, response_dict)
