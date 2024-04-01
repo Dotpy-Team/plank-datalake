@@ -130,18 +130,23 @@ urlpatterns = [
     path('detail-trigger/<str:trigger_id>', p.detail_trigger, name='detail_trigger'),
     path('list-trigger/', p.list_trigger, name='list_trigger'),
 
-    #TOKEN URLS 
+    #TOKEN URLS: 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('verify/', TokenVerifyView.as_view(), name='token_verify'),
 
-    #REST_API
+    #REST API:
     path("api/", include([
         path("", include(job_router.urls)),
         path("", include(customer_router.urls))
     ])),
 
+    #JOB EXECUTION API: 
     path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger , name='list_table_by_trigger'),
     path('job-api/<str:table_id>', p.job_api, name="job_api"), 
     
+    #CUSTOMER API: 
+    path('customer-post/', b.post_customer, name="post_customer"),
+    path('api-list-customer/', b.list_customer_api, name="list_customer_api"),
+    path('get-customer-cnpj/<str:str_cnpj>', b.get_customer_by_cnpj, name="customer_by_cnpj"),
 ]

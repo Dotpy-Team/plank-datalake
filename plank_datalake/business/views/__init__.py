@@ -9,3 +9,4 @@ from .contract import *
 from .service import *
 from .contractitem import *
 from .contact import *
+from .customer_api import *
