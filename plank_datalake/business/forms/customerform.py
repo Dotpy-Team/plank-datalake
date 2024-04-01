@@ -125,5 +125,6 @@ class CustomerForm(forms.ModelForm):
             'dth_create',
             'str_finance_complement',
             'str_documents',
-            'str_comments'
+            'str_comments', 
+            'cod_aws_account'
         ]

@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from business.routers import *
 from process.routers import *
 from process import views as p
 from business import views as b
@@ -136,7 +137,8 @@ urlpatterns = [
 
     #REST_API
     path("api/", include([
-        path("", include(job_router.urls))
+        path("", include(job_router.urls)),
+        path("", include(customer_router.urls))
     ])),
 
     path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger , name='list_table_by_trigger'),
