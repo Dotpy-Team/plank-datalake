@@ -43,7 +43,7 @@ class Customer(models.Model):
     str_finance_complement = models.CharField(max_length=500)
     str_documents = models.CharField(max_length=200, null=True, blank=True)
     str_comments = models.CharField(max_length=200, null=True, blank=True)
-    cod_aws_account = models.CharField(max_length=200)
+    str_cod_aws_account = models.CharField(max_length=200)
 
     def __str__(self):
         return self.str_name

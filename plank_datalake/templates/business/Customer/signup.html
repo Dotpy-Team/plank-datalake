@@ -135,11 +135,11 @@
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                        {{ form.cod_aws_account }}
+                        {{ form.str_cod_aws_account }}
                         <small><p>Código da conta AWS.</p></small>
-                        {% if form.cod_aws_account.errors %}
+                        {% if form.str_cod_aws_account.errors %}
                             <div class="text-danger">
-                                {{ form.str_finance_complement.errors }}
+                                {{ form.str_cod_aws_account.errors }}
                             </div>
                         {% endif %}
                     </div>

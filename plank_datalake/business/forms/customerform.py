@@ -108,7 +108,7 @@ class CustomerForm(forms.ModelForm):
         required=True
     )
 
-    cod_aws_account = forms.CharField(
+    str_cod_aws_account = forms.CharField(
         label= "Código da conta AWS:",
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required= True
@@ -132,5 +132,5 @@ class CustomerForm(forms.ModelForm):
             'str_finance_complement',
             'str_documents',
             'str_comments', 
-            'cod_aws_account'
+            'str_cod_aws_account'
         ]
