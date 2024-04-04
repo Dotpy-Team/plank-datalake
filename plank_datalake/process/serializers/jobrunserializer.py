@@ -2,7 +2,7 @@ from rest_framework import serializers
 from process.models import JobRun
 
 
-class JobExecSerializer(serializers.ModelSerializer):
+class JobRunSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobRun
         fields = [

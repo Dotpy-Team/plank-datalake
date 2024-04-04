@@ -1,43 +1,52 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="text-primary text-center">
-            Lista de dependecias 
-        </h3> 
-        <a href="/add-dependencies/" class="btn btn-primary">
-            Adicionar nova dependencia
-        </a>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-primary text-center">
+                Steps
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Pipela</th>
+                                <th scope="col">Tabela</th>
+                                <th scope="col">Query</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for step in steps %}
+                            <tr>
+                                <td scope="row"><a href="{{step.detail_url}}">{{ step.step_id }}</a></th>
+                                <td>{{ step.customer }}</td>
+                                <td>{{ step.pipeline }}</td>
+                                <td>{{ step.table }}</td>
+                                <td>{{ step.str_query }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <a href="/add-dependencies/" class="btn btn-primary">
+                        Novo step
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row mt-5">
-    <div class="col-md-12">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Pipela</th>
-                    <th scope="col">Tabela</th>
-                    <th scope="col">Query</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for step in steps %}
-                <tr>
-                    <td scope="row"><a href="{{step.detail_url}}">{{ step.step_id }}</a></th>
-                    <td>{{ step.customer }}</td>
-                    <td>{{ step.pipeline }}</td>
-                    <td>{{ step.table }}</td>
-                    <td>{{ step.str_query }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+
 
 {% endblock %}
 

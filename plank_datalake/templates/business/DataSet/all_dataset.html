@@ -2,36 +2,42 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
             <h3 class="text-primary text-center">
-                Lista de Datasets
+                Datasets
             </h3>
-            <a href="{{new_user}}" class="btn btn-primary mt-2">Novo Dataset</a></td>
+        </div>
+        <div class="card-body">
+	        <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>IA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dataset in datasets %}
+                                <tr>
+                                    <td><a href="{{dataset.detail_url}}">{{dataset.str_title}}</a></td>
+                                    <td>{{dataset.str_desc}}</td>
+                                    <td>{{dataset.str_desc_ia}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>        
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{new_user}}" class="btn btn-primary mt-2">Novo Dataset</a></td>
+                </div>
+            </div>
         </div>
     </div>
-
-	<div class="row">
-		<div class="col-md-12">
-            {% for dataset in datasets %}
-                <div class='card mt-4 border-primary'>
-                    <div class='card-body'>
-                        <div class="row justify-content-center">
-                            <div class="col justify-content-center">
-                                <a href="{{dataset.detail_url}}"><p>{{ dataset.str_title }}</p></a>
-                            </div>
-                            <div class="col">
-                                <p>{{ dataset.str_desc }}</p>
-                            </div>
-                            <div class="col">
-                                <td>{{ dataset.str_desc_ia }}</td>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-		</div>
-	</div>
 </div>
 
 

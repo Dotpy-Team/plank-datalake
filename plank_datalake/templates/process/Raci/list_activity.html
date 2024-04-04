@@ -1,44 +1,49 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="text-primary text-center">
-            Lista de atividades
-        </h3> 
-        <a href="/raci/" class="btn btn-primary">
-            Adicionar nova atividade
-        </a>
-    </div>
-</div>
-
-<div class="row mt-5">
-    <div class="col-md-12">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Desc</th>
-                    <th scope="col">Resp.</th>
-                    <th scope="col">Accoun.</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for activity in raci %}
-                <tr>
-                    <td scope="row"><a href="{{activity.detail_url}}">{{ activity.activity_id }}</a></th>
-                    <td>{{ activity.str_title }}</td>
-                    <td>{{ activity.str_desc }}</td>
-                    <td>{{ activity.responsible_id }}</td>
-                    <td>{{ activity.accountable_id }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-primary text-center">
+                Atividades
+            </h3> 
+        </div>
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Desc</th>
+                                <th scope="col">Resp.</th>
+                                <th scope="col">Accoun.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for activity in raci %}
+                            <tr>
+                                <td scope="row"><a href="{{activity.detail_url}}">{{ activity.activity_id }}</a></th>
+                                <td>{{ activity.str_title }}</td>
+                                <td>{{ activity.str_desc }}</td>
+                                <td>{{ activity.responsible_id }}</td>
+                                <td>{{ activity.accountable_id }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <a href="/raci/" class="btn btn-primary">
+                        Nova atividade
+                    </a>
+                </div>
+            </div>        
+        </div>
     </div>
 </div>
 
 {% endblock %}
-
-

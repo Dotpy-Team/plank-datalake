@@ -92,9 +92,9 @@ def admin_list_contracts(request):
     return render(request, html_location, response_dict)
 
 @login_required
-def list_contracts(request):
-    customer_id = request.user.customer.customer_id
-    customer = get_object_or_404(Customer, customer_id=customer_id)
+def list_contracts(request, customer_id):
+    customer_id = uncrip(customer_id)
+    # customer = get_object_or_404(Customer, customer_id=customer_id)
 
     contracts = Contract.objects.filter(customer_id=customer_id)
     html_location = parse_html_path(CONTRACT_PATH,'list_contract')

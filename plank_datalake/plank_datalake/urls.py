@@ -37,7 +37,7 @@ urlpatterns = [
     path('contract/<str:customer_id>', b.new_contract , name='new_contract'),
     path('contract-details/<str:contract_id>', b.profile_contract , name='profile_contract'),
     path('admin-contract-list/', b.admin_list_contracts, name='admin_list_contracts'),
-    path('contracts/', b.list_contracts, name='list_contracts'),
+    path('contracts/<str:customer_id>', b.list_contracts, name='list_contracts'),
 
     #CONTRACT_ITEM
     path('contract-item/<str:contract_id>', b.new_contract_item, name='new_contract_item'),
@@ -45,7 +45,7 @@ urlpatterns = [
     #CONTACT
     path('new-contact/<str:customer_id>', b.new_contact, name='new_contact'),
     path('profile-contact/<str:contact_id>', b.profile_contact, name='profile_contact'),
-    path('list-contacts/<str:customer_id>', b.list_contacts, name='list_contacts'),
+    path('list-contacts/<str:customer_id>', b.list_contacts_by_id, name='list_contacts_by_id'),
     path('list-contacts/', b.list_contacts, name='list_contacts'),
 
     #USER:
@@ -141,9 +141,12 @@ urlpatterns = [
         path("", include(customer_router.urls))
     ])),
 
-    #JOB EXECUTION API: 
+    #TABLE API:
     path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger , name='list_table_by_trigger'),
-    path('job-api/<str:table_id>', p.job_api, name="job_api"), 
+
+    #JOB EXECUTION API: 
+    path('get-job/<str:table_id>', p.get_job, name="get_job_api"),
+    path('post-job/<str:table_id>', p.post_job, name="post-job-api"), 
     
     #CUSTOMER API: 
     path('customer-post/', b.post_customer, name="post_customer"),

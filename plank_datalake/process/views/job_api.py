@@ -4,26 +4,46 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from business.models import Customer
-from process.models import Tables, JobRun
-from process.serializers import JobExecSerializer
+from process.models import Tables, JobRun, LogRequest
+from process.serializers import JobRunSerializer, jobrunserializer
+
+import json
 
 
-@api_view(['GET', 'POST'])
-def job_api(request, table_id):
+@api_view(["POST"])
+def post_job(request, table_id):
+    
+    response = request.data
+    print(dir(response))
 
     try:
-        tables = Tables.objects.get(table_id=table_id)
+        table = Tables.objects.get(table_id=table_id)
+        response["customer"] = table.customer_id
+        response["table"] = table.table_id
     except Tables.DoesNotExist:
-        return Response('Tables not exist')
+        error = {"table_id":[ 'Table no found.']}
+        log_request = LogRequest.objects.create(
+            customer_id=1,
+            str_url=request.path,
+            str_method="POST",
+            str_request_body=response,
+            str_response_status=412,
+            str_response_body= error
+        )
+        log_request.save() 
+        return Response(error, status=412)
     
-    if request.method == "GET":
-        job = JobRun.objects.filter(table_id = tables)
-        serializer = JobExecSerializer(job, many=True)
-        return Response(serializer.data)
-    elif request.method == "POST":
-        serializer = JobExecSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+    job_serializer = JobRunSerializer(data=response)
+
+    if job_serializer.is_valid():
+        job_serializer.save()
+        return Response(job_serializer.data)
     else:
-        return Response('Deu errado')
+        return Response(job_serializer.errors, status=412)
+
+
+@api_view(["GET"])
+def get_job(request, table_id):
+    job = JobRun.objects.filter(table_id=table_id)
+    serializer = JobRunSerializer(job, many=True)
+    return Response(serializer.data)

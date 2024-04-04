@@ -1,9 +1,18 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="row mt-4">
-    <div class="col-md-12">
-        <table class="table table-bordered">
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-primary text-center">
+                Contratos
+            </h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row mt-2">
+                <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>#id</th>
@@ -14,14 +23,17 @@
             <tbody>
                 {% for contract in contracts %}
                 <tr>
-                    <td><a href="{{contract.detail_url}}">{{ contract.id_contract }}</a></td>
+                    <td><a href="{{contract.detail_url}}">{{ contract.contract_id }}</a></td>
                     <td>{{ contract.str_title }}</td>
                     <td>{{ contract.str_object }}</td>             
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+            </div>
+        </div>
     </div>
+</div>
 </div>
 
 {% endblock %}

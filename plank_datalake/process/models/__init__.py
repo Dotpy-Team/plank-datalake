@@ -6,4 +6,4 @@ from .raci import RaciActivity, RaciRelated
 from .pipeline import Pipeline 
 from .step import Step
 from .trigger import Trigger 
-
+from .logrequest import LogRequest
