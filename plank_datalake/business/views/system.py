@@ -51,7 +51,7 @@ def new_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.table_type = 'System'
+            system.str_table_type = 'System'
             system.customer = customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -144,7 +144,7 @@ def new_sheets_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.table_type = 'Google Sheets'
+            system.str_table_type = 'Google Sheets'
             system.customer =customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -180,7 +180,7 @@ def new_postgre_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.table_type = 'PostGre'
+            system.str_table_type = 'PostGre'
             system.customer = customer_instance 
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -216,7 +216,7 @@ def new_mysql_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.table_type = 'MySql'
+            system.str_table_type = 'MySql'
             system.customer = customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -252,7 +252,7 @@ def new_sqlite_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.table_type = 'SQLite'
+            system.str_table_type = 'SQLite'
             system.customer = customer_instance
             system.save()
             return render('profile_system', crip(str(system.system_id)))

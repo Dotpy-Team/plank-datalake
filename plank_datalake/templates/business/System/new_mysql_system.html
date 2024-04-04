@@ -47,24 +47,24 @@
                     </div>
                 </div>
 
-                <h4>Informações de conexão PostGre:</h4>
+                <h4>Informações de conexão MySQL:</h4>
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                    {{ form.host }}
+                    {{ form.str_host }}
                     <small><p>Host.</p></small>
-                        {% if form.host.errors %}
+                        {% if form.str_host.errors %}
                             <div class="text-danger">
-                                {{ form.host.errors }}
+                                {{ form.str_host.errors }}
                             </div>
                         {% endif %}
                     </div>
                     <div class="col">
-                        {{ form.user }}
+                        {{ form.str_user }}
                         <small><p>User.</p></small>
-                        {% if form.user.errors %}
+                        {% if form.str_user.errors %}
                             <div class="text-danger">
-                                {{ form.user.errors }}
+                                {{ form.str_user.errors }}
                             </div>
                         {% endif %}
                     </div> 
@@ -72,20 +72,20 @@
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                    {{ form.passwd }}
+                    {{ form.str_passwd }}
                     <small><p>Password.</p></small>
-                        {% if form.passwd.errors %}
+                        {% if form.str_passwd.errors %}
                             <div class="text-danger">
-                                {{ form.passwd.errors }}
+                                {{ form.str_passwd.errors }}
                             </div>
                         {% endif %}
                     </div>
                     <div class="col">
-                    {{ form.database }}
+                    {{ form.str_database }}
                     <small><p>Database.</p></small>
-                        {% if form.database.errors %}
+                        {% if form.str_database.errors %}
                             <div class="text-danger">
-                                {{ form.database.errors }}
+                                {{ form.str_database.errors }}
                             </div>
                         {% endif %}
                     </div>    

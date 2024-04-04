@@ -47,24 +47,24 @@
                     </div>
                 </div>
 
-                <h4>Informações de conexão PostGre:</h4>
+                <h4>Informações de conexão SQLite:</h4>
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                    {{ form.engine }}
+                    {{ form.str_engine }}
                     <small><p>Host.</p></small>
-                        {% if form.engine.errors %}
+                        {% if form.str_engine.errors %}
                             <div class="text-danger">
-                                {{ form.engine.errors }}
+                                {{ form.str_engine.errors }}
                             </div>
                         {% endif %}
                     </div>
                     <div class="col">
-                        {{ form.database_name }}
+                        {{ form.str_database_name }}
                         <small><p>User.</p></small>
-                        {% if form.database_name.errors %}
+                        {% if form.str_database_name.errors %}
                             <div class="text-danger">
-                                {{ form.database_name.errors }}
+                                {{ form.str_database_name.errors }}
                             </div>
                         {% endif %}
                     </div> 
