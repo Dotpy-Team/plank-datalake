@@ -3,8 +3,6 @@
 
 <div class="container">
 	<div class="row">
-		
-		{% if system.table_type == 'System' %}
 		<div class="col-md-4">
 			<div class="card border-primary">
 				<h5 class="card-header">
@@ -58,7 +56,15 @@
 			</div>
 		</div>
 
-		{% elif system.table_type == 'Google Sheets' %}
+	</div>
+
+</div>
+
+
+{% endblock %}
+
+{% comment %} 
+{% if system.table_type == 'Google Sheets' %}
 
 		<div class="col-md-4">
 			<div class="card border-primary">
@@ -124,7 +130,9 @@
 			</div>
 		</div>
 
-		{% elif system.table_type == 'PostGre' %}
+		{% endif %}
+
+		{% if system.table_type == 'PostGre' %}
 
 		<div class="col-md-4">
 			<div class="card border-primary">
@@ -185,7 +193,9 @@
 			</div>
 		</div>
 
-		{% elif system.table_type == 'MySql' %}
+		{% endif %}
+
+		{% if system.table_type == 'MySql' %}
 
 		<div class="col-md-4">
 			<div class="card border-primary">
@@ -243,8 +253,10 @@
 				</div>
 			</div>
 		</div>
+		
+		{% endif %}
 
-		{% elif system.table_type == 'SQLite' %}
+		{% if system.table_type == 'SQLite' %}
 
 		<div class="col-md-4">
 			<div class="card border-primary">
@@ -300,10 +312,4 @@
 			</div>
 		</div>
 
-		{% endif %}
-
-	</div>
-
-</div>
-
-{% endblock %}
+		{% endif %} {% endcomment %}
