@@ -8,3 +8,4 @@ from .step import *
 from .trigger import *
 from .tables_api import *
 from .job_api import *
+from .columns_api import *

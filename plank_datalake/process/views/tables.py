@@ -113,3 +113,4 @@ def get_table(request,table_id):
         return render(request, html_location, response_dict)
     except Http404:
         return redirect('table_add')
+

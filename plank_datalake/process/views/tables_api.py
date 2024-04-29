@@ -14,8 +14,6 @@ def list_table_by_trigger(request, trigger_id):
     except Trigger.DoesNotExist:
         return Response('Trigger not exist')
     
-    tables = Tables.objects.filter(trigger_id=trigger)
-    table_values = tables.values()
-    # table_list = TablesSerializer(table_values).data
+    tables = Tables.objects.filter(trigger_id=trigger).values()
 
-    return Response(table_values)
+    return Response(tables)

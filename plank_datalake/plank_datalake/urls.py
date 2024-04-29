@@ -142,7 +142,8 @@ urlpatterns = [
     ])),
 
     #TABLE API:
-    path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger , name='list_table_by_trigger'),
+    path('table-by-trigger/<str:trigger_id>', p.list_table_by_trigger, name='list_table_by_trigger'),
+    path('get-table-columns/<str:table_id>', p.get_table_columns, name='get_table_columns'),
 
     #JOB EXECUTION API: 
     path('get-job/<str:table_id>', p.get_job, name="get_job_api"),
