@@ -20,7 +20,7 @@ def get_table_columns(request, table_id):
         id = row['table_id']
         name = row['str_name']
 
-    columns = Columns.objects.filter(table_id=tables_id).values('str_source_name', 'str_datatype')
+    columns = Columns.objects.filter(table_id=tables_id).values('id_column', 'str_source_name', 'str_datatype')
 
     response_dict = {
         "id": id,
