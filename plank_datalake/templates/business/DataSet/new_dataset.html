@@ -40,6 +40,16 @@
                         
                         <div class="row">
                             <div class='col'>
+                                {{form.raci_activity}}
+                                <small><p>Raci.</p></small>
+                                {% if form.raci_activity.errors %}
+                                    <div class="text-danger">
+                                        {{ form.raci_activity.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class='col'>
                                 {{ form.str_desc }}
                                 <small><p>Descrição.</p></small>
                                 {% if form.str_desc.errors %}

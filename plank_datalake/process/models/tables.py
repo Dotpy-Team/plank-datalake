@@ -1,6 +1,5 @@
 from django.db import models
 from business.models import DataSet, Customer
-from .raci import RaciActivity
 from .step import Step
 from .trigger import Trigger
 
@@ -56,21 +55,20 @@ class Tables(models.Model):
     str_name = models.CharField(max_length=80)
     str_desc = models.TextField()
     str_desc_ia = models.TextField()
-
-    raci_activity = models.ForeignKey(
-        RaciActivity, 
-        on_delete=models.CASCADE,
-        related_name='owner',
-        null=True, 
-        blank=True
-    )
-
     dth_start_at = models.DateTimeField(auto_now=True)
     dth_last_updated = models.DateTimeField(null=True, blank=True)
     
     int_size = models.IntegerField(null=True, blank=True)
     int_number_of_rows = models.IntegerField(null=True, blank=True)
     float_perc_growth = models.FloatField(null=True, blank=True)
+    str_color = models.CharField(
+        max_length=30,
+        choices=[
+            ('r', 'red'),
+            ('g', 'green'),
+            ('b', 'blue')
+        ]
+    )
 
     trigger = models.ForeignKey(
         Trigger,

@@ -31,5 +31,6 @@ class DataSetForm(forms.ModelForm):
             'str_status',
             'str_title',
             'str_desc',
+            'raci_activity',
             'str_desc_ia'
         ]

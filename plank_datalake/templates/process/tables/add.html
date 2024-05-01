@@ -91,13 +91,13 @@
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                    {{ form.raci_activity }}
-                    <small><p>Raci.</p></small>
-                        {% if form.raci_activity.errors %}
+                        {{ form.str_color }}
+                        <small><p>Cor.</p></small>
+                        {% if form.str_color.errors %}
                             <div class="text-danger">
-                                {{ form.raci_activity.errors }}
+                                {{ form.str_color.errors }}
                             </div>
-                        {% endif %}
+                        {% endif %}    
                     </div>
                     <div class="col">
                         {{ form.trigger }}
