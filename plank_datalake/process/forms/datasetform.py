@@ -1,5 +1,5 @@
 from django import forms
-from business.models import  DataSet
+from process.models import  DataSet
 
 class DataSetForm(forms.ModelForm):
     

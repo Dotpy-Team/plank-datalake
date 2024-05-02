@@ -1,4 +1,5 @@
 from django.db import models
+from .raci import RaciActivity
 from .system import System
 
 class DataSet(models.Model):
@@ -10,6 +11,15 @@ class DataSet(models.Model):
             ('Inativo', 'Inativo')
         ]
     )
+
+    raci_activity = models.ForeignKey(
+        RaciActivity, 
+        on_delete=models.CASCADE,
+        related_name='owner',
+        null=True, 
+        blank=True
+    )
+
     str_title = models.CharField(max_length=200, null=True, blank=True)
     str_desc = models.CharField(max_length=200, null=True, blank=True)
     str_desc_ia = models.CharField(max_length=200, null=True, blank=True)

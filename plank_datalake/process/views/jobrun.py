@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.views import View
 from process.models import Tables, RaciActivity, JobRun
-from business.models import Customer,DataSet
+from business.models import Customer
 from process.forms import ColumnsForm, JobRunForm
 import base64
 

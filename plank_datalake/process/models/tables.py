@@ -1,5 +1,6 @@
 from django.db import models
-from business.models import DataSet, Customer
+from business.models import Customer
+from .dataset import DataSet
 from .step import Step
 from .trigger import Trigger
 

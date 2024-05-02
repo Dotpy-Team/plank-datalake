@@ -1,5 +1,6 @@
 from django import forms
-from business.models import Customer, System , DataSet , Task
+from process.models import System, DataSet
+from business.models import Customer, Task
 
 class SystemForm(forms.ModelForm):
 

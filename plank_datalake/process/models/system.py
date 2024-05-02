@@ -1,5 +1,5 @@
 from django.db import models
-from .customer import Customer
+from business.models import Customer
 
 class System(models.Model):
     system_id = models.AutoField(primary_key=True)

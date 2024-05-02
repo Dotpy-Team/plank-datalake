@@ -66,23 +66,23 @@ urlpatterns = [
     path('service/', b.new_service , name='new_service'),
 
     #SYSTEM:
-    path('chose-system/', b.route, name='route'), 
-    path('system/', b.new_system , name='new_system'),
-    path('sheets-system/', b.new_sheets_system, name='new_sheets_system'),
-    path('postgre-system/', b.new_postgre_system, name='new_postgre_system'),
-    path('mysql-system/', b.new_mysql_system, name='new_mysql_system'),
-    path('sqlite-system/', b.new_sqlite_system, name='new_sqlite_system'),
-    path('admin-system/<str:customer_id>', b.new_system , name='new_system'),
+    path('chose-system/', p.route, name='route'), 
+    path('system/', p.new_system , name='new_system'),
+    path('sheets-system/', p.new_sheets_system, name='new_sheets_system'),
+    path('postgre-system/', p.new_postgre_system, name='new_postgre_system'),
+    path('mysql-system/', p.new_mysql_system, name='new_mysql_system'),
+    path('sqlite-system/', p.new_sqlite_system, name='new_sqlite_system'),
+    path('admin-system/<str:customer_id>', p.new_system , name='new_system'),
 
-    path('systems/', b.list_system, name='list_system'),
-    path('system-details/<str:system_id>', b.profile_system, name='profile_system'),
+    path('systems/', p.list_system, name='list_system'),
+    path('system-details/<str:system_id>', p.profile_system, name='profile_system'),
 
-    path('admin-list-system/<str:customer_id>', b.admin_list_system, name='list_system'),
+    path('admin-list-system/<str:customer_id>', p.admin_list_system, name='list_system'),
 
     #DATASET:
-    path('dataset/<str:system_id>', b.new_dataset , name='new_dataset'),
-    path('dataset-details/<str:dataset_id>', b.profile_dataset, name='profile_dataset'),
-    path('all-dataset/', b.all_dataset, name='profile_dataset'),
+    path('dataset/<str:system_id>', p.new_dataset , name='new_dataset'),
+    path('dataset-details/<str:dataset_id>', p.profile_dataset, name='profile_dataset'),
+    path('all-dataset/', p.all_dataset, name='profile_dataset'),
 
     #RACI:
     path('raci/', p.new_raci , name='new_raci'),

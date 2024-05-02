@@ -4,8 +4,9 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from business.models import System, DataSet, Customer
-from business.forms import SystemForm, GoogleSheetSystemForm, PostGreSytemForm, MySqlSystemForm, SQLiteSystemForm
+from business.models import Customer
+from process.models import System, DataSet
+from process.forms import SystemForm, GoogleSheetSystemForm, PostGreSytemForm, MySqlSystemForm, SQLiteSystemForm
 import base64
 
 def crip(text):
@@ -29,7 +30,7 @@ SYSTEM PROFILE
 """
 #######################################
 
-SYSTEM_PATH = 'business/System/'
+SYSTEM_PATH = 'process/System/'
 
 @login_required
 def route(request):

@@ -1,5 +1,5 @@
 from django.db import models
-from business.models import DataSet, Customer
+from business.models import Customer
 from .tables import Tables
 
 class Columns(models.Model):

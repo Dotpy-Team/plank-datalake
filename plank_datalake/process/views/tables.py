@@ -5,8 +5,8 @@ from django.http import Http404
 from django.views import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from process.models import Tables, RaciActivity, Columns, Trigger
-from business.models import Customer,DataSet, System
+from process.models import Tables, Columns, Trigger, DataSet, System
+from business.models import Customer
 from process.forms import TablesForm
 from process.serializers import TablesSerializer
 import base64
@@ -54,10 +54,6 @@ def new_table_by_id(request, dataset_id):
             return render(request, html_location, response_dict)
     else:
         form = TablesForm()
-
-        form.fields['raci_activity'].queryset = RaciActivity.objects.filter(customer_id=customer_id)
-        form.fields['raci_activity'].widget.attrs['class'] = 'form-select'
-        form.fields['raci_activity'].label = 'RACI'
         
         form.fields['trigger'].queryset = Trigger.objects.filter(customer_id=customer_id)
         form.fields['trigger'].widget.attrs['class'] = 'form-select'

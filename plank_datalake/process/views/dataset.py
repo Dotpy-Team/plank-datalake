@@ -4,8 +4,9 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from business.models import DataSet, System, Customer
-from business.forms import DataSetForm
+from business.models import Customer
+from process.models import DataSet, System
+from process.forms import DataSetForm
 import base64
 
 def crip(text):
@@ -29,7 +30,7 @@ DATASET PROFILE
 """
 #######################################
 
-DATASET_PATH = 'business/DataSet/'
+DATASET_PATH = 'process/DataSet/'
 
 @login_required
 def new_dataset(request,system_id):

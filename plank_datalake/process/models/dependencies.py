@@ -1,6 +1,6 @@
 from django.db import models
-from business.models import DataSet, Customer
-from process.models import Tables
+from business.models import  Customer
+from .tables import Tables
 
 class Dependencies(models.Model):
 
