@@ -1,6 +1,7 @@
 from django import forms
 from process.models import RaciActivity, RaciRelated
 
+
 class RaciActivityForm(forms.ModelForm):
 
     str_title = forms.CharField(
@@ -15,14 +16,29 @@ class RaciActivityForm(forms.ModelForm):
         required=True
     )
 
+    CHOICE_COLOR = (
+        ('red', 'red'),
+        ('green', 'green'),
+        ('blue', 'blue')
+    )
+
+    str_color = forms.ChoiceField(
+        label='cor',
+        choices=CHOICE_COLOR,
+        widget= forms.Select(attrs={'class': 'form-select'}),
+        required=True
+    )
+
     class Meta:
         model = RaciActivity
         fields = [
             'str_title',
             'str_desc',
             'responsible',
+            'str_color',
             'accountable'
         ]
+
     
 class RaciRelatedForm(forms.ModelForm):
 

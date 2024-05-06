@@ -1,6 +1,7 @@
 from django import forms
 from process.models import  DataSet
 
+
 class DataSetForm(forms.ModelForm):
     
     CHOICES_STATUS = (
@@ -25,18 +26,6 @@ class DataSetForm(forms.ModelForm):
         required=True
     )
 
-    CHOICE_COLOR = (
-        ('R', 'red'),
-        ('g', 'green'),
-        ('b', 'blue')
-    )
-
-    str_color = forms.ChoiceField(
-        label='cor',
-        choices=CHOICE_COLOR,
-        widget= forms.Select(attrs={'class': 'form-select'}),
-        required=True
-    )
 
     class Meta:
         model = DataSet
@@ -45,6 +34,5 @@ class DataSetForm(forms.ModelForm):
             'str_title',
             'str_desc',
             'raci_activity',
-            'str_color',
             'str_desc_ia'
         ]
