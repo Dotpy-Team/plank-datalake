@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Tables, Step, Pipeline
+from process.models import Tables, Step, Pipeline, Trigger
 from business.models import Customer
 from process.forms import StepForm, TablesStepForm
 import base64
@@ -88,6 +88,11 @@ def new_child_table(request, step_id):
             }
     else:
         form = TablesStepForm(initial={'step_id':step_id})
+
+        form.fields['trigger'].queryset = Trigger.objects.filter(customer_id=customer_id)
+        form.fields['trigger'].widget.attrs['class'] = 'form-select'
+        form.fields['trigger'].label = 'Trigger'
+
         response_dict = {
             'form': form
         }

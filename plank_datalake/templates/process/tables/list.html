@@ -73,7 +73,8 @@
                         <li class="list-group-item">Descrição: {{ card_table.str_desc }}</li>
                         <li class="list-group-item">Tipo de Ingestão: {{ card_table.str_type }}</li>
                         <li class="list-group-item">Data de Cadastro: {{ card_table.dth_start_at }}</li>
-                        
+                        <li class="list-group-item">Camada: {{ card_table.layer }}</li>
+
                         <li class="list-group-item">
                             Tamanho em GB: 
                             {% if card_table.int_size is None %}

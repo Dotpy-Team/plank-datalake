@@ -169,37 +169,37 @@ class PostGreSytemForm(forms.ModelForm):
         required=True
     )
 
-    engine = forms.CharField(
+    str_engine = forms.CharField(
         label= 'Engine',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    name = forms.CharField(
+    str_name = forms.CharField(
         label= 'Name',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    user = forms.CharField(
+    str_user = forms.CharField(
         label= 'User',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    password = forms.CharField(
+    str_password = forms.CharField(
         label= 'Password',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    host = forms.CharField(       
+    str_host = forms.CharField(       
         label= 'Host',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    port = forms.CharField(
+    str_port = forms.CharField(
         label= 'Port',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
@@ -245,19 +245,19 @@ class MySqlSystemForm(forms.ModelForm):
     )
 
     
-    user = forms.CharField(
+    str_user = forms.CharField(
         label= 'User',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    passwd = forms.CharField(
+    str_passwd = forms.CharField(
         label='Password',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    database = forms.CharField(
+    str_database = forms.CharField(
         label='Database',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
@@ -301,13 +301,13 @@ class SQLiteSystemForm(forms.ModelForm):
         required=True
     )
 
-    engine = forms.CharField(
+    str_engine = forms.CharField(
         label= 'Engine',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
 
-    database_name = forms.CharField(
+    str_database_name = forms.CharField(
         label= 'Database Name',
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required= True

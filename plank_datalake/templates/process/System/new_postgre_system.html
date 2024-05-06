@@ -13,7 +13,7 @@
                 {% csrf_token %}
                 
                 <h4>Dados do Sistema:</h4>
-
+                <p>{{ form.errors }}</p>
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
                     {{ form.str_title }}

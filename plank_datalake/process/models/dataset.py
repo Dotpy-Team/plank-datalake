@@ -25,3 +25,12 @@ class DataSet(models.Model):
     str_desc_ia = models.CharField(max_length=200, null=True, blank=True)
     dth_start_at = models.DateField(auto_now=True)
 
+    str_color = models.CharField(
+        max_length=30,
+        choices=(
+            ('r', 'red'),
+            ('g', 'green'),
+            ('b', 'blue')
+        )
+    )
+

@@ -91,15 +91,6 @@
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                        {{ form.str_color }}
-                        <small><p>Cor.</p></small>
-                        {% if form.str_color.errors %}
-                            <div class="text-danger">
-                                {{ form.str_color.errors }}
-                            </div>
-                        {% endif %}    
-                    </div>
-                    <div class="col">
                         {{ form.trigger }}
                         <small><p>Trigger.</p></small>
                         {% if form.trigger.errors %}

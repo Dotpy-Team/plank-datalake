@@ -72,18 +72,6 @@ class TablesForm(forms.ModelForm):
         required=False
     )
 
-    CHOICE_COLOR = (
-        ('R', 'red'),
-        ('g', 'green'),
-        ('b', 'blue')
-    )
-
-    str_color = forms.ChoiceField(
-        label='cor',
-        choices=CHOICE_COLOR,
-        widget= forms.Select(attrs={'class': 'form-select'}),
-        required=True
-    )
 
     class Meta:
         model = Tables
@@ -95,7 +83,6 @@ class TablesForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
-            "str_color",
             "trigger"
         ]
 
@@ -182,7 +169,6 @@ class TablesStepForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
-            "str_color",
             "trigger"
         ]
 

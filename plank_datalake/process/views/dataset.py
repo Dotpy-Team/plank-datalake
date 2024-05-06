@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import Customer
 from process.models import DataSet, System
+from .raci import RaciActivity
 from process.forms import DataSetForm
 import base64
 
@@ -35,6 +36,7 @@ DATASET_PATH = 'process/DataSet/'
 @login_required
 def new_dataset(request,system_id):
     try:
+        customer_id = request.user.customer.customer_id
         system_id = uncrip(system_id)
         system_instance = System.objects.get(system_id=system_id)
     except System.DoesNotExist:
@@ -56,6 +58,11 @@ def new_dataset(request,system_id):
             return render(request, html_location, response_dict)
     else:
         form = DataSetForm()
+
+        form.fields['raci_activity'].queryset = RaciActivity.objects.filter(customer_id=customer_id)
+        form.fields['raci_activity'].widget.attrs['class'] = 'form-select'
+        form.fields['raci_activity'].label = 'Raci'
+
         html_location = parse_html_path(DATASET_PATH,'new_dataset')
         dict_form = {
             'form': form

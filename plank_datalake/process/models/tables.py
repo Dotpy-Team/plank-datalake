@@ -62,14 +62,6 @@ class Tables(models.Model):
     int_size = models.IntegerField(null=True, blank=True)
     int_number_of_rows = models.IntegerField(null=True, blank=True)
     float_perc_growth = models.FloatField(null=True, blank=True)
-    str_color = models.CharField(
-        max_length=30,
-        choices=[
-            ('r', 'red'),
-            ('g', 'green'),
-            ('b', 'blue')
-        ]
-    )
 
     trigger = models.ForeignKey(
         Trigger,

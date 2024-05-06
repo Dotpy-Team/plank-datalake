@@ -40,7 +40,7 @@
                         
                         <div class="row">
                             <div class='col'>
-                                {{form.raci_activity}}
+                                {{ form.raci_activity }}
                                 <small><p>Raci.</p></small>
                                 {% if form.raci_activity.errors %}
                                     <div class="text-danger">
@@ -49,6 +49,18 @@
                                 {% endif %}
                             </div>
 
+                            <div class="col">
+                                {{ form.str_color }}
+                                <small><p>Cor.</p></small>
+                                {% if form.str_color.errors %}
+                                    <div class="text-danger">
+                                        {{ form.str_color.errors }}
+                                    </div>
+                                {% endif %}    
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class='col'>
                                 {{ form.str_desc }}
                                 <small><p>Descrição.</p></small>
@@ -57,7 +69,6 @@
                                         {{ form.str_desc.errors }}
                                     </div>
                                 {% endif %}
-
                             </div>
                         </div>
 

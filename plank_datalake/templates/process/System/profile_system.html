@@ -1,0 +1,86 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class='container'>
+	<div class="row">
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link active" aria-current="page" href="#">Detalhes</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">DataSets</a>
+			</li>
+			{% if system.str_table_type == 'Google Sheets' %}
+			<li class="nav-item">
+				<a class="nav-link" href="#">Configurações Google Sheets</a>
+			</li>
+
+			{% elif system.str_table_type == 'PostGre' %}
+			<li class="nav-item">
+				<a class="nav-link" href="#">Configurações PostGre</a>
+			</li>
+			{% endif %}
+
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Sistema
+				</h5>
+				<div class="card-body">
+					<p class="card-text">Nome do sistema: {{ system.str_title }}</p>
+                    <p class="card-text">Descrição: {{ system.str_desc }}</p>
+                    <p class="card-text">Status: {{ system.str_status }}</p>
+				</div>
+				<div class="card-footer">
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<div class="row md-2">
+		<div class="col-md-4">
+			<div class="card border-primary">
+				<h5 class="card-header">
+					Datasets
+				</h5>
+				<div class="card-body">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>#id</th>
+								<th>Nome</th>
+								<th>Descricao</th>
+								<th>Descricao IA</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for dataset in datasets %}
+							<tr>
+								<td><a href="{{dataset.detail_url}}">{{ dataset.system_id }}</a></td>
+								<td>{{ dataset.str_title }}</td>
+								<td>{{ dataset.str_desc }}</td>
+								<td>{{ dataset.str_desc_ia }}</td>                    
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+					<div class="col">
+						<a href="{{new_dataset}}" class="btn btn-primary btn-block">Novo DataSet</a>
+					</div>
+		
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
+
+		<div class="col-md-8">
+			
