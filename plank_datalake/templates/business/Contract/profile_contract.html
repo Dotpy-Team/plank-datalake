@@ -32,7 +32,7 @@
                 <tbody>
                     {% for item in contract.contractitem_set.all %}
                     <tr>
-                        <td><a href="{{item.detail_url}}">{{ item.service.id_service }}</a></td>
+                        <td><a href="{{item.detail_url}}">{{ item.service.service_id }}</a></td>
                         <td>{{ item.service.str_title }}</td>
                         <td>{{ item.service.str_descr }}</td>
                         <td>{{ item.service.int_price }}</td>

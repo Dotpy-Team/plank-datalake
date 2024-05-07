@@ -4,7 +4,7 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from business.models import ContractItem, Contract, Service
+from business.models import ContractItem, Contract, Service, Customer
 from business.forms import ContractItemForm
 import base64
 
@@ -33,34 +33,41 @@ ContractItem PROFILE
 CONTRACTITEM_PATH = 'business/ContractItem/'
 
 @login_required
-def new_contract_item(request,contract_id):
+def new_contract_item(request, contract_id):
     try:
-        customer_id = request.user.customer.customer_id
         contract_id = uncrip(contract_id)
+        customer_id = request.user.customer.customer_id
+        customer_instance = Customer.objects.get(customer_id=customer_id)
         contract_instance = Contract.objects.get(contract_id=contract_id)
     except Contract.DoesNotExist:
-        return redirect('home')
+        return redirect('home_page')
     
+    html_location = parse_html_path(CONTRACTITEM_PATH, 'new_contract_item')
+
     if request.method == 'POST':
+
         form = ContractItemForm(request.POST)
-        
+
         try:
             service_id = request.POST.get('service_id')
             service_instance = Service.objects.get(service_id=service_id)
         except Service.DoesNotExist:
-            return redirect('home')
-
-        html_location = parse_html_path(CONTRACTITEM_PATH,'new_contract_item')
-
+            return redirect('home_page')
+        
         if form.is_valid():
-            contractitem = form.save(commit=False)
-            contractitem.contract = contract_instance
-            contractitem.service = service_instance
-            contractitem.save()
+            item = form.save(commit=False)
+            item.contract = contract_instance
+            item.customer = customer_instance
+            item.service = service_instance
+            item.save()
             return redirect('profile_contract', crip(str(contract_id)))
         else:
-            print(form.errors)
-            response_dict = {'form': form}
+            error_message = 'Credenciais inválidas. Por favor, tente novamente.'
+            response_dict = {
+                "form": form,
+                "error_message": error_message,
+                "error_forms": form.errors
+            }
             return render(request, html_location, response_dict)
     else:
         form = ContractItemForm()
@@ -69,8 +76,53 @@ def new_contract_item(request,contract_id):
         form.fields['service'].widget.attrs['class'] = 'form-select'
         form.fields['service'].label = 'service'
 
-        html_location = parse_html_path(CONTRACTITEM_PATH,'new_contract_item')
-        dict_form = {
-            'form': form
+        response_dict ={
+            "form": form
         }
-    return render(request, html_location, dict_form)
+
+        return render(request, html_location, response_dict)
+
+# @login_required
+# def new_contract_item(request,contract_id):
+#     try:
+#         customer_id = request.user.customer.customer_id
+#         customer_instance = Customer.objects.get(customer_id=customer_id)
+#         contract_id = uncrip(contract_id)
+#         contract_instance = Contract.objects.get(contract_id=contract_id)
+#     except Contract.DoesNotExist:
+#         return redirect('home_page')
+    
+#     if request.method == 'POST':
+#         form = ContractItemForm(request.POST)
+        
+#         try:
+#             service_id = request.POST.get('service_id')
+#             service_instance = Service.objects.get(service_id=service_id)
+#         except Service.DoesNotExist:
+#             return redirect('home_page')
+
+#         html_location = parse_html_path(CONTRACTITEM_PATH,'new_contract_item')
+
+#         if form.is_valid():
+#             contractitem = form.save(commit=False)
+#             contractitem.customer = customer_instance
+#             contractitem.contract = contract_instance
+#             contractitem.service = service_instance
+#             contractitem.save()
+#             return redirect('profile_contract', crip(str(contract_id)))
+#         else:
+#             print(form.errors)
+#             response_dict = {'form': form}
+#             return render(request, html_location, response_dict)
+#     else:
+#         form = ContractItemForm()
+
+        # form.fields['service'].queryset = Service.objects.filter(customer_id=customer_id)
+        # form.fields['service'].widget.attrs['class'] = 'form-select'
+        # form.fields['service'].label = 'service'
+
+#         html_location = parse_html_path(CONTRACTITEM_PATH,'new_contract_item')
+#         dict_form = {
+#             'form': form
+#         }
+#     return render(request, html_location, dict_form)
