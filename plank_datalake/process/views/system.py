@@ -256,7 +256,7 @@ def new_sqlite_system(request):
             system.str_table_type = 'SQLite'
             system.customer = customer_instance
             system.save()
-            return render('profile_system', crip(str(system.system_id)))
+            return redirect('profile_system', crip(str(system.system_id)))
         else:
             error_message = 'Os valores estão incorretos, tente novamente'
             error_dict = {

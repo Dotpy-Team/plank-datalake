@@ -47,9 +47,9 @@ def new_contract_item(request, contract_id):
     if request.method == 'POST':
 
         form = ContractItemForm(request.POST)
-
+        
         try:
-            service_id = request.POST.get('service_id')
+            service_id = request.POST.get('service')
             service_instance = Service.objects.get(service_id=service_id)
         except Service.DoesNotExist:
             return redirect('home_page')
