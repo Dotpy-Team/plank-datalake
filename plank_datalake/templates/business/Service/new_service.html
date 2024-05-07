@@ -86,7 +86,7 @@
             </thead>
 
             <tbody>
-                {% for service in service_all %}    
+                {% for service in services %}    
                 <tr>
                     <td><a href="{{service.detail_url}}">{{ service.service_id }}</a></td>
                     <td>{{ service.str_title }}</td>

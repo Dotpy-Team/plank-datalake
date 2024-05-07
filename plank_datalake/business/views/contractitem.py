@@ -35,6 +35,7 @@ CONTRACTITEM_PATH = 'business/ContractItem/'
 @login_required
 def new_contract_item(request,contract_id):
     try:
+        customer_id = request.user.customer.customer_id
         contract_id = uncrip(contract_id)
         contract_instance = Contract.objects.get(contract_id=contract_id)
     except Contract.DoesNotExist:
@@ -63,6 +64,11 @@ def new_contract_item(request,contract_id):
             return render(request, html_location, response_dict)
     else:
         form = ContractItemForm()
+
+        form.fields['service'].queryset = Service.objects.filter(customer_id=customer_id)
+        form.fields['service'].widget.attrs['class'] = 'form-select'
+        form.fields['service'].label = 'service'
+
         html_location = parse_html_path(CONTRACTITEM_PATH,'new_contract_item')
         dict_form = {
             'form': form

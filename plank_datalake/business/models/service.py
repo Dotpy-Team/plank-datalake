@@ -1,7 +1,9 @@
 from django.db import models
+from .customer import Customer
 
 class Service(models.Model):
     service_id = models.AutoField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     str_title = models.CharField(max_length=200, null=True, blank=True)
     str_descr = models.CharField(max_length=200, null=True, blank=True)
     int_price = models.IntegerField(null=True, blank=True)

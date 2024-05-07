@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import Service
+from .customer import Customer
 from business.forms import ServiceForm
 import base64
 
@@ -31,28 +32,39 @@ SERVICE PROFILE
 
 SERVICE_PATH = 'business/SERVICE/'
 
+
 @login_required
 def new_service(request):
-    service_all = Service.objects.all()
-    
+
+    try:
+        customer_id = request.user.customer.customer_id
+        customer_instance = Customer.objects.get(customer_id=customer_id)
+    except Customer.DoesNotExist:
+        return redirect('new_service')
+
+    services = Service.objects.filter(customer_id=customer_id)
+
     if request.method == 'POST':
         form = ServiceForm(request.POST)
         html_location = parse_html_path(SERVICE_PATH,'new_service')
+
         if form.is_valid():
-            service = form.save()
+            service = form.save(commit=False)
+            service.customer = customer_instance
+            service.save()
             return redirect('new_service')
         else:
             print(form.errors)
             response_dict = {
-                'form': form,
-                'service_all':service_all
+                "form": form,
+                "services": services
             }
             return render(request, html_location, response_dict)
     else:
         form = ServiceForm()
         html_location = parse_html_path(SERVICE_PATH,'new_service')
         dict_form = {
-            'form': form,
-            'service_all':service_all
+            "form": form,
+            "services": services
         }
     return render(request, html_location, dict_form)
