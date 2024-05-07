@@ -19,6 +19,16 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">Configurações PostGre</a>
 			</li>
+
+			{% elif system.str_table_type == 'MySql'%}
+			<li class="nav-item">
+				<a class="nav-link" href="#">Configurações MySQL</a>
+			</li>
+
+			{% elif system.str_table_type == 'SQLite'%}
+			<li class="nav-item">
+				<a class="nav-link" href="#">Configurações SQLite</a>
+			</li>
 			{% endif %}
 
 		</ul>
