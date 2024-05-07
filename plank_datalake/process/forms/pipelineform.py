@@ -32,4 +32,5 @@ class PipelineForm(forms.ModelForm):
             'dth_start_at',
             'dth_end_at',
             'str_desc',
+            'raci_activity'
         ]

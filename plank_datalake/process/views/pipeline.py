@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Pipeline
+from process.models import Pipeline, RaciActivity
 from business.models import Customer   
 from process.forms import PipelineForm
 import base64
@@ -47,8 +47,14 @@ def new_pipeline(request):
                 'error_message':error_message,
                 'errors': form.errors 
             }
+            return render(request, html_location, error_dict)
     else:
         form = PipelineForm()
+
+        form.fields['raci_activity'].queryset = RaciActivity.objects.filter(customer_id=customer_id)
+        form.fields['raci_activity'].widget.attrs['class'] = 'form-select'
+        form.fields['raci_activity'].label = 'Raci'
+
         response_dict = {
             'form': form
         }
