@@ -66,7 +66,7 @@ def new_user(request, customer_id):
             'form':form
         }
         return render(request, html_location, response_dict)
-    
+
 def user_login(request, message=None):
     html_location = parse_html_path(CUSTOMUSER_PATH,'login')
     
@@ -106,11 +106,14 @@ def user_profile(request):
 @login_required
 def admin_user_profile(request,email):
     email = uncrip(email)
+
+    print(request.user.is_staff)
+    print(request.user.is_superuser)
     try:
         custom_user = get_object_or_404(CustomUser, email=email)
         html_location = parse_html_path(CUSTOMUSER_PATH,'admin_profile')
         response_dict = {
-            'user': custom_user,
+            'custom_user': custom_user,
             'new_user': reverse('new_user',args=[crip(str(custom_user.customer_id))])
         }
         return render(request, html_location, response_dict)

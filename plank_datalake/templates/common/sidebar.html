@@ -41,7 +41,6 @@
                 </li>
             </ul>
         </li> {% endcomment %}
-
         {% if user.is_superuser %}
             <li>
                 <a href="/customer/">Novo cliente</a>
@@ -54,15 +53,15 @@
         {% else %}
 
             <li>
-                <a href="/customer-profile/">Perfil do cliente</a>
+                <a href="/user-profile/">Perfil do Usuário</a>
             </li>
             
             <li>
-                <a href="/user-profile/">Perfil do Usuário</a>
+                <a href="/customer-profile/">Perfil da Empresa</a>
             </li>
 
             <li>
-                <a href="/raci/">Nova Responsabilidade</a>
+                <a href="/raci/">Processos e envolvidos</a>
             </li>
 
             <li>
@@ -70,11 +69,15 @@
             </li>
 
             <li>
-                <a href="/all-dataset/">Dataset</a>
+                <a href="/search-tables/">Tabelas</a>
             </li>
 
             <li>
-                <a href="/search-tables/">Explorar Tabelas</a>
+                <a href="/search-tables/">Transformações</a>
+            </li>
+
+            <li>
+                <a href="/search-tables/">Dashboards</a>
             </li>
 
         {% endif %}
