@@ -1,0 +1,84 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+
+				<h5 class="card-header">Perfil do usuário</h5>
+				<div class="card-body">
+                    <div class="panel">
+                        <div class="user-heading round">
+                            <a href="#">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                            </a>
+                            <h1>{{ user.first_name }}</h1>
+                            <p>{{ user.email }}</p>
+                    </div>
+    
+                    <p class="card-text">Nome: {{ user.first_name }}</p>
+                    <p class="card-text">Cargo: {{ user.str_cargo }}</p>
+                    <p class="card-text">CPF: {{ user.str_cpf }}</p>
+                    <p class="card-text">Email: {{ user.email }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <h5 class="card-header">Meus processos</h5>
+                    <div class="card-body">
+
+                        <table class="table mt-4">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product</th>
+                                    <th>Payment Taken</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>TB - Monthly</td>
+                                    <td>01/04/2012</td>
+                                    <td>Default</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>TB - Monthly</td>
+                                    <td>01/04/2012</td>
+                                    <td>Default</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>TB - Monthly</td>
+                                    <td>01/04/2012</td>
+                                    <td>Default</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>TB - Monthly</td>
+                                    <td>01/04/2012</td>
+                                    <td>Default</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>TB - Monthly</td>
+                                    <td>01/04/2012</td>
+                                    <td>Default</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+
+{% endblock %}

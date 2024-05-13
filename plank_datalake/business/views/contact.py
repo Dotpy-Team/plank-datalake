@@ -23,9 +23,9 @@ def parse_html_path(template_path,page):
 CONTACT_PATH = 'business/Contact/'
 
 @login_required
-def new_contact(request, customer_id):
+def new_contact(request):
     try:
-        customer_id = uncrip(customer_id)
+        customer_id = request.user.customer.customer_id
         customer_instance = Customer.objects.get(customer_id=customer_id)
     except Customer.DoesNotExist:
         return redirect('home')
@@ -58,8 +58,8 @@ def profile_contact(request, contact_id):
     return render(request, html_location, response_dict)
 
 @login_required
-def list_contacts_by_id(request, customer_id):
-    customer_id = uncrip(customer_id)
+def list_contacts_by_id(request):
+    customer_id = request.user.customer.customer_id
     contacts = Contacts.objects.filter(customer_id=customer_id)
     html_location = parse_html_path(CONTACT_PATH,'list_contacts')
 

@@ -108,7 +108,7 @@ def admin_user_profile(request,email):
     email = uncrip(email)
     try:
         custom_user = get_object_or_404(CustomUser, email=email)
-        html_location = parse_html_path(CUSTOMUSER_PATH,'profile')
+        html_location = parse_html_path(CUSTOMUSER_PATH,'admin_profile')
         response_dict = {
             'user': custom_user,
             'new_user': reverse('new_user',args=[crip(str(custom_user.customer_id))])
