@@ -43,7 +43,7 @@ urlpatterns = [
     path('contract-item/<str:contract_id>', b.new_contract_item, name='new_contract_item'),
 
     #CONTACT
-    path('new-contact/', b.new_contact, name='new_contact'),
+    path('new-contact/<str:customer_id>', b.new_contact, name='new_contact'),
     path('profile-contact/<str:contact_id>', b.profile_contact, name='profile_contact'),
     path('list-contacts/', b.list_contacts_by_id, name='list_contacts_by_id'),
     path('admin-list-contacts/', b.list_contacts, name='list_contacts'),

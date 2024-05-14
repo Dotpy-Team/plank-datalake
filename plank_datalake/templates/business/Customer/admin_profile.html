@@ -1,5 +1,142 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
+
+<div class="container">
+
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col mt-2">
+                    <a href="{{contact_list}}"><button class="btn btn-primary mt-2">Contatos</button></a>
+                </div>
+
+                <div class="col">
+                    <a href="{{contract_list}}"><button class="btn btn-primary mt-2">Contratos</button></a>
+                </div>
+
+                <div class="col">
+                    <a href="{{payments}}"><button class="btn btn-primary mt-2">Pagamentos</button></a>
+                </div>
+
+                <div class="col">
+                    <a href=""><button class="btn btn-primary mt-2">Follow-up</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row mt-2 mb-2">
+                <div class="col">
+                    <img src="{% static 'images/google-37.png' %}" alt="Bootstrap" width="100" height="100" class="rounded-circle border border-blue">
+                </div>
+
+                <div class="col">
+                    <div class="row mt-2">
+                        {{ customer.str_name }}
+                    </div>
+                    <div class="row mt-2">
+                    Rua tal
+                    </div>
+                    <div class="row mt-2">
+                        {{ customer.str_telefone}}
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row mt-2">
+                        {{ customer.str_setor }}
+                    </div>
+                    <div class="row mt-2">
+                        {{ customer.str_size }}
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        {{ customer.str_customer_type }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        AQUI VÃO FICAR ALGUNS GRAFICOS
+    </div>
+
+
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="col">
+                    <p><b>Contratos</b></p>
+                </div>
+            </div>
+        
+            <div class="row mt-2 mb-2">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Dt de Inicio</th>
+                            <th scope="col">Dt Fim</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contract in contracts %}
+                        <tr>
+                            <td>{{ contract.str_title }}</td>
+                            <td>{{ contract.dth_start_at }}</td>
+                            <td>{{ contract.dth_end_at}}</td>
+                            <td>{{ contract.str_status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row mt-2">
+                <div class="col">
+                    <p><b>Contatos</b></p>
+                </div>
+            </div>
+        
+            <div class="row mt-2 mb-2">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Sobrenome</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Nivel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>{{ contact.str_name }}</td>
+                            <td>{{ contact.dth_start_at }}</td>
+                            <td>{{ contact.str_phone_number}}</td>
+                            <td>{{ contact.str_type_contact }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
+
 
 <div class='container'>
     <div class="card">
@@ -64,5 +201,3 @@
         </div>
     </div>
 </div>
-
-{% endblock %}

@@ -23,13 +23,15 @@ def parse_html_path(template_path,page):
 CONTACT_PATH = 'business/Contact/'
 
 @login_required
-def new_contact(request):
+def new_contact(request, customer_id):
     try:
-        customer_id = request.user.customer.customer_id
+        customer_id = uncrip(customer_id)
         customer_instance = Customer.objects.get(customer_id=customer_id)
     except Customer.DoesNotExist:
         return redirect('home')
     
+    # customer = uncrip(customer_id)
+
     if request.method == 'POST':
         form = ContactsForm(request.POST) 
         html_location = parse_html_path(CONTACT_PATH,'new_contact')
@@ -37,7 +39,7 @@ def new_contact(request):
         if form.is_valid():
             contact = form.save(commit=False)
             contact.customer = customer_instance
-            contact.save()
+            form.save()
             return redirect('profile_contact', crip(str(contact.contact_id)))
         else:
             print(form.errors)

@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from business.models import Customer,Contract
+from business.models import Customer,Contract, Contacts
 from business.forms import CustomerForm
 import base64
 
@@ -61,9 +61,14 @@ def admin_profile_customer(request,customer_id):
     try:
         customer_id = uncrip(customer_id)
         customer = get_object_or_404(Customer, customer_id=customer_id)
+        contracts = Contract.objects.filter(customer_id=customer)
+        contacts = Contacts.objects.filter(customer_id=customer_id)
         html_location = parse_html_path(CUSTUMER_PATH,'admin_profile')
         response_dict = {
             'customer': customer,
+            "contracts": contracts,
+            "contacts": contacts,
+            "contact_list": reverse('list_contacts'), 
             'users':reverse('users_list_by_id_customer',args=[crip(str(customer.customer_id))]),
             'new_user': reverse('new_user',args=[crip(str(customer_id))]),
             'new_table': reverse('new_table_by_id',args=[crip(str(customer_id))]),
