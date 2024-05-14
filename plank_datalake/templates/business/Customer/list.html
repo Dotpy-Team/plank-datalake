@@ -30,26 +30,31 @@
 
     <div class="row"> 
         <div class="col">
-            {% for customer in customers%}
             <div class="row">
-                <div class="card mt-2" style="width: 18rem;">
-                    <div class="card-body">
-                        <div class="row">
-                            <img class="card-img-top" src="{% static 'images/google-37.png'%}" alt="Bootstrap"> 
+                {% for customer in customers%}
+                <div class="col-md-4 mb-3">
+                    <div class="card mt-2" style="width: 18rem;">
+                        <div class="card-body">
+                            <div class="row">
+                                <img class="card-img-top" src="{% static 'images/google-37.png'%}" alt="Bootstrap"> 
+                            </div>
+                            <div class="row mt-2 justify-content-center">
+                                {{ customer.str_name }}
+                            </div>
+                            <div class="row mt-2 justify-content-center">
+                                {{ customer.str_setor }}
+                            </div>
+                            <div class="row mt-2 justify-content-center">
+                                {{ customer.str_customer_type }}
+                            </div>                
                         </div>
-                        <div class="row mt-2 justify-content-center">
-                            {{ customer.str_name }}
-                        </div>
-                        <div class="row mt-2 justify-content-center">
-                            {{ customer.str_setor }}
-                        </div>
-                        <div class="row mt-2 justify-content-center">
-                            {{ customer.str_customer_type }}
-                        </div>                
                     </div>
-                </div>           
+                </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                <div class="row mt-2">
+            {% endif %}
+                {% endfor %}        
             </div>
-            {% endfor %}
         </div>
     </div>
 
