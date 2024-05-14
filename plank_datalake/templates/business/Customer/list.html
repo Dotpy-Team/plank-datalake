@@ -1,8 +1,65 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
-
 <div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <a href=""><button class="btn btn-primary mt-3 text-rigth">Setor</button></a>
+                </div>
+
+                <div class="col">
+                    <a href=""><button class="btn btn-primary mt-3 text-rigth">Status</button></a>
+                </div>
+
+                <div class="col">
+                    <input type="text">
+                </div>
+                <div class="col">
+                    <a href=""><button class="btn btn-primary mt-3 text-rigth">Buscar</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center" style="text-align: center;">
+        <p>Lista de Usuários</p>
+    </div>
+
+    <div class="row"> 
+        <div class="col">
+            {% for customer in customers%}
+            <div class="row">
+                <div class="card mt-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <img class="card-img-top" src="{% static 'images/google-37.png'%}" alt="Bootstrap"> 
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            {{ customer.str_name }}
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            {{ customer.str_setor }}
+                        </div>
+                        <div class="row mt-2 justify-content-center">
+                            {{ customer.str_customer_type }}
+                        </div>                
+                    </div>
+                </div>           
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% comment %} <div class="container">
     <div class="card">
         <div class="card-header">
             <h3 class="text-primary text-center">
@@ -46,6 +103,4 @@
 
         </div>
     </div>
-</div>
-
-{% endblock %}
+</div> {% endcomment %}
