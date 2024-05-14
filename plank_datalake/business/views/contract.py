@@ -61,8 +61,7 @@ def new_contract(request,customer_id):
     return render(request, html_location, dict_form)
 
 @login_required
-def  profile_contract(request,contract_id):
-    # try:
+def profile_contract(request, contract_id):
     contract_id = uncrip(contract_id)
     contract = get_object_or_404(Contract, contract_id=contract_id)
     contract_item = ContractItem.objects.select_related('contractitem__service').filter(contract_id=contract_id)

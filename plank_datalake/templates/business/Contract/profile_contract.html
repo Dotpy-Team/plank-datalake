@@ -1,47 +1,108 @@
 {% extends 'common/base.html' %}
+{% load static%}
 {% block content %}
 
-<div class="container justify-content-center">
-    <div class="card border-primary" style="max-width: 100rem;">
-        <div class='card-header'><b>Detalhes:</b></div>
+<div class="container">
+    <div class="card">
         <div class="card-body">
-            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
-            <h3 class="card-text-secondary-emphasis">Nome:</h3>
-            <p class="card-text">{{ contract.str_title }}</p>
-            <h3 class="card-text-secondary-emphasis">Status:</h3>
-            <p class="card-text">{{ contract.str_status }}</p>
-            <h3 class="card-text-secondary-emphasis">Descrição:</h3>
-            <p class="card-text">{{ contract.str_object }}</p>
+            <div class="row mt-2 mb-2">
+                <div class="col">
+                    <img src="{% static 'images/google-37.png'%}" alt="Bootstrap" width="100" height="100" class="rounded-circle border border-blue">
+                </div>
 
-            <a href="{{new_contract_item}}" class="btn btn-primary mt-2">Adicionar Item ao Contrato</a></td>
+                <div class="col">
+                    <div class="row mt-2">
+                        {{ contract.customer.str_name }}
+                    </div>
+                    <div class="row mt-2">
+                    Rua tal
+                    </div>
+                    <div class="row mt-2">
+                        {{ contract.customer.str_telefone}}
+                    </div>
+                </div>
 
-            <p> Itens deste contrato</p>
+                <div class="col">
+                    <div class="row mt-2">
+                        {{ contract.customer.str_setor }}
+                    </div>
+                    <div class="row mt-2">
+                        {{ contract.customer.str_size }}
+                    </div>
+                </div>
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>#id</th>
-                        <th>Titulo</th>
-                        <th>Descricao</th>
-                        <th>Valor monetario</th>
-                        <th>Quantidade</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+                <div class="col">
+                    <div class="row">
+                        {{ contract.customer.str_customer_type }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <tbody>
-                    {% for item in contract.contractitem_set.all %}
-                    <tr>
-                        <td><a href="{{item.detail_url}}">{{ item.service.service_id }}</a></td>
-                        <td>{{ item.service.str_title }}</td>
-                        <td>{{ item.service.str_descr }}</td>
-                        <td>{{ item.service.int_price }}</td>
-                        <td>{{ item.service.int_qnt }}</td>
-                        <td>{{ item.service.str_status }}</td>
-                    </tr>
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <p>Contrato</p>
+                    </div>
+
+                    <div class="row">
+                        <p>DotPy Software</p>
+                    </div>
+
+                    <div class="row">
+                        <p>12345678-0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row"><hr></div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="row mt-2">
+                        {{ contract.dth_start_at }}
+                    </div>
+
+                    <div class="row mt-2">
+                        {{ contract.dth_end_at }}
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row mt-2">
+                        <a href=""><button class="btn btn-primary mt-3 text-rigth">Novo Item</button></a>
+                    </div>
+                    <div class="col">
+                        <p>R$5.000</p>
+                    </div>
+                </div>            
+            </div>
+
+            <div class="row"><hr></div>
+
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cod Item</th>
+                            <th scope="col">Desc</th>
+                            <th scope="col">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in contracitem %}
+                        <tr>
+                            <td scope="row">{{ item.item_id }}</td>
+                            <td scope="row">{{ item.str_descr }}</td>
+                            <td scope="row">{{ item.values }}</td>
+                        </tr>
                     {% endfor %}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
