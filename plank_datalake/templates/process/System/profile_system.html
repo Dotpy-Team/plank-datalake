@@ -1,96 +1,89 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
-<div class='container'>
+<div class="container">
 	<div class="row">
-		<ul class="nav">
-			<li class="nav-item">
-				<a class="nav-link active" aria-current="page" href="#">Detalhes</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">DataSets</a>
-			</li>
-			{% if system.str_table_type == 'Google Sheets' %}
-			<li class="nav-item">
-				<a class="nav-link" href="#">Configurações Google Sheets</a>
-			</li>
 
-			{% elif system.str_table_type == 'PostGre' %}
-			<li class="nav-item">
-				<a class="nav-link" href="#">Configurações PostGre</a>
-			</li>
+	<div class="col">
+		<div class="row mt-2 mb-2">
 
-			{% elif system.str_table_type == 'MySql'%}
-			<li class="nav-item">
-				<a class="nav-link" href="#">Configurações MySQL</a>
-			</li>
-
-			{% elif system.str_table_type == 'SQLite'%}
-			<li class="nav-item">
-				<a class="nav-link" href="#">Configurações SQLite</a>
-			</li>
-			{% endif %}
-
-		</ul>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4">
-			<div class="card border-primary">
-				<h5 class="card-header">
-					Sistema
-				</h5>
+			<div class="card">
 				<div class="card-body">
-					<p class="card-text">Nome do sistema: {{ system.str_title }}</p>
-                    <p class="card-text">Descrição: {{ system.str_desc }}</p>
-                    <p class="card-text">Status: {{ system.str_status }}</p>
-				</div>
-				<div class="card-footer">
+					<div class="row">
+						<div class="col">
+							<img src="{% static  system.img_path  %}" alt="Bootstrap" width='100' height='100'>
+						</div> 
+
+						<div class="col">
+							<div class="row mt-2">
+								{{ system.str_title }}
+							</div>
+							<div class="row mt-2">
+								{{ system.str_desc }}
+							</div>		
+						</div>
+
+						<div class="col">
+							<div class="row mt-2">
+								{{ system.str_status }}
+							</div>
+							<div class="row mt-2">
+								Responsavel:
+							</div>
+							<div class="row mt-2">
+								Aprovador:
+							</div>
+							<div class="row mt-2">
+								Criação: {{ system.dth_start_At}}
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>	
-	</div>
 
-	<div class="row md-2">
-		<div class="col-md-4">
-			<div class="card border-primary">
-				<h5 class="card-header">
-					Datasets
-				</h5>
-				<div class="card-body">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>#id</th>
-								<th>Nome</th>
-								<th>Descricao</th>
-								<th>Descricao IA</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for dataset in datasets %}
-							<tr>
-								<td><a href="{{dataset.detail_url}}">{{ dataset.system_id }}</a></td>
-								<td>{{ dataset.str_title }}</td>
-								<td>{{ dataset.str_desc }}</td>
-								<td>{{ dataset.str_desc_ia }}</td>                    
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
+		</div>
 
-					<div class="col">
-						<a href="{{new_dataset}}" class="btn btn-primary btn-block">Novo DataSet</a>
-					</div>
-		
+		<div class="row mt-2 mb-2">
+			<div class="col">
+				<div class="row" style='text-align: center;'>
+					<p>Datasets</p>
 				</div>
 			</div>
 		</div>
+
+		<div class="row mt-2 mb-2">
+			<div class="col">
+				<div class="row">
+					{% for dataset in datasets  %}
+						<div class="col-md-4 mb-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="row mt-2 justify-content-center">
+										{{ dataset.str_title }}
+									</div>
+									<div class="row mt-2 justify-content-center">
+										{{ dataset.str_desc }}
+									</div>
+									<div class="row mt-2 justify-content-center">
+										{{ dataset.dth_created_at }}
+									</div>
+								</div>
+							</div>
+						</div>
+				{% if forloop.counter|divisibleby:3 and not forloop.last%}
+					<div class="row mt-2"></div>
+				{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
 	</div>
 
+	</div>
 </div>
 
 {% endblock %}
 
-		<div class="col-md-8">
 			

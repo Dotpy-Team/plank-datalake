@@ -52,7 +52,7 @@ def new_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.str_table_type = 'System'
+            system.str_table_type = 'system'
             system.customer = customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -72,6 +72,9 @@ def new_system(request):
 def profile_system(request,system_id):
     system_id = uncrip(system_id)
     system = get_object_or_404(System, system_id=system_id)
+    # caminho_da_imagem = "{% static 'img/sua_imagem.jpg' %}"
+    system.img_path = f"images/{system.str_table_type}.png"
+    print(system.img_path)
     datasets = DataSet.objects.filter(system_id=system_id)
 
     for dataset in datasets:
@@ -145,7 +148,7 @@ def new_sheets_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.str_table_type = 'Google Sheets'
+            system.str_table_type = 'google_sheets'
             system.customer =customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -181,7 +184,7 @@ def new_postgre_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.str_table_type = 'PostGre'
+            system.str_table_type = 'postgre'
             system.customer = customer_instance 
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -217,7 +220,7 @@ def new_mysql_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.str_table_type = 'MySql'
+            system.str_table_type = 'mysql'
             system.customer = customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))
@@ -253,7 +256,7 @@ def new_sqlite_system(request):
 
         if form.is_valid():
             system = form.save(commit=False)
-            system.str_table_type = 'SQLite'
+            system.str_table_type = 'sqlite'
             system.customer = customer_instance
             system.save()
             return redirect('profile_system', crip(str(system.system_id)))

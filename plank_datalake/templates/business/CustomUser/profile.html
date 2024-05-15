@@ -3,82 +3,121 @@
 {% block content %}
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="card">
-
-				<h5 class="card-header">Perfil do usuário</h5>
-				<div class="card-body">
-                    <div class="panel">
-                        <div class="user-heading round">
-                            <a href="#">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
-                            </a>
-                            <h1>{{ user.first_name }}</h1>
-                            <p>{{ user.email }}</p>
-                    </div>
-    
-                    <p class="card-text">Nome: {{ user.first_name }}</p>
-                    <p class="card-text">Cargo: {{ user.str_cargo }}</p>
-                    <p class="card-text">CPF: {{ user.str_cpf }}</p>
-                    <p class="card-text">Email: {{ user.email }}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-        <div class="col-md-12">
-            <div class="card mt-4">
-                <h5 class="card-header">Meus processos</h5>
-                    <div class="card-body">
-
-                        <table class="table mt-4">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product</th>
-                                    <th>Payment Taken</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>TB - Monthly</td>
-                                    <td>01/04/2012</td>
-                                    <td>Default</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>TB - Monthly</td>
-                                    <td>01/04/2012</td>
-                                    <td>Default</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>TB - Monthly</td>
-                                    <td>01/04/2012</td>
-                                    <td>Default</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>TB - Monthly</td>
-                                    <td>01/04/2012</td>
-                                    <td>Default</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>TB - Monthly</td>
-                                    <td>01/04/2012</td>
-                                    <td>Default</td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <a href=""><button class="btn btn-primary mt-3 text-rigth">Grupo de Acesso</button></a>
+                        </div>
+                        <div class="col">
+                            <a href=""><button class="btn btn-primary mt-3 text-rigth">Staff</button></a>
+                        </div>
+                        <div class="col">
+                            <a href=""><button class="btn btn-primary mt-3 text-rigth">Historico de Login</button></a>
+                        </div>
+                        <div class="col">
+                            <a href=""><button class="btn btn-primary mt-3 text-rigth">Alternar Senha</button></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-	</div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <img src="{% static 'images/google-37.png'%}" alt="Bootstrap" width="100" height="100" class="rounded-circle mx-auto d-block border border-blue">                        
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {{ user.str_cargo }}                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        Nome: {{ user.first_name }}    
+                    </div>
+                    <div class="row">
+                        Sobrenome: {{ user.last_name }}
+                    </div>
+                    <div class="row">
+                        Telefone: {{ user.str_telefone }}
+                    </div>
+                    <div>
+                        E-mail: {{ user.email }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        Ícone_Insta | @xpto_xpto
+                    </div>
+                    <div class="row">
+                        Ícone_Linkedin | xpto xpto
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="row justify-content-center">
+                                Processos envolvidos
+                            </div>
+                            <div class="row mt-2">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Titulo</th>
+                                            <th scope="col">Data de Criação</th>
+                                            <th scope="col">Tipo Env.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for raci in activity %}
+                                        <tr>
+                                            <td scope="row">{{ raci.str_title }}</td>
+                                            <td scope="row">{{ raci.dth_create_at }}</td>
+                                            {% comment %} <td scope="row">{{ raci. }}</td> {% endcomment %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
