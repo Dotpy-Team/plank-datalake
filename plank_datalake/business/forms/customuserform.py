@@ -30,12 +30,26 @@ class CustomUserForm(forms.ModelForm):
         attrs={'class': 'form-control'}),
         required=False
     )
+
     str_address = forms.CharField(
         label='Endereço',
         widget=forms.TextInput(
         attrs={'class': 'form-control'}),
         required=False
     )
+
+    str_address_number = forms.CharField(
+        label='Número',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    str_postal_cod = forms.CharField(
+        label="CEP",
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
+
     email = forms.EmailField(
         label='Email *',
         widget=forms.EmailInput(attrs={'class': 'form-control'}),
@@ -56,6 +70,8 @@ class CustomUserForm(forms.ModelForm):
             'str_telefone',
             'str_cargo',
             'str_address',
+            'str_address_number',
+            'str_postal_cod',
             'email', 
             'password'
         ]
