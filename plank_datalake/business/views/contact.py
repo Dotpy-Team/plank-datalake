@@ -29,17 +29,15 @@ def new_contact(request, customer_id):
         customer_instance = Customer.objects.get(customer_id=customer_id)
     except Customer.DoesNotExist:
         return redirect('home')
-    
-    # customer = uncrip(customer_id)
+
+    html_location = parse_html_path(CONTACT_PATH,'new_contact')
 
     if request.method == 'POST':
         form = ContactsForm(request.POST) 
-        html_location = parse_html_path(CONTACT_PATH,'new_contact')
-
         if form.is_valid():
             contact = form.save(commit=False)
             contact.customer = customer_instance
-            form.save()
+            contact.save()
             return redirect('profile_contact', crip(str(contact.contact_id)))
         else:
             print(form.errors)
@@ -48,7 +46,7 @@ def new_contact(request, customer_id):
     else:
         form = ContactsForm()
         html_location = parse_html_path(CONTACT_PATH,'new_contact')
-        response_dict = { 'form': 'form'}
+        response_dict = { 'form': form}
         return render(request, html_location, response_dict)
 
 @login_required   

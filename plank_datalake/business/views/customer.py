@@ -46,6 +46,7 @@ def new_customer(request):
 def admin_list_customers(request):
     customers = Customer.objects.all()
     html_location = parse_html_path(CUSTUMER_PATH,'list')
+
     for customer in customers:
         customer.detail_url = reverse(
             'admin_profile_customer',
@@ -53,7 +54,9 @@ def admin_list_customers(request):
         )
         customer.save()
 
-    response_dict = {'customers': customers}
+    response_dict = {
+        'customers': customers,
+    }
     return render(request, html_location, response_dict)
 
 @login_required
@@ -74,6 +77,7 @@ def admin_profile_customer(request,customer_id):
             'new_table': reverse('new_table_by_id',args=[crip(str(customer_id))]),
             'new_system': reverse('new_system',args=[crip(str(customer_id))]),
             'new_task': reverse('new_task',args=[crip(str(customer_id))]),
+            'new_contact': reverse('new_contact', args=[crip(str(customer_id))]),
             # 'view_tables': reverse('view_tables',args=[crip(str(id_customer))])
             'new_contract': reverse('new_contract',args=[crip(str(customer_id))])
         }
