@@ -2,40 +2,81 @@
 {% block content %}
 
 <div class="container">
-    <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Novo Contato</h3>    
-        </div>
+    <div class="row">
+    <div class="col">
 
-        <div class="card-body">
-            <form method="post" class="form">
+        <div class="card">
+        
+            <div class="card-header text-center">
+                <h3 class="text-primary">Novo Contato</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" class="form">
 
                 {% csrf_token %}
                 
-                <h4>Informações do contato:</h4>
-
-                <div class="row mt-2 justify-content-center">
+                <div class="row">
+                    <h4>Nome:</h4>
+                </div>
+                
+                <div class="row mt-3">
                     <div class="col">
-                    {{ form.str_name }}
-                    <small><p>Nome.</p></small>
-                        {% if form.str_name.errors %}
+                        {{ form.str_first_name }}
+                        <small><p>Nome.</p></small>
+                        {% if form.str_first_name.errors %}
                             <div class="text-danger">
-                                {{ form.str_name.errors }}
+                                {{ form.str_first_name.errors }}
                             </div>
                         {% endif %}
                     </div>
                     <div class="col">
-                        {{ form.email }}
-                        <small><p>E-mail.</p></small>
-                        {% if form.email.errors %}
+                        {{ form.str_last_name }}
+                        <small><p>Sobrenome.</p></small>
+                        {% if form.str_last_name.errors %}
                             <div class="text-danger">
-                                {{ form.email.errors }}
+                                {{ form.str_last_name.errors }}
                             </div>
                         {% endif %}
-                    </div>   
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            {{ form.str_type_contact }}
+                            <small><p>Tipo Contato</p></small>
+                            {% if form.str_type_contact.errors %}
+                                <div class="text-danger">
+                                    {{ form.str_type_contact.errors }}
+                                </div>
+                            {% endif %} 
+                        </div>
+                    </div>     
                 </div>
 
-                <div class='row mt-2 justify-content-center'>
+                <div class="row mt-2">
+                    <h4>Informações de contato:</h4>
+                </div>
+                
+                <div class="row mt-3">
+                     <div class="col">
+                        {{ form.str_email }}
+                        <small><p>E-mail.</p></small>
+                        {% if form.str_email.errors %}
+                            <div class="text-danger">
+                                {{ form.str_email.errors }}
+                            </div>
+                        {% endif %}
+                     </div>
+                     <div class="col">
+                        {{ form.str_comercial_email }}
+                        <small><p>E-mail Comercial.</p></small>
+                        {% if form.str_comercial_email.errors %}
+                            <div class="text-danger">
+                                {{ form.str_comercial_email.errors }}
+                            </div>
+                        {% endif %}
+                     </div>
+                </div>
+
+                <div class="row mt-2">
                     <div class="col">
                         {{ form.str_phone_number }}
                         <small><p>Telefone.</p></small>
@@ -46,22 +87,37 @@
                         {% endif %}
                     </div>
                     <div class="col">
-                        {{ form.str_type_contact }}
-                        <small><p>Tipo do contato.</p></small>
-                        {% if form.str_type_contact.errors %}
+                        {{ form.str_comercial_phone_number }}
+                        <small><p>Telefone Comercial.</p></small>
+                        {% if form.str_comercial_phone_number.errors %}
                             <div class="text-danger">
-                                {{ form.str_type_contact.errors }}
+                                {{ form.str_comercial_phone_number.errors }}
                             </div>
                         {% endif %}
                     </div>
+                    <div class="col">
+                        {{ form.str_whatsapp_number }}
+                        <small><p>WhatsApp</p></small>
+                        {% if form.str_whatsapp_number.errors %}
+                            <div class="text-danger">
+                                {{ form.str_whatsapp_number.errors }}
+                            </div>
+                        {% endif %}          
+                    </div>
                 </div>
 
-                <div class="col" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+                <div class="row mt-3">
+                    <div class="col" style="text-align: right;">
+                        <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+                    </div>
                 </div>
-                
-            </form>
+
+                </form>
+            </div>
+
         </div>
+
+    </div>
     </div>
 </div>
 
