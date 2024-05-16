@@ -14,7 +14,7 @@ class System(models.Model):
     str_desc = models.CharField(max_length=200, null=True, blank=True)
     str_desc_ia = models.CharField(max_length=200, null=True, blank=True)
     dth_start_at = models.DateField(auto_now=True)
-    str_table_type = models.CharField(max_length=50)
+    str_system_type = models.CharField(max_length=50)
 
     #Google Sheets
     str_type = models.CharField(max_length=80, blank=True, null=True)

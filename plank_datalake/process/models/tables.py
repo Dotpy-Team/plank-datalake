@@ -10,6 +10,8 @@ class Tables(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     dataset = models.ForeignKey(DataSet, on_delete=models.CASCADE, null=True, blank=True)
     step = models.ForeignKey(Step, on_delete=models.CASCADE, null=True, blank=True)
+    trigger = models.ForeignKey(Trigger, on_delete=models.CASCADE, null=True, blank=True)
+
     layer = models.CharField(max_length=20)
     str_frequency = models.CharField(
         max_length=20, choices=[
@@ -63,11 +65,46 @@ class Tables(models.Model):
     int_number_of_rows = models.IntegerField(null=True, blank=True)
     float_perc_growth = models.FloatField(null=True, blank=True)
 
-    trigger = models.ForeignKey(
-        Trigger,
-        on_delete=models.CASCADE, 
-        null=True, 
-        blank=True
+    str_archive_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('json', 'json'),
+            ('txt', 'txt'),
+            ('parquet', 'parquet'),
+            ('csv', 'csv')
+        ]
+    )
+
+    str_separado = models.CharField(
+        max_length=10,
+        choices=[
+            (';', ';'),
+            (',', ','),
+            ('\t', '\t')
+        ]
+    )
+
+    str_delimitador = models.CharField(
+        max_length=10,
+        choices=[
+            ('\n', '\n')
+        ]
+    )
+
+    str_header = models.CharField(
+        max_length=10,
+        choices=[
+            ('True', 'True'),
+            ('False', 'False')
+        ]
+    )
+
+    str_trailer = models.CharField(
+        max_length=10,
+        choices=[
+            ('True', 'True'),
+            ('False', 'False')
+        ]
     )
 
     def __str__(self):
