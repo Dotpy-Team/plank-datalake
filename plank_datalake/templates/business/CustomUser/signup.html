@@ -73,13 +73,35 @@
                 <div class='row mt-2 justify-content-center'>
                     <div class="col">
                         {{ form.str_address }}
-                        <small><p>Endereço.</p></small>
+                        <small><p>Rua/Avenida.</p></small>
                         {% if form.str_address.errors %}
                             <div class="text-danger">
                                 {{ form.str_address.errors }}
                             </div>
                         {% endif %}
                     </div>
+                    <div class="col-md-2">
+                        {{ form.str_postal_cod }}
+                        <small><p>CEP</p></small>
+                        {% if form.str_postal_cod.errors %}
+                            <div class="text-danger">
+                                {{ form.str_postal_cod.errors }}
+                            </div>
+                        {% endif %}                        
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.str_address_number }}
+                        <small><p>Número</p></small>
+                        {% if form.str_address_number.errors %}
+                            <div class="text-danger">
+                                {{ form.str_address_number.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+
                 </div>
 
 
