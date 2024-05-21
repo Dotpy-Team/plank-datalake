@@ -17,8 +17,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
-                                <th>Email</th>
+                                <th>Sobrenome</th>
+                                <th>E-mail</th>
+                                <th>E-mail Comercial</th>
                                 <th>Telefone</th>
+                                <th>Telefone Comercial</th>
                                 <th>Cargo</th>
                             </tr>
                         </thead>
@@ -26,9 +29,12 @@
                             {% for contact in contacts %}
                             <tr>
                                 <td><a href="{{contact.detail_url}}">{{ contact.contact_id }}</a></td>
-                                <td>{{ contact.str_name }}</td>
-                                <td>{{ contact.email }}</td> 
-                                <td>{{ contact.str_phone_number }}</td>  
+                                <td>{{ contact.str_first_name }}</td>
+                                <td>{{ contact.str_last_name }}</td>
+                                <td>{{ contact.str_email }}</td>
+                                <td>{{ contact.str_comercial_email }}</td>
+                                <td>{{ contact.str_phone_number }}</td>
+                                <td>{{ contact.str_comercial_phone_number }}</td>  
                                 <td>{{ contact.str_type_contact }}</td>              
                             </tr>
                             {% endfor %}
@@ -39,7 +45,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <a href="/new-contact/" class="btn btn-primary mt-2">Novo Contato</a>
+                    <a href="{{new_contact}}" class="btn btn-primary mt-2">Novo Contato</a>
                 </div>
             </div>
         </div>

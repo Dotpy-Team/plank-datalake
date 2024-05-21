@@ -28,7 +28,7 @@ def new_contact(request, customer_id):
         customer_id = uncrip(customer_id)
         customer_instance = Customer.objects.get(customer_id=customer_id)
     except Customer.DoesNotExist:
-        return redirect('home')
+        return redirect('home_page')
 
     html_location = parse_html_path(CONTACT_PATH,'new_contact')
 
@@ -71,7 +71,8 @@ def list_contacts_by_id(request):
         contact.save()
 
     response_dict = {
-        'contacts': contacts, 
+        'contacts': contacts,
+        'new_contact': reverse('new_contact', args=[crip(str(customer_id))])
     }
     return render(request, html_location, response_dict)
 
@@ -79,5 +80,16 @@ def list_contacts_by_id(request):
 def list_contacts(request):
     contacts = Contacts.objects.all()
     html_location = parse_html_path(CONTACT_PATH,'list_contacts')
-    response_dict = {'contacts': contacts}
+
+    for contact in contacts:
+        contact.detail_url = reverse(
+            'profile_contact',
+            args=[crip(str(contact.contact_id))]
+        )
+
+        contact.save()
+
+    response_dict = {
+        'contacts': contacts
+    }
     return render(request, html_location, response_dict)

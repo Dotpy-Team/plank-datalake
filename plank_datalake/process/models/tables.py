@@ -75,7 +75,7 @@ class Tables(models.Model):
         ]
     )
 
-    str_separado = models.CharField(
+    str_separador = models.CharField(
         max_length=10,
         choices=[
             (';', ';'),
