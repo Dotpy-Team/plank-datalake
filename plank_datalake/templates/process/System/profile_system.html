@@ -7,52 +7,52 @@
 
 	<div class="col">
 		<div class="row mt-2 mb-2">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<div class="col">
+								<img src="{% static  system.img_path  %}" alt="Bootstrap" width='100' height='100'>
+							</div> 
 
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<div class="col">
-							<img src="{% static  system.img_path  %}" alt="Bootstrap" width='100' height='100'>
-						</div> 
+							<div class="col">
+								<div class="row mt-2">
+									{{ system.str_title }}
+								</div>
+								<div class="row mt-2">
+									{{ system.str_desc }}
+								</div>		
+							</div>
 
-						<div class="col">
-							<div class="row mt-2">
-								{{ system.str_title }}
-							</div>
-							<div class="row mt-2">
-								{{ system.str_desc }}
-							</div>		
-						</div>
-
-						<div class="col">
-							<div class="row mt-2">
-								{{ system.str_status }}
-							</div>
-							<div class="row mt-2">
-								Responsavel:
-							</div>
-							<div class="row mt-2">
-								Aprovador:
-							</div>
-							<div class="row mt-2">
-								Criação: {{ system.dth_start_At}}
+							<div class="col">
+								<div class="row mt-2">
+									{{ system.str_status }}
+								</div>
+								<div class="row mt-2">
+									Responsavel:
+								</div>
+								<div class="row mt-2">
+									Aprovador:
+								</div>
+								<div class="row mt-2">
+									Criação: {{ system.dth_start_At}}
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 
-		<div class="row mt-2 mb-2">
+		<div class="row mt-4 mb-2">
 			<div class="col">
 				<div class="row" style='text-align: center;'>
 					<p>Datasets</p>
 				</div>
 			</div>
 		</div>
-
-		<div class="row mt-2 mb-2">
+		
+		<div class="row mt-2">
 			<div class="col">
 				<div class="row">
 					{% for dataset in datasets  %}
@@ -68,6 +68,11 @@
 									<div class="row mt-2 justify-content-center">
 										{{ dataset.dth_created_at }}
 									</div>
+									<div class="row mt-2">
+										<div class="col" style="text-align: right;" >
+											<a href="{{dataset.detail_url}}">ver mais</a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -76,6 +81,12 @@
 				{% endif %}
 					{% endfor %}
 				</div>
+			</div>
+		</div>
+
+		<div class="row mt-2">
+			<div class="col" style="text-align: left;">
+				<a href="{{new_dataset}}"><button type="submit" class="btn btn-primary mt-3 text-rigth">Adicionar Dataset</button></a>
 			</div>
 		</div>
 
