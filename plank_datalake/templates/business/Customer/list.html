@@ -34,7 +34,7 @@
                     <div class="card mt-2" style="width: 18rem;">
                         <div class="card-body">
                             <div class="row">
-                                <img class="card-img-top" src="{% static 'images/google-37.png'%}" alt="Bootstrap"> 
+                                <img class="card-img-top" src="{% static 'images/dotpy_logo.png'%}" alt="Bootstrap">
                             </div>
                             <div class="row mt-2 justify-content-center">
                                 {{ customer.str_name }}
@@ -44,7 +44,11 @@
                             </div>
                             <div class="row mt-2 justify-content-center">
                                 {{ customer.str_customer_type }}
-                            </div>                
+                            </div>  
+                            <div class="row mt-4">
+                                {% comment %} Botão provisório {% endcomment %}
+                                <a href="{{customer.detail_url}}"><button class="btn btn-primary mt-2 text-rigth"> Ver mais</button></a> 
+                            </div>              
                         </div>
                     </div>
                 </div>

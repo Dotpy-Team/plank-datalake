@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col mt-2">
-                    <a href="{{contact_list}}"><button class="btn btn-primary mt-2">Contatos</button></a>
+                    <a href="{{new_contact}}"><button class="btn btn-primary mt-2">Novo Contato</button></a>
                 </div>
 
                 <div class="col">
@@ -122,8 +122,8 @@
                     <tbody>
                         {% for contact in contacts %}
                         <tr>
-                            <td>{{ contact.str_name }}</td>
-                            <td>{{ contact.dth_start_at }}</td>
+                            <td>{{ contact.str_first_name }}</td>
+                            <td>{{ contact.str_last_name }}</td>
                             <td>{{ contact.str_phone_number}}</td>
                             <td>{{ contact.str_type_contact }}</td>
                         </tr>

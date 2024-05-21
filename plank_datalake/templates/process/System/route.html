@@ -2,102 +2,139 @@
 {% load static %}
 {% block content %}
 
-<div class="container justify-contents-center">
+<div class="container">
 
-    <div class="container px-4 py-5" id="custom-cards">
-        <h2 class="pb-2 border-bottom">Home</h2>
+    <div class="row mt-4">    
 
-            <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-                <div class="col">
-
-                    <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-
-                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Genérico</h2>
-                            <ul class="d-flex list-unstyled mt-auto">
-                                <li class="me-auto">
-                                    <img src="{% static 'images/system_logo.png' %}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                                </li>
-                                <li class="d-flex align-items-center">
-                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                                    <small><a href="/system/">Adicionar Sistema</a></small>
-                                </li>
-                            </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://img.freepik.com/free-vector/watercolor-emerald-background_23-2150270303.jpg?w=1380&t=st=1710340442~exp=1710341042~hmac=9e127450abd9f16e3ae2be1e38d91ad11ef16d49e06ff3eacdfd5f34d8df9480');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Google Sheets</h2>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="{% static 'images/sheets_logo.png' %}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                                <small><a href="/sheets-system/">Adicionar Sistema</a></small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://as1.ftcdn.net/v2/jpg/01/91/78/32/1000_F_191783282_0TVrx5VrvrkpDHSKdjjI87HkbXJy5TMw.jpg');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">PostGrees.</h2>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="{% static 'images/postgre_logo.png'%}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                                <small><a href="/postgre-system/">Adicionar Sistema</a></small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://as1.ftcdn.net/v2/jpg/01/47/61/40/1000_F_147614099_3Bnup1ByI3CQ04x3Tr59rV7G6kGzrOal.jpg');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">MySQL.</h2>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="{% static 'images/mysql_logo.png'%}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                                <small><a href="/mysql-system/">Adicionar Sistema</a></small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('https://as2.ftcdn.net/v2/jpg/05/75/86/15/1000_F_575861586_Mf8awOi5lb9kAd9zMBcjNVHf8JbjAwdl.jpg');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">SQLite.</h2>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="{% static 'images/system_logo.png'%}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                                <small><a href="/sqlite-system/">Adicionar Sistema</a></small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
     </div>
 
 </div>
 
 {% endblock %}
+
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                UI/Web&amp;Graph design for teenagers 11-17&#160;years old
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                  04.11.2022
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                UX/UI Web-Design&#160;+ Mobile Design
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                  04.11.2022
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Annual package "Product+UX/UI+Graph designer&#160;2022"
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                  04.11.2022
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Graphic Design
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                  04.11.2022
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Motion Design
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                  30.11.2022
+                </span>
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Front-end development&#160;+ jQuery&#160;+ CMS
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg">
+              </div>
+              <div class="ag-courses-item_title">
+                Digital Marketing
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Interior Design
+              </div>
+      
+              <div class="ag-courses-item_date-box">
+                Start:
+                <span class="ag-courses-item_date">
+                  31.10.2022
+                </span>
+              </div>
+            </a>
+          </div>
+      
+        </div>
+      </div>
