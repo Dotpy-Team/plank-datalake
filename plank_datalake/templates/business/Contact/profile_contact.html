@@ -13,7 +13,7 @@
                 <h5 class="card-text-secondary-emphasis">Email:</h5>
             </div>
 
-            <div class="row mt-2">
+            <div class="row mt-2 mb-2">
                 <div class="col">
                     <small>E-mail: </small>{{ contact.str_email }}
                 </div>
@@ -26,10 +26,27 @@
                 <h5 class="card-text-secondary-emphasis">Telefone:</h5>
             </div>
 
+            <div class="row mt-2 mb-2">
+                <div class="col">
+                    <small>Telefone: </small> {{ contact.str_phone_number }}
+                </div>
+                <div class="col">
+                    <small>Telefone Comercial: </small> {{ contact.str_comercial_phone_number }}
+                </div>
+                <div class="col">
+                    <small>WhatsApp: </small> {{ contact.str_whatsapp_number }}
+                </div>
+            </div>
 
-            <p class="card-text">{{ contact.str_phone_number }}</p>
-            <h3 class="card-text-secondary-emphasis">Cargo:</h3>
-            <p class="card-text">{{ contact.str_type_contact }}</p>
+            <div class="row mt-2">  
+                <h5 class="card-text-secondary-emphasis">Cargo:</h5>
+            </div>
+
+            <div class="row mt-2 mb-2">
+                <div class="col">
+                    <small>Setor: </small> {{ contact.str_type_contact }} 
+                </div>       
+            </div>
         </div>
     </div>
 </div>

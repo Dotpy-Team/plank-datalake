@@ -98,7 +98,58 @@
                                 {{ form.trigger.errors }}
                             </div>
                         {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_archive_type }}
+                        <small><p>Tipo de Arquivo.</p></small>
+                        {% if form.str_archive_type %}
+                            <div class="text-danger">
+                                {{ form.str_archive_type.errors }}
+                            </div> 
+                        {% endif %}
                     </div>  
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_separador }}
+                        <small><p>Separador.</p></small>
+                        {% if form.str_separador %}
+                            <div class="text-danger">
+                                {{ form.str_separador.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.str_delimitador }}
+                        <small><p>Delimitador.</p></small>
+                        {% if form.str_delimitador %}
+                            <div class="text-danger">
+                                {{ form.str_delimitador.errors }}
+                            </div>
+                        {% endif %}                       
+                    </div> 
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_header }}
+                        <small><p>Header.</p></small>
+                        {% if form.str_header %}
+                            <div class="text-danger">
+                                {{ form.str_header.errors }}
+                            </div>
+                        {% endif %}  
+                    </div>
+                    <div class="col">
+                        {{ form.str_trailer }}
+                        <small><p>Trailer.</p></small>
+                        {% if form.str_trailer %}
+                            <div class="text-danger">
+                                {{ form.str_trailer.errors }}
+                            </div>
+                        {% endif %}  
+                    </div>
                 </div>
 
                 <div class="col" style="text-align: right;">

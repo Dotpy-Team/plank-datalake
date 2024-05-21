@@ -10,7 +10,7 @@ class Contacts(models.Model):
     str_comercial_email = models.CharField(max_length=80)
     str_phone_number = models.CharField(max_length=20)
     str_comercial_phone_number = models.CharField(max_length=20)
-    str_whatspp_number = models.CharField(max_length=20)
+    str_whatsapp_number = models.CharField(max_length=20)
     str_type_contact = models.CharField(
         max_length=30,
         choices=[

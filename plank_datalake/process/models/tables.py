@@ -87,7 +87,8 @@ class Tables(models.Model):
     str_delimitador = models.CharField(
         max_length=10,
         choices=[
-            ('\n', '\n')
+            ('\n', '\n'),
+            ('n', 'n')
         ]
     )
 

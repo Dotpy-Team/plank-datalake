@@ -72,6 +72,68 @@ class TablesForm(forms.ModelForm):
         required=False
     )
 
+    CHOICE_ARCHIVE_TYPE = (
+        ('json', 'json'),
+        ('txt', 'txt'),
+        ('parquet', 'parquet'),
+        ('csv', 'csv')
+    )
+
+    str_archive_type = forms.ChoiceField(
+        label= 'Tipo de arquivo',
+        choices= CHOICE_ARCHIVE_TYPE,
+        widget= forms.Select(attrs={'class': 'form-select'}),
+        required=True
+    )
+
+    CHOICE_SEPARADOR = (
+        (';', ';'),
+        (',', ','),
+        ('\t', '\t')
+    )
+
+    str_separador = forms.ChoiceField(
+        label= 'Separador',
+        choices= CHOICE_SEPARADOR,
+        widget= forms.Select(attrs={'class': 'form-select'}),
+        required= True
+    )
+
+    CHOICE_DELIMITADOR = (
+        ('\n', '\n'),
+        ('n', 'n')
+    )
+
+    str_delimitador = forms.ChoiceField(
+        label= 'Delimitador',
+        choices= CHOICE_DELIMITADOR,
+        widget= forms.Select(attrs={'class': 'form-select'}),
+        required=True
+    )
+
+    CHOICE_HEADER = (
+        ('True', 'True'),
+        ('False', 'False')
+    )
+
+    str_header = forms.ChoiceField(
+        label= 'Header',
+        choices= CHOICE_HEADER,
+        widget= forms.Select(attrs={'class': 'form-select'}),
+        required=True
+    )
+
+    CHOICE_TRAILER = (
+        ('True', 'True'),
+        ('False', 'False')
+    )
+
+    str_trailer = forms.ChoiceField(
+        label='Trailer',
+        choices= CHOICE_TRAILER,
+        widget= forms.Select(attrs={'class': 'form-select'}),
+        required=True
+    )
 
     class Meta:
         model = Tables
@@ -83,6 +145,11 @@ class TablesForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
+            "str_archive_type",
+            "str_separador",
+            "str_delimitador",
+            "str_header",
+            "str_trailer",
             "trigger"
         ]
 
@@ -158,6 +225,67 @@ class TablesStepForm(forms.ModelForm):
         required=False
     )
 
+    CHOICE_ARCHIVE_TYPE = (
+        ('json', 'json'),
+        ('txt', 'txt'),
+        ('parquet', 'parquet'),
+        ('csv', 'csv')
+    )
+
+    str_archive_type = forms.ChoiceField(
+        label= 'Tipo de arquivo',
+        choices= CHOICE_ARCHIVE_TYPE,
+        widget= forms.Select(attrs={'form': 'form-select'}),
+        required=True
+    )
+
+    CHOICE_SEPARADOR = (
+        (';', ';'),
+        (',', ','),
+        ('\t', '\t')
+    )
+
+    str_separador = forms.ChoiceField(
+        label= 'Separador',
+        choices= CHOICE_SEPARADOR,
+        widget= forms.Select(attrs={'form': 'form-select'}),
+        required= True
+    )
+
+    CHOICE_DELIMITADOR = (
+        ('\n', '\n')
+    )
+
+    str_delimitador = forms.ChoiceField(
+        label= 'Delimitador',
+        choices= CHOICE_DELIMITADOR,
+        widget= forms.Select(attrs={'form': 'form-select'}),
+        required=True
+    )
+
+    CHOICE_HEADER = (
+        ('True', 'True'),
+        ('False', 'False')
+    )
+
+    str_header = forms.ChoiceField(
+        label= 'Header',
+        choices= CHOICE_HEADER,
+        widget= forms.Select(attrs={'form': 'form-select'}),
+        required=True
+    )
+
+    CHOICE_TRAILER = (
+        ('True', 'True'),
+        ('False', 'False')
+    )
+
+    str_trailer = forms.ChoiceField(
+        label='Trailer',
+        choices= CHOICE_TRAILER,
+        widget= forms.Select(attrs={'form': 'form-select'}),
+        required=True
+    )
 
     class Meta:
         model = Tables
@@ -169,6 +297,11 @@ class TablesStepForm(forms.ModelForm):
             "str_name",
             "str_desc",
             "str_desc_ia",
+            "str_archive_type",
+            "str_separador",
+            "str_delimitador",
+            "str_header",
+            "str_trailer",
             "trigger"
         ]
 

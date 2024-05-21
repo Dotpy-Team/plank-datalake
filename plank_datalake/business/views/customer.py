@@ -71,7 +71,6 @@ def admin_profile_customer(request,customer_id):
             'customer': customer,
             "contracts": contracts,
             "contacts": contacts,
-            "contact_list": reverse('list_contacts'), 
             'users':reverse('users_list_by_id_customer',args=[crip(str(customer.customer_id))]),
             'new_user': reverse('new_user',args=[crip(str(customer_id))]),
             'new_table': reverse('new_table_by_id',args=[crip(str(customer_id))]),

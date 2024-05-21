@@ -34,8 +34,14 @@ def new_table_by_id(request, dataset_id):
         dataset_instance = DataSet.objects.get(dataset_id=dataset_id)
     except Customer.DoesNotExist:
         return redirect('home')
+    
     if request.method == 'POST':
         form = TablesForm(request.POST)
+
+        form.fields['trigger'].queryset = Trigger.objects.filter(customer_id=customer_id)
+        form.fields['trigger'].widget.attrs['class'] = 'form-select'
+        form.fields['trigger'].label = 'Trigger'
+
         html_location = parse_html_path(TABLE_PATH,'add')
         if form.is_valid():
             table = form.save(commit=False)

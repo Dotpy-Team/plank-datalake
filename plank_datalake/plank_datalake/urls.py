@@ -66,7 +66,7 @@ urlpatterns = [
     path('service/', b.new_service , name='new_service'),
 
     #SYSTEM:
-    path('chose-system/', p.route, name='route'), 
+    path('chose-system/', p.route, name='route'),
     path('system/', p.new_system , name='new_system'),
     path('sheets-system/', p.new_sheets_system, name='new_sheets_system'),
     path('postgre-system/', p.new_postgre_system, name='new_postgre_system'),

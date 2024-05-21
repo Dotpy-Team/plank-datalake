@@ -78,7 +78,7 @@
 
                 <div class="col">
                     <div class="row mt-2">
-                        <a href=""><button class="btn btn-primary mt-3 text-rigth">Novo Item</button></a>
+                        <a href="{{new_contract_item}}"><button class="btn btn-primary mt-3 text-rigth">Novo Item</button></a>
                     </div>
                     <div class="col">
                         <p>R$5.000</p>
@@ -98,11 +98,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for item in contracitem %}
+                    {% for item in itens %}
                         <tr>
-                            <td scope="row">{{ item.item_id }}</td>
-                            <td scope="row">{{ item.str_descr }}</td>
-                            <td scope="row">{{ item.values }}</td>
+                            <td scope="row">{{ item.contractitem_id }}</td>
+                            <td scope="row">{{ item.service.str_descr }}</td>
+                            <td scope="row">{{ item.service.int_price }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
