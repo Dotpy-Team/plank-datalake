@@ -101,11 +101,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {% for raci in activity %}
+                                    {% for activity in activities %}
                                         <tr>
-                                            <td scope="row">{{ raci.str_title }}</td>
-                                            <td scope="row">{{ raci.dth_create_at }}</td>
-                                            {% comment %} <td scope="row">{{ raci. }}</td> {% endcomment %}
+                                            <td scope="row">{{ activity.str_title }}</td>
+                                            <td scope="row">{{ activity.dth_create_at }}</td>
+                                            <td scope="row">{{ activity.str_type}}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

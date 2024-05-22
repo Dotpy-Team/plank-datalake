@@ -14,7 +14,7 @@ import json
 def post_job(request, table_id):
     
     response = request.data
-    print(dir(response))
+    print(response)
 
     try:
         table = Tables.objects.get(table_id=table_id)

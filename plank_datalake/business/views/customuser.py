@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.db.models import Q 
 from business.models import CustomUser, Customer
+from process.models import RaciActivity, RaciRelated
 from business.forms import CustomUserForm
 import base64
 
@@ -92,11 +94,41 @@ def user_login(request, message=None):
 @login_required
 def user_profile(request):
     email = request.user.email
+    user_id = request.user.id
+  
+    related = RaciRelated.objects.filter(person=user_id)  
+    list_related = []
+
+    for aux_related in related:
+        list_related.append(aux_related.activity_id)
+
+    activities = RaciActivity.objects.filter(Q(responsible=user_id) | Q(accountable=user_id) | Q(activity_id__in = list_related))
+
+    for aux_activity in activities:
+        print(aux_activity.accountable_id, aux_activity.responsible_id)
+
+        if aux_activity.accountable_id == user_id:
+            aux_activity.str_type = 'Aprovador' 
+        elif aux_activity.responsible_id == user_id:
+            aux_activity.str_type = 'Responsável'
+        else:
+            aux_related = related.filter(activity=aux_activity.activity_id)
+
+            for aux in aux_related:
+                if aux.str_type == "CON":
+                    aux.str_type = 'Consultado'
+                elif aux.str_type == "INF":
+                    aux.str_type = 'Informado'
+
+            aux_activity.str_type = aux.str_type
+
+
     try:
         custom_user = get_object_or_404(CustomUser, email=email)
         html_location = parse_html_path(CUSTOMUSER_PATH,'profile')
         response_dict = {
             'user': custom_user,
+            'activities': activities,
             'new_user': reverse('new_user',args=[crip(str(custom_user.customer_id))])
         }
         return render(request, html_location, response_dict)
