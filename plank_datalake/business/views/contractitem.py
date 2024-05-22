@@ -36,9 +36,9 @@ CONTRACTITEM_PATH = 'business/ContractItem/'
 def new_contract_item(request, contract_id):
     try:
         contract_id = uncrip(contract_id)
-        customer_id = request.user.customer.customer_id
-        customer_instance = Customer.objects.get(customer_id=customer_id)
         contract_instance = Contract.objects.get(contract_id=contract_id)
+        customer_id = contract_instance.customer_id
+        customer_instance = Customer.objects.get(customer_id=customer_id)
     except Contract.DoesNotExist:
         return redirect('home_page')
     
@@ -47,7 +47,7 @@ def new_contract_item(request, contract_id):
     if request.method == 'POST':
 
         form = ContractItemForm(request.POST)
-        
+
         try:
             service_id = request.POST.get('service')
             service_instance = Service.objects.get(service_id=service_id)
