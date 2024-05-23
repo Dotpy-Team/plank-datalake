@@ -43,8 +43,8 @@ class RaciActivityForm(forms.ModelForm):
 class RaciRelatedForm(forms.ModelForm):
 
     CHOICES_TYPE = (
-        ('CON', 'CON'),
-        ('INF', 'INF')
+        ('Consultado', 'CON'),
+        ('Informado', 'INF')
     )
     str_type = forms.ChoiceField(
         label='SETOR:',
@@ -52,6 +52,8 @@ class RaciRelatedForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-select mt-1'}),
         required=True
     )
+
+
     class Meta:
         model = RaciRelated
         fields = [

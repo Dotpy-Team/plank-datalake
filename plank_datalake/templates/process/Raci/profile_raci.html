@@ -1,52 +1,76 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container justify-content-center">
-    <div class="card border-primary" style="max-width: 100rem;">
-        <div class='card-header'>
-            <b>Detalhes:</b>
+<div class="container">
+    <div class="row">
+    <div class="col">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row mt-2">
+                    <h3 class="card-title text-primary">{{ activity.str_title }}</h3>
+                </div>
+                <div class="row mt-2">
+                    <div>{{ activity.str_desc }}</div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <div class="row mt-2">
+                            <div>Aprovador: {{ activity.accountable }}</div>
+                        </div>
+                        <div class="row mt-2">
+                            <div>Responsável: {{ activity.responsible }}</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row mt-2">
+                            <div>Criado por: </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div>Data de criação: </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="card-body">
-            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
-            <h3 class="card-text-secondary-emphasis">Atividade:</h3>
-            <p class="card-text">{{ activity.str_title }}</p>
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="row mt-2">
+                    <h4 class="card-title text-primary">Relacionados</h4>
+                </div>
 
-            <h3 class="card-text-secondary-emphasis">Descricao:</h3>
-            <p class="card-text">{{ activity.str_desc }}</p>
-
-            <h3 class="card-text-secondary-emphasis">Aprovador:</h3>
-            <p class="card-text">{{ activity.accountable.first_name }}</p>
-
-            <h3 class="card-text-secondary-emphasis">Responsavel:</h3>
-            <p class="card-text">{{ activity.responsible.first_name }}</p>
-
-            <h3 class="card-text-secondary-emphasis">Cor:</h3>
-            <p class="card-text">{{ activity.str_color }}</p>
-
-            <a href="{{new_related}}" class="btn btn-primary mt-2">Adicionar um relacionado</a></td>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id Custom User</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Tipo de relacionado</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for person in related %}
-                    <tr>
-                        <th>{{ person.related_id }}</th>
-                        <td>{{ person.person.first_name }}</td>
-                        <td>{{ person.str_type }}</td>
-                        <td>{{ person.person.email }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                <div class="row mt-2">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Sobrenome</th>
+                                <th scope="col">Dt Inclusão</th>
+                                <th scope="col">Nível</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for related in related %}
+                            <tr>
+                                <td scope='row'>{{ related.person.first_name }}</td>
+                                <td scope='row'>{{ related.person.last_name }}</td>
+                                <td scope='row'></td>
+                                <td scope='row'>{{ related.str_type }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+        <div class="row mt-2">
+            <a href="{{new_related}}"><button class="btn btn-primary mt-3 text-rigth">Adicionar Relacionado</button></a>
+        </div>
+
+    </div>
     </div>
 </div>
 

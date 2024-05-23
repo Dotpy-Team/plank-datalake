@@ -34,10 +34,10 @@ SERVICE_PATH = 'business/SERVICE/'
 
 
 @login_required
-def new_service(request):
+def new_service(request, customer_id):
 
     try:
-        customer_id = request.user.customer.customer_id
+        customer_id = uncrip(customer_id)
         customer_instance = Customer.objects.get(customer_id=customer_id)
     except Customer.DoesNotExist:
         return redirect('new_service')

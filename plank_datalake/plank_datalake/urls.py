@@ -63,7 +63,7 @@ urlpatterns = [
     path('task-details/<str:task_id>', b.profile_task, name='profile_task'),
 
     #SERVICE:
-    path('service/', b.new_service , name='new_service'),
+    path('service/<str:customer_id>', b.new_service , name='new_service'),
 
     #SYSTEM:
     path('chose-system/', p.route, name='route'),

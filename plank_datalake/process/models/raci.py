@@ -31,8 +31,8 @@ class RaciRelated(models.Model):
     person = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='person')
     str_type = models.CharField(
         max_length=20, choices=[
-            ('CON', 'CON'),
-            ('INF', 'INF')
+            ('Consultado', 'CON'),
+            ('Informado', 'INF')
         ]
     )
 

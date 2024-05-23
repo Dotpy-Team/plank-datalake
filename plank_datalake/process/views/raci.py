@@ -84,8 +84,11 @@ def new_related(request,activity_id):
         form = RaciRelatedForm(request.POST)
         html_location = parse_html_path(RACI_PATH,'new_related')
 
-        if form.is_valid():
+        form.fields['person'].queryset = customer_instance.customuser_set.all()
+        form.fields['person'].widget.attrs['class'] = 'form-select'
+        form.fields['person'].label = 'Relacionado'
 
+        if form.is_valid():
             related = form.save(commit=False)
             related.customer = customer_instance
             related.activity = activity_instance
