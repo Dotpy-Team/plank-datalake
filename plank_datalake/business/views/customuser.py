@@ -105,8 +105,6 @@ def user_profile(request):
     activities = RaciActivity.objects.filter(Q(responsible=user_id) | Q(accountable=user_id) | Q(activity_id__in = list_related))
 
     for aux_activity in activities:
-        print(aux_activity.accountable_id, aux_activity.responsible_id)
-
         if aux_activity.accountable_id == user_id:
             aux_activity.str_type = 'Aprovador' 
         elif aux_activity.responsible_id == user_id:

@@ -25,7 +25,18 @@ class RaciActivityForm(forms.ModelForm):
     str_color = forms.ChoiceField(
         label='cor',
         choices=CHOICE_COLOR,
-        widget= forms.Select(attrs={'class': 'form-select'}),
+        widget=forms.Select(attrs={'class': 'form-select'}),
+        required=True
+    )
+
+    CHOICE_SHAREABLE = (
+        ('True', 'True'),
+        ('False', 'False')
+    )
+
+    str_shareable = forms.CharField(
+        label='Compartilhavel',
+        widget=forms.Select(attrs={'class': 'form-select'}),
         required=True
     )
 
@@ -36,6 +47,7 @@ class RaciActivityForm(forms.ModelForm):
             'str_desc',
             'responsible',
             'str_color',
+            'str_shareable',
             'accountable'
         ]
 

@@ -7,8 +7,17 @@ class RaciActivity(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     str_title = models.CharField(max_length=200)
     str_desc = models.CharField(max_length=200)
+    dth_created_at = models.DateTimeField(auto_now_add=True)
     responsible = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='responsible')
     accountable = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='accountable')
+
+    str_shareable = models.CharField(
+        max_length=30,
+        choices=(
+            ('True', 'True'),
+            ('False', 'False')
+        )
+    )
 
     str_color = models.CharField(
         max_length=30,
@@ -29,6 +38,7 @@ class RaciRelated(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     activity = models.ForeignKey(RaciActivity, on_delete=models.CASCADE)
     person = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='person')
+    dth_add = models.DateTimeField(auto_now_add=True)
     str_type = models.CharField(
         max_length=20, choices=[
             ('Consultado', 'CON'),
