@@ -48,6 +48,10 @@ def new_contract_item(request, contract_id):
 
         form = ContractItemForm(request.POST)
 
+        form.fields['service'].queryset = Service.objects.all()
+        form.fields['service'].widget.attrs['class'] = 'form-select'
+        form.fields['service'].label = 'service'
+
         try:
             service_id = request.POST.get('service')
             service_instance = Service.objects.get(service_id=service_id)
@@ -72,7 +76,7 @@ def new_contract_item(request, contract_id):
     else:
         form = ContractItemForm()
 
-        form.fields['service'].queryset = Service.objects.filter(customer_id=customer_id)
+        form.fields['service'].queryset = Service.objects.filter()
         form.fields['service'].widget.attrs['class'] = 'form-select'
         form.fields['service'].label = 'service'
 

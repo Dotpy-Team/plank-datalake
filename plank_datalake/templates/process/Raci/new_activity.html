@@ -3,16 +3,15 @@
 
 <div class="container">
     <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Adicionar Raci Activity</h3>    
-        </div>
-
         <div class="card-body">
+
+            <div class="row mt-2">
+                <h4>Adicionar Processo</h4>
+            </div>
+
             <form method="post" class="form">
 
                 {% csrf_token %}
-                
-                <h4>Dados do pipeline:</h4>
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
@@ -36,7 +35,7 @@
                 </div>
 
                 <div class="row mt-2 justify-content-center">
-                    <div class="col">
+                    <div class="col-md-4">
                     {{ form.responsible }}
                     <small><p>Responsavel.</p></small>
                         {% if form.responsible.errors %}
@@ -46,7 +45,7 @@
                         {% endif %}
                     </div>  
 
-                    <div class="col">
+                    <div class="col-md-4">
                     {{ form.accountable }}
                     <small><p>Aprovador.</p></small>
                         {% if form.accountable.errors %}
@@ -56,12 +55,24 @@
                         {% endif %}
                     </div>
                     
-                    <div class="col">
+                    <div class="col-md-4">
                         {{ form.str_color }}
                         <small><p>Cor.</p></small>
                         {% if form.str_color.errors %}
                             <div class="text-danger">
                                 {{ form.str_color.errors }}
+                            </div>
+                        {% endif %}    
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-md-4">
+                        {{ form.str_shareable }}
+                        <small><p>Compartilhavel.</p></small>
+                        {% if form.str_shareable.errors %}
+                            <div class="text-danger">
+                                {{ form.str_shareable.errors }}
                             </div>
                         {% endif %}    
                     </div>

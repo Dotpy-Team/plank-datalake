@@ -34,6 +34,15 @@ def new_raci(request):
     if request.method == 'POST':
         form = RaciActivityForm(request.POST)
         html_location = parse_html_path(RACI_PATH,'new_activity')
+
+        form.fields['responsible'].queryset = customer_instance.customuser_set.all()
+        form.fields['responsible'].widget.attrs['class'] = 'form-select'
+        form.fields['responsible'].label = 'Responsavel'
+
+        form.fields['accountable'].queryset = customer_instance.customuser_set.all()
+        form.fields['accountable'].widget.attrs['class'] = 'form-select'
+        form.fields['accountable'].label = 'Aprovador'
+
         if form.is_valid():
             raci = form.save(commit=False)
             raci.customer = customer_instance

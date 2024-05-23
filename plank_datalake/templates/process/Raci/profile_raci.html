@@ -28,7 +28,7 @@
                             <div>Criado por: </div>
                         </div>
                         <div class="row mt-2">
-                            <div>Data de criação: </div> 
+                            <div>Data de criação: {{ activity.dth_created_at }}</div> 
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                             <tr>
                                 <td scope='row'>{{ related.person.first_name }}</td>
                                 <td scope='row'>{{ related.person.last_name }}</td>
-                                <td scope='row'></td>
+                                <td scope='row'>{{ related.dth_add }}</td>
                                 <td scope='row'>{{ related.str_type }}</td>
                             </tr>
                             {% endfor %}

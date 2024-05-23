@@ -34,8 +34,9 @@ class RaciActivityForm(forms.ModelForm):
         ('False', 'False')
     )
 
-    str_shareable = forms.CharField(
+    str_shareable = forms.ChoiceField(
         label='Compartilhavel',
+        choices= CHOICE_SHAREABLE,
         widget=forms.Select(attrs={'class': 'form-select'}),
         required=True
     )

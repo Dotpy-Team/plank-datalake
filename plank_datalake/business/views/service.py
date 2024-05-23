@@ -34,15 +34,8 @@ SERVICE_PATH = 'business/SERVICE/'
 
 
 @login_required
-def new_service(request, customer_id):
-
-    try:
-        customer_id = uncrip(customer_id)
-        customer_instance = Customer.objects.get(customer_id=customer_id)
-    except Customer.DoesNotExist:
-        return redirect('new_service')
-
-    services = Service.objects.filter(customer_id=customer_id)
+def new_service(request):
+    services = Service.objects.all()
 
     if request.method == 'POST':
         form = ServiceForm(request.POST)
@@ -50,7 +43,6 @@ def new_service(request, customer_id):
 
         if form.is_valid():
             service = form.save(commit=False)
-            service.customer = customer_instance
             service.save()
             return redirect('new_service')
         else:
