@@ -12,6 +12,16 @@ class Tables(models.Model):
     step = models.ForeignKey(Step, on_delete=models.CASCADE, null=True, blank=True)
     trigger = models.ForeignKey(Trigger, on_delete=models.CASCADE, null=True, blank=True)
 
+    str_name = models.CharField(max_length=80)
+    str_desc = models.TextField()
+    str_desc_ia = models.TextField()
+    dth_start_at = models.DateTimeField(auto_now=True)
+    dth_last_updated = models.DateTimeField(null=True, blank=True)
+    int_size = models.IntegerField(null=True, blank=True)
+    int_number_of_rows = models.IntegerField(null=True, blank=True)
+    float_perc_growth = models.FloatField(null=True, blank=True)
+    str_key_words = models.CharField(max_length=100)
+
     layer = models.CharField(max_length=20)
     str_frequency = models.CharField(
         max_length=20, choices=[
@@ -54,16 +64,6 @@ class Tables(models.Model):
         null=True,
         blank=True
     )
-
-    str_name = models.CharField(max_length=80)
-    str_desc = models.TextField()
-    str_desc_ia = models.TextField()
-    dth_start_at = models.DateTimeField(auto_now=True)
-    dth_last_updated = models.DateTimeField(null=True, blank=True)
-    
-    int_size = models.IntegerField(null=True, blank=True)
-    int_number_of_rows = models.IntegerField(null=True, blank=True)
-    float_perc_growth = models.FloatField(null=True, blank=True)
 
     str_archive_type = models.CharField(
         max_length=20,
