@@ -2,84 +2,137 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
 
-    <div class="card mt-2">
+<div class="container">
+    <div class='row mt-4'>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        Quantidade de Contatos
+                    </p>
+                <div class="progress">
+                    <div class="progress-bar w-75">
+                    </div>
+                </div>          
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        Chance de fechar
+                    </p>
+                <div class="progress">
+                    <div class="progress-bar bg-success w-75">
+                    </div>
+                </div>          
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        %
+                    </p>
+                <div class="progress">
+                    <div class="progress-bar bg-danger w-75">
+                    </div>
+                </div>          
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+    
+                <div class="col-3 text-center">
+                    <img src="{% static 'images/google-37.png' %}" alt="Bootstrap" width="150" height="150" class="rounded-circle mb-3">
+                </div>
+    
+                <div class="col-5">
+                    <h3 class="mb-2"><b>{{ customer.str_name }}</b></h3>
+                    <div class="mb-2">
+                        <p class="mb-1"><strong>Endereço:</strong></p>
+                        <p class="mb-1">{{ customer.str_address }}</p>
+                    </div>
+                    <div class="mb-2">
+                        <p class="mb-1"><strong>Telefone:</strong></p>
+                        <p class="mb-1">{{ customer.str_telefone }}</p>
+                    </div>
+                </div>
+    
+                <div class="col-3">
+                    <div class="mb-2">
+                        <p class="mb-1"><strong>Setor:</strong></p>
+                        <p class="mb-1">{{ customer.get_str_setor_display }}</p>
+                    </div>
+                    <div class="mb-2">
+                        <p class="mb-1"><strong>Porte:</strong></p>
+                        <p class="mb-1">{{ customer.get_str_size_display }}</p>
+                    </div>
+                </div>
+    
+                <div class="col-1 align-self-start">
+                    {% if customer.str_customer_type == 'Ativo' %}
+                        <button type="button" class="btn btn-outline-success">{{ customer.str_customer_type }}</button>
+                    {% elif customer.str_customer_type == 'Inativo' %}
+                            <button type="button" class="btn btn-outline-danger">{{ customer.str_customer_type }}</button>
+                    {% else %}
+                        <button type="button" class="btn btn-outline-dark">{{ customer.str_customer_type }}</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mt-4">
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <a href="{{new_contract}}"><button class="btn btn-primary mt-2">Adicionar Contrato</button></a>
+                    <a href="{{new_contract}}"><button class="btn btn-primary w-100">Adicionar Contrato</button></a>
                 </div>
 
                 <div class="col">
-                    <a href="{{new_contact}}"><button class="btn btn-primary mt-2">Adicionar Contato</button></a>
+                    <a href="{{new_contact}}"><button class="btn btn-primary w-100">Adicionar Contato</button></a>
                 </div>
 
                 <div class="col">
-                    <a href="{{payments}}"><button class="btn btn-primary mt-2">Adicionar Fatura</button></a>
+                    <a href="{{payments}}"><button class="btn btn-primary w-100">Adicionar Fatura</button></a>
                 </div>
 
                 <div class="col">
-                    <a href=""><button class="btn btn-primary mt-2">Follow-up</button></a>
+                    <a href="{{new_user}}"><button class="btn btn-primary w-100">Novo Usuario</button></a>
+                </div>
+
+                <div class="col">
+                    <a href=""><button class="btn btn-primary w-100">Follow-up</button></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card mt-2">
-        <div class="card-body">
-            <div class="row mt-2 mb-2">
-                <div class="col">
-                    <img src="{% static 'images/google-37.png' %}" alt="Bootstrap" width="100" height="100" class="rounded-circle border border-blue">
-                </div>
-
-                <div class="col">
-                    <div class="row mt-2">
-                        {{ customer.str_name }}
-                    </div>
-                    <div class="row mt-2">
-                    Rua tal
-                    </div>
-                    <div class="row mt-2">
-                        {{ customer.str_telefone}}
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row mt-2">
-                        {{ customer.str_setor }}
-                    </div>
-                    <div class="row mt-2">
-                        {{ customer.str_size }}
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        {{ customer.str_customer_type }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-2">
-        AQUI VÃO FICAR ALGUNS GRAFICOS
-    </div>
-
-
-    <div class="card mt-2">
+    <div class="card mt-4">
         <div class="card-body">
             <div class="row mt-2">
                 <div class="col">
-                    <p><b>Contratos</b></p>
+                    <h5><b>Contratos</b></h5>
                 </div>
             </div>
         
             <div class="row mt-2 mb-2">
-                <table class="table table-bordered">
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">Titulo</th>
                             <th scope="col">Dt de Inicio</th>
                             <th scope="col">Dt Fim</th>
@@ -89,6 +142,7 @@
                     <tbody>
                         {% for contract in contracts %}
                         <tr>
+                            <td>{{ contract.contract_id }}</td>
                             <td>{{ contract.str_title }}</td>
                             <td>{{ contract.dth_start_at }}</td>
                             <td>{{ contract.dth_end_at}}</td>
@@ -101,18 +155,19 @@
         </div>
     </div>
 
-    <div class="card mt-2">
+    <div class="card mt-4">
         <div class="card-body">
             <div class="row mt-2">
                 <div class="col">
-                    <p><b>Contatos</b></p>
+                    <h5><b>Contatos</b></h5>
                 </div>
             </div>
         
             <div class="row mt-2 mb-2">
-                <table class="table table-bordered">
+                <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
+                            <th scope="col">#</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Sobrenome</th>
                             <th scope="col">Telefone</th>
@@ -122,6 +177,7 @@
                     <tbody>
                         {% for contact in contacts %}
                         <tr>
+                            <td>{{ contact.contact_id }}</td>
                             <td>{{ contact.str_first_name }}</td>
                             <td>{{ contact.str_last_name }}</td>
                             <td>{{ contact.str_phone_number}}</td>
@@ -134,5 +190,6 @@
             </div>
         </div>
 </div>
+
 
 {% endblock %}

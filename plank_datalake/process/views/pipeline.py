@@ -63,8 +63,8 @@ def new_pipeline(request):
 @login_required 
 def detail_pipeline(request, pipeline_id):
     pipeline_id = uncrip(pipeline_id)
-
     pipeline = get_object_or_404(Pipeline, pipeline_id=pipeline_id)
+    
     html_location = parse_html_path(PIPELINE_PATH, 'detail_pipeline')
     response_dict = {
         'pipeline': pipeline,

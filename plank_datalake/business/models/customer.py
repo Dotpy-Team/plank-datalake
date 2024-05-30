@@ -21,21 +21,35 @@ class Customer(models.Model):
     str_linkedin_profile = models.CharField(max_length=200, null=True, blank=True)
     str_contact = models.CharField(max_length=200, null=True, blank=True)
     str_setor = models.CharField(
-        max_length=20, choices=[
-            ('TECH', 'TECH'),
-            ('ADM', 'ADM'), 
-            ('JUR', 'JUR'),
-            ('FIN', 'FIN'),
-            ('LOG', 'LOG')
+        max_length=20, 
+        choices=[
+            ('TECH', 'Tecnologia'),
+            ('ADM', 'Administrativo'), 
+            ('JUR', 'Jurídico'),
+            ('FIN', 'Financeiro'),
+            ('SAU', 'Saúde'),
+            ('EDU', 'Educação'),
+            ('COM', 'Comunicação'),
+            ('ART', 'Arte e Cultura'),
+            ('AGR', 'Agrícola'),
+            ('IND', 'Industrial'),
+            ('ALI', 'Alimentício'),
+            ('AUT', 'Automotivo'),
+            ('CON', 'Construção'),
+            ('SER', 'Serviços'),
+            ('PET', 'Petróleo e Gás'),
+            ('MEI', 'Microempreendedor Individual'),
+            ('OUT', 'Outros')
         ]
     )
     str_size = models.CharField(
-        max_length=20, choices=[
-            ('PEQ', 'PEQ'),
-            ('PEQ MEDIA', 'PEQ MEDIA'), 
-            ('MEDIA', 'MEDIA'),
-            ('MEDIA GRANDE', 'MEDIA GRANDE'),
-            ('GRANDE', 'GRANDE')
+        max_length=20, 
+        choices=[
+            ('PEQ', 'Pequena'),
+            ('PEQ_MEDIA', 'Pequena/Média'), 
+            ('MEDIA', 'Média'),
+            ('MEDIA_GRANDE', 'Média/Grande'),
+            ('GRANDE', 'Grande')
         ]
     )
     dth_create = models.DateField()

@@ -7,25 +7,25 @@
 			<div class="card">
 				<div class="card-body">
 					<p class="card-text">
-						Usuários Ativos
+						Usuários
 					</p>
-          <div class="progress">
-            <div class="progress-bar w-75">
-            </div>
-          </div>
-        </div>
+					<div class="progress">
+						<div class="progress-bar w-75">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
 			<div class="card">
 				<div class="card-body">
 					<p class="card-text">
-						Quantidade de tabelas
+						tabelas
 					</p>
-          <div class="progress">
-            <div class="progress-bar w-75">
-            </div>
-          </div>          
+					<div class="progress">
+						<div class="progress-bar w-75">
+						</div>
+					</div>          
 				</div>
 			</div>
 		</div>
@@ -35,10 +35,10 @@
 					<p class="card-text">
 						Execuções hoje
 					</p>
-          <div class="progress">
-            <div class="progress-bar w-75">
-            </div>
-          </div>          
+					<div class="progress">
+						<div class="progress-bar bg-success w-75">
+						</div>
+					</div>          
 				</div>
 			</div>
 		</div>
@@ -48,10 +48,10 @@
 					<p class="card-text">
 						Execuções em alerta
 					</p>
-          <div class="progress">
-            <div class="progress-bar w-75">
-            </div>
-          </div>
+					<div class="progress">
+						<div class="progress-bar bg-danger w-25">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -61,17 +61,17 @@
 		<div class="col-md-4">
 			<div class="card">
 				<div class="card-body">
+					<h4>
+            			{{customer.str_name}}
+					</h4> 
 					<p class="card-text">
-            {{customer.str_name}}
-					</p> 
+			            {{customer.get_str_setor_display}}
+					</p>
 					<p class="card-text">
-            {{customer.str_setor}}
+						{{customer.str_cnpj}}
 					</p>
-          <p class="card-text">
-            {{customer.str_cnpj}}
-					</p>
-          <p class="card-text">
-            {{customer.str_telefone}}
+					<p class="card-text">
+						{{customer.str_telefone}}
 					</p>
 				</div>
 			</div>
@@ -79,9 +79,9 @@
 			<div class="list-group mt-4">
 				 <a href="#" class="list-group-item list-group-item-action">Informações do contrato</a>
 				<div class="list-group-item">
-          {% for contrato in contract %}
-            <p class="list-group-item-text">{{ contrato.str_title }}</p>
-          {% endfor %}
+					{% for contrato in contract %}
+						<p class="list-group-item-text">{{ contrato.str_title }}</p>
+					{% endfor %}
 				</div>
 			</div> 
 		</div>
@@ -98,34 +98,34 @@
 					<p class="list-group-item-text">
 						Site: {{customer.str_site}}
 					</p>
-          <p class="list-group-item-text">
+          			<p class="list-group-item-text">
 						Linkedin: {{customer.str_linkedin_profile}}
 					</p>
 
-        </div>
-			</div>
+        	</div>
+		</div>
 			<div class="row mt-4">
 				<div class="col-md-6">
-					<img src="https://media.licdn.com/dms/image/D4D3DAQFgzsgFUSV1tQ/image-scale_191_1128/0/1661290627577/dotpy_cover?e=1705701600&v=beta&t=dhbowdci1tyZmM9hKJeEpo4uZbMLpstPE8-6Bv72t_8" alt="Descrição da Imagem">			
+					<img src="https://media.licdn.com/dms/image/C4D16AQFLW9Z4R5SdAw/profile-displaybackgroundimage-shrink_350_1400/0/1654564948229?e=1722470400&v=beta&t=wn9udCdKGlN4wKWo3GhnqqOjqfIAL6kU7JkRGuu9drg" alt="Descrição da Imagem">			
 				</div>
 			</div>
 		</div>
 
         <div class="row mt-4">
             <div class="col">
-                <a href="{{new_user}}" class="btn btn-primary btn-block">Adicionar um novo usuário</a>
+                <a href="{{new_user}}" class="btn btn-primary w-100">novo usuário</a>
             </div> 
 
             <div class="col">
-                <a href="{{new_contract}}" class="btn btn-primary btn-block">Novo Contrato</a>
+                <a href="{{new_contract}}" class="btn btn-primary w-100">lista de usuários</a>
             </div>
 
             <div class="col">
-                <a href="{{new_contact}}" class="btn btn-primary btn-block">Novo Contato</a>
+                <a href="{{new_contact}}" class="btn btn-primary w-100">Contratos</a>
             </div>
 
             <div class="col">
-                <a href="{{users}}" class="btn btn-primary btn-block">Usuarios</a>
+                <a href="{{users}}" class="btn btn-primary w-100">Pagamentos</a>
             </div>
         </div>
 

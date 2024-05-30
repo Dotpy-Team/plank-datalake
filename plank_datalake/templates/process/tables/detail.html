@@ -93,43 +93,75 @@ tbody {
 
             <a href="{{ list_job }}"><button type="button" class="btn btn-info mt-4">Lista de execução.</button></a>             
 
-            <div class="card border-info mt-2 justify-content-center">
-                <table class="table table mt-4">
-                    <thead>
-                        <tr>
-                            <th class="text-center" scope="col">Name</th>
-                            <th class="text-center" scope="col">Rename</th>
-                            <th class="text-center" scope="col">Datatype</th>
-                            <th class="text-center" scope="col">Tipo de infor.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for column in columns %}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="colunas-tab" data-toggle="tab" href="#colunas" role="tab" aria-controls="colunas" aria-selected="true">Colunas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="execucoes-tab" data-toggle="tab" href="#execucoes" role="tab" aria-controls="execucoes" aria-selected="false">Execuções</a>
+                </li>
+              </ul>
+            
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="colunas" role="tabpanel" aria-labelledby="colunas-tab">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Colunas</h5>
+                      <p class="card-text">Conteúdo relacionado às colunas.</p>
+                      <table class="table table mt-4">
+                        <thead>
                             <tr>
-                                <td class="text-center" scope="row">{{column.str_source_name}}</td>
-                                <td class="text-center" scope="row">{{column.str_rename}}</td>
-                                <td class="text-center" scope="row">{{column.str_datatype}}</td>
-                                <td class="text-center" scope="row">
-                                    {% if column.str_type == 'CPK' %}
-                                        <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
-                                    {% elif column.str_type == 'CFK' %}
-                                        <span class="badge text-bg-secondary rounded-pill">Chave Extrangeira</span>
-                                    {% elif column.str_type == 'SEN' %}
-                                        <span class="badge text-bg-danger rounded-pill">Dado Sensivel</span>
-                                    {% elif column.str_type == 'KDS' %}
-                                        <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
-                                    {% endif %}
-                                </td>
+                                <th class="text-center" scope="col">Name</th>
+                                <th class="text-center" scope="col">Rename</th>
+                                <th class="text-center" scope="col">Datatype</th>
+                                <th class="text-center" scope="col">Tipo de infor.</th>
                             </tr>
-                        {% empty %}
-                            <p>Não há colunas cadastradas.</p>
-                        {% endfor %}
-                    </tbody>
-                </table> 
-            </div>
-  
-
+                        </thead>
+                        <tbody>
+                            {% for column in columns %}
+                                <tr>
+                                    <td class="text-center" scope="row">{{column.str_source_name}}</td>
+                                    <td class="text-center" scope="row">{{column.str_rename}}</td>
+                                    <td class="text-center" scope="row">{{column.str_datatype}}</td>
+                                    <td class="text-center" scope="row">
+                                        {% if column.str_type == 'CPK' %}
+                                            <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
+                                        {% elif column.str_type == 'CFK' %}
+                                            <span class="badge text-bg-secondary rounded-pill">Chave Extrangeira</span>
+                                        {% elif column.str_type == 'SEN' %}
+                                            <span class="badge text-bg-danger rounded-pill">Dado Sensivel</span>
+                                        {% elif column.str_type == 'KDS' %}
+                                            <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <p>Não há colunas cadastradas.</p>
+                            {% endfor %}
+                        </tbody>
+                    </table> 
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="execucoes" role="tabpanel" aria-labelledby="execucoes-tab">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Execuções</h5>
+                      <p class="card-text">Conteúdo relacionado às execuções.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
         </div>
     </div>
+
+
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 {% endblock %}

@@ -107,6 +107,7 @@ def detail_step(request, step_id):
     response_dict = {
         'step': step
     }
+    
     return render(request, html_location, response_dict)
 
 @login_required

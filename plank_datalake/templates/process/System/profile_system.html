@@ -10,33 +10,28 @@
 			<div class="col">
 				<div class="card">
 					<div class="card-body">
-						<div class="row">
-							<div class="col">
-								<img src="{% static  system.img_path  %}" alt="Bootstrap" width='100' height='100'>
+						<div class="row">							
+							<div class="col-md-2">
+								<img src="{% static  system.img_path  %}" alt="Bootstrap" width="150" height="150">
 							</div> 
-
-							<div class="col">
-								<div class="row mt-2">
-									{{ system.str_title }}
-								</div>
-								<div class="row mt-2">
-									{{ system.str_desc }}
-								</div>		
+							<div class="col-md-4">
+								<h4>{{ system.str_title }}</h4>
+								<p>{{ system.str_desc }}</p>
 							</div>
 
-							<div class="col">
-								<div class="row mt-2">
-									{{ system.str_status }}
-								</div>
-								<div class="row mt-2">
-									Responsavel:
-								</div>
-								<div class="row mt-2">
-									Aprovador:
-								</div>
-								<div class="row mt-2">
-									Criação: {{ system.dth_start_At}}
-								</div>
+							<div class="col-md-4">
+								<p>Responsavel: Luiz Gustavo Cairo</p>
+								<p>Aprovador: Jeremias Cairo</p>
+								<p>Criação: {{ system.dth_start_At}}</p>
+							</div>
+							<div class='col-md-2'>
+								{% if system.str_status == 'Ativo' %}
+									<button type="button" class="btn btn-outline-success">{{ system.str_status }}</button>
+								{% elif system.str_status == 'Inativo' %}
+									<button type="button" class="btn btn-outline-danger">{{ system.str_status }}</button>
+								{% else %}
+									<button type="button" class="btn btn-outline-dark">{{ system.str_status }}</button>
+								{% endif %}
 							</div>
 						</div>
 					</div>

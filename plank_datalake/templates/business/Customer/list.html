@@ -3,61 +3,57 @@
 {% block content %}
 
 <div class="container">
-    <div class="card">
+    <div class="card mt-3">
         <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <a href=""><button class="btn btn-primary mt-3 text-rigth">Setor</button></a>
+            <div class="row justify-content-center">
+
+                <div class="col-md-2">
+                    <a href="#"><button class="btn btn-primary text-right">Setor</button></a>
                 </div>
 
-                <div class="col">
-                    <a href=""><button class="btn btn-primary mt-3 text-rigth">Status</button></a>
+                <div class="col-md-2">
+                    <a href="#"><button class="btn btn-primary text-right">Status</button></a>
                 </div>
 
-                <div class="col">
-                    <input type="text">
-                    <a href=""><button class="btn btn-primary mt-3 text-rigth">Buscar</button></a>
+                <div class="col-md-6">
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Nome ou CNPJ">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row mt-4 justify-content-center" style="text-align: center;">
-        <p>Lista de Usuários</p>
+        <h4>Lista de Usuários</h4>
     </div>
 
-    <div class="row"> 
-        <div class="col">
-            <div class="row">
-                {% for customer in customers%}
-                <div class="col-md-4 mb-3">
-                    <div class="card mt-2" style="width: 18rem;">
-                        <div class="card-body">
-                            <div class="row">
-                                <img class="card-img-top" src="{% static 'images/dotpy_logo.png'%}" alt="Bootstrap">
-                            </div>
-                            <div class="row mt-2 justify-content-center">
-                                {{ customer.str_name }}
-                            </div>
-                            <div class="row mt-2 justify-content-center">
-                                {{ customer.str_setor }}
-                            </div>
-                            <div class="row mt-2 justify-content-center">
-                                {{ customer.str_customer_type }}
-                            </div>  
-                            <div class="row mt-4">
-                                {% comment %} Botão provisório {% endcomment %}
-                                <a href="{{customer.detail_url}}"><button class="btn btn-primary mt-2 text-rigth"> Ver mais</button></a> 
-                            </div>              
-                        </div>
-                    </div>
+    <div class="row">
+        {% for customer in customers%}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/dotpy_logo.png'%}" alt="Bootstrap">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><b>{{ customer.str_name }}</b></h5>
+                    <p class="card-text text-center">{{ customer.str_setor }}</p>
+                    <p class="card-text text-center">{{ customer.str_customer_type }}</p>
+                    <div class="text-center">
+                        <a href="{{customer.detail_url}}" class="btn btn-primary">Ver mais</a>
+                    </div>          
                 </div>
-            {% if forloop.counter|divisibleby:3 and not forloop.last %}
-                <div class="row mt-2">
-            {% endif %}
-                {% endfor %}        
             </div>
         </div>
+        
+        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+            <div class="row mt-2">
+        {% endif %}
+
+        {% endfor %}        
     </div>
 
 </div>

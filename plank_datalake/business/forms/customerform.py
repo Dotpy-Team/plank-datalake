@@ -81,11 +81,11 @@ class CustomerForm(forms.ModelForm):
     )
 
     CHOICES_SIZE = (
-        ('PEQ', 'PEQ'),
-        ('PEQ MEDIA', 'PEQ MEDIA'), 
-        ('MEDIA', 'MEDIA'),
-        ('MEDIA GRANDE', 'MEDIA GRANDE'),
-        ('GRANDE', 'GRANDE')
+        ('PEQ', 'Pequena'),
+        ('PEQ_MEDIA', 'Pequena/Média'), 
+        ('MEDIA', 'Média'),
+        ('MEDIA_GRANDE', 'Média/Grande'),
+        ('GRANDE', 'Grande')
     )
     str_size = forms.ChoiceField(
         label='Status:',
@@ -95,11 +95,23 @@ class CustomerForm(forms.ModelForm):
     )
 
     CHOICES_SETOR = (
-        ('TECH', 'TECH'),
-        ('ADM', 'ADM'), 
-        ('JUR', 'JUR'),
-        ('FIN', 'FIN'),
-        ('LOG', 'LOG')
+        ('TECH', 'Tecnologia'),
+        ('ADM', 'Administrativo'), 
+        ('JUR', 'Jurídico'),
+        ('FIN', 'Financeiro'),
+        ('SAU', 'Saúde'),
+        ('EDU', 'Educação'),
+        ('COM', 'Comunicação'),
+        ('ART', 'Arte e Cultura'),
+        ('AGR', 'Agrícola'),
+        ('IND', 'Industrial'),
+        ('ALI', 'Alimentício'),
+        ('AUT', 'Automotivo'),
+        ('CON', 'Construção'),
+        ('SER', 'Serviços'),
+        ('PET', 'Petróleo e Gás'),
+        ('MEI', 'Microempreendedor Individual'),
+        ('OUT', 'Outros')
     )
     str_setor = forms.ChoiceField(
         label='SETOR:',

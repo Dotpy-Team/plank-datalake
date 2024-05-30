@@ -11,3 +11,4 @@ from .job_api import *
 from .columns_api import *
 from .dataset import *
 from .system import *
+from .dashboard import *
