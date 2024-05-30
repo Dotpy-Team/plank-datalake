@@ -156,7 +156,7 @@ class TablesForm(forms.ModelForm):
             "str_delimitador",
             "str_header",
             "str_trailer",
-            "str_key_word"
+            "str_key_word",
             "trigger"
         ]
 
