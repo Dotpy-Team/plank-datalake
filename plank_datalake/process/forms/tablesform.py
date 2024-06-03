@@ -135,12 +135,6 @@ class TablesForm(forms.ModelForm):
         required=True
     )
 
-    str_key_word = forms.CharField(
-        label= 'Key Word',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
-        required=True
-    )
-
     class Meta:
         model = Tables
         fields = [
@@ -156,7 +150,6 @@ class TablesForm(forms.ModelForm):
             "str_delimitador",
             "str_header",
             "str_trailer",
-            "str_key_word",
             "trigger"
         ]
 
@@ -294,12 +287,6 @@ class TablesStepForm(forms.ModelForm):
         required=True
     )
 
-    str_key_word = forms.CharField(
-        label='Key Word',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
-        required=True
-    )
-
     class Meta:
         model = Tables
         fields = [
@@ -315,7 +302,6 @@ class TablesStepForm(forms.ModelForm):
             "str_delimitador",
             "str_header",
             "str_trailer",
-            "str_key_word",
             "trigger"
         ]
 

@@ -24,5 +24,6 @@ class TablesSerializer(serializers.ModelSerializer):
             'int_size', 
             'int_number_of_rows', 
             'float_perc_growth',
+            'str_key_words',
             'trigger' 
         ]
