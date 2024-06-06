@@ -41,8 +41,8 @@ class RaciRelated(models.Model):
     dth_add = models.DateTimeField(auto_now_add=True)
     str_type = models.CharField(
         max_length=20, choices=[
-            ('Consultado', 'CON'),
-            ('Informado', 'INF')
+            ('CON','Consultado'),
+            ('INF','Informado')
         ]
     )
 

@@ -1,90 +1,72 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container">
-
-    <div class="row">
-        <div class="col">
-            <a href="{{new_table}}"><button type="submit" class="btn btn-primary mt-3 text-rigth">Adicionar Tabela</button></a>
-        </div>
+<div class="card">
+    <div class='card-header'>
+        <h4 class='text-primary'>{{ dataset.str_title }}</h4>
     </div>
-
-    <div class="row mt-2">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="row mt-2">
-                                {{ dataset.str_title }}
-                            </div>
-                            <div class="row mt-2">
-                                {{ dataset.str_desc }}
-                            </div>
-                        </div>
-                            
-                        <div class="col">
-                            <div class="row mt-2">
-                                {{ dataset.str_status }}
-                            </div>
-                            <div class="row mt-2">
-                                Responsável:
-                            </div>
-                            <div class="row mt-2">
-                                Aprovador:
-                            </div>
-                            <div class="row mt-2">
-                                Criação: {{ dataset.dth_created_at }}
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+    <div class="card-body">        
+        <div class="row">
+            <div class="col-md-8">
+                <p><strong>Descrição:</strong></p>
+                <p class="lead">{{ dataset.str_desc }}</p>        
+            </div>
+                
+            <div class="col-3">
+                <p><strong>Aprovador</strong></p>
+                <p>{{ dataset.raci_activity.accountable }}</p>
+                <p><strong>Responsável</strong></p>
+                <p>{{ dataset.raci_activity.responsible }}</p>
+                <p><strong>Criado em</strong></p>
+                <p>{{ dataset.dth_start_at }}</p>
+            </div>
+            <div class='col-md-1'>
+                {% if dataset.str_status == 'Ativo' %}
+                    <button type="button" class="btn btn-outline-success">{{ dataset.str_status }}</button>
+                {% elif dataset.str_status == 'Inativo' %}
+                    <button type="button" class="btn btn-outline-danger">{{ dataset.str_status }}</button>
+                {% else %}
+                    <button type="button" class="btn btn-outline-dark">{{ dataset.str_status }}</button>
+                {% endif %}
             </div>
         </div>
     </div>
-    
-    <div class="row mt-2">
-        <div class="col">
-            <div class="card">
-
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col" style="text-align: center;">
-                            <h4>Execuções</h4>                       
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id Job</th>
-                                <th scope="col">Tabela</th>
-                                <th scope="col">Dt de Inicio</th>
-                                <th scope="col">Dt Fim</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for execution in executions %}
-                            <tr>
-                                <td scope='row'>{{ execution.job_id }}</td>
-                                <td scope='row'>{{ execution.str_table_name }}</td>
-                                <td scope='row'>{{ executon.dth_start_at }}</td>
-                                <td scope='row'>{{ execution.dth_end_at }}</td>
-                                <td scope='row'>{{ execution.str_status}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
+
+<a href="{{new_table}}"><button type="submit" class="btn btn-primary mt-3 text-rigth">Adicionar Tabela</button></a>
+
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#Id Job</th>
+            <th scope="col">Tabela</th>
+            <th scope="col">Dt de Inicio</th>
+            <th scope="col">Dt Fim</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for execution in executions %}
+        <tr>
+            <td scope='row'>{{ execution.job_id }}</td>
+            <td scope='row'>{{ execution.table.str_name }}</td>
+            <td scope='row'>{{ executon.dth_start_at }}</td>
+            <td scope='row'>{{ execution.dth_last_updated }}</td>
+            <td scope='row'>{{ execution.str_status}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 
 {% endblock %}
 

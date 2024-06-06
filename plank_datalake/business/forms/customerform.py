@@ -119,7 +119,7 @@ class CustomerForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-select mt-1'}),
         required=True
     )
-
+    
     str_cod_aws_account = forms.CharField(
         label= "Código da conta AWS:",
         widget= forms.TextInput(attrs={'class': 'form-control'}),

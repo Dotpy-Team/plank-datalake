@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
 from business.models import Customer
-from process.models import DataSet, System
+from process.models import DataSet, System, Tables, JobRun
 from .raci import RaciActivity
 from process.forms import DataSetForm
 import base64
@@ -94,9 +94,15 @@ def profile_dataset(request,dataset_id):
     dataset_id = uncrip(dataset_id)
     dataset = get_object_or_404(DataSet, dataset_id=dataset_id)
     html_location = parse_html_path(DATASET_PATH,'profile_dataset')
+
+    table_ids = Tables.objects.filter(dataset_id=dataset_id).values_list('table_id', flat=True)
+    
+    jobs = JobRun.objects.filter(table_id__in=table_ids)
+    
     response_dict = {
         'dataset': dataset,
-        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.dataset_id))])
+        'new_table':reverse('new_table_by_id',args=[crip(str(dataset.dataset_id))]),
+        'executions':jobs
     }
     return render(request, html_location, response_dict)
     # except Http404:

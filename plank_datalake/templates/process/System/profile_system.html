@@ -2,93 +2,86 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-	<div class="row">
-
-	<div class="col">
-		<div class="row mt-2 mb-2">
-			<div class="col">
-				<div class="card">
-					<div class="card-body">
-						<div class="row">							
-							<div class="col-md-2">
-								<img src="{% static  system.img_path  %}" alt="Bootstrap" width="150" height="150">
-							</div> 
-							<div class="col-md-4">
-								<h4>{{ system.str_title }}</h4>
-								<p>{{ system.str_desc }}</p>
-							</div>
-
-							<div class="col-md-4">
-								<p>Responsavel: Luiz Gustavo Cairo</p>
-								<p>Aprovador: Jeremias Cairo</p>
-								<p>Criação: {{ system.dth_start_At}}</p>
-							</div>
-							<div class='col-md-2'>
-								{% if system.str_status == 'Ativo' %}
-									<button type="button" class="btn btn-outline-success">{{ system.str_status }}</button>
-								{% elif system.str_status == 'Inativo' %}
-									<button type="button" class="btn btn-outline-danger">{{ system.str_status }}</button>
-								{% else %}
-									<button type="button" class="btn btn-outline-dark">{{ system.str_status }}</button>
-								{% endif %}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row mt-4 mb-2">
-			<div class="col">
-				<div class="row" style='text-align: center;'>
-					<p>Datasets</p>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row mt-2">
-			<div class="col">
-				<div class="row">
-					{% for dataset in datasets  %}
-						<div class="col-md-4 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="row mt-2 justify-content-center">
-										{{ dataset.str_title }}
-									</div>
-									<div class="row mt-2 justify-content-center">
-										{{ dataset.str_desc }}
-									</div>
-									<div class="row mt-2 justify-content-center">
-										{{ dataset.dth_created_at }}
-									</div>
-									<div class="row mt-2">
-										<div class="col" style="text-align: right;" >
-											<a href="{{dataset.detail_url}}">ver mais</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-				{% if forloop.counter|divisibleby:3 and not forloop.last%}
-					<div class="row mt-2"></div>
-				{% endif %}
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-
-		<div class="row mt-2">
-			<div class="col" style="text-align: left;">
-				<a href="{{new_dataset}}"><button type="submit" class="btn btn-primary mt-3 text-rigth">Adicionar Dataset</button></a>
-			</div>
-		</div>
-
+<div class="card">
+	<div class='card-header'>
+		<h4 class='text-primary'>{{ system.str_title }}</h4>
 	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-2">
+				<img src="{% static  system.img_path  %}" alt="Bootstrap" width="150" height="150">
+			</div>
 
+			<div class="col-md-6">
+				<p><strong>Descrição:</strong></p>
+                <p class="lead">{{ system.str_desc }}</p>
+			</div>
+
+			<div class="col-md-3">
+				<p><strong>Responsavel</strong></p>
+				<p>Luiz Gustavo Cairo</p>
+				<p><strong>Aprovador</strong></p>
+				<p>Jeremias Cairo</p>
+				<p><strong>Criacáo</strong></p>
+				<p>{{ system.dth_start_At}}</p>
+			</div>
+
+			<div class='col-md-1'>
+				{% if system.str_status == 'Ativo' %}
+					<button type="button" class="btn btn-outline-success">{{ system.str_status }}</button>
+				{% elif system.str_status == 'Inativo' %}
+					<button type="button" class="btn btn-outline-danger">{{ system.str_status }}</button>
+				{% else %}
+					<button type="button" class="btn btn-outline-dark">{{ system.str_status }}</button>
+				{% endif %}
+			</div>
+		</div>
 	</div>
 </div>
+
+<h3 class="text-primary text-center mt-3">Datasets</h3>
+
+<div class='row mt-3'>
+    <div class='col'>
+        <form role="search">
+            <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search">
+        </form>
+    </div>
+    <div class='col'>
+		<a href="{{new_dataset}}"><button type="submit" class="btn btn-primary text-rigth">Adicionar Dataset</button></a>		
+    </div>
+</div>
+
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#id</th>
+            <th>Nome</th>
+            <th>Descricao</th>
+            <th>Raci</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dataset in datasets  %}
+        <tr>
+            <td><a href="{{dataset.detail_url}}">{{ dataset.dataset_id }}</a></td>
+            <td>{{ dataset.str_title }}</td>
+            <td>{{ dataset.str_desc }}</td>
+            <td>{{ dataset.raci_activity }}</td>                    
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 
 {% endblock %}
 

@@ -15,14 +15,19 @@ class DataSetForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-select mt-1'}),
         required=True
     )
+
     str_title = forms.CharField(
         label='Nome *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
+    
     str_desc = forms.CharField(
         label='Descricao *',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'Descrição'
+        }),
         required=True
     )
 

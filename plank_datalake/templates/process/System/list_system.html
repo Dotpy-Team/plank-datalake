@@ -1,37 +1,51 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <h3 class="text-primary text-center">
-            Lista de sistemas
-        </h3>
-        <a href="/chose-system/" class="btn btn-primary mt-2">Novo sistema</a></td>
+
+<h3 class="text-primary text-center">
+    Sistemas
+</h3>
+
+<div class='row mt-3'>
+    <div class='col'>
+        <form role="search">
+            <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search">
+        </form>
+    </div>
+    <div class='col'>
+        <a href="/chose-system/" class="btn btn-primary">Novo sistema</a></td>
     </div>
 </div>
-<div class="row mt-4">
-    <div class="col-md-12">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#id</th>
-                    <th>Nome</th>
-                    <th>Descricao</th>
-                    <th>Descricao IA</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for system in systems %}
-                <tr>
-                    <td><a href="{{system.detail_url}}">{{ system.system_id }}</a></td>
-                    <td>{{ system.str_title }}</td>
-                    <td>{{ system.str_desc }}</td>
-                    <td>{{ system.str_desc_ia }}</td>                    
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#id</th>
+            <th>Nome</th>
+            <th>Descricao</th>
+            <th>Descricao IA</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for system in systems %}
+        <tr>
+            <td><a href="{{system.detail_url}}">{{ system.system_id }}</a></td>
+            <td>{{ system.str_title }}</td>
+            <td>{{ system.str_desc }}</td>
+            <td>{{ system.str_desc_ia }}</td>                    
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 
 {% endblock %}

@@ -12,7 +12,10 @@ class RaciActivityForm(forms.ModelForm):
     
     str_desc = forms.CharField(
         label='Descricao *',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'Descrição'
+        }),
         required=True
     )
 
@@ -56,9 +59,10 @@ class RaciActivityForm(forms.ModelForm):
 class RaciRelatedForm(forms.ModelForm):
 
     CHOICES_TYPE = (
-        ('Consultado', 'CON'),
-        ('Informado', 'INF')
+        ('CON','Consultado'),
+        ('INF','Informado')
     )
+    
     str_type = forms.ChoiceField(
         label='SETOR:',
         choices=CHOICES_TYPE,

@@ -1,75 +1,51 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container">
-    <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Novo Dataset</h3>    
-        </div>
+<div class="card">
+    <div class='card-header text-center'>
+        <h3 class="text-primary">Dataset</h3>    
+    </div>
 
-        <div class="card-body">
-                <form method="POST" class="form">
-                    {% csrf_token %}
-                    
-                        <!-- firstname and lastname content -->
-                        
-                        <h4>Informações do Dataset:</h4>
+    <div class="card-body">
+        <form method="POST" class="form">
+            {% csrf_token %}
 
-                        <div class="row mt-2 justify-content-center">
-                            <div class='col'>
-                                {{ form.str_title }}
-                                <small><p>Nome do Dataset.</p></small>
-                                {% if form.str_title.errors %}
-                                    <div class="text-danger">
-                                        {{ form.str_title.errors }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class='col'>
-                                {{ form.str_status }}
-                                <small><p>Status.</p></small>
-                                {% if form.str_status.errors %}
-                                    <div class="text-danger">
-                                        {{ form.str_status.errors }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
+            {{ form.str_title }}
+            <small><p>Titulo.</p></small>
+            {% if form.str_title.errors %}
+                <div class="text-danger">
+                    {{ form.str_title.errors }}
+                </div>
+            {% endif %}
 
-                        <!-- another info content -->
-                        
-                        <div class="row">
-                            <div class='col'>
-                                {{ form.raci_activity }}
-                                <small><p>Raci.</p></small>
-                                {% if form.raci_activity.errors %}
-                                    <div class="text-danger">
-                                        {{ form.raci_activity.errors }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
+            {{ form.str_status }}
+            <small><p>Status.</p></small>
+            {% if form.str_status.errors %}
+                <div class="text-danger">
+                    {{ form.str_status.errors }}
+                </div>
+            {% endif %}
 
-                        <div class="row">
-                            <div class='col'>
-                                {{ form.str_desc }}
-                                <small><p>Descrição.</p></small>
-                                {% if form.str_desc.errors %}
-                                    <div class="text-danger">
-                                        {{ form.str_desc.errors }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
+            {{ form.str_desc }}
+            <small><p>Descrição.</p></small>
+            {% if form.str_desc.errors %}
+                <div class="text-danger">
+                    {{ form.str_desc.errors }}
+                </div>
+            {% endif %}
 
-
-                        <div class="col" style="text-align: right;">
-                            <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
-                        </div>
-
-                </form>
-        </div>
-
+            {{ form.raci_activity }}
+            <small><p>Raci.</p></small>
+            {% if form.raci_activity.errors %}
+                <div class="text-danger">
+                    {{ form.raci_activity.errors }}
+                </div>
+            {% endif %}
+            
+            <div class="col" style="text-align: right;">
+                <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+            </div>
+        </form>
     </div>
 </div>
 
