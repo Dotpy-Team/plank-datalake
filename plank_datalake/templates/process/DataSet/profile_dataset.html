@@ -1,26 +1,63 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
-<div class="card">
-    <div class='card-header'>
-        <h4 class='text-primary'>{{ dataset.str_title }}</h4>
+<style>
+    .scroll-container {
+        height: 150px;
+        overflow-y: auto;
+    }
+
+    .tab-content {
+        height: 200px;
+    }
+
+</style>
+<div class='row'>
+    <div class='col-md-2'>
+        <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 150px;">    
     </div>
-    <div class="card-body">        
-        <div class="row">
-            <div class="col-md-8">
-                <p><strong>Descrição:</strong></p>
-                <p class="lead">{{ dataset.str_desc }}</p>        
+    <div class='col'>
+        <h4> Dataset </h4>
+        <h2 class='text-primary'>{{ dataset.str_title }}</h2>
+    </div>
+</div>
+
+<ul class="nav mt-4 nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#details" data-toggle="tab">Detalhes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#process" data-toggle="tab">Processo</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#related" data-toggle="tab">Relacionados</a>
+    </li>
+</ul>
+
+<div class="tab-content mt-4">
+    <div id="details" class="tab-pane active">
+        <p><strong>Descrição:</strong></p>
+        <p class="lead">{{ dataset.str_desc }}</p>
+    </div>
+    <div id="process" class="tab-pane fade">
+        <div class='row'>
+            <div class='col'>
+                <p><strong>Responsavel</strong></p>
+                <p>{{ dataset.raci_activity.responsible }}</p>
             </div>
-                
-            <div class="col-3">
+
+            <div class='col'>
                 <p><strong>Aprovador</strong></p>
                 <p>{{ dataset.raci_activity.accountable }}</p>
-                <p><strong>Responsável</strong></p>
-                <p>{{ dataset.raci_activity.responsible }}</p>
-                <p><strong>Criado em</strong></p>
-                <p>{{ dataset.dth_start_at }}</p>
             </div>
-            <div class='col-md-1'>
+
+            <div class='col'>
+                <p><strong>Criacáo</strong></p>
+                <p>{{ dataset.dth_start_at}}</p>       
+            </div>
+
+            <div class='col'>
                 {% if dataset.str_status == 'Ativo' %}
                     <button type="button" class="btn btn-outline-success">{{ dataset.str_status }}</button>
                 {% elif dataset.str_status == 'Inativo' %}
@@ -31,9 +68,42 @@
             </div>
         </div>
     </div>
+    <div id="related" class="tab-pane fade">
+        <div class="scroll-container">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>                        
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>                        
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-<a href="{{new_table}}"><button type="submit" class="btn btn-primary mt-3 text-rigth">Adicionar Tabela</button></a>
+<a href="{{new_table}}"><button type="submit" class="btn btn-primary text-rigth">Adicionar Tabela</button></a>
 
 <table class="table mt-4 table-striped table-bordered table-hover">
     <thead>
@@ -67,6 +137,11 @@
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
 </nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 {% endblock %}
 

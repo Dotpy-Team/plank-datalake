@@ -1,245 +1,225 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-3">
-			<div class="card">
-				<div class="card-body">
-					<p class="card-text">
-						Usuários
-					</p>
-					<div class="progress">
-						<div class="progress-bar w-75">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<div class="card-body">
-					<p class="card-text">
-						tabelas
-					</p>
-					<div class="progress">
-						<div class="progress-bar w-75">
-						</div>
-					</div>          
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<div class="card-body">
-					<p class="card-text">
-						Execuções hoje
-					</p>
-					<div class="progress">
-						<div class="progress-bar bg-success w-75">
-						</div>
-					</div>          
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<div class="card-body">
-					<p class="card-text">
-						Execuções em alerta
-					</p>
-					<div class="progress">
-						<div class="progress-bar bg-danger w-25">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="row">
+	<div class="col">
+		<a href="{{new_user}}" class="btn btn-primary w-100">novo usuário</a>
+	</div> 
+
+	<div class="col">
+		<a href="{{new_contract}}" class="btn btn-primary w-100">lista de usuários</a>
 	</div>
 
-	<div class="row mt-4">
-		<div class="col-md-4">
-			<div class="card">
-				<div class="card-body">
-					<h4>
-            			{{customer.str_name}}
-					</h4> 
-					<p class="card-text">
-			            {{customer.get_str_setor_display}}
-					</p>
-					<p class="card-text">
-						{{customer.str_cnpj}}
-					</p>
-					<p class="card-text">
-						{{customer.str_telefone}}
-					</p>
-				</div>
-			</div>
-
-			<div class="list-group mt-4">
-				 <a href="#" class="list-group-item list-group-item-action">Informações do contrato</a>
-				<div class="list-group-item">
-					{% for contrato in contract %}
-						<p class="list-group-item-text">{{ contrato.str_title }}</p>
-					{% endfor %}
-				</div>
-			</div> 
-		</div>
-		<div class="col-md-8">
-			<div class="list-group">
-				 <a href="#" class="list-group-item list-group-item-action">complementos da empresa</a>
-				<div class="list-group-item">
-					<p class="list-group-item-text">
-						Telefone: {{customer.str_telefone}}
-					</p>
-					<p class="list-group-item-text">
-						Endereço: {{customer.str_address}}
-					</p>
-					<p class="list-group-item-text">
-						Site: {{customer.str_site}}
-					</p>
-          			<p class="list-group-item-text">
-						Linkedin: {{customer.str_linkedin_profile}}
-					</p>
-
-        	</div>
-		</div>
-			<div class="row mt-4">
-				<div class="col-md-6">
-					<img src="https://media.licdn.com/dms/image/C4D16AQFLW9Z4R5SdAw/profile-displaybackgroundimage-shrink_350_1400/0/1654564948229?e=1722470400&v=beta&t=wn9udCdKGlN4wKWo3GhnqqOjqfIAL6kU7JkRGuu9drg" alt="Descrição da Imagem">			
-				</div>
-			</div>
-		</div>
-
-        <div class="row mt-4">
-            <div class="col">
-                <a href="{{new_user}}" class="btn btn-primary w-100">novo usuário</a>
-            </div> 
-
-            <div class="col">
-                <a href="{{new_contract}}" class="btn btn-primary w-100">lista de usuários</a>
-            </div>
-
-            <div class="col">
-                <a href="{{new_contact}}" class="btn btn-primary w-100">Contratos</a>
-            </div>
-
-            <div class="col">
-                <a href="{{users}}" class="btn btn-primary w-100">Pagamentos</a>
-            </div>
-        </div>
-
-		<div class="col-md-12">
-			<div class="card mt-4">
-				<h5 class="card-header">
-					Pagamentos
-				</h5>
-				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Product</th>
-								<th>Payment Taken</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-						</tbody>
-					</table>
-
-				</div>
-				<div class="card-footer">
-				</div>
-			</div>
-		</div>
+	<div class="col">
+		<a href="{{new_contact}}" class="btn btn-primary w-100">Contratos</a>
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="card mt-4">
-				<h5 class="card-header">
-					Chamados abertos
-				</h5>
-				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Product</th>
-								<th>Payment Taken</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>TB - Monthly</td>
-								<td>01/04/2012</td>
-								<td>Default</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="card-footer">
-				</div>
-			</div>
-		</div>
 
-
+	<div class="col">
+		<a href="{{users}}" class="btn btn-primary w-100">Pagamentos</a>
 	</div>
 </div>
+
+<div class="row mt-2">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <img src="{% static 'images/google-37.png'%}" alt="Bootstrap" width="150" height="150" class="rounded-circle mb-3">                        
+                <h4 class="mb-0">{{customer.str_name}}</h4>
+				<p class="text-muted">{{customer.get_str_setor_display}}</p>
+
+			</div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class='row'>
+                    <div class='col'>
+                        <div>
+                            <p><strong>CNPJ:</strong> {{customer.str_cnpj}}</p>
+							<p><strong>Telefone:</strong> {{customer.str_telefone}}</p>
+                            <p><strong>E-mail:</strong> {{ customer.str_email }}</p>
+							<p><strong>Site:</strong> {{ customer.str_site }}</p>
+                        </div>
+                    </div>
+                    <div class='col'>
+                        <p><strong>Linkedin:</strong> {{ customer.str_linkedin_profile }}</p>
+                        <p><strong>Setor:</strong> {{customer.get_str_setor_display}}</p>
+                        <p><strong>AWS Account:</strong> {{ user.str_cod_aws_account }}</p>
+						<p><strong>Blaaaa:</strong> blaaaa</p>
+					</div>
+                </div>
+				<div class='row'>
+					<p> endereço: {{customer.str_address}} </p>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-body">
+				<p class="card-text">
+					Usuários
+				</p>
+				<div class="progress">
+					<div class="progress-bar w-75">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-body">
+				<p class="card-text">
+					tabelas
+				</p>
+				<div class="progress">
+					<div class="progress-bar w-75">
+					</div>
+				</div>          
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-body">
+				<p class="card-text">
+					Execuções hoje
+				</p>
+				<div class="progress">
+					<div class="progress-bar bg-success w-75">
+					</div>
+				</div>          
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-body">
+				<p class="card-text">
+					Execuções em alerta
+				</p>
+				<div class="progress">
+					<div class="progress-bar bg-danger w-25">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<img src="https://media.licdn.com/dms/image/C4D16AQFLW9Z4R5SdAw/profile-displaybackgroundimage-shrink_350_1400/0/1654564948229?e=1722470400&v=beta&t=wn9udCdKGlN4wKWo3GhnqqOjqfIAL6kU7JkRGuu9drg" alt="Descrição da Imagem">
+
+<div class="card mt-4">
+	<h5 class="card-header">
+		Pagamentos
+	</h5>
+	<div class="card-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Product</th>
+					<th>Payment Taken</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<div class="card-footer">
+	</div>
+</div>
+
+<div class="card mt-4">
+	<h5 class="card-header">
+		Chamados abertos
+	</h5>
+	<div class="card-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Product</th>
+					<th>Payment Taken</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>TB - Monthly</td>
+					<td>01/04/2012</td>
+					<td>Default</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="card-footer">
+	</div>
+</div>
+
 {% endblock %}

@@ -1,67 +1,108 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
+<style>
 
+    .tab-content {
+        height: 150px;
+    }
 
-<div class="card">
-    <div class='card-header'> 
-        <h3 class="text-primary">{{ activity.str_title }}</h3>
+</style>
+
+<div class='row'>
+
+    <div class='col-md-2'>
+        <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 150px;">
     </div>
-    <div class="card-body">
+
+    <div class='col'>
+        <h4>Processo</h4>
+        <h2 class='text-primary'>{{ activity.str_title }}</h2>        
+    </div>
+
+</div>
+
+<ul class="nav mt-4 nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#details" data-toggle="tab">Detalhes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#process" data-toggle="tab">Processo</a>
+    </li>
+</ul>
+
+<div class="tab-content mt-4">
+    <div id="details" class="tab-pane active">
+        <p><strong>Descrição:</strong></p>
+        <p class="lead">{{ activity.str_desc }}</p>
+    </div>
+    <div id="process" class="tab-pane fade">
         <div class='row'>
-            <div class='col-md-8'>
-                <p><strong>Descrição:</strong></p>
-                <p class="lead">{{ activity.str_desc }}</p>
+            <div class='col'>
+                <p><strong>Responsavel</strong></p>
+                <p>{{ activity.responsible }}</p>
             </div>
+
             <div class='col'>
                 <p><strong>Aprovador</strong></p>
                 <p>{{ activity.accountable }}</p>
-                <p><strong>Responsável</strong></p>
-                <p>{{ activity.responsible }}</p>
-                <p><strong>Data de criação</strong></p>
-                <p>{{ activity.dth_created_at }}</p>
+            </div>
+
+            <div class='col'>
+                <p><strong>Criacáo</strong></p>
+                <p>{{ activity.dth_created_at }}</p>       
+            </div>
+
+            <div class='col'>
+                {% if dataset.str_status == 'Ativo' %}
+                    <button type="button" class="btn btn-outline-success">{{ dataset.str_status }}</button>
+                {% elif dataset.str_status == 'Inativo' %}
+                    <button type="button" class="btn btn-outline-danger">{{ dataset.str_status }}</button>
+                {% else %}
+                    <button type="button" class="btn btn-outline-dark">{{ dataset.str_status }}</button>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
-<div class="card mt-4">
-    <div class="card-header">
-        <h4 class="text-primary">Relacionados</h4>
-    </div>
-    <div class="card-body">
-        <a href="{{new_related}}"><button class="btn btn-primary text-rigth">Adicionar Relacionado</button></a>
-        <table class="table mt-2 table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Dt Inclusão</th>
-                    <th scope="col">Nível</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for related in related %}
-                <tr>
-                    <td scope='row'>{{ related.related_id }}</td>
-                    <td scope='row'>{{ related.person.first_name }} {{ related.person.last_name }}</td>
-                    <td scope='row'>{{ related.dth_add }}</td>
-                    <td scope='row'>{{ related.get_str_type_display }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
-    </div>
-</div>
+<a href="{{new_related}}"><button class="btn btn-primary mt-2 text-rigth">Adicionar Relacionado</button></a>
+
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Dt Inclusão</th>
+            <th scope="col">Nível</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for related in related %}
+        <tr>
+            <td scope='row'>{{ related.related_id }}</td>
+            <td scope='row'>{{ related.person.first_name }} {{ related.person.last_name }}</td>
+            <td scope='row'>{{ related.dth_add }}</td>
+            <td scope='row'>{{ related.get_str_type_display }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 {% endblock %}
 

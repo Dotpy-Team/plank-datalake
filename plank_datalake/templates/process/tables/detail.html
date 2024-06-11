@@ -1,168 +1,176 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
 <style>
-thead, tbody { 
-    display: block; 
-}
 
-tbody {
-    max-height: 400px;
-    overflow-y: scroll;
-}
+    .tab-content {
+        height: 250px;
+    }
 
-.text-rigth {
-    text-align: right;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.table {
-    border-collapse: collapse;
-    background-color: #fff;
-    width: 100%;
-}
-
-.table th,
-.table td {
-  padding: 10px;
-  width:5%;
-}
-
-.table tbody tr {
-  border-bottom: 1px solid #999;
-}
 </style>
 
-<div class="container">
+<div class='row mt-4'>
+    <div class='col-md-2'>
+        <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 150px;">
+    </div>
 
-    <div class="card border-info mt-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h1 class="text-info"><b>{{ table.str_name }}</b>
-                <small class="text-primary">{{ table.str_system }}</small>
-            </h1>
+    <div class='col'>
+        <h4>Tabela</h4>
+        <h2 class='text-primary'>{{ table.str_name }}</h2>
+    </div>
 
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-success">Mais</button>
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop4" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
-                        <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
-                        <a class="dropdown-item" href="{{ exclude }}">Excluir Colunas</a>
-                        <a class="dropdown-item" href="{{ look_all }}">Ver Todas</a>
-                    </div>
+    <div class='col-md-2'>
+        <button type="button" class="btn btn-primary">Mais</button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop4" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
+                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Execução (temporario)</a>
+                    <a class="dropdown-item" href="{{ list_job }}">Ver todas execuções</a>
+                    <a class="dropdown-item" href="{{ look_all }}">Ver Todas Colunas</a>
                 </div>
             </div>
         </div>
-
-        <div class="card-body">
-            <h5 class="text-body-tertiary">{{ table.str_dataset }}</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Frequência: {{ table.str_frequency }}</li>
-                <li class="list-group-item">Modo: {{ table.str_mode }}</li>
-                <li class="list-group-item">Descrição: {{ table.str_desc }}</li>
-                <li class="list-group-item">Tipo de Ingestão: {{ table.str_type }}</li>
-                <li class="list-group-item">Data de Cadastro: {{ table.dth_start_at }}</li>
-                <li class="list-group-item">Camada: {{ table.layer }}</li>
-                <li class="list-group-item">Palavras Chave: {{ card_table.str_key_words }}</li>
-
-                <li class="list-group-item">
-                    Tamanho em GB: 
-                    {% if table.int_size is None %}
-                        0
-                    {% else %}
-                        {{ table.int_size }}
-                    {% endif %}
-                </li>
-                
-                <li class="list-group-item">
-                    Quantidade de linhas: 
-                    {% if table.int_number_of_rows is None %}
-                        0
-                    {% else %}
-                        {{ table.int_number_of_rows }}
-                    {% endif %}
-                    
-                </li>
-            </ul>
-
-            <a href="{{ add }}"><button type="button" class="btn btn-info mt-4">Adicionar nova coluna.</button></a>
-
-            <a href="{{ new_job }}"><button type="button" class="btn btn-info mt-4">Adicionar uma nova execução.</button></a>
-
-            <a href="{{ list_job }}"><button type="button" class="btn btn-info mt-4">Lista de execução.</button></a>             
-
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="colunas-tab" data-toggle="tab" href="#colunas" role="tab" aria-controls="colunas" aria-selected="true">Colunas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="execucoes-tab" data-toggle="tab" href="#execucoes" role="tab" aria-controls="execucoes" aria-selected="false">Execuções</a>
-                </li>
-              </ul>
-            
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="colunas" role="tabpanel" aria-labelledby="colunas-tab">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Colunas</h5>
-                      <p class="card-text">Conteúdo relacionado às colunas.</p>
-                      <table class="table table mt-4">
-                        <thead>
-                            <tr>
-                                <th class="text-center" scope="col">Name</th>
-                                <th class="text-center" scope="col">Rename</th>
-                                <th class="text-center" scope="col">Datatype</th>
-                                <th class="text-center" scope="col">Tipo de infor.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for column in columns %}
-                                <tr>
-                                    <td class="text-center" scope="row">{{column.str_source_name}}</td>
-                                    <td class="text-center" scope="row">{{column.str_rename}}</td>
-                                    <td class="text-center" scope="row">{{column.str_datatype}}</td>
-                                    <td class="text-center" scope="row">
-                                        {% if column.str_type == 'CPK' %}
-                                            <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
-                                        {% elif column.str_type == 'CFK' %}
-                                            <span class="badge text-bg-secondary rounded-pill">Chave Extrangeira</span>
-                                        {% elif column.str_type == 'SEN' %}
-                                            <span class="badge text-bg-danger rounded-pill">Dado Sensivel</span>
-                                        {% elif column.str_type == 'KDS' %}
-                                            <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% empty %}
-                                <p>Não há colunas cadastradas.</p>
-                            {% endfor %}
-                        </tbody>
-                    </table> 
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="execucoes" role="tabpanel" aria-labelledby="execucoes-tab">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Execuções</h5>
-                      <p class="card-text">Conteúdo relacionado às execuções.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            
-        </div>
     </div>
-
-
 </div>
+
+<ul class="nav mt-4 nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#description" data-toggle="tab">Descrição</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#details" data-toggle="tab">Detalhes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#columns" data-toggle="tab">Colunas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#more" data-toggle="tab">Mais +</a>
+    </li>
+
+</ul>
+
+<div class="tab-content mt-4">
+    <div id="description" class="tab-pane active">
+        <p><strong>Descrição:</strong></p>
+        <p class="lead">{{ table.str_desc }}</p>
+    </div>
+    <div id="details" class="tab-pane fade">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Frequência: {{ table.str_frequency }}</li>
+            <li class="list-group-item">Modo: {{ table.str_mode }}</li>
+            <li class="list-group-item">Descrição: {{ table.str_desc }}</li>
+            <li class="list-group-item">Tipo de Ingestão: {{ table.str_type }}</li>
+            <li class="list-group-item">Data de Cadastro: {{ table.dth_start_at }}</li>
+            <li class="list-group-item">Camada: {{ table.layer }}</li>
+            <li class="list-group-item">Palavras Chave: {{ card_table.str_key_words }}</li>
+
+            <li class="list-group-item">
+                Tamanho em GB: 
+                {% if table.int_size is None %}
+                    0
+                {% else %}
+                    {{ table.int_size }}
+                {% endif %}
+            </li>
+            
+            <li class="list-group-item">
+                Quantidade de linhas: 
+                {% if table.int_number_of_rows is None %}
+                    0
+                {% else %}
+                    {{ table.int_number_of_rows }}
+                {% endif %}
+            </li>
+        </ul>
+
+    </div>
+    <div id="columns" class="tab-pane fade">
+
+        <table class="table mt-4 table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Name</th>
+                    <th class="text-center" scope="col">Rename</th>
+                    <th class="text-center" scope="col">Datatype</th>
+                    <th class="text-center" scope="col">Tipo de infor.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for column in columns %}
+                    <tr>
+                        <td class="text-center" scope="row">{{column.str_source_name}}</td>
+                        <td class="text-center" scope="row">{{column.str_rename}}</td>
+                        <td class="text-center" scope="row">{{column.str_datatype}}</td>
+                        <td class="text-center" scope="row">
+                            {% if column.str_type == 'CPK' %}
+                                <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
+                            {% elif column.str_type == 'CFK' %}
+                                <span class="badge text-bg-secondary rounded-pill">Chave Extrangeira</span>
+                            {% elif column.str_type == 'SEN' %}
+                                <span class="badge text-bg-danger rounded-pill">Dado Sensivel</span>
+                            {% elif column.str_type == 'KDS' %}
+                                <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <p>Não há colunas cadastradas.</p>
+                {% endfor %}
+            </tbody>
+        </table> 
+
+    </div>
+</div>
+
+<h4>Execuções</h4>
+
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="text-center" scope="col">Name</th>
+            <th class="text-center" scope="col">Rename</th>
+            <th class="text-center" scope="col">Datatype</th>
+            <th class="text-center" scope="col">Tipo de infor.</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for column in columns %}
+            <tr>
+                <td class="text-center" scope="row">{{column.str_source_name}}</td>
+                <td class="text-center" scope="row">{{column.str_rename}}</td>
+                <td class="text-center" scope="row">{{column.str_datatype}}</td>
+                <td class="text-center" scope="row">
+                    {% if column.str_type == 'CPK' %}
+                        <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
+                    {% elif column.str_type == 'CFK' %}
+                        <span class="badge text-bg-secondary rounded-pill">Chave Extrangeira</span>
+                    {% elif column.str_type == 'SEN' %}
+                        <span class="badge text-bg-danger rounded-pill">Dado Sensivel</span>
+                    {% elif column.str_type == 'KDS' %}
+                        <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% empty %}
+            <p>Não há colunas cadastradas.</p>
+        {% endfor %}
+    </tbody>
+</table> 
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 
 {% endblock %}

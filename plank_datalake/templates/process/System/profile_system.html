@@ -2,41 +2,189 @@
 {% load static %}
 {% block content %}
 
-<div class="card">
-	<div class='card-header'>
-		<h4 class='text-primary'>{{ system.str_title }}</h4>
-	</div>
-	<div class="card-body">
-		<div class="row">
-			<div class="col-md-2">
-				<img src="{% static  system.img_path  %}" alt="Bootstrap" width="150" height="150">
-			</div>
+<style>
+    .scroll-container {
+        height: 150px;
+        overflow-y: auto;
+    }
+    .tab-content {
+        height: 200px;
+    }
 
-			<div class="col-md-6">
-				<p><strong>Descrição:</strong></p>
-                <p class="lead">{{ system.str_desc }}</p>
-			</div>
+</style>
 
-			<div class="col-md-3">
-				<p><strong>Responsavel</strong></p>
-				<p>Luiz Gustavo Cairo</p>
-				<p><strong>Aprovador</strong></p>
-				<p>Jeremias Cairo</p>
-				<p><strong>Criacáo</strong></p>
-				<p>{{ system.dth_start_At}}</p>
-			</div>
+<div class='row'>
+    <div class='col-md-2'>
+        <img src="{% static  system.img_path  %}" alt="Bootstrap" width="100" height="100">
+    </div>
 
-			<div class='col-md-1'>
-				{% if system.str_status == 'Ativo' %}
-					<button type="button" class="btn btn-outline-success">{{ system.str_status }}</button>
-				{% elif system.str_status == 'Inativo' %}
-					<button type="button" class="btn btn-outline-danger">{{ system.str_status }}</button>
-				{% else %}
-					<button type="button" class="btn btn-outline-dark">{{ system.str_status }}</button>
-				{% endif %}
-			</div>
-		</div>
-	</div>
+    <div class='col-md-6'>
+        <h4> Sistema </h4>
+        <h2 class='text-primary'>{{ system.str_title }}</h2>                
+    </div>
+</div>
+
+
+<ul class="nav mt-4 nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#details" data-toggle="tab">Detalhes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#process" data-toggle="tab">Processo</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#related" data-toggle="tab">Relacionados</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#more" data-toggle="tab">Mais</a>
+    </li>    
+</ul>
+
+<div class="tab-content mt-4">
+    <div id="details" class="tab-pane active">
+
+        <p><strong>Descrição:</strong></p>
+        <p class="lead">{{ system.str_desc }}</p>
+        
+    </div>
+    <div id="process" class="tab-pane fade">
+        <div class='row'>
+            <div class='col'>
+                <p><strong>Responsavel</strong></p>
+                <p>Luiz Gustavo Cairo</p>
+            </div>
+
+            <div class='col'>
+                <p><strong>Aprovador</strong></p>
+                <p>Jeremias Cairo</p>
+            </div>
+
+            <div class='col'>
+                <p><strong>Criacáo</strong></p>
+                <p>{{ system.dth_start_at}}</p>       
+            </div>
+
+            <div class='col'>
+                {% if system.str_status == 'Ativo' %}
+                    <button type="button" class="btn btn-outline-success">{{ system.str_status }}</button>
+                {% elif system.str_status == 'Inativo' %}
+                    <button type="button" class="btn btn-outline-danger">{{ system.str_status }}</button>
+                {% else %}
+                    <button type="button" class="btn btn-outline-dark">{{ system.str_status }}</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="related" class="tab-pane fade">
+        <div class="scroll-container">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>                        
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>                        
+                <li class="list-group-item">
+                    Relacionado: Luiz Cairo  - Execution Date: Informado 
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="more" class="tab-pane fade">
+        <p><strong>Variáveis Sistemicas:</strong></p>
+
+        <div class="scroll-container">
+            <ul class="list-group">
+
+                {% if system.str_system_type == 'google_sheets' %}
+                    <li class="list-group-item">
+                        str_type: {{system.str_type}} 
+                    </li>
+                    <li class="list-group-item">
+                        str_project_id: {{system.str_project_id}}
+                    </li>
+                    <li class="list-group-item">
+                        str_private_key_id: {{system.str_private_key_id}}
+                    </li>
+                    <li class="list-group-item">
+                        str_private_key: {{system.str_private_key}}
+                    </li>
+                    <li class="list-group-item">
+                        str_client_email: {{system.str_client_email}}
+                    </li>
+                    <li class="list-group-item">
+                        str_client_id: {{system.str_client_id}}
+                    </li>
+                    <li class="list-group-item">
+                        str_auth_uri: {{system.str_auth_uri}}
+                    </li>
+                    <li class="list-group-item">
+                        str_token_uri: {{system.str_token_uri}}
+                    </li>
+                    <li class="list-group-item">
+                        str_auth_provider_x509_cert_url: {{system.str_auth_provider_x509_cert_url}}
+                    </li>                    
+                    <li class="list-group-item">
+                        str_client_x509_cert_url: {{system.str_client_x509_cert_url}}
+                    </li>                    
+                    <li class="list-group-item">
+                        str_universe_domain: {{system.str_universe_domain}}
+                    </li>
+                
+                {% elif system.str_system_type == 'postgre' %}
+                    <li class="list-group-item">
+                        PostGree: {{system.PostGree}}
+                    </li>
+                    <li class="list-group-item">
+                        str_name: {{system.str_name}}
+                    </li>
+                    <li class="list-group-item">
+                        str_user: {{system.str_user}}
+                    </li>
+                    <li class="list-group-item">
+                        str_password: {{system.str_password}}
+                    </li>
+                    <li class="list-group-item">
+                        str_host: {{system.str_host}}
+                    </li>
+                    <li class="list-group-item">
+                        str_port: {{system.str_port}}
+                    </li>
+                
+                {% elif system.str_system_type == 'MySql' %}
+                    <li class="list-group-item">
+                        str_passwd: {{system.str_passwd}}
+                    </li>
+                    <li class="list-group-item">
+                        str_database: {{system.str_database}}
+                    </li>
+                {% elif system.str_system_type == 'SQLite' %}
+                    <li class="list-group-item">
+                        str_database_name: {{system.str_database_name}}
+                    </li>
+                {%endif%}
+
+            </ul>
+        </div>        
+    </div>    
 </div>
 
 <h3 class="text-primary text-center mt-3">Datasets</h3>
@@ -82,6 +230,26 @@
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
 </nav>
+
+
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function() {
+        var jumbotron = document.getElementById('jumbotron');
+        if (jumbotron.classList.contains('hidden')) {
+            jumbotron.classList.remove('hidden');
+            this.textContent = 'Hide Details';
+        } else {
+            jumbotron.classList.add('hidden');
+            this.textContent = 'Show Details';
+        }
+    });
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 {% endblock %}
 
