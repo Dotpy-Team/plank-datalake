@@ -9,9 +9,27 @@
             <link rel="stylesheet" href="{% static 'css/sidebars.css' %}" >
             <link rel="stylesheet" href="{% static 'css/style.css' %}" >
 
-            <meta name="author" content="Luiz Cairo">
-            <link rel="icon" type="image/x-icon" href="{% static 'images/dotpy_logo.png' %}">
-            {% comment %} {% include 'common/style.html' %} {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800" rel="stylesheet">
+    <style>
+        /* Aplicando as fontes no CSS */
+        body {
+            font-family: 'Mukta', sans-serif; /* ou 'Open Sans', sans-serif; */
+        }
+
+        /* Você pode aplicar as fontes a elementos específicos */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Mukta', sans-serif; /* Títulos com Mukta */
+        }
+
+        p {
+            font-family: 'Mukta', sans-serif; /* Parágrafos com Open Sans */
+        }
+    </style>
+
+    <meta name="author" content="Luiz Cairo">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/dotpy_logo.png' %}">
 
     </head>
 

@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Pipeline, RaciActivity
+from process.models import Pipeline, RaciActivity, Step, Tables
 from business.models import Customer   
-from process.forms import PipelineForm
+from process.forms import PipelineForm, StepForm
 import base64
 
 def crip(text):
@@ -34,7 +34,6 @@ def new_pipeline(request):
     html_location = parse_html_path(PIPELINE_PATH,'new_pipeline')
     
     if request.method == 'POST':
-
         if form.is_valid(): 
             pipeline = form.save(commit=False)
             pipeline.customer = customer_instance
@@ -66,9 +65,21 @@ def detail_pipeline(request, pipeline_id):
     pipeline = get_object_or_404(Pipeline, pipeline_id=pipeline_id)
     
     html_location = parse_html_path(PIPELINE_PATH, 'detail_pipeline')
+
+    steps = Step.objects.filter(pipeline_id=pipeline_id)
+    for step in steps:
+        step.new_child_table = reverse('new_child_table', args=[crip(str(step.step_id))])
+        try:
+            step.table = Tables.objects.get(step_id=step.step_id)
+        except Tables.DoesNotExist:
+            step.table = None
+
+        step.save()
+    
     response_dict = {
         'pipeline': pipeline,
-        'new_step': reverse('new_step', args=[crip(str(pipeline.pipeline_id))])
+        'new_step': reverse('new_step', args=[crip(str(pipeline.pipeline_id))]),
+        'steps':steps
     }
 
     return render(request, html_location, response_dict)

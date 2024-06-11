@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
 <style>
@@ -15,6 +16,8 @@
         line-height: 1.5;
         overflow: auto;
         white-space: pre;
+        text-align: left;
+        box-sizing: border-box; /* Inclui padding no cálculo do tamanho */
     }
 
     .code-editor:focus {
@@ -22,43 +25,168 @@
         border-color: #6272a4;
     }
 
+    .tab-content {
+        height: 250px;
+    }
+
 </style>
 
-<div class="container justify-content-center">
-    <div class="card border-primary" style="max-width: 100rem;">
-        <div class="card-body">
-            <div class='row'>
-                <div class='col-md-6'>
-                    <h3 class="card-title text-primary">{{ pipeline.str_title }}</h3>
-                    <h5 class="card-text-secondary-emphasis">Descrição:</h3>
-                    <p class="card-text">{{ pipeline.str_desc }}</p>        
-                </div>
+<div class='row mt-4'>
+    <div class='col-md-2'>
+        <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 150px;">
+    </div>
 
-                <div class='col-md-6'>
-                    <p class="card-text">Data de Inicio: {{ pipeline.dth_start_at }}</p>
-                    <p class="card-text">Data do Fim: {{ pipeline.dth_end_at }}</p>
-                    <p class="card-text">{{ pipeline.raci_activity }}</p>
-                    <button type="button" class="btn btn-light w-100">verificar responsáveis</button>                
+    <div class='col'>
+        <h4>Transformação</h4>
+        <h2 class='text-primary'>{{ pipeline.str_title }}</h2>
+        <button id="toggleButton" class="btn btn-primary mt-4">Mais</button>
+
+    </div>
+
+    <div class='col-md-2'>
+        <button type="button" class="btn btn-primary">Opções</button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop4" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
+                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Execução (temporario)</a>
+                    <a class="dropdown-item" href="{{ list_job }}">Ver todas execuções</a>
+                    <a class="dropdown-item" href="{{ look_all }}">Ver Todas Colunas</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="card border-primary mt-2">
+<div id="areaExpansivel" style="display: none;">
+    <ul class="nav mt-4 nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#description" data-toggle="tab">Descrição</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#dependencies" data-toggle="tab">Detalhes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#executions" data-toggle="tab">Execuções</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#raci" data-toggle="tab">Envolvidos</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4">
+        <div id="description" class="tab-pane active">
+            <div class="row">
+                <div class='col-md-3'>
+                    <p class="card-text">Data de Inicio: {{ pipeline.dth_start_at }}</p>
+                </div>
+                <div class='col-md-3'>
+                    <p class="card-text">Data do Fim: {{ pipeline.dth_end_at }}</p>
+                </div>
+            </div>
+            <h4>Descrição:</h4>
+            <p>{{ pipeline.str_desc }}</p>
+    
+        </div>
+    
+        <div id="dependencies" class="tab-pane fade">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">depencencia: salesforce_cadastro_clientes</li>
+                <li class="list-group-item">depencencia: salesforce_cadastro_usuarios</li>
+                <li class="list-group-item">depencencia: salesforce_financeiro_pagamentos</li>
+                <li class="list-group-item">depencencia: salesforce_financeiro_notas_fiscais</li>
+                <li class="list-group-item">depencencia: salesforce_logistica_rotas</li>
+            </ul>
+        </div>
+    
+        <div id="executions" class="tab-pane fade">
+            <table class="table mt-4 table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">#ID</th>
+                        <th class="text-center" scope="col">Dth Inicio</th>
+                        <th class="text-center" scope="col">Dth Fim</th>
+                        <th class="text-center" scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td class="text-center" scope="row">17263</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">Sucesso</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" scope="row">57428123</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">Sucesso</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" scope="row">4638653</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">Sucesso</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" scope="row">34534657</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">Sucesso</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" scope="row">123124</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">2025-05-11</td>
+                            <td class="text-center" scope="row">Sucesso</td>
+                        </tr>
+    
+    
+                </tbody>
+            </table> 
+    
+        </div>
+    
+        <div id="raci" class="tab-pane fade">
+            <h4 class="card-text">{{ pipeline.raci_activity }}</h4>
+            <div class='row'>
+                <div class='col'>
+                    <p>Responsavel: {{ pipeline.raci_activity.responsible }}</p>
+                </div>
+                <div class='col'>
+                    <p>Aprovador: {{ pipeline.raci_activity.accountable }}</p>
+                </div>
+            </div>       
+            <button type="button" class="btn btn-light w-100">verificar responsáveis</button>                
+        </div>    
+    </div>
+</div>
+
+
+{% for step in steps %}
+
+    <div class="card border-primary mt-4">
         <div class='card-body'>
             <div class='row'>
                 <div class='col-md-4'>
-                    <h4>app.transacao_fatura</h4>
+                    <h4><b> #{{ step.step_id }}</b> app.{{ step.table.str_name }}</h4>
+                </div>
+                <div class='col-md-2'>
+                    {% if step.table is None %}
+                    <a href="{{ step.new_child_table }}" class="btn btn-danger w-100">Propriedades</a>
+                    {% else %}
+                        <a href="{{ step.new_child_table }}" class="btn btn-secondary w-100">Propriedades</a>
+                    {% endif %}
+                </div>
+                <div class='col-md-2'>
+                    <button type="button" class="btn btn-dark w-100">Salvar</button>
                 </div>
                 <div class='col-md-2'>
                     <button type="button" class="btn btn-primary w-100">Executar</button>
                 </div>
-                <div class='col-md-2'>
-                    <button type="button" class="btn btn-light w-100">Salvar</button>
-                </div>                
             </div>
             <div class='row mt-2'>
-                <textarea id="codeEditor" class="code-editor" rows="10"></textarea>
+                <textarea id="codeEditor" class="code-editor" rows="10">{{ step.str_query}}</textarea>
             </div>
             <div class='row mt-2'>
                 <div class="alert alert-danger" role="alert">
@@ -144,15 +272,42 @@
             </div>
 
         </div>
+    </div> 
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+          <a href="{{ new_step }}" class="btn btn-info mt-4">Adicionar novo Step.</a>
+        </div>
     </div>
 
-    <a href="{{ new_step }}"><button type="button" class="btn btn-info mt-4">Adicionar novo Step.</button></a>
+{% endfor %}
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <a href="{{ new_step }}" class="btn btn-info mt-4">Adicionar novo Step.</a>
+    </div>
 </div>
+
+
+
+<script>
+
+    document.getElementById("toggleButton").addEventListener("click", function() {
+        var area = document.getElementById("areaExpansivel");
+        if (area.style.display === "none") {
+            area.style.display = "block";
+            this.textContent = "Minimizar";
+        } else {
+            area.style.display = "none";
+            this.textContent = "Maximizar";
+        }
+    });
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 {% endblock %}
 

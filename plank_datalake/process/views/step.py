@@ -7,6 +7,8 @@ from process.models import Tables, Step, Pipeline, Trigger
 from business.models import Customer
 from process.forms import StepForm, TablesStepForm
 import base64
+import json
+
 
 def crip(text):
     crip = base64.b64encode(text.encode()).decode()
@@ -21,6 +23,7 @@ STEP_PATH = 'process/Step/'
 def parse_html_path(path,page):
     html_location = path + f'{page}.html'
     return html_location
+
 
 @login_required
 def new_step(request, pipeline_id):
@@ -43,7 +46,7 @@ def new_step(request, pipeline_id):
             pipeline.pipeline = pipeline_instance
             step.save()
             pipeline.save()
-            return redirect('new_child_table', crip(str(step.step_id)))
+            return redirect('detail_pipeline', crip(str(step.pipeline_id)))
         else:
             error_message = 'Credenciais inválidas. Por favor, tente novamente.'   
             error_dict = {
@@ -59,7 +62,6 @@ def new_step(request, pipeline_id):
 
 @login_required
 def new_child_table(request, step_id):
-
     try:
         step_id = uncrip(step_id) 
         customer_id = request.user.customer.customer_id
@@ -68,10 +70,10 @@ def new_child_table(request, step_id):
     except Customer.DoesNotExist:
         return redirect('new_step')
     
-    form = TablesStepForm(request.POST)
     html_location = parse_html_path(STEP_PATH, 'new_step_table')
 
     if request.method == 'POST':
+        form = TablesStepForm(request.POST)
         if form.is_valid():
             table = form.save(commit=False)
             table.customer = customer_instance
@@ -87,11 +89,7 @@ def new_child_table(request, step_id):
                 'error_form': table.errors 
             }
     else:
-        form = TablesStepForm(initial={'step_id':step_id})
-
-        form.fields['trigger'].queryset = Trigger.objects.filter(customer_id=customer_id)
-        form.fields['trigger'].widget.attrs['class'] = 'form-select'
-        form.fields['trigger'].label = 'Trigger'
+        form = TablesStepForm()
 
         response_dict = {
             'form': form

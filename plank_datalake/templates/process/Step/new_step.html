@@ -1,25 +1,144 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
-<div class="container mt-5">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            <h3 class="text-center">Nova Tabela</h3>
-        </div>
-        <div class="card-body">
-            <form method="post" class="form">
-                {% csrf_token %}
-                
-                {{ form.as_p }}
 
-                <div class="form-group row justify-content-center">
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit">Salvar</button>
-                    </div>
+<style>
+    .code-editor {
+        width: 100%;
+        height: 300px;
+        padding: 15px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        color: #f8f8f2;
+        background-color: #282a36;
+        border: 1px solid #44475a;
+        border-radius: 5px;
+        line-height: 1.5;
+        overflow: auto;
+        white-space: pre;
+        text-align: left;
+        box-sizing: border-box; /* Inclui padding no cálculo do tamanho */
+    }
+
+    .code-editor:focus {
+        outline: none;
+        border-color: #6272a4;
+    }
+
+    .tab-content {
+        height: 250px;
+    }
+
+</style>
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="card border-primary mt-2">
+        <div class='card-body'>
+            <div class='row'>
+                <div class='col-md-4'>
+                    <h4>{{ step.step_id }} app.transacao_fatura</h4>
+                </div>
+                <div class='col-md-2'>
+                    <button type="button" class="btn btn-primary w-100">Executar</button>
+                </div>
+                <div class='col-md-2'>
+                    <button type="submit" class="btn btn-light w-100">Salvar</button>
+                </div>                
+            </div>
+            <div class='row mt-2'>
+                <textarea id="codeEditor" class="code-editor" rows="10" name='str_query'>{{ form.str_query.value|default_if_none:'' }}</textarea>
+            </div>
+            {% comment %} <input type="hidden" id="id_str_query" name="str_query"> {% endcomment %}
+            <div class='row mt-2'>
+                <div class="alert alert-danger" role="alert">
+                    {{ form.errors }}
                 </div>
 
-            </form>
+                <div class="alert alert-danger" role="alert">
+                    SQL ERROR: syntax error at or near
+                </div>
+            </div>
+
+            <div class='row mt-2'>
+
+                <ul class="nav nav-tabs" id="executionTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="result-tab" data-toggle="tab" href="#result" role="tab" aria-controls="result" aria-selected="true">Resultado da Execução</a>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">Detalhes da Execução</a>
+                    </li>
+                </ul>
+        
+                <!-- Tab Content -->
+                <div class="tab-content" id="executionTabContent">
+                    <!-- Result Tab Pane -->
+                    <div class="tab-pane fade show active" id="result" role="tabpanel" aria-labelledby="result-tab">
+                        <div class='row mt-4'>
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">id_salesforce</th>
+                                        <th scope="col">codigo_sap</th>
+                                        <th scope="col">nome</th>
+                                        <th scope="col">dt_nasci</th>
+                                        <th scope="col">telefone</th>
+                                        <th scope="col">status_cliente</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>aushdauhsd</td>
+                                        <td>000123123</td>
+                                        <td>luiz</td>
+                                        <td>29-04-1998</td>
+                                        <td>12386123</td>
+                                        <td>Ativo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>aushdauhsd</td>
+                                        <td>000123123</td>
+                                        <td>luiz</td>
+                                        <td>29-04-1998</td>
+                                        <td>12386123</td>
+                                        <td>Ativo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>aushdauhsd</td>
+                                        <td>000123123</td>
+                                        <td>luiz</td>
+                                        <td>29-04-1998</td>
+                                        <td>12386123</td>
+                                        <td>Ativo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>aushdauhsd</td>
+                                        <td>000123123</td>
+                                        <td>luiz</td>
+                                        <td>29-04-1998</td>
+                                        <td>12386123</td>
+                                        <td>Ativo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                        <ul class="list-group list-group-flush">                            
+                            <li class="list-group-item">2025-05-01 15:11:45 INFO SparkEnv: Registering BlockManagerMaster </li>
+                            <li class="list-group-item">2025-05-01 15:11:45 INFO DiskBlockManager: Created local directory at /tmp/spark-local-20150105151145-b1ba</li>
+                            <li class="list-group-item">2025-05-01 15:11:45 INFO MemoryStore: MemoryStore started with capacity 0.0 B.</li>
+                            <li class="list-group-item">2025-05-01 15:11:45 INFO ConnectionManager: Bound socket to port 44728 with id = ConnectionManagerId(192.168.100.85,44728)</li>
+                            <li class="list-group-item">2025-05-01 15:11:45 INFO BlockManagerMaster: Trying to register BlockManager</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
+</form>
+
 
 {% endblock %}
