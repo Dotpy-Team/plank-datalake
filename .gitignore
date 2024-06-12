@@ -4,10 +4,6 @@ myvenv/
 # Ignorar tudo dentro da pasta venv
 .venv/
 
-
-# Ignorar as migrações
-**/migrations/
-
 # Ignorar os caches
 **/__pycache__/
 
