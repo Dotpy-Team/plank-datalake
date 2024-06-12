@@ -12,11 +12,12 @@ class Columns(models.Model):
     str_datatype = models.CharField(
         max_length=60,
         choices=[
-            ('STR', 'String'),
-            ('INT', 'Integer'),
-            ('FLO', 'Float'),
-            ('DAT', 'Date'),
-            ('DTH', 'Datetime')
+            ('string', 'String'),
+            ('int', 'Integer'),
+            ('bigint', 'BigInt'),
+            ('double', 'Float'),
+            ('date', 'Date'),
+            ('timestamp', 'Datetime')
         ]
     )
     str_pattern_format = models.CharField(max_length=60)
