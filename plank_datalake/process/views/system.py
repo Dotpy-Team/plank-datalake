@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
@@ -72,10 +73,25 @@ def new_system(request):
 def profile_system(request,system_id):
     system_id = uncrip(system_id)
     system = get_object_or_404(System, system_id=system_id)
-    # caminho_da_imagem = "{% static 'img/sua_imagem.jpg' %}"
     system.img_path = f"images/{system.str_system_type}.png"
-    print(system.img_path)
     datasets = DataSet.objects.filter(system_id=system_id)
+    
+    search = request.GET.get('search')
+
+    if search:
+        datasets = DataSet.objects.filter(str_title__icontains=search)
+    
+    datasets = datasets.order_by('dataset_id')
+
+    paginator = Paginator(datasets, 6)  # 10 datasets por página
+    page = request.GET.get('page')
+    
+    try:
+        datasets = paginator.page(page)
+    except PageNotAnInteger:
+        datasets = paginator.page(1)
+    except EmptyPage:
+        datasets = paginator.page(paginator.num_pages)
 
     for dataset in datasets:
         dataset.detail_url = reverse(
@@ -88,7 +104,9 @@ def profile_system(request,system_id):
     response_dict = {
         'system': system,
         'datasets':datasets,
-        'new_dataset':reverse('new_dataset',args=[crip(str(system.system_id))])
+        'new_dataset':reverse('new_dataset',args=[crip(str(system.system_id))]),
+        'profile_system':reverse('profile_system',args=[crip(str(system.system_id))]),
+        'search':search
     }
 
     return render(request, html_location, response_dict)
@@ -96,16 +114,32 @@ def profile_system(request,system_id):
 @login_required
 def list_system(request):
     customer_id = request.user.customer.customer_id
-    systems = System.objects.filter(customer_id=customer_id)
+    systems = System.objects.filter(customer_id=customer_id).order_by('system_id')
 
     html_location = parse_html_path(SYSTEM_PATH,'list_system')
+
+    # Configuração da paginação
+    paginator = Paginator(systems, 6)  # 10 sistemas por página
+    page = request.GET.get('page')
+
+    try:
+        systems = paginator.page(page)
+    except PageNotAnInteger:
+        systems = paginator.page(1)
+    except EmptyPage:
+        systems = paginator.page(paginator.num_pages)
+    
+
     for system in systems:
         system.detail_url = reverse(
             'profile_system',
             args=[crip(str(system.system_id))]
         )
         system.save()
-    response_dict = {'systems': systems}
+        
+    response_dict = {
+        'systems': systems
+    }
     
     return render(request, html_location, response_dict)
 
