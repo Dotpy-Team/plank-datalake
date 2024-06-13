@@ -45,8 +45,8 @@ urlpatterns = [
     #CONTACT
     path('new-contact/<str:customer_id>', b.new_contact, name='new_contact'),
     path('profile-contact/<str:contact_id>', b.profile_contact, name='profile_contact'),
-    path('list-contacts/', b.list_contacts_by_id, name='list_contacts_by_id'),
-    path('admin-list-contacts/', b.list_contacts, name='list_contacts'),
+    path('list-contacts/', b.list_contacts, name='list_contacts'),
+    path('admin-list-contacts/', b.list_contacts_by_id, name='list_contacts'),
 
     #USER:
     path('signup/<str:customer_id>', b.new_user , name='new_user'),
@@ -87,7 +87,7 @@ urlpatterns = [
     #RACI:
     path('raci/', p.new_raci , name='new_raci'),
     path('raci-details/<str:activity_id>', p.profile_raci , name='profile_raci'),
-    path('raci-list/', p.list_contracts , name='list_contracts'),
+    path('raci-list/', p.list_activities , name='list_activities'),
 
     #RACI-RELATED:
     path('raci-related/<str:activity_id>', p.new_related , name='new_related'),

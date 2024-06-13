@@ -58,7 +58,7 @@ def profile_contact(request, contact_id):
     return render(request, html_location, response_dict)
 
 @login_required
-def list_contacts_by_id(request):
+def list_contacts(request):
     customer_id = request.user.customer.customer_id
     contacts = Contacts.objects.filter(customer_id=customer_id)
     html_location = parse_html_path(CONTACT_PATH,'list_contacts')
@@ -77,7 +77,7 @@ def list_contacts_by_id(request):
     return render(request, html_location, response_dict)
 
 @login_required
-def list_contacts(request):
+def list_contacts_by_id(request):
     contacts = Contacts.objects.all()
     html_location = parse_html_path(CONTACT_PATH,'list_contacts')
 
