@@ -6,9 +6,15 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-1                  # Defina isso para a sua região AWS preferida, por exemplo, us-west-1
-  ECR_REPOSITORY: plank-datalake         # Defina isso para o nome do seu repositório Amazon ECR
-  ECR_REGISTRY: 121253776145.dkr.ecr.us-east-1.amazonaws.com # O registro ECR do seu repositório
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: plank-datalake
+  ECR_REGISTRY: 121253776145.dkr.ecr.us-east-1.amazonaws.com
+  CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+  SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+  CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+  TASK_DEFINITION_FAMILY: ${{ secrets.TASK_DEFINITION_FAMILY }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   deploy:
@@ -30,10 +36,11 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-    
+
     - name: Set Image Tag
       id: set-image-tag
-      run: echo "IMAGE_TAG=${GITHUB_REF#refs/heads/}-${{ github.run_id }}" >> $GITHUB_ENV
+      run: |
+        echo "IMAGE_TAG=${GITHUB_REF#refs/heads/}-${GITHUB_RUN_ID}" >> $GITHUB_ENV
 
     - name: Build Docker Image
       id: build-image
@@ -57,10 +64,10 @@ jobs:
       run: |
         # Get the current task definition
         CURRENT_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_FAMILY --query 'taskDefinition' --output json)
-        
+
         # Update the container image
         UPDATED_CONTAINER_DEFINITIONS=$(echo $CURRENT_TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.containerDefinitions[0].image=$IMAGE')
-        
+
         # Prepare the updated task definition
         UPDATED_TASK_DEFINITION=$(echo $CURRENT_TASK_DEFINITION | jq '{
           family: .family,
@@ -81,7 +88,7 @@ jobs:
           NEW_TASK_DEFINITION=$(aws ecs register-task-definition \
             --family $TASK_DEFINITION_FAMILY \
             --cli-input-json "$UPDATED_TASK_DEFINITION")
-          
+
           # Extract the new revision number
           NEW_REVISION=$(echo $NEW_TASK_DEFINITION | jq -r '.taskDefinition.revision')
           echo "New task definition revision: $NEW_REVISION"
