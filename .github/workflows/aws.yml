@@ -75,6 +75,11 @@ jobs:
           taskRoleArn: (.taskRoleArn // null) | select(. != null)
         }')
 
+        # Debug prints
+        echo "Current Task Definition: $CURRENT_TASK_DEFINITION"
+        echo "Updated Container Definitions: $UPDATED_CONTAINER_DEFINITIONS"
+        echo "Updated Task Definition: $UPDATED_TASK_DEFINITION"
+
         # Register the new task definition
         NEW_TASK_DEFINITION=$(aws ecs register-task-definition \
           --family $TASK_DEFINITION_FAMILY \
