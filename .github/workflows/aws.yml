@@ -6,12 +6,12 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-1                  # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: plank-datalake         # set this to your Amazon ECR repository name
+  AWS_REGION: us-east-1                  # Defina isso para a sua região AWS preferida, por exemplo, us-west-1
+  ECR_REPOSITORY: plank-datalake         # Defina isso para o nome do seu repositório Amazon ECR
 
 jobs:
   deploy:
-    name: Build Image
+    name: Build and Deploy Image
     runs-on: ubuntu-latest
     environment: production
 
@@ -24,7 +24,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -44,3 +44,15 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+    - name: Update ECS service
+      env:
+        CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+        SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+        CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+        ECR_REGISTRY: 121253776145.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REPOSITORY: plank-datalake
+        IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        AWS_REGION: ${{ env.AWS_REGION }}
+      run: |
+        aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment --region $AWS_REGION
