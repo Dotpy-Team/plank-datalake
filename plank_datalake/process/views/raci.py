@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
@@ -133,8 +134,28 @@ def profile_raci(request,activity_id):
     activity = get_object_or_404(RaciActivity, activity_id=activity_id)
     html_location = parse_html_path(RACI_PATH,'profile_raci')
 
-    related = RaciRelated.objects.filter(activity_id=activity_id)
+    related_type = request.GET.get('related_type')
+
+    if related_type == 'informado':
+        related = RaciRelated.objects.filter(activity_id=activity_id, str_type='INF')
+    elif related_type == 'consultado':
+        related = RaciRelated.objects.filter(activity_id=activity_id, str_type='CON')
+    elif related_type == 'todos':
+        related = RaciRelated.objects.filter(activity_id=activity_id)
+    else:
+        related = RaciRelated.objects.filter(activity_id=activity_id)
+
     customUser = Customer.objects.get(customer_id=activity.customer_id).customuser_set.all()
+
+    paginator = Paginator(related, 6)
+    page = request.GET.get('page')
+
+    try:
+        related_page = paginator.page(page)
+    except PageNotAnInteger:
+        related_page = paginator.page(1)
+    except EmptyPage:
+        related_page = paginator.page(paginator.num_pages)
 
     response_dict = {
         'activity': activity,
@@ -142,26 +163,45 @@ def profile_raci(request,activity_id):
             'new_related',
             args=[crip(str(activity.activity_id))]
         ),
-        'related': related
+        'related': related_page,
+        'related_type':related_type
     }
     return render(request, html_location, response_dict)
-    # except Http404:
-    #     return redirect('signup_company')
 
 @login_required
-def list_contracts(request):
+def list_activities(request):
     customer_id = request.user.customer.customer_id
     customer = get_object_or_404(Customer, customer_id=customer_id)
 
+    search = request.GET.get('search')
     raci = RaciActivity.objects.filter(customer_id=customer_id)
+
+    if search:
+        raci = raci.filter(str_title__icontains=search)
+
+    raci = raci.order_by('activity_id')
     html_location = parse_html_path(RACI_PATH,'list_activity')
+
     for activity in raci:
         activity.detail_url = reverse(
             'profile_raci',
             args=[crip(str(activity.activity_id))]
         )
         activity.save()
+    
+    paginator = Paginator(raci, 6)  # Define 10 itens por página
+    page = request.GET.get('page')
+    
+    try:
+        raci_page = paginator.page(page)
+    except PageNotAnInteger:
+        raci_page = paginator.page(1)
+    except EmptyPage:
+        raci_page = paginator.page(paginator.num_pages)
 
-    response_dict = {'raci': raci}
+    response_dict = {
+        'raci': raci_page,
+        'search': search
+    }
+    
     return render(request, html_location, response_dict)
-
