@@ -75,23 +75,23 @@ jobs:
           taskRoleArn: (.taskRoleArn // null) | select(. != null)
         }')
 
-        # Debug prints
-        echo "Current Task Definition: $CURRENT_TASK_DEFINITION"
-        echo "Updated Container Definitions: $UPDATED_CONTAINER_DEFINITIONS"
-        echo "Updated Task Definition: $UPDATED_TASK_DEFINITION"
+        # Check if task definition has changed
+        if [ "$UPDATED_TASK_DEFINITION" != "$CURRENT_TASK_DEFINITION" ]; then
+          # Register the new task definition
+          NEW_TASK_DEFINITION=$(aws ecs register-task-definition \
+            --family $TASK_DEFINITION_FAMILY \
+            --cli-input-json "$UPDATED_TASK_DEFINITION")
+          
+          # Extract the new revision number
+          NEW_REVISION=$(echo $NEW_TASK_DEFINITION | jq -r '.taskDefinition.revision')
+          echo "New task definition revision: $NEW_REVISION"
 
-        # Register the new task definition
-        NEW_TASK_DEFINITION=$(aws ecs register-task-definition \
-          --family $TASK_DEFINITION_FAMILY \
-          --cli-input-json "$UPDATED_TASK_DEFINITION")
-        
-        # Extract the new revision number
-        NEW_REVISION=$(echo $NEW_TASK_DEFINITION | jq -r '.taskDefinition.revision')
-        echo "New task definition revision: $NEW_REVISION"
-
-        # Output the new task definition ARN
-        NEW_TASK_DEFINITION_ARN=$(echo $NEW_TASK_DEFINITION | jq -r '.taskDefinition.taskDefinitionArn')
-        echo "new-task-definition-arn=$NEW_TASK_DEFINITION_ARN" >> $GITHUB_ENV
+          # Output the new task definition ARN
+          NEW_TASK_DEFINITION_ARN=$(echo $NEW_TASK_DEFINITION | jq -r '.taskDefinition.taskDefinitionArn')
+          echo "new-task-definition-arn=$NEW_TASK_DEFINITION_ARN" >> $GITHUB_ENV
+        else
+          echo "Task definition unchanged. No need to register."
+        fi
 
     - name: Update ECS Service
       id: update-ecs
