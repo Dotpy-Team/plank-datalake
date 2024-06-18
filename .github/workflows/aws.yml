@@ -8,6 +8,7 @@ on:
 env:
   AWS_REGION: us-east-1                  # Defina isso para a sua região AWS preferida, por exemplo, us-west-1
   ECR_REPOSITORY: plank-datalake         # Defina isso para o nome do seu repositório Amazon ECR
+  ECR_REGISTRY: 121253776145.dkr.ecr.us-east-1.amazonaws.com # O registro ECR do seu repositório
 
 jobs:
   deploy:
@@ -31,28 +32,53 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
     
     - name: Set Image Tag
+      id: set-image-tag
       run: echo "IMAGE_TAG=${GITHUB_REF#refs/heads/}-${{ github.run_id }}" >> $GITHUB_ENV
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build Docker Image
       id: build-image
-      env:
-        ECR_REGISTRY: 121253776145.dkr.ecr.us-east-1.amazonaws.com
       run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ env.IMAGE_TAG }} .
 
-    - name: Update ECS service
+    - name: Push Docker Image to ECR
+      id: push-image
+      run: |
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ env.IMAGE_TAG }}
+        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:${{ env.IMAGE_TAG }}" >> $GITHUB_OUTPUT
+
+    - name: Update ECS Task Definition
+      id: update-task-def
       env:
         CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
         SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
         CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-        ECR_REGISTRY: 121253776145.dkr.ecr.us-east-1.amazonaws.com
-        ECR_REPOSITORY: plank-datalake
-        IMAGE_TAG: ${{ env.IMAGE_TAG }}
-        AWS_REGION: ${{ env.AWS_REGION }}
+        ECR_IMAGE: ${{ steps.push-image.outputs.image }}
+        TASK_DEFINITION_FAMILY: ${{ secrets.TASK_DEFINITION_FAMILY }}
       run: |
-        aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment --region $AWS_REGION
+        # Get the current task definition
+        CURRENT_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_FAMILY --query 'taskDefinition.{containerDefinitions:containerDefinitions, family:family, networkMode:networkMode, cpu:cpu, memory:memory, volumes:volumes, placementConstraints:placementConstraints, requiresCompatibilities:requiresCompatibilities, executionRoleArn:executionRoleArn, taskRoleArn:taskRoleArn}' --output json)
+        
+        # Update the container image
+        UPDATED_TASK_DEFINITION=$(echo $CURRENT_TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.containerDefinitions[0].image=$IMAGE')
+        
+        # Register the new task definition
+        NEW_TASK_DEFINITION=$(aws ecs register-task-definition \
+          --family $TASK_DEFINITION_FAMILY \
+          --cli-input-json "$UPDATED_TASK_DEFINITION")
+        
+        # Extract the new revision number
+        NEW_REVISION=$(echo $NEW_TASK_DEFINITION | jq -r '.taskDefinition.revision')
+        echo "New task definition revision: $NEW_REVISION"
+
+        # Output the new task definition ARN
+        NEW_TASK_DEFINITION_ARN=$(echo $NEW_TASK_DEFINITION | jq -r '.taskDefinition.taskDefinitionArn')
+        echo "new-task-definition-arn=$NEW_TASK_DEFINITION_ARN" >> $GITHUB_ENV
+
+    - name: Update ECS Service
+      id: update-ecs
+      env:
+        CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+        SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
+        NEW_TASK_DEFINITION_ARN: ${{ env.NEW_TASK_DEFINITION_ARN }}
+      run: |
+        aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --task-definition $NEW_TASK_DEFINITION_ARN --force-new-deployment --region $AWS_REGION
