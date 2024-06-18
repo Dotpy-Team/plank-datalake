@@ -16,11 +16,12 @@ class ColumnsForm(forms.ModelForm):
     )
 
     CHOICES_DATATYPE = (
-        ('STR', 'String'),
-        ('INT', 'Integer'),
-        ('FLO', 'Float'),
-        ('DAT', 'Date'),
-        ('DTH', 'Datetime')
+        ('string', 'String'),
+        ('int', 'Integer'),
+        ('bigint', 'BigInt'),
+        ('double', 'Float'),
+        ('date', 'Date'),
+        ('timestamp', 'Datetime')
     )
 
     str_datatype = forms.ChoiceField(
