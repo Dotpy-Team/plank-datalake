@@ -56,11 +56,25 @@ jobs:
         TASK_DEFINITION_FAMILY: ${{ secrets.TASK_DEFINITION_FAMILY }}
       run: |
         # Get the current task definition
-        CURRENT_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_FAMILY --query 'taskDefinition.{containerDefinitions:containerDefinitions, family:family, networkMode:networkMode, cpu:cpu, memory:memory, volumes:volumes, placementConstraints:placementConstraints, requiresCompatibilities:requiresCompatibilities, executionRoleArn:executionRoleArn, taskRoleArn:taskRoleArn}' --output json)
+        CURRENT_TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $TASK_DEFINITION_FAMILY --query 'taskDefinition' --output json)
         
         # Update the container image
-        UPDATED_TASK_DEFINITION=$(echo $CURRENT_TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.containerDefinitions[0].image=$IMAGE')
+        UPDATED_CONTAINER_DEFINITIONS=$(echo $CURRENT_TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.containerDefinitions[0].image=$IMAGE')
         
+        # Prepare the updated task definition
+        UPDATED_TASK_DEFINITION=$(echo $CURRENT_TASK_DEFINITION | jq '{ 
+          family: .family, 
+          containerDefinitions: .containerDefinitions, 
+          networkMode: .networkMode, 
+          cpu: .cpu, 
+          memory: .memory, 
+          volumes: .volumes, 
+          placementConstraints: .placementConstraints, 
+          requiresCompatibilities: .requiresCompatibilities, 
+          executionRoleArn: .executionRoleArn // "", 
+          taskRoleArn: .taskRoleArn // "" 
+        }')
+
         # Register the new task definition
         NEW_TASK_DEFINITION=$(aws ecs register-task-definition \
           --family $TASK_DEFINITION_FAMILY \
