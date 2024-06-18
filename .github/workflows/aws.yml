@@ -62,17 +62,17 @@ jobs:
         UPDATED_CONTAINER_DEFINITIONS=$(echo $CURRENT_TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.containerDefinitions[0].image=$IMAGE')
         
         # Prepare the updated task definition
-        UPDATED_TASK_DEFINITION=$(echo $CURRENT_TASK_DEFINITION | jq '{ 
-          family: .family, 
-          containerDefinitions: .containerDefinitions, 
-          networkMode: .networkMode, 
-          cpu: .cpu, 
-          memory: .memory, 
-          volumes: .volumes, 
-          placementConstraints: .placementConstraints, 
-          requiresCompatibilities: .requiresCompatibilities, 
-          executionRoleArn: .executionRoleArn // "", 
-          taskRoleArn: .taskRoleArn // "" 
+        UPDATED_TASK_DEFINITION=$(echo $CURRENT_TASK_DEFINITION | jq '{
+          family: .family,
+          containerDefinitions: .containerDefinitions,
+          networkMode: .networkMode,
+          cpu: .cpu,
+          memory: .memory,
+          volumes: .volumes,
+          placementConstraints: .placementConstraints,
+          requiresCompatibilities: .requiresCompatibilities,
+          executionRoleArn: .executionRoleArn // empty,
+          taskRoleArn: .taskRoleArn // empty
         }')
 
         # Register the new task definition
