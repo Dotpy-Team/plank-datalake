@@ -71,8 +71,8 @@ jobs:
           volumes: .volumes,
           placementConstraints: .placementConstraints,
           requiresCompatibilities: .requiresCompatibilities,
-          executionRoleArn: .executionRoleArn // empty,
-          taskRoleArn: .taskRoleArn // empty
+          executionRoleArn: (.executionRoleArn // null) | select(. != null),
+          taskRoleArn: (.taskRoleArn // null) | select(. != null)
         }')
 
         # Register the new task definition
