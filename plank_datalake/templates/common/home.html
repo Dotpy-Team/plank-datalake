@@ -1,78 +1,104 @@
 {% extends 'common/base.html' %}
 {% block content %}
+{% load static %}
 
-<div class="container justify-contents-center">
-
-    <div class="container px-4 py-5" id="custom-cards">
-        <h2 class="pb-2 border-bottom">Home</h2>
-
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-        <div class="col">
-
-            <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-
-                <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Usuários e Permissões</h2>
-                <ul class="d-flex list-unstyled mt-auto">
-                <li class="me-auto">
-                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                </li>
-                <li class="d-flex align-items-center me-3">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                    <small>Earth</small>
-                </li>
-                <li class="d-flex align-items-center">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                    <small>3d</small>
-                </li>
-                </ul>
+<div class='row'>
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/database-fill-gear.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Sistemas</h4>
+                <p class="card-text">Módulo para cadastro e gestão de sistemas a serem integrados.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
             </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Contrato e Pagamentos.</h2>
-                <ul class="d-flex list-unstyled mt-auto">
-                <li class="me-auto">
-                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                </li>
-                <li class="d-flex align-items-center me-3">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                    <small>Pakistan</small>
-                </li>
-                <li class="d-flex align-items-center">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                    <small>4d</small>
-                </li>
-                </ul>
-            </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-                <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Responsabilidades e processos</h2>
-                <ul class="d-flex list-unstyled mt-auto">
-                <li class="me-auto">
-                    <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                </li>
-                <li class="d-flex align-items-center me-3">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
-                    <small>California</small>
-                </li>
-                <li class="d-flex align-items-center">
-                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
-                    <small>5d</small>
-                </li>
-                </ul>
-            </div>
-            </div>
-        </div>
         </div>
     </div>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/file-earmark-arrow-down.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Dataset</h4>
+                <p class="card-text">Módulo para organização contextual de dados.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+
+    </div>
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/file-spreadsheet-fill.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Tabela</h4>
+                <p class="card-text">Módulo para armazenamento de metadados de tabelas.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='row mt-2'>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/bezier2.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Pipelines e Transformações</h4>
+                <p class="card-text">Módulo para construção e gestão de fluxos e transformações de dados.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/graph-up.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Dashboards</h4>
+                <p class="card-text">Módulo para criação e análise de dashboards de dados.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/people-fill.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Processos e envolvidos</h4>
+                <p class="card-text">Módulo para criação de atividades e atribuição de responsáveis e envolvidos.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class='row mt-2'>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/person-plus-fill.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Novo Usuário</h4>
+                <p class="card-text">Módulo para criação de novos usuários no sistema.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/building-fill-gear.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Configuração Empresa</h4>
+                <p class="card-text">Configuração de parâmetros e ajustes específicos da empresa no sistema.</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 

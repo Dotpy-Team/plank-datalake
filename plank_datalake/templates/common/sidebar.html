@@ -11,46 +11,44 @@
         <p>Serviços:</p>
         {% if user.is_superuser %}
             <li>
-                <a href="/customer/">Novo cliente</a>
+                <a href="/customer/"><img src="{% static 'icons/building-fill-add.svg' %}" width="30" height="30" alt="Card image">Novo cliente</a>
             </li>
 
             <li>
-                <a href="/admin-customer-profiles/">Clientes ativos</a>
+                <a href="/admin-customer-profiles/"><img src="{% static 'icons/boxes.svg' %}" width="30" height="30" alt="Card image">Clientes ativos</a>
             </li>
 
         {% else %}
 
             <li>
-                <a href="/user-profile/">Perfil do Usuário</a>
+                <a href="/user-profile/"><img src="{% static 'icons/person-bounding-box.svg' %}" width="30" height="30" alt="Card image">Perfil do Usuário</a>
             </li>
             
             <li>
-                <a href="/customer-profile/">Perfil da Empresa</a>
+                <a href="/customer-profile/"><img src="{% static 'icons/book.svg' %}" width="30" height="30" alt="Card image">Perfil da Empresa</a>
             </li>
 
             <li>
-                <a href="/raci-list/">Processos e envolvidos</a>
+                <a href="/raci-list/"><img src="{% static 'icons/people-fill.svg' %}" width="30" height="30" alt="Card image">Processos e envolvidos</a>
             </li>
 
             <li>
-                <a href="/systems/">Sistemas</a>
+                <a href="/chose-system/"><img src="{% static 'icons/database-gear.svg' %}" width="30" height="30" alt="Card image">Sistemas</a>
             </li>
 
             <li>
-                <a href="/search-tables/">Tabelas</a>
+                <a href="/search-tables/"><img src="{% static 'icons/table.svg' %}" width="30" height="30" alt="Card image">Tabelas</a>
             </li>
 
             <li>
-                <a href="/list-pipeline/">Transformações</a>
+                <a href="/list-pipeline/"><img src="{% static 'icons/bezier.svg' %}" width="30" height="30" alt="Card image">Transformações</a>
             </li>
 
             <li>
-                <a href="/dashboard/">Dashboards</a>
+                <a href="/dashboard/"><img src="{% static 'icons/clipboard-data.svg' %}" width="30" height="30" alt="Card image">Dashboards</a>
             </li>
 
         {% endif %}
-        
-
 
         <li>
             <form action="{% url 'user_logout'%}" method="post">
