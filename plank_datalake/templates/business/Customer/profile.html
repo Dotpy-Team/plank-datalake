@@ -2,221 +2,58 @@
 {% load static %}
 {% block content %}
 
-<div class='card'>
-	<div class='card-body'>
-		<div class="row">
-			<div class="col">
-				<a href="{{new_user}}" class="btn btn-primary w-100">novo usuário</a>
-			</div> 
-			<div class="col">
-				<a href="{{new_contract}}" class="btn btn-primary w-100">lista de usuários</a>
-			</div>
-			<div class="col">
-				<a href="{{new_contact}}" class="btn btn-primary w-100">Contratos</a>
-			</div>
-			<div class="col">
-				<a href="{{users}}" class="btn btn-primary w-100">Pagamentos</a>
-			</div>
-		</div>
-	</div>
+<div class='d-flex justify-content-center'>
+    <img src="{% static 'images/google-37.png'%}" alt="Bootstrap" width="150" height="150" class="rounded-circle mb-3">
 </div>
 
-<div class="row mt-2">
-    <div class="col-md-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <img src="{% static 'images/google-37.png'%}" alt="Bootstrap" width="150" height="150" class="rounded-circle mb-3">                        
-                <h4 class="mb-0">{{customer.str_name}}</h4>
-				<p class="text-muted">{{customer.get_str_setor_display}}</p>
+<div class='d-flex justify-content-center'>
+    <h4>Uma Parceria Dotpy + {{customer.str_name}}!</h4>
+</div>
 
-			</div>
+<div class='row mt-2'>
+    <div class='col'>
+        <div class='card'>
+            <div class='card-body'>
+                <h4>Usuários</h4>
+                <p>Acesse o console de usuários e veja os usuários do sistema.</p>
+                <button type="button" class="btn btn-primary w-100">Ver mais</button>
+            </div>
         </div>
     </div>
-
-    <div class="col-md-8">
-        <div class="card h-100">
-            <div class="card-body">
-                <div class='row'>
-                    <div class='col'>
-                        <div>
-                            <p><strong>CNPJ:</strong> {{customer.str_cnpj}}</p>
-							<p><strong>Telefone:</strong> {{customer.str_telefone}}</p>
-                            <p><strong>E-mail:</strong> {{ customer.str_email }}</p>
-							<p><strong>Site:</strong> {{ customer.str_site }}</p>
-                        </div>
-                    </div>
-                    <div class='col'>
-                        <p><strong>Linkedin:</strong> {{ customer.str_linkedin_profile }}</p>
-                        <p><strong>Setor:</strong> {{customer.get_str_setor_display}}</p>
-                        <p><strong>AWS Account:</strong> {{ user.str_cod_aws_account }}</p>
-						<p><strong>Blaaaa:</strong> blaaaa</p>
-					</div>
-                </div>
-				<div class='row'>
-					<p> endereço: {{customer.str_address}} </p>
-				</div>
+    <div class='col'>
+        <div class='card'>
+            <div class='card-body'>
+                <h4>Contratos</h4>
+                <p>Acesse seu contrato e veja os serviços contratados.</p>
+                <button type="button" class="btn btn-primary w-100">Ver Mais</button>
+            </div>
+        </div>
+    </div>
+    <div class='col'>
+        <div class='card'>
+            <div class='card-body'>
+                <h4>Faturas</h4>
+                <p>Acesse sua fatura e veja o histórico de pagamentos realizados.</p>
+                <button type="button" class="btn btn-primary w-100">Ver Mais</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row mt-2">
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<p class="card-text">
-					Usuários
-				</p>
-				<div class="progress">
-					<div class="progress-bar w-75">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<p class="card-text">
-					tabelas
-				</p>
-				<div class="progress">
-					<div class="progress-bar w-75">
-					</div>
-				</div>          
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<p class="card-text">
-					Execuções hoje
-				</p>
-				<div class="progress">
-					<div class="progress-bar bg-success w-75">
-					</div>
-				</div>          
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-body">
-				<p class="card-text">
-					Execuções em alerta
-				</p>
-				<div class="progress">
-					<div class="progress-bar bg-danger w-25">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
-<div class="card mt-4">
-	<h5 class="card-header">
-		Pagamentos
-	</h5>
-	<div class="card-body">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Product</th>
-					<th>Payment Taken</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
-	<div class="card-footer">
-	</div>
-</div>
-
-<div class="card mt-4">
-	<h5 class="card-header">
-		Chamados abertos
-	</h5>
-	<div class="card-body">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Product</th>
-					<th>Payment Taken</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>TB - Monthly</td>
-					<td>01/04/2012</td>
-					<td>Default</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="card-footer">
+<div class="card mt-2">
+    <div class='card-body'>
+        <h4>Informações Básicas</h4>
+		<p><strong>CNPJ:</strong> {{customer.str_cnpj}}</p>
+		<p><strong>Telefone:</strong> {{customer.str_telefone}}</p>
+		<p><strong>E-mail:</strong> {{ customer.str_email }}</p>
+		<p><strong>Site:</strong> {{ customer.str_site }}</p>
+		<p><strong>Linkedin:</strong> {{ customer.str_linkedin_profile }}</p>
+		<p><strong>Setor:</strong> {{customer.get_str_setor_display}}</p>
+		<p><strong>AWS Account:</strong> {{ user.str_cod_aws_account }}</p>
+		<p><strong>Blaaaa:</strong> blaaaa</p>
+		<p><strong>Endereço:</strong> {{customer.str_address}} </p>
+		<button type="button" class="btn btn-primary">Editar</button>
 	</div>
 </div>
 

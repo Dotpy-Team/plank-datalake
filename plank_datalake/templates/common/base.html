@@ -13,19 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800" rel="stylesheet">
     <style>
-        /* Aplicando as fontes no CSS */
-        body {
-            font-family: 'Mukta', sans-serif; /* ou 'Open Sans', sans-serif; */
-        }
 
-        /* Você pode aplicar as fontes a elementos específicos */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Mukta', sans-serif; /* Títulos com Mukta */
-        }
-
-        p {
-            font-family: 'Mukta', sans-serif; /* Parágrafos com Open Sans */
-        }
     </style>
 
     <meta name="author" content="Luiz Cairo">
@@ -37,32 +25,30 @@
         <div class='wrapper'>
             {% include 'common/sidebar.html' %}
             <!-- Page Content  -->
-                <div id="content">
+            <div id="content">
 
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg">
 
-                            <button type="button" id="sidebarCollapse" class="btn btn-dark">
-                                <i class="fas fa-align-left"></i>
-                                <span>Menu</span>
-                            </button>
-                            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <i class="fas fa-align-justify"></i>
-                            </button>
-                        </div>
-                    </nav>
+                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                        <i class="fas fa-align-left"></i>
+                        <span>Menu</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                </nav>
 
-                    {% comment %} <h2>Collapsible Sidebar Using Bootstrap 4asydtgaysgdyagdyagsdysagdygasydgasydgyasdgyasgd</h2> {% endcomment %}
-                    <div class='container-fluid'>
-                        {% block content %}
-                        
-                        {% endblock %}
+                <div class='container-fluid'>
 
-                        {% if request.path != '/' and request.path != '/view-tables/' %}
-                            {% include 'common/footer.html' %}
-                        {% endif %} 
-                    </div>
+                    {% block content %}
+                    
+                    {% endblock %}
+
+                    {% if request.path != '/' and request.path != '/view-tables/' %}
+                        {% include 'common/footer.html' %}
+                    {% endif %} 
                 </div>
+            </div>
         </div>
 
 

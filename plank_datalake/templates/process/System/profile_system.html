@@ -15,7 +15,11 @@
 
 <div class='row'>
     <div class='col-md-2'>
-        <img src="{% static  system.img_path  %}" alt="Bootstrap" width="100" height="100">
+        {% if system.str_system_type == '' %}
+            <img src="{% static 'icons/database-fill-gear.svg' %}" width="100" height="100" alt="Card image">
+        {% else %}
+            <img src="{% static  system.img_path  %}" alt="Bootstrap" width="100" height="100">
+        {% endif %}
     </div>
 
     <div class='col-md-6'>
