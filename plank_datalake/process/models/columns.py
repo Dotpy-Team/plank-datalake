@@ -16,7 +16,7 @@ class Columns(models.Model):
             ('int', 'Integer'),
             ('bigint', 'BigInt'),
             ('double', 'Float'),
-            ('date', 'Date'),
+            ('timestamp', 'Date'),
             ('timestamp', 'Datetime')
         ]
     )

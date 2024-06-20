@@ -20,7 +20,7 @@ class ColumnsForm(forms.ModelForm):
         ('int', 'Integer'),
         ('bigint', 'BigInt'),
         ('double', 'Float'),
-        ('date', 'Date'),
+        ('timestamp', 'Date'),
         ('timestamp', 'Datetime')
     )
 
