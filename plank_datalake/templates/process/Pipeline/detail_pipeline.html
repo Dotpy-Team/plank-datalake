@@ -185,9 +185,17 @@
                     <button type="button" class="btn btn-primary w-100">Executar</button>
                 </div>
             </div>
+            
             <div class='row mt-2'>
                 <textarea id="codeEditor" class="code-editor" rows="10">{{ step.str_query}}</textarea>
             </div>
+
+            <div class='row mt-2'>
+                <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: 25%">25%</div>
+                </div>
+            </div>
+
             <div class='row mt-2'>
                 <div class="alert alert-danger" role="alert">
                     SQL ERROR: syntax error at or near

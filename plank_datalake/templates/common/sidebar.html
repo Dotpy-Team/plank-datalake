@@ -9,6 +9,20 @@
 
     <ul class="list-unstyled components">
         <p>Serviços:</p>
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Configurações</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                    <a href="/customer-profile/">Perfil da Empresa</a>
+                </li>
+
+                <li>
+                    <a href="/user-profile/">Perfil do Usuário</a>
+                </li>
+                    
+            </ul>
+        </li>
+
         {% if user.is_superuser %}
             <li>
                 <a href="/customer/"><img src="{% static 'icons/building-fill-add.svg' %}" width="30" height="30" alt="Card image">Novo cliente</a>
@@ -21,31 +35,23 @@
         {% else %}
 
             <li>
-                <a href="/user-profile/"><img src="{% static 'icons/person-bounding-box.svg' %}" width="30" height="30" alt="Card image">Perfil do Usuário</a>
-            </li>
-            
+                <a href="/raci-list/">Processos e envolvidos</a>
+            </li>    
+
             <li>
-                <a href="/customer-profile/"><img src="{% static 'icons/book.svg' %}" width="30" height="30" alt="Card image">Perfil da Empresa</a>
+                <a href="/chose-system/">Sistemas</a>
             </li>
 
             <li>
-                <a href="/raci-list/"><img src="{% static 'icons/people-fill.svg' %}" width="30" height="30" alt="Card image">Processos e envolvidos</a>
+                <a href="/search-tables/">Tabelas</a>
             </li>
 
             <li>
-                <a href="/chose-system/"><img src="{% static 'icons/database-gear.svg' %}" width="30" height="30" alt="Card image">Sistemas</a>
+                <a href="/list-pipeline/">Transformações</a>
             </li>
 
             <li>
-                <a href="/search-tables/"><img src="{% static 'icons/table.svg' %}" width="30" height="30" alt="Card image">Tabelas</a>
-            </li>
-
-            <li>
-                <a href="/list-pipeline/"><img src="{% static 'icons/bezier.svg' %}" width="30" height="30" alt="Card image">Transformações</a>
-            </li>
-
-            <li>
-                <a href="/dashboard/"><img src="{% static 'icons/clipboard-data.svg' %}" width="30" height="30" alt="Card image">Dashboards</a>
+                <a href="/dashboard/">Dashboards</a>
             </li>
 
         {% endif %}
@@ -60,12 +66,4 @@
 
     </ul>
 
-    {% comment %} <ul class="list-unstyled CTAs">
-        <li>
-            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-        </li>
-        <li>
-            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-        </li>
-    </ul> {% endcomment %}
 </nav>
