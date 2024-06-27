@@ -59,12 +59,12 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: plankdatalake
-        image: ${{ steps.build-image.outputs.image }}
+        image: ${{ steps.push-image.outputs.image }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: plankdatalake
-        cluster: plank
+        service: ${{ env.SERVICE_NAME }}
+        cluster: ${{ env.CLUSTER_NAME }}
         wait-for-service-stability: true
