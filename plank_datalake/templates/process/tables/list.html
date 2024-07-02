@@ -1,10 +1,41 @@
 {% extends 'common/base.html' %}
-
 {% load static %}
-
 {% block content %}
 
-<div class="row">
+<style>
+    .myInput {
+      padding: 20px;
+      margin-top: -6px;
+      border: 0;
+      border-radius: 0;
+      background: #f1f1f1;
+    }
+</style>
+
+<div class='row'>
+    <div class='col'>
+        <form role="search" method="get" action="{% url 'list_system' %}">
+            <input class="form-control mb-1" type="search" name="search" placeholder="Pesquisar" aria-label="Search" value="{{ query }}">
+        </form>
+    </div>
+    <div class='col'>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+            <li><a href="#">jQuery</a></li>
+            <li><a href="#">Bootstrap</a></li>
+            <li><a href="#">Angular</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
     <div class="nav col-md-3 d-none d-md-block bg-dark sidebar" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 365px;">
 
@@ -86,19 +117,18 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        $(".table-link").on("click", function(event) {
-            event.preventDefault();
-
-            var content = $(this).data("content");
-            $("#content-placeholder").html(content);
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".dropdown-menu li").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
+      });
     });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 
 {% endblock %}

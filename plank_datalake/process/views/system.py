@@ -114,7 +114,14 @@ def profile_system(request,system_id):
 @login_required
 def list_system(request):
     customer_id = request.user.customer.customer_id
-    systems = System.objects.filter(customer_id=customer_id).order_by('system_id')
+    systems = System.objects.filter(customer_id=customer_id)
+
+    search = request.GET.get('search')
+
+    if search:
+        systems = systems.filter(str_title__icontains=search)
+    
+    systems = systems.order_by('system_id')
 
     html_location = parse_html_path(SYSTEM_PATH,'list_system')
 

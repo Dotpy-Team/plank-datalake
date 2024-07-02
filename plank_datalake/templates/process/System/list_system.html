@@ -8,8 +8,8 @@
 
 <div class='row mt-3'>
     <div class='col'>
-        <form role="search">
-            <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search">
+        <form role="search" method="get" action="{% url 'list_system' %}">
+            <input class="form-control mb-1" type="search" name="search" placeholder="Pesquisar" aria-label="Search" value="{{ query }}">
         </form>
     </div>
     <div class='col'>

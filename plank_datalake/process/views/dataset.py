@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.urls import reverse
 from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
@@ -98,12 +99,23 @@ def profile_dataset(request,dataset_id):
     table_ids = Tables.objects.filter(dataset_id=dataset_id).values_list('table_id', flat=True)
     
     jobs = JobRun.objects.filter(table_id__in=table_ids)
+
+    jobs = jobs.order_by('dth_start_at')
     
+    # Configuração da paginação
+    paginator = Paginator(jobs, 8)
+    page = request.GET.get('page')
+
+    try:
+        jobs = paginator.page(page)
+    except PageNotAnInteger:
+        jobs = paginator.page(1)
+    except EmptyPage:
+        jobs = paginator.page(paginator.num_pages)
+
     response_dict = {
         'dataset': dataset,
         'new_table':reverse('new_table_by_id',args=[crip(str(dataset.dataset_id))]),
         'executions':jobs
     }
     return render(request, html_location, response_dict)
-    # except Http404:
-    #     return redirect('signup_company')
