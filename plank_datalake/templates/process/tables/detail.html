@@ -3,11 +3,11 @@
 {% block content %}
 
 <style>
-
     .tab-content {
         height: 250px;
+        overflow-y:auto;
+        overflow-x: hidden;
     }
-
 </style>
 
 <div class='row mt-4'>
@@ -22,14 +22,13 @@
 
     <div class='col-md-2'>
         <button type="button" class="btn btn-primary">Mais</button>
-            <div class="btn-group" role="group">
-                <button id="btnGroupDrop4" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
-                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
-                    <a class="dropdown-item" href="{{ add }}">Adicionar uma Execução (temporario)</a>
-                    <a class="dropdown-item" href="{{ list_job }}">Ver todas execuções</a>
-                    <a class="dropdown-item" href="{{ look_all }}">Ver Todas Colunas</a>
-                </div>
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop4" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                <a class="dropdown-item" href="{{ add }}">Adicionar uma Nova Coluna</a>
+                <a class="dropdown-item" href="{{ add }}">Adicionar uma Execução (temporario)</a>
+                <a class="dropdown-item" href="{{ list_job }}">Ver todas execuções</a>
+                <a class="dropdown-item" href="{{ look_all }}">Ver Todas Colunas</a>
             </div>
         </div>
     </div>
@@ -45,45 +44,55 @@
     <li class="nav-item">
         <a class="nav-link" href="#columns" data-toggle="tab">Colunas</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#more" data-toggle="tab">Mais +</a>
-    </li>
-
 </ul>
 
 <div class="tab-content mt-4">
     <div id="description" class="tab-pane active">
         <p><strong>Descrição:</strong></p>
         <p class="lead">{{ table.str_desc }}</p>
+
+        <p><strong>Key Words:</strong></p>
+        <p class="lead">{{ table.str_key_words }}</p>
+
     </div>
     <div id="details" class="tab-pane fade">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Frequência: {{ table.str_frequency }}</li>
-            <li class="list-group-item">Modo: {{ table.str_mode }}</li>
-            <li class="list-group-item">Descrição: {{ table.str_desc }}</li>
-            <li class="list-group-item">Tipo de Ingestão: {{ table.str_type }}</li>
-            <li class="list-group-item">Data de Cadastro: {{ table.dth_start_at }}</li>
-            <li class="list-group-item">Camada: {{ table.layer }}</li>
-            <li class="list-group-item">Palavras Chave: {{ card_table.str_key_words }}</li>
 
-            <li class="list-group-item">
-                Tamanho em GB: 
-                {% if table.int_size is None %}
-                    0
-                {% else %}
-                    {{ table.int_size }}
-                {% endif %}
-            </li>
-            
-            <li class="list-group-item">
-                Quantidade de linhas: 
-                {% if table.int_number_of_rows is None %}
-                    0
-                {% else %}
-                    {{ table.int_number_of_rows }}
-                {% endif %}
-            </li>
-        </ul>
+        <div class='row'>
+            <div class='col'>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Frequência: {{ table.str_frequency }}</li>
+                    <li class="list-group-item">Modo: {{ table.str_mode }}</li>
+                    <li class="list-group-item">Descrição: {{ table.str_desc }}</li>
+                    <li class="list-group-item">Tipo de Ingestão: {{ table.str_type }}</li>
+                </ul>
+            </div>
+
+            <div class='col'>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Data de Cadastro: {{ table.dth_start_at }}</li>
+                    <li class="list-group-item">Camada: {{ table.layer }}</li>        
+                    <li class="list-group-item">
+                        Tamanho em GB: 
+                        {% if table.int_size is None %}
+                            0
+                        {% else %}
+                            {{ table.int_size }}
+                        {% endif %}
+                    </li>
+                    
+                    <li class="list-group-item">
+                        Quantidade de linhas: 
+                        {% if table.int_number_of_rows is None %}
+                            0
+                        {% else %}
+                            {{ table.int_number_of_rows }}
+                        {% endif %}
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
 
     </div>
     <div id="columns" class="tab-pane fade">
@@ -91,18 +100,23 @@
         <table class="table mt-4 table-striped table-bordered table-hover">
             <thead>
                 <tr>
+                    <th class="text-center" scope="col">Id</th>
                     <th class="text-center" scope="col">Name</th>
                     <th class="text-center" scope="col">Rename</th>
                     <th class="text-center" scope="col">Datatype</th>
+                    <th class="text-center" scope="col">Pattern</th>
                     <th class="text-center" scope="col">Tipo de infor.</th>
+                    <th class="text-center" scope="col">#</th>
                 </tr>
             </thead>
             <tbody>
                 {% for column in columns %}
                     <tr>
+                        <td class="text-center" scope="row">{{column.id_column}}</td>
                         <td class="text-center" scope="row">{{column.str_source_name}}</td>
                         <td class="text-center" scope="row">{{column.str_rename}}</td>
                         <td class="text-center" scope="row">{{column.str_datatype}}</td>
+                        <td class="text-center" scope="row">{{column.str_pattern_format}}</td>
                         <td class="text-center" scope="row">
                             {% if column.str_type == 'CPK' %}
                                 <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
@@ -114,6 +128,7 @@
                                 <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
                             {% endif %}
                         </td>
+                        <td class="text-center" scope="row"><button type="button" class="btn btn-outline-danger btn-sm">x</button></td>
                     </tr>
                 {% empty %}
                     <p>Não há colunas cadastradas.</p>
@@ -124,34 +139,28 @@
     </div>
 </div>
 
-<h4>Execuções</h4>
+<h4 class='mt-2'>Execuções</h4>
 
 <table class="table mt-4 table-striped table-bordered table-hover">
     <thead>
         <tr>
-            <th class="text-center" scope="col">Name</th>
-            <th class="text-center" scope="col">Rename</th>
-            <th class="text-center" scope="col">Datatype</th>
-            <th class="text-center" scope="col">Tipo de infor.</th>
+            <th class="text-center" scope="col">ID</th>
+            <th class="text-center" scope="col">Dth Inicio</th>
+            <th class="text-center" scope="col">Dth Fim</th>
+            <th class="text-center" scope="col">Bucket Trigger</th>
+            <th class="text-center" scope="col">Event Trigger</th>
+            <th class="text-center" scope="col">Status</th>
         </tr>
     </thead>
     <tbody>
-        {% for column in columns %}
+        {% for execution in executions %}
             <tr>
-                <td class="text-center" scope="row">{{column.str_source_name}}</td>
-                <td class="text-center" scope="row">{{column.str_rename}}</td>
-                <td class="text-center" scope="row">{{column.str_datatype}}</td>
-                <td class="text-center" scope="row">
-                    {% if column.str_type == 'CPK' %}
-                        <span class="badge text-bg-primary rounded-pill">Chave Primaria</span>
-                    {% elif column.str_type == 'CFK' %}
-                        <span class="badge text-bg-secondary rounded-pill">Chave Extrangeira</span>
-                    {% elif column.str_type == 'SEN' %}
-                        <span class="badge text-bg-danger rounded-pill">Dado Sensivel</span>
-                    {% elif column.str_type == 'KDS' %}
-                        <span class="badge text-bg-light rounded-pill">Informação descritiva</span>
-                    {% endif %}
-                </td>
+                <td class="text-center" scope="row">{{execution.job_id}}</td>
+                <td class="text-center" scope="row">{{execution.dth_start_at}}</td>
+                <td class="text-center" scope="row">{{execution.dth_last_updated}}</td>
+                <td class="text-center" scope="row">{{execution.str_event_bucket_trigger}}</td>
+                <td class="text-center" scope="row">{{execution.str_event_key_trigger}}</td>
+                <td class="text-center" scope="row">{{execution.str_status}}</td>
             </tr>
         {% empty %}
             <p>Não há colunas cadastradas.</p>
@@ -159,13 +168,28 @@
     </tbody>
 </table> 
 
-<nav aria-label="Page navigation example">
+<!-- Paginação para executions -->
+<nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        {% if executions.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ executions.previous_page_number }}">Anterior</a>
+            </li>
+        {% endif %}
+        
+        {% for num in executions.paginator.page_range %}
+            {% if executions.number == num %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if executions.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ executions.next_page_number }}">Próximo</a>
+            </li>
+        {% endif %}
     </ul>
 </nav>
 

@@ -2,15 +2,6 @@
 {% load static %}
 {% block content %}
 
-<style>
-    .myInput {
-      padding: 20px;
-      margin-top: -6px;
-      border: 0;
-      border-radius: 0;
-      background: #f1f1f1;
-    }
-</style>
 
 <div class='row'>
     <div class='col'>
@@ -19,25 +10,13 @@
         </form>
     </div>
     <div class='col'>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-            <li><a href="#">HTML</a></li>
-            <li><a href="#">CSS</a></li>
-            <li><a href="#">JavaScript</a></li>
-            <li><a href="#">jQuery</a></li>
-            <li><a href="#">Bootstrap</a></li>
-            <li><a href="#">Angular</a></li>
-            </ul>
-        </div>
+        <button type="button" class="btn btn-primary">Nova Tabela</button>
     </div>
 </div>
 
 <div class="row mt-2">
-    <div class="nav col-md-3 d-none d-md-block bg-dark sidebar" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
-        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 365px;">
+    <div class="nav col-md-3 d-none d-md-block sidebar" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
+        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 300px;">
 
             <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
                 <img src="{% static 'icons/table.svg' %}" alt="table" width="24" height="24" style="margin-right: 10px;">            
@@ -58,7 +37,6 @@
 
                                 <small class="text-body-secondary"> {{table.str_system}} </small>
                             </div>
-                            <div class="col-10 mb-1 small"> {{table.str_desc}} </div>
                         </a>
                     
                     {% endfor %}
@@ -74,11 +52,29 @@
         <div class="card">
     
             <div class="card-body">
-                <h1 class="text-info"><b>{{ card_table.str_name }}</b>
-                    <small class="text-primary">{{ card_table.str_system }}</small>
-                </h1>
-    
-                <a class="dropdown-item" href="{{ card_table.table_view }}">Ver Todas</a>
+                <div class='row'>
+                    <div class='col-md-10'>
+
+                        {%if card_table.layer == 'ingestion'%}
+                            <h4 class="text-primary"><b>context.{{ card_table.dataset.system.str_title }}_{{ card_table.dataset.str_title }}_{{ card_table.str_name }}</b></h4>
+                        {% else %}
+                            <h4 class="text-primary"><b>app.{{ card_table.step.pipeline.str_title }}_{{ card_table.str_name }}</b></h4>
+                        {%endif%}
+
+                    </div>
+                    <div class='col-md-2'>
+                        <button type="button" class="btn btn-success">Mais</button>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop4" type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                                <a class="dropdown-item" href="{{ card_table.details_url }}">Ver Mais Detalhes</a>
+                                <a class="dropdown-item" href="{{ add }}">Ver Colunas</a>
+                                <a class="dropdown-item" href="{{ list_job }}">Ver execuções</a>
+                                <a class="dropdown-item" href="{{ look_all }}">Ver Dependencias</a>
+                            </div>
+                        </div>
+                    </div>                   
+                </div>
 
                 <h5 class="text-body-tertiary">{{ card_table.str_dataset }}</h5>
                 <ul class="list-group list-group-flush">

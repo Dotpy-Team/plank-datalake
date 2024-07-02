@@ -1,6 +1,7 @@
 body {
     font-family: 'Mukta', sans-serif; /* ou 'Open Sans', sans-serif; */
-    background-image:url("https://i.pinimg.com/564x/d5/b6/0f/d5b60f715be665c2dd4750f84b99f0be.jpg");
+    background-color: #E0E1EF;
+    /* background-image:url("https://i.pinimg.com/564x/d5/b6/0f/d5b60f715be665c2dd4750f84b99f0be.jpg"); */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -56,7 +57,7 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #163099;
+    background: #3C3A3E;
     color: #fff;
     transition: all 0.3s;
 }
@@ -67,12 +68,12 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #0d2386;
+    background: #0500FF;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #3C3A3E;
 }
 
 #sidebar ul p {
@@ -85,14 +86,15 @@ a, a:hover, a:focus {
     font-size: 1.1em;
     display: block;
 }
+
 #sidebar ul li a:hover {
-    color: #375be9;
+    color: #6E0094;
     background: #fff;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #2747d6;
+    background: #6E0094;
 }
 
 
@@ -115,7 +117,7 @@ a[aria-expanded="true"]::before {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #f3f3f3;
+    background: #6E0094;
 }
 
 ul.CTAs {

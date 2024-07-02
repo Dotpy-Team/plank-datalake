@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from process.models import Tables, Columns, Trigger, DataSet, System
+from process.models import Tables, Columns, Trigger, DataSet, System, JobRun
 from business.models import Customer
 from process.forms import TablesForm
 from process.serializers import TablesSerializer
@@ -103,14 +104,30 @@ def get_table(request,table_id):
         table = Tables.objects.get(table_id=table_id)
         columns = Columns.objects.filter(table_id=table_id)
         html_location = parse_html_path(TABLE_PATH,'detail')
+
+        executions = JobRun.objects.filter(table_id=table_id)
+
+        executions = executions.order_by('-job_id')
+
+        paginator = Paginator(executions, 6)  # 10 datasets por página
+        page = request.GET.get('page')
+        
+        try:
+            executions = paginator.page(page)
+        except PageNotAnInteger:
+            executions = paginator.page(1)
+        except EmptyPage:
+            executions = paginator.page(paginator.num_pages)
+
         response_dict = {
             'add': reverse('new_column',args=[crip(str(table.table_id))]),
             'new_job': reverse('new_execution',args=[crip(str(table.table_id))]),
             'view_job': reverse('detail_execution', args=[crip(str(table.table_id))]),
             'list_job': reverse('list_execution', args=[crip(str(table.table_id))]),
             'new_dependencie': reverse('new_dependencies', args=[crip(str(table.table_id))]),
+            'table': table,
             'columns': columns,
-            'table': table
+            'executions':executions
         }
         return render(request, html_location, response_dict)
     except Http404:
