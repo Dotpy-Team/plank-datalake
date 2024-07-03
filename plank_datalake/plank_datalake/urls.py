@@ -94,6 +94,7 @@ urlpatterns = [
 
     #TABLES:
     path('add-table/<str:dataset_id>', p.new_table_by_id,name='new_table_by_id'),
+    path('add-table/', p.new_table_without_dataset,name='new_table_without_dataset'),    
     path('detail-table/<str:table_id>',p.get_table,name='table_view'),
     path('search-tables/',p.get_tables,name='view_tables'),
     path('search-tables/<str:table_id>',p.get_tables,name='view_tables_id'),

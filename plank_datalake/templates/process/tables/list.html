@@ -5,12 +5,12 @@
 
 <div class='row'>
     <div class='col'>
-        <form role="search" method="get" action="{% url 'list_system' %}">
+        <form role="search" method="get" action="{% url 'view_tables' %}">
             <input class="form-control mb-1" type="search" name="search" placeholder="Pesquisar" aria-label="Search" value="{{ query }}">
         </form>
     </div>
     <div class='col'>
-        <button type="button" class="btn btn-primary">Nova Tabela</button>
+        <a href="/add-table/" class="btn btn-primary">Novo sistema</a>
     </div>
 </div>
 

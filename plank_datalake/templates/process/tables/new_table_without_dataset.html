@@ -1,0 +1,169 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<h3 class="text-primary">Adicionar Tabela</h3>    
+<form method="post" class="form">
+
+    {% csrf_token %}
+    
+    <h4>Dados da tabela:</h4>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_name }}
+        <small><p>Nome.</p></small>
+            {% if form.str_name.errors %}
+                <div class="text-danger">
+                    {{ form.str_name.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+            {{ form.str_desc }}
+            <small><p>Descrição.</p></small>
+            {% if form.str_desc.errors %}
+                <div class="text-danger">
+                    {{ form.str_desc.errors }}
+                </div>
+            {% endif %}
+        </div>   
+        <div class="col">
+            {{ form.str_desc_ia }}
+            <small><p>Descrição Ia.</p></small>
+            {% if form.str_desc_ia.errors %}
+                <div class="text-danger">
+                    {{ form.str_desc_ia.errors }}
+                </div>
+            {% endif %}
+        </div>   
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_frequency }}
+        <small><p>Frequência.</p></small>
+            {% if form.str_frequency.errors %}
+                <div class="text-danger">
+                    {{ form.str_frequency.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_type_of }}
+            <small><p>Tipo.</p></small>
+            {% if form.str_type_of.errors %}
+                <div class="text-danger">
+                    {{ form.str_type_of.errors }}
+                </div>
+            {% endif %}
+        </div>  
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_mode }}
+        <small><p>Modo.</p></small>
+            {% if form.str_mode.errors %}
+                <div class="text-danger">
+                    {{ form.str_mode.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_type }}
+            <small><p>Modo.</p></small>
+            {% if form.str_type.errors %}
+                <div class="text-danger">
+                    {{ form.str_type.errors }}
+                </div>
+            {% endif %}
+        </div>  
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+            {{ form.trigger }}
+            <small><p>Trigger.</p></small>
+            {% if form.trigger.errors %}
+                <div class="text-danger">
+                    {{ form.trigger.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.dataset }}
+            <small><p>Dataset.</p></small>
+            {% if form.dataset.errors %}
+                <div class="text-danger">
+                    {{ form.dataset.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_archive_type }}
+            <small><p>Tipo de Arquivo.</p></small>
+            {% if form.str_archive_type %}
+                <div class="text-danger">
+                    {{ form.str_archive_type.errors }}
+                </div> 
+            {% endif %}
+        </div>  
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+            {{ form.str_separador }}
+            <small><p>Separador.</p></small>
+            {% if form.str_separador %}
+                <div class="text-danger">
+                    {{ form.str_separador.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_delimitador }}
+            <small><p>Delimitador.</p></small>
+            {% if form.str_delimitador %}
+                <div class="text-danger">
+                    {{ form.str_delimitador.errors }}
+                </div>
+            {% endif %}                       
+        </div> 
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+            {{ form.str_header }}
+            <small><p>Header.</p></small>
+            {% if form.str_header %}
+                <div class="text-danger">
+                    {{ form.str_header.errors }}
+                </div>
+            {% endif %}  
+        </div>
+        <div class="col">
+            {{ form.str_trailer }}
+            <small><p>Trailer.</p></small>
+            {% if form.str_trailer %}
+                <div class="text-danger">
+                    {{ form.str_trailer.errors }}
+                </div>
+            {% endif %}  
+        </div>
+    </div>
+
+    <div class="col" style="text-align: right;">
+        <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
+    </div>
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+{% endblock %}

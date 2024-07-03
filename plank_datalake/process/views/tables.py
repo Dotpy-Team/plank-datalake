@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -8,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from process.models import Tables, Columns, Trigger, DataSet, System, JobRun
 from business.models import Customer
-from process.forms import TablesForm
+from process.forms import TablesForm, TablesWithOutDatasetForm
 from process.serializers import TablesSerializer
 import base64
 
@@ -73,9 +74,67 @@ def new_table_by_id(request, dataset_id):
         return render(request, html_location, response_dict)
 
 @login_required
+def new_table_without_dataset(request):
+    try:
+        customer_id = request.user.customer.customer_id
+        customer_instance = Customer.objects.get(customer_id=customer_id)
+    except Customer.DoesNotExist:
+        return redirect('home')
+    
+    if request.method == 'POST':
+        form = TablesWithOutDatasetForm(request.POST)
+
+
+        form.fields['trigger'].queryset = Trigger.objects.filter(customer_id=customer_id)
+        form.fields['trigger'].widget.attrs['class'] = 'form-select'
+        form.fields['trigger'].label = 'Trigger'
+
+        html_location = parse_html_path(TABLE_PATH,'new_table_without_dataset')
+        
+        if form.is_valid():
+            table = form.save(commit=False)
+            table.customer = customer_instance
+            table.layer = 'ingestion'
+            table.save()
+            return redirect('table_view', crip(str(table.table_id)))
+        else:
+            error_message = 'Credenciais inválidas. Por favor, tente novamente.'
+            response_dict = {
+                'form': form,
+                'error_message':error_message,
+                'error_forms':form.errors
+            }
+            return render(request, html_location, response_dict)
+    else:
+        form = TablesWithOutDatasetForm()
+
+        form.fields['dataset'].queryset = DataSet.objects.filter(system__customer_id=customer_id)
+        form.fields['dataset'].widget.attrs['class'] = 'form-select'
+        form.fields['dataset'].label = 'dataset'
+
+
+        form.fields['trigger'].queryset = Trigger.objects.filter(customer_id=customer_id)
+        form.fields['trigger'].widget.attrs['class'] = 'form-select'
+        form.fields['trigger'].label = 'Trigger'
+
+        html_location = parse_html_path(TABLE_PATH,'new_table_without_dataset')
+        response_dict = {
+            'form':form
+        }
+        return render(request, html_location, response_dict)
+
+@login_required
 def get_tables(request, table_id=None):
     customer_id = request.user.customer.customer_id
     tables = Tables.objects.filter(customer_id=customer_id)
+    
+    search = request.GET.get('search')
+
+    if search:
+        tables = tables.filter(
+            Q(str_name__icontains=search) | Q(dataset__str_title__icontains=search) | Q(dataset__system__str_title__icontains=search)
+        )
+
     for table in tables:
         table.selected = False
         table.detail_url = reverse('view_tables_id',args=[crip(str(table.table_id))])
@@ -93,7 +152,8 @@ def get_tables(request, table_id=None):
     html_location = parse_html_path(TABLE_PATH,'list')
     response_dict = {
         'tables': tables,
-        'card_table': card_table
+        'card_table': card_table,
+        'search':search
     }
     return render(request, html_location, response_dict)
 
