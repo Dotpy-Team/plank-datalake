@@ -2,8 +2,8 @@ name: Start Stop RDS Instance
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Desligar a RDS às 00:00 BRT (03:00 UTC)
-    - cron: '0 10 * * *' # Ligar a RDS às 07:00 BRT (10:00 UTC)
+    - cron: '0 0 * * *'    # Desligar a RDS às 21:00 BRT (00:00 UTC do dia seguinte)
+    - cron: '0 11 * * *'   # Ligando a RDS às 08:00 BRT (11:00 UTC)
   workflow_dispatch:  # Permite disparar a job manualmente
 
 jobs:
