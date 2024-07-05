@@ -19,7 +19,6 @@ def formCustomer():
 
     driver.get("http://127.0.0.1:8000/customer/")
     time.sleep(3)
-
     str_name = driver.find_element("xpath", '//*[@id="id_str_name"]')
     str_cnpj = driver.find_element("xpath", '//*[@id="id_str_cnpj"]')
     str_address = driver.find_element("xpath", '//*[@id="id_str_address"]')
