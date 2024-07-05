@@ -1,4 +1,4 @@
-name: Stop RDS Instance
+name: Start RDS Instance
 
 on:
   schedule:
@@ -20,7 +20,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1  # Altere para a região onde está sua instância RDS
 
-    - name: Stop RDS instance
+    - name: Start RDS Instance
       run: |
         aws rds start-db-instance --db-instance-identifier datalake
       env:
