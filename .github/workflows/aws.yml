@@ -11,10 +11,10 @@ env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: plank-datalake
   ECR_REGISTRY: 121253776145.dkr.ecr.us-east-1.amazonaws.com
-  CLUSTER_NAME: plank
-  SERVICE_NAME: plankdatalake
+  CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+  SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
   CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-  TASK_DEFINITION_FAMILY: plankdatalake
+  TASK_DEFINITION_FAMILY: task-definition.json
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -58,20 +58,20 @@ jobs:
 
       - name: Download task definition
         run: |
-          aws ecs describe-task-definition --task-definition plankdatalake --query taskDefinition > task-definition.json
+          aws ecs describe-task-definition --task-definition plankdatalake --query taskDefinition > ${{ env.TASK_DEFINITION_FAMILY }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: task-definition.json
+          task-definition: ${{ env.TASK_DEFINITION_FAMILY }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: task-definition.json
+          task-definition: ${{ env.TASK_DEFINITION_FAMILY }}
           service: ${{ env.SERVICE_NAME }}
           cluster: ${{ env.CLUSTER_NAME }}
           wait-for-service-stability: true
