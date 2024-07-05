@@ -2,7 +2,7 @@ name: Stop RDS Instance
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Este cron job será executado todos os dias às 03:00 UTC
+    - cron: '0 11 * * *'  # Este cron job será executado todos os dias às 03:00 UTC
   workflow_dispatch:  # Permite disparar a job manualmente
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
 
     - name: Stop RDS instance
       run: |
-        aws rds stop-db-instance --db-instance-identifier datalake
+        aws rds start-db-instance --db-instance-identifier datalake
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
