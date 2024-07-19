@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
@@ -91,6 +92,17 @@ def list_pipeline(request):
 
     pipelines = Pipeline.objects.filter(customer_id=customer_id)
     html_location = parse_html_path(PIPELINE_PATH, 'list_pipeline')
+
+    # Configuração da paginação
+    paginator = Paginator(pipelines, 6)  # 10 sistemas por página
+    page = request.GET.get('page')
+
+    try:
+        pipelines = paginator.page(page)
+    except PageNotAnInteger:
+        pipelines = paginator.page(1)
+    except EmptyPage:
+        pipelines = paginator.page(paginator.num_pages)
 
     for pipeline in pipelines:
         pipeline.detail_url = reverse(
