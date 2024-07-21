@@ -2,23 +2,6 @@
 {% load static %}
 {% block content %}
 
-<style>
-    #dashboardContainer {
-        width: 100%;
-        height: 800px;
-    }
-</style>
-
-<script>
-    // Incorporar o painel do QuickSight
-    var embedUrl = "https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/2aab4e13-d95c-40b0-8f73-12af403bcf67/views/7ed05cbf-8d29-4b72-bedf-1bacf2d98bd4?directory_alias=dotpy-teste-1";
-    var iframe = document.createElement('iframe');
-    iframe.src = embedUrl;
-    iframe.width = '100%';
-    iframe.height = '800';
-    iframe.frameborder = '0';
-    iframe.allowfullscreen = true;
-    document.getElementById('dashboardContainer').appendChild(iframe);
-</script>
+<iframe width="600" height="2500" src="https://lookerstudio.google.com/embed/reporting/1zixIQUuxgKQwPa8L2x4fSTvn677qrotc/page/eC8J" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
 
 {% endblock %}
