@@ -3,13 +3,25 @@
 {% load static %}
 
 <div class='row'>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/people-fill.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Processos e envolvidos</h4>
+                <p class="card-text">Módulo para criação de atividades e atribuição de responsáveis e envolvidos.</p>
+                <a href="/raci-list/" class="btn btn-primary">Veja Mais..</a>
+            </div>
+        </div>
+    </div>
+
     <div class='col-md-4'>
         <div class="card text-center">
             <div class="card-body">
                 <img src="{% static 'icons/database-fill-gear.svg' %}" width="50" height="50" alt="Card image">
                 <h4 class="card-title mt-3">Sistemas</h4>
                 <p class="card-text">Módulo para cadastro e gestão de sistemas a serem integrados.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <a href="/systems/" class="btn btn-primary">Veja Mais..</a>
             </div>
         </div>
     </div>
@@ -20,21 +32,12 @@
                 <img src="{% static 'icons/file-earmark-arrow-down.svg' %}" width="50" height="50" alt="Card image">
                 <h4 class="card-title mt-3">Dataset</h4>
                 <p class="card-text">Módulo para organização contextual de dados.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <a href="/all-dataset/" class="btn btn-primary">Veja Mais..</a>
             </div>
         </div>
 
     </div>
-    <div class='col-md-4'>
-        <div class="card text-center">
-            <div class="card-body">
-                <img src="{% static 'icons/file-spreadsheet-fill.svg' %}" width="50" height="50" alt="Card image">
-                <h4 class="card-title mt-3">Tabela</h4>
-                <p class="card-text">Módulo para armazenamento de metadados de tabelas.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <div class='row mt-2'>
@@ -42,10 +45,21 @@
     <div class='col-md-4'>
         <div class="card text-center">
             <div class="card-body">
+                <img src="{% static 'icons/file-spreadsheet-fill.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Tabela</h4>
+                <p class="card-text">Módulo para armazenamento de metadados de tabelas.</p>
+                <a href="/search-tables/" class="btn btn-primary">Veja Mais..</a>
+            </div>
+        </div>
+    </div>
+
+    <div class='col-md-4'>
+        <div class="card text-center">
+            <div class="card-body">
                 <img src="{% static 'icons/bezier2.svg' %}" width="50" height="50" alt="Card image">
                 <h4 class="card-title mt-3">Pipelines e Transformações</h4>
                 <p class="card-text">Módulo para construção e gestão de fluxos e transformações de dados.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <a href="/list-pipeline/" class="btn btn-primary">Veja Mais..</a>
             </div>
         </div>
     </div>
@@ -56,21 +70,11 @@
                 <img src="{% static 'icons/graph-up.svg' %}" width="50" height="50" alt="Card image">
                 <h4 class="card-title mt-3">Dashboards</h4>
                 <p class="card-text">Módulo para criação e análise de dashboards de dados.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <a href="/dashboard/" class="btn btn-primary">Veja Mais..</a>
             </div>
         </div>
     </div>
 
-    <div class='col-md-4'>
-        <div class="card text-center">
-            <div class="card-body">
-                <img src="{% static 'icons/people-fill.svg' %}" width="50" height="50" alt="Card image">
-                <h4 class="card-title mt-3">Processos e envolvidos</h4>
-                <p class="card-text">Módulo para criação de atividades e atribuição de responsáveis e envolvidos.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
-            </div>
-        </div>
-    </div>
 
 
 </div>
@@ -83,7 +87,7 @@
                 <img src="{% static 'icons/person-plus-fill.svg' %}" width="50" height="50" alt="Card image">
                 <h4 class="card-title mt-3">Novo Usuário</h4>
                 <p class="card-text">Módulo para criação de novos usuários no sistema.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <a href="#" class="btn btn-primary">Veja Mais..</a>
             </div>
         </div>
     </div>
@@ -94,7 +98,7 @@
                 <img src="{% static 'icons/building-fill-gear.svg' %}" width="50" height="50" alt="Card image">
                 <h4 class="card-title mt-3">Configuração Empresa</h4>
                 <p class="card-text">Configuração de parâmetros e ajustes específicos da empresa no sistema.</p>
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <a href="/customer-profile/" class="btn btn-primary">Veja Mais..</a>
             </div>
         </div>
     </div>

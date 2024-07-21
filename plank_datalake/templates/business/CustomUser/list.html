@@ -2,59 +2,30 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
+<h4>Lista de Usuários</h4>
 
-    <div class="row">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <a href=""><button class="btn btn-primary mt-3 text-rigth">Setor</button></a>
-                    </div>
-                    <div class="col">
-                        <a href=""><button class="btn btn-primary mt-3 text-rigth">Status</button></a>
-                    </div>
-                    <div class="col">
-                        <input type="text">
-                        <button class="btn btn-primary mt-3 text-rigth">Buscar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<a href="{{new_user}}" class="btn btn-primary mt-2">Adicionar um novo usuario</a>
 
-    <div class="row mt-4 justify-content-cente" id="list_user">
-        <p>Lista de Usuários</p>
-    </div>
-    
-    <div class="row">
-        <div class="col">
-            <div class="row">
-            {% for user in users %}
-                <div class="col-md-4 mb-3">
-                    <div class="card mt-2" style="width: 18rem;">
-                        <div class="card-body">
-                            <div class="row">
-                                <img class="card-img-top" src="{% static 'images/google-37.png'%}" alt="Bootstrap">
-                            </div>
-                            <div class="row mt-2 justify-content-center">
-                                {{ user.first_name }} {{ user.last_name }}
-                            </div>
-                            <div class="row mt-2 justify-content-center">
-                                {{ user.str_cargo }}
-                            </div>
-                            <div class="row mt-2 justify-content-center">
-                                {{ user.is_active }}
-                            </div>
-                        </div>
-                    </div>
-                </div>    
-            {% endfor %}
-            </div>    
-        </div>
-    </div>
-
-</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cargo</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ user.str_cargo }}</td>
+                <td>{{ user.is_active }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
 

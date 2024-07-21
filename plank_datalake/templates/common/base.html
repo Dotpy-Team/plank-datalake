@@ -27,15 +27,35 @@
             <!-- Page Content  -->
             <div id="content">
 
-                <nav class="navbar navbar-expand-lg">
+  
+                <nav class="navbar">
+                    <div class='row'>
+                        <div class='col'>
+                            <button type="button" id="sidebarCollapse" class="btn btn-outline-primary">
+                                <span>Menu</span>
+                            </button>
+                        </div>
+                        <div class='col'>
+                            <a href="/" class="btn btn-primary">Home</a>
+                        </div>
+                    </div>
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
-                        <i class="fas fa-align-left"></i>
-                        <span>Menu</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
+                    <form class="form-inline">
+                        <div class='row'>
+                            <div class='col'>
+                                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                            </div>
+                            <div class='col'>
+                                <button type="button" class="btn btn-primary">Mais</button>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop4" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+                                        <a class="dropdown-item" href="/user-profile/">Perfil</a>
+                                        <a class="dropdown-item" href="/customer-profile/">Empresa</a>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
                 </nav>
 
                 <div class='container-fluid'>

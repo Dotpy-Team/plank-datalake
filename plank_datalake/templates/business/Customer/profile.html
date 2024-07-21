@@ -16,7 +16,7 @@
             <div class='card-body'>
                 <h4>Usuários</h4>
                 <p>Acesse o console de usuários e veja os usuários do sistema.</p>
-                <button type="button" class="btn btn-primary w-100">Ver mais</button>
+                <a href="{{users}}" class="btn btn-primary">Veja todos os usuarios da empresa</a>
             </div>
         </div>
     </div>
@@ -25,11 +25,11 @@
             <div class='card-body'>
                 <h4>Contratos</h4>
                 <p>Acesse seu contrato e veja os serviços contratados.</p>
-                <button type="button" class="btn btn-primary w-100">Ver Mais</button>
+                <a href="{{list_contracts}}" class="btn btn-primary">Acesse os contratos</a>
             </div>
         </div>
     </div>
-    <div class='col'>
+    {% comment %} <div class='col'>
         <div class='card'>
             <div class='card-body'>
                 <h4>Faturas</h4>
@@ -37,7 +37,7 @@
                 <button type="button" class="btn btn-primary w-100">Ver Mais</button>
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
 </div>
 
 
