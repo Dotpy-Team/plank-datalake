@@ -21,7 +21,7 @@ def get_table_columns(request, table_id):
         name = row['str_name']
         sep = row['str_separador']
 
-    columns = Columns.objects.filter(table_id=tables_id).values('id_column', 'str_source_name', 'str_datatype')
+    columns = Columns.objects.filter(table_id=tables_id).values('id_column', 'str_source_name', 'str_datatype', 'str_type')
 
     response_dict = {
         "id": id,
