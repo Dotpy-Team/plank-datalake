@@ -15,7 +15,7 @@ env:
   CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
   CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-  TASK_DEFINITION_FAMILY: task-definition.json
+  TASK_DEFINITION_FAMILY: plankdatalake
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -30,20 +30,19 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Set Image Tag
         id: set-image-tag
         run: |
-          IMAGE_TAG=${GITHUB_REF#refs/heads/}-${GITHUB_RUN_ID}
+          IMAGE_TAG=${GITHUB_SHA}
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
       - name: Build Docker Image
@@ -58,21 +57,33 @@ jobs:
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Download task definition
+        id: download-task-def
         run: |
-          aws ecs describe-task-definition --task-definition plankdatalake --query taskDefinition > ${{ env.TASK_DEFINITION_FAMILY }}
+          aws ecs describe-task-definition \
+            --task-definition ${{ env.TASK_DEFINITION_FAMILY }} \
+            --query taskDefinition \
+            --output json > task-definition.json
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ${{ env.TASK_DEFINITION_FAMILY }}
-          container-name: ${{ env.CONTAINER_NAME }}
-          image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Update task definition with new image
+        id: update-task-def
+        run: |
+          cat task-definition.json | \
+          jq --arg IMAGE "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+          '.containerDefinitions[0].image = $IMAGE' > new-task-definition.json
 
-      - name: Deploy Amazon ECS task definition
+      - name: Register new task definition
+        id: register-task-def
+        run: |
+          TASK_REVISION=$(aws ecs register-task-definition \
+            --cli-input-json file://new-task-definition.json \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text)
+          echo "TASK_REVISION=$TASK_REVISION" >> $GITHUB_ENV
+
+      - name: Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ env.TASK_DEFINITION_FAMILY }}
+          task-definition: ${{ env.TASK_REVISION }}
           service: ${{ env.SERVICE_NAME }}
           cluster: ${{ env.CLUSTER_NAME }}
           wait-for-service-stability: true
