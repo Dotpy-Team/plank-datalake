@@ -94,6 +94,13 @@ jobs:
       - name: Print TASK_REVISION
         run: echo "TASK_REVISION=$TASK_REVISION"
 
+      - name: Verify cluster and services
+        run: |
+          echo "Listing clusters:"
+          aws ecs list-clusters
+          echo "Listing services in cluster ${{ env.CLUSTER_NAME }}:"
+          aws ecs list-services --cluster ${{ env.CLUSTER_NAME }}
+
       - name: Deploy to ECS
         run: |
           aws ecs update-service \
