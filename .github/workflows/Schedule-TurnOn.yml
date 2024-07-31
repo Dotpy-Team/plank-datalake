@@ -1,4 +1,4 @@
-name: Start RDS Instance
+name: Start RDS Instance and ECS Instance
 
 on:
   schedule:
@@ -27,3 +27,9 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         
+    - name: Start ECS Cluster
+      run: |
+        aws ecs update-service --cluster plank --service plank-news --desired-count 1
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
