@@ -2,7 +2,7 @@ name: Stop RDS Instance and ECS Instance
 
 on:
   schedule:
-    - cron: '0 0 * * 1-5'  # Este cron job será executado todos os dias às 03:00 UTC
+    - cron: '0 23 * * *'  # Este cron job será executado todos os dias às 03:00 UTC
   workflow_dispatch:  # Permite disparar a job manualmente
 
 jobs:
