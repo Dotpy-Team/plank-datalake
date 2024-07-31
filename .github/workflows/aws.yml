@@ -67,10 +67,10 @@ jobs:
       - name: Clean and update task definition
         id: clean-update-task-def
         run: |
-          cat task-definition.json | \
-          jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy) | 
+          jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy) |
               .containerDefinitions[0].image = $IMAGE' \
-              --arg IMAGE "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" > new-task-definition.json
+              --arg IMAGE "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
+              < task-definition.json > new-task-definition.json
 
       - name: Register new task definition
         id: register-task-def
@@ -88,4 +88,3 @@ jobs:
           service: ${{ env.SERVICE_NAME }}
           cluster: ${{ env.CLUSTER_NAME }}
           wait-for-service-stability: true
-          
