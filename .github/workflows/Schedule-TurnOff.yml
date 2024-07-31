@@ -1,4 +1,4 @@
-name: Stop RDS Instance
+name: Stop RDS Instance and ECS Instance
 
 on:
   schedule:
