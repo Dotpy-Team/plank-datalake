@@ -91,6 +91,9 @@ jobs:
             --output text)
           echo "TASK_REVISION=$TASK_REVISION" >> $GITHUB_ENV
 
+      - name: Print TASK_REVISION
+        run: echo "TASK_REVISION=$TASK_REVISION"
+
       - name: Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
