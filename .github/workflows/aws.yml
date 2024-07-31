@@ -15,7 +15,7 @@ env:
   CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
   CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-  TASK_DEFINITION_FAMILY: plank-datalake
+  TASK_DEFINITION_FAMILY: plankdatalake
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
