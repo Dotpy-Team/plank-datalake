@@ -15,13 +15,13 @@ env:
   CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
   SERVICE_NAME: ${{ secrets.SERVICE_NAME }}
   CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-  TASK_DEFINITION_FAMILY: plankdatalake
+  TASK_DEFINITION_FAMILY: plank-datalake
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   deploy:
-    name: Build and Deploy Image
+    name: Build and Deploy Docker Image
     runs-on: ubuntu-latest
     environment: production
 
@@ -56,7 +56,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-      - name: Download task definition
+      - name: Download Task Definition
         id: download-task-def
         run: |
           aws ecs describe-task-definition \
@@ -64,15 +64,15 @@ jobs:
             --query 'taskDefinition' \
             --output json > task-definition.json
 
-      - name: Clean and update task definition
-        id: clean-update-task-def
+      - name: Update Task Definition
+        id: update-task-def
         run: |
           jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy) |
               .containerDefinitions[0].image = $IMAGE' \
               --arg IMAGE "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
               < task-definition.json > new-task-definition.json
 
-      - name: Register new task definition
+      - name: Register New Task Definition
         id: register-task-def
         run: |
           TASK_REVISION=$(aws ecs register-task-definition \
@@ -81,10 +81,10 @@ jobs:
             --output text)
           echo "TASK_REVISION=$TASK_REVISION" >> $GITHUB_ENV
 
-      - name: Print TASK_REVISION
+      - name: Print Task Revision
         run: echo "TASK_REVISION=$TASK_REVISION"
 
-      - name: Verify cluster and services
+      - name: Verify Cluster and Services
         run: |
           echo "Listing clusters:"
           aws ecs list-clusters
