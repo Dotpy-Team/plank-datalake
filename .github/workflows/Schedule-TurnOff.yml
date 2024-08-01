@@ -1,35 +1,31 @@
-name: Stop RDS Instance and ECS Instance
+name: Stop RDS Instance and ECS Service
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # Este cron job será executado todos os dias às 03:00 UTC
+    - cron: '0 23 * * *'  # Este cron job será executado todos os dias às 23:00 UTC
   workflow_dispatch:  # Permite disparar a job manualmente
 
 jobs:
-  stop-rds:
+  stop-instances:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1  # Altere para a região onde está sua instância RDS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Altere para a região onde está sua instância RDS
 
-    - name: Stop RDS instance
-      run: |
-        aws rds stop-db-instance --db-instance-identifier datalake
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        
-    - name: Stop ECS Service
-      run: |
-        aws ecs update-service --cluster plank --service plank-news --desired-count 0
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Stop RDS instance
+        run: |
+          echo "Stopping RDS instance..."
+          aws rds stop-db-instance --db-instance-identifier datalake
+
+      - name: Stop ECS Service
+        run: |
+          echo "Stopping ECS service..."
+          aws ecs update-service --cluster plank --service plank-news --desired-count 0
