@@ -8,23 +8,31 @@
         overflow-y: auto;
     }
     .tab-content {
-        height: 200px;
+        height: 300px;
     }
 
 </style>
 
+<h2>Sistema {{ system.str_system_type }}</h2>
 <div class='row'>
-    <div class='col-md-2'>
+    <div class='col-md-1'>
         {% if system.str_system_type == '' %}
-            <img src="{% static 'icons/database-fill-gear.svg' %}" width="100" height="100" alt="Card image">
+            <img src="{% static 'icons/database-fill-gear.svg' %}" width="75" height="75" alt="Card image">
         {% else %}
-            <img src="{% static  system.img_path  %}" alt="Bootstrap" width="100" height="100">
+            <img src="{% static  system.img_path  %}" style="max-width: 75px;" alt="Bootstrap">
         {% endif %}
     </div>
 
-    <div class='col-md-6'>
-        <h4> Sistema </h4>
-        <h2 class='text-primary'>{{ system.str_title }}</h2>                
+    <div class='col'>
+        <h4>Nome do Sistema:</h4>
+        <h4 class='text-primary'>{{ system.str_title }}</h4>
+        {% if system.str_status == 'Ativo' %}
+            <span class="badge text-bg-success">Ativo</span>
+        {% elif system.str_status == 'Inativo' %}
+            <span class="badge text-bg-danger">Inativo</span>
+        {% else %}
+            <button type="button" class="btn btn-outline-dark">ERROR</button>
+        {% endif %}
     </div>
 </div>
 
@@ -37,10 +45,10 @@
         <a class="nav-link" href="#process" data-toggle="tab">Processo</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#related" data-toggle="tab">Relacionados</a>
+        <a class="nav-link" href="#dataset" data-toggle="tab">Dataset</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#more" data-toggle="tab">Mais</a>
+        <a class="nav-link" href="#more" data-toggle="tab">Variáveis Sistemicas</a>
     </li>    
 </ul>
 
@@ -48,38 +56,42 @@
     <div id="details" class="tab-pane active">
 
         <p><strong>Descrição:</strong></p>
-        <p class="lead">{{ system.str_desc }}</p>
-        
+        <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style="height: 200px" disabled>{{ system.str_desc }}</textarea>
+        </div>
     </div>
     <div id="process" class="tab-pane fade">
         <div class='row'>
             <div class='col'>
                 <p><strong>Responsavel</strong></p>
-                <p>Luiz Gustavo Cairo</p>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                    <label for="floatingInputDisabled">MOKEE Luiz Gustavo Cairo</label>
+                </div>
+
             </div>
 
             <div class='col'>
                 <p><strong>Aprovador</strong></p>
-                <p>Jeremias Cairo</p>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                    <label for="floatingInputDisabled">MOKEE Luiz Gustavo Cairo</label>
+                </div>
+
             </div>
 
             <div class='col'>
-                <p><strong>Criacáo</strong></p>
-                <p>{{ system.dth_start_at}}</p>       
+                <p><strong>Data de Criação</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                    <label for="floatingInputDisabled">{{ system.dth_start_at}}</label>
+                </div>
             </div>
 
-            <div class='col'>
-                {% if system.str_status == 'Ativo' %}
-                    <button type="button" class="btn btn-outline-success">{{ system.str_status }}</button>
-                {% elif system.str_status == 'Inativo' %}
-                    <button type="button" class="btn btn-outline-danger">{{ system.str_status }}</button>
-                {% else %}
-                    <button type="button" class="btn btn-outline-dark">{{ system.str_status }}</button>
-                {% endif %}
-            </div>
         </div>
-    </div>
-    <div id="related" class="tab-pane fade">
+
+        <p><strong>Relacionados</strong></p>
+
         <div class="scroll-container">
             <ul class="list-group">
                 <li class="list-group-item">
@@ -111,6 +123,71 @@
                 </li>
             </ul>
         </div>
+
+    </div>
+
+    <div id="dataset" class="tab-pane fade">
+
+
+        <h3 class="text-primary text-center mt-3">Datasets</h3>
+
+        <div class='row mt-3'>
+            <div class='col'>
+                <form role="search" method="get" action="{{ profile_system }}">
+                    <input class="form-control" type="search" name="search" placeholder="Pesquisar" aria-label="Search" value="{{ request.GET.search }}">
+                </form>
+            </div>
+            <div class='col'>
+                <a href="{{new_dataset}}"><button type="submit" class="btn btn-primary text-rigth">Adicionar Dataset</button></a>		
+            </div>
+        </div>
+        
+        <table class="table mt-4 table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#id</th>
+                    <th>Nome</th>
+                    <th>Descricao</th>
+                    <th>Raci</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dataset in datasets  %}
+                <tr>
+                    <td><a href="{{dataset.detail_url}}">{{ dataset.dataset_id }}</a></td>
+                    <td>{{ dataset.str_title }}</td>
+                    <td>{{ dataset.str_desc }}</td>
+                    <td>{{ dataset.raci_activity }}</td>                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- Paginação -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if datasets.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ datasets.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+                
+                {% for num in datasets.paginator.page_range %}
+                    {% if datasets.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+        
+                {% if datasets.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ datasets.next_page_number }}">Próximo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>        
+
     </div>
     <div id="more" class="tab-pane fade">
         <p><strong>Variáveis Sistemicas:</strong></p>
@@ -190,66 +267,6 @@
         </div>        
     </div>    
 </div>
-
-<h3 class="text-primary text-center mt-3">Datasets</h3>
-
-<div class='row mt-3'>
-    <div class='col'>
-        <form role="search" method="get" action="{{ profile_system }}">
-            <input class="form-control" type="search" name="search" placeholder="Pesquisar" aria-label="Search" value="{{ request.GET.search }}">
-        </form>
-    </div>
-    <div class='col'>
-		<a href="{{new_dataset}}"><button type="submit" class="btn btn-primary text-rigth">Adicionar Dataset</button></a>		
-    </div>
-</div>
-
-<table class="table mt-4 table-striped table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>#id</th>
-            <th>Nome</th>
-            <th>Descricao</th>
-            <th>Raci</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for dataset in datasets  %}
-        <tr>
-            <td><a href="{{dataset.detail_url}}">{{ dataset.dataset_id }}</a></td>
-            <td>{{ dataset.str_title }}</td>
-            <td>{{ dataset.str_desc }}</td>
-            <td>{{ dataset.raci_activity }}</td>                    
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<!-- Paginação -->
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-        {% if datasets.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ datasets.previous_page_number }}">Anterior</a>
-            </li>
-        {% endif %}
-        
-        {% for num in datasets.paginator.page_range %}
-            {% if datasets.number == num %}
-                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-            {% else %}
-                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-            {% endif %}
-        {% endfor %}
-
-        {% if datasets.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ datasets.next_page_number }}">Próximo</a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
-
 
 <script>
     document.getElementById('toggleButton').addEventListener('click', function() {

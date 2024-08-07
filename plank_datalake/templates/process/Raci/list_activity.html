@@ -42,13 +42,13 @@
                 <td>{{ activity.responsible.first_name }} {{ activity.responsible.last_name }}</td>
                 <td>{{ activity.accountable.first_name }} {{ activity.accountable.last_name }}</td>
                 <td>
-                {% if activity.str_status == 'A' %}
-                    <span class="badge text-bg-success">Ativo</span>
-                {% elif activity.str_status == 'I' %}
-                    <span class="badge text-bg-danger">Inativo</span>
-                {% else %}
-                    <button type="button" class="btn btn-outline-dark">ERROR</button>
-                {% endif %}
+                    {% if activity.str_status == 'A' %}
+                        <span class="badge text-bg-success">Ativo</span>
+                    {% elif activity.str_status == 'I' %}
+                        <span class="badge text-bg-danger">Inativo</span>
+                    {% else %}
+                        <button type="button" class="btn btn-outline-dark">ERROR</button>
+                    {% endif %}
                 </td>
                 <td><a href="{{activity.detail_url}}"><button type="button" class="btn btn-light"><img src="{% static 'icons/pencil.svg' %}" width="20" height="20" alt="Card image"></button></a></td>
             </tr>

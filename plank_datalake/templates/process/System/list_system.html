@@ -23,7 +23,7 @@
             <th>#id</th>
             <th>Nome</th>
             <th>Descricao</th>
-            <th>Descricao IA</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -32,7 +32,15 @@
             <td><a href="{{system.detail_url}}">{{ system.system_id }}</a></td>
             <td>{{ system.str_title }}</td>
             <td>{{ system.str_desc }}</td>
-            <td>{{ system.str_desc_ia }}</td>                    
+            <td>
+                {% if system.str_status == 'Ativo' %}
+                    <span class="badge text-bg-success">Ativo</span>
+                {% elif system.str_status == 'Inativo' %}
+                    <span class="badge text-bg-danger">Inativo</span>
+                {% else %}
+                    <button type="button" class="btn btn-outline-dark">ERROR</button>
+                {% endif %}
+            </td>                    
         </tr>
         {% endfor %}
     </tbody>

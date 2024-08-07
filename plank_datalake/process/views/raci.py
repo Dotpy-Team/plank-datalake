@@ -47,6 +47,7 @@ def new_raci(request):
         if form.is_valid():
             raci = form.save(commit=False)
             raci.customer = customer_instance
+            raci.str_status = "A"
             raci.save()
             return redirect('profile_raci', crip(str(raci.activity_id)))
         else:
