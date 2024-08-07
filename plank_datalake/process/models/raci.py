@@ -28,6 +28,14 @@ class RaciActivity(models.Model):
         )
     )
     
+    str_status = models.CharField(
+        max_length=30,
+        choices=(
+            ('A', 'Ativo'),
+            ('I', 'Inativo')
+        )
+    )
+
     def __str__(self):
         return self.str_title
 
