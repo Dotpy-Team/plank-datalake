@@ -1,14 +1,18 @@
 body {
-    font-family: 'Mukta', sans-serif; /* ou 'Open Sans', sans-serif; */
     background-color: #F5F8FF;
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Mukta', sans-serif; /* Títulos com Mukta */
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    font-style: normal; /* Títulos com Mukta */
 }
 
 p {
-    font-family: 'Mukta', sans-serif; /* Parágrafos com Open Sans */
+    font-family: "Kanit", sans-serif; /* Parágrafos com Open Sans */
 }
 
 a, a:hover, a:focus {
