@@ -3,22 +3,17 @@
 <!-- Sidebar  -->
 <nav id="sidebar">
     <div class="sidebar-header">
-        <img src="{% static 'images/plank_logo_branco.png' %}" alt="Bootstrap" width="150" height="150">
+        
     </div>
 
     <ul class="list-unstyled components">
-        <p>Serviços:</p>
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+
         <li>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Configurações</a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
-                <li>
-                    <a href="/customer-profile/">Perfil da Empresa</a>
-                </li>
-                <li>
-                    <a href="/user-profile/">Perfil do Usuário</a>
-                </li>
-            </ul>
+            <a href="/" class='mt-4'><img src="{% static 'icons/house-door-fill.svg' %}" width="30" height="30" alt="Card image" >Inicio</a>
         </li>
+
 
         {% if user.is_superuser %}
             <li>
@@ -32,24 +27,29 @@
         {% else %}
 
             <li>
-                <a href="/raci-list/">Processos e envolvidos</a>
-            </li>    
-
-            <li>
-                <a href="/chose-system/">Sistemas</a>
+                <a href="/customer-profile/"><img src="{% static 'icons/buildings-fill.svg' %}" width="30" height="30" alt="Card image">Perfil da Empresa</a>
             </li>
 
             <li>
-                <a href="/search-tables/">Tabelas</a>
+                <a href="/raci-list/"><img src="{% static 'icons/layers-fill.svg' %}" width="30" height="30" alt="Card image">Processos e envolvidos</a>
             </li>
 
             <li>
-                <a href="/list-pipeline/">Transformações</a>
+                <a href="/systems/"><img src="{% static 'icons/layout-text-window.svg' %}" width="30" height="30" alt="Card image">Sistemas</a>
             </li>
 
             <li>
-                <a href="/dashboard/">Dashboards</a>
+                <a href="/search-tables/"><img src="{% static 'icons/border-outer.svg' %}" width="30" height="30" alt="Card image">Tabelas</a>
             </li>
+
+            <li>
+                <a href="/list-pipeline/"><img src="{% static 'icons/bezier.svg' %}" width="30" height="30" alt="Card image">Transformações</a>
+            </li>
+
+            <li>
+                <a href="/dashboard/"><img src="{% static 'icons/clipboard-data-fill.svg' %}" width="30" height="30" alt="Card image">Dashboards</a>
+            </li>
+
 
         {% endif %}
 
