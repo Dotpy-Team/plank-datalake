@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 
-
 <div class='row'>
     <div class='col'>
         <form role="search" method="get" action="{% url 'view_tables' %}">
@@ -14,114 +13,74 @@
     </div>
 </div>
 
-<div class="row mt-2">
-    <div class="nav col-md-3 d-none d-md-block sidebar" style="max-height: 80vh; overflow-y: auto; overflow-x: hidden;">
-        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 300px;">
-
-            <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
-                <img src="{% static 'icons/table.svg' %}" alt="table" width="24" height="24" style="margin-right: 10px;">            
-                <span class="fs-5 fw-semibold">Tabelas</span>
-            </a>
-
-            <div class="list-group list-group-flush border-bottom scrollarea">                    
-                {% if tables|length > 0 %}
-                    {% for table in tables %}
-
-                        <a href="{{table.detail_url}}" class="list-group-item list-group-item-action py-3 lh-sm">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                {%if table.layer == 'ingestion'%}
-                                    <p><b>context.{{table.dataset.system.str_title}}_{{table.dataset.str_title}}_{{table.str_name}} </b></p>
-                                {% else %}
-                                    <p><b>app.{{table.step.pipeline.str_title}}_{{table.str_name}} </b></p>                            
-                                {%endif%}
-
-                                <small class="text-body-secondary"> {{table.str_system}} </small>
-                            </div>
-                        </a>
-                    
-                    {% endfor %}
-                {% else %}
-                    <p>Não há tabelas cadastradas.</p>
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">nome</th>
+        <th scope="col">descriçao</th>
+        <th scope="col">data inicio</th>
+        <th scope="col">layer</th>
+        <th scope="col">tipo de arquivo</th>
+        <th scope="col">ações</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for table in tables %}
+        <tr>
+            <th scope="row">{{table.table_id}}</th>
+            <td>{{table.str_name}}</td>
+            <td>{{table.str_desc}}</td>
+            <td>{{table.dth_start_at}}</td>
+            <td>
+                {% if table.layer == 'ingestion'%}
+                    <span class="badge text-bg-primary">{{table.layer}}</span>            
+                {% elif table.layer == 'process'%}
+                    <span class="badge text-bg-info">{{table.layer}}</span>
                 {% endif %}
+            </td>
+            <td>
+                {% if table.str_archive_type == 'json'%}
+                    <span class="badge text-bg-warning">{{table.str_archive_type}}</span>
+                {% elif table.str_archive_type == 'csv'%}
+                    <span class="badge text-bg-success">{{table.str_archive_type}}</span>
+                {% elif table.str_archive_type == 'txt'%}
+                    <span class="badge text-bg-secondary">{{table.str_archive_type}}</span>
+               {% endif %}
+            </td>
+            <td><a href="{{table.detail_url}}"><button type="button" class="btn btn-light"><img src="{% static 'icons/pencil.svg' %}" width="20" height="20" alt="Card image"></button></a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
 
-            </div>
-        </div>
-    </div>
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-4">
+        {% if tables.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ tables.previous_page_number }}{% if search %}&search={{ search }}{% endif %}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-9 px-md-4">
-        <div class="card">
-    
-            <div class="card-body">
-                <div class='row'>
-                    <div class='col-md-10'>
+        {% for num in tables.paginator.page_range %}
+            {% if tables.number == num %}
+                <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+            {% elif num > tables.number|add:'-3' and num < tables.number|add:'3' %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}{% if search %}&search={{ search }}{% endif %}">{{ num }}</a></li>
+            {% endif %}
+        {% endfor %}
 
-                        {%if card_table.layer == 'ingestion'%}
-                            <h4 class="text-primary"><b>context.{{ card_table.dataset.system.str_title }}_{{ card_table.dataset.str_title }}_{{ card_table.str_name }}</b></h4>
-                        {% else %}
-                            <h4 class="text-primary"><b>app.{{ card_table.step.pipeline.str_title }}_{{ card_table.str_name }}</b></h4>
-                        {%endif%}
-
-                    </div>
-                    <div class='col-md-2'>
-                        <button type="button" class="btn btn-success">Mais</button>
-                        <div class="btn-group" role="group">
-                            <button id="btnGroupDrop4" type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
-                                <a class="dropdown-item" href="{{ card_table.details_url }}">Ver Mais Detalhes</a>
-                                <a class="dropdown-item" href="{{ add }}">Ver Colunas</a>
-                                <a class="dropdown-item" href="{{ list_job }}">Ver execuções</a>
-                                <a class="dropdown-item" href="{{ look_all }}">Ver Dependencias</a>
-                            </div>
-                        </div>
-                    </div>                   
-                </div>
-
-                <h5 class="text-body-tertiary">{{ card_table.str_dataset }}</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Frequência: {{ card_table.str_frequency }}</li>
-                    <li class="list-group-item">Modo: {{ card_table.str_mode }}</li>
-                    <li class="list-group-item">Descrição: {{ card_table.str_desc }}</li>
-                    <li class="list-group-item">Tipo de Ingestão: {{ card_table.str_type }}</li>
-                    <li class="list-group-item">Data de Cadastro: {{ card_table.dth_start_at }}</li>
-                    <li class="list-group-item">Camada: {{ card_table.layer }}</li>
-                    <li class="list-group-item">Palavras Chave: {{ card_table.str_key_words }}</li>
-
-                    <li class="list-group-item">
-                        Tamanho em GB: 
-                        {% if card_table.int_size is None %}
-                            0
-                        {% else %}
-                            {{ card_table.int_size }}
-                        {% endif %}
-                    </li>
-                    
-                    <li class="list-group-item">
-                        Quantidade de linhas: 
-                        {% if card_table.int_number_of_rows is None %}
-                            0
-                        {% else %}
-                            {{ card_table.int_number_of_rows }}
-                        {% endif %}
-                        
-                    </li>
-                
-                </ul>
-            </div>
-        </div>
-    </main>
-
-</div>
-
-<script>
-    $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $(".dropdown-menu li").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
-    });
-</script>
+        {% if tables.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ tables.next_page_number }}{% if search %}&search={{ search }}{% endif %}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

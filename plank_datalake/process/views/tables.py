@@ -124,35 +124,33 @@ def new_table_without_dataset(request):
         return render(request, html_location, response_dict)
 
 @login_required
-def get_tables(request, table_id=None):
+def get_tables(request):
     customer_id = request.user.customer.customer_id
-    tables = Tables.objects.filter(customer_id=customer_id)
-    
+    tables = Tables.objects.filter(customer_id=customer_id).order_by('table_id')
+    for table in tables:
+        table.detail_url = reverse('table_view', args=[crip(str(table.table_id))])
+        table.save()
+
     search = request.GET.get('search')
 
     if search:
         tables = tables.filter(
             Q(str_name__icontains=search) | Q(dataset__str_title__icontains=search) | Q(dataset__system__str_title__icontains=search)
         )
+    
+    paginator = Paginator(tables, 6)
+    page = request.GET.get('page')
 
-    for table in tables:
-        table.selected = False
-        table.detail_url = reverse('view_tables_id',args=[crip(str(table.table_id))])
-        table.save()
-    if len(tables) > 0:
-        if table_id == None:
-            card_table = tables[0]
-            card_table.details_url = reverse('table_view',args=[crip(str(card_table.table_id))])
-        else:
-            card_table = Tables.objects.get(table_id=uncrip(table_id))
-            card_table.details_url = reverse('table_view',args=[crip(str(card_table.table_id))])
-    else:
-        card_table = None
+    try:
+        tables = paginator.page(page)
+    except PageNotAnInteger:
+        tables = paginator.page(1)
+    except EmptyPage:
+        tables = paginator.page(paginator.num_pages)
 
     html_location = parse_html_path(TABLE_PATH,'list')
     response_dict = {
         'tables': tables,
-        'card_table': card_table,
         'search':search
     }
     return render(request, html_location, response_dict)
