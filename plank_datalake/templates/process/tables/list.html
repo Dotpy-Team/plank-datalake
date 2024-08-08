@@ -46,6 +46,9 @@
                     <span class="badge text-bg-success">{{table.str_archive_type}}</span>
                 {% elif table.str_archive_type == 'txt'%}
                     <span class="badge text-bg-secondary">{{table.str_archive_type}}</span>
+
+                {% else %}
+                    <span class="badge text-bg-dark">N/A</span>
                {% endif %}
             </td>
             <td><a href="{{table.detail_url}}"><button type="button" class="btn btn-light"><img src="{% static 'icons/pencil.svg' %}" width="20" height="20" alt="Card image"></button></a></td>
