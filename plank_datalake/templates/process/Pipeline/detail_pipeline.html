@@ -31,14 +31,16 @@
 
 </style>
 
+<h2>Pipeline de Transformação de Dados</h2>
+
 <div class='row mt-4'>
-    <div class='col-md-2'>
-        <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 150px;">
+    <div class='col-md-1'>
+        <img src="{% static 'icons/bezier.svg' %}" width="75" height="75" alt="Card image">
     </div>
 
     <div class='col'>
-        <h4>Transformação</h4>
-        <h2 class='text-primary'>{{ pipeline.str_title }}</h2>
+        <h4>Nome do pipeline:</h4>
+        <h4 class='text-primary'>{{ pipeline.str_title }}</h4>
         <button id="toggleButton" class="btn btn-primary mt-4">Mais</button>
 
     </div>
@@ -54,7 +56,6 @@
                     <a class="dropdown-item" href="{{ look_all }}">Ver Todas Colunas</a>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 
@@ -63,30 +64,27 @@
         <li class="nav-item">
             <a class="nav-link active" href="#description" data-toggle="tab">Descrição</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#dependencies" data-toggle="tab">Detalhes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#executions" data-toggle="tab">Execuções</a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="#raci" data-toggle="tab">Envolvidos</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#dependencies" data-toggle="tab">Dependencias</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#executions" data-toggle="tab">Execuções</a>
         </li>
     </ul>
 
     <div class="tab-content mt-4">
         <div id="description" class="tab-pane active">
-            <div class="row">
-                <div class='col-md-3'>
-                    <p class="card-text">Data de Inicio: {{ pipeline.dth_start_at }}</p>
-                </div>
-                <div class='col-md-3'>
-                    <p class="card-text">Data do Fim: {{ pipeline.dth_end_at }}</p>
-                </div>
+
+            <p><strong>Descrição:</strong></p>
+            <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style="height: 200px" disabled>{{ pipeline.str_desc }}</textarea>
             </div>
-            <h4>Descrição:</h4>
-            <p>{{ pipeline.str_desc }}</p>
-    
         </div>
     
         <div id="dependencies" class="tab-pane fade">
@@ -166,7 +164,7 @@
 {% for step in steps %}
 
     <div class="card border-primary mt-4">
-        <div class='card-body'>
+        <div class='card-body bg-light'>
             <div class='row'>
                 <div class='col-md-4'>
                     <h4><b> #{{ step.step_id }}</b> app.{{ step.table.str_name }}</h4>

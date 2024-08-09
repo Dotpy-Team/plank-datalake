@@ -16,11 +16,13 @@
 <table class="table mt-4 table-striped table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col">id</th>
+        <th scope="col">sistema/pipeline</th>
+        <th scope="col">dataset</th>
         <th scope="col">nome</th>
-        <th scope="col">descriçao</th>
         <th scope="col">data inicio</th>
-        <th scope="col">layer</th>
+        <th scope="col">frequencia</th>
+        <th scope="col">modo</th>
+        <th scope="col">camada</th>
         <th scope="col">tipo de arquivo</th>
         <th scope="col">ações</th>
       </tr>
@@ -28,10 +30,17 @@
     <tbody>
         {% for table in tables %}
         <tr>
-            <th scope="row">{{table.table_id}}</th>
-            <td>{{table.str_name}}</td>
-            <td>{{table.str_desc}}</td>
+            {% if table.layer == 'ingestion'%}
+                <td>{{table.dataset.system.str_title}}</td>
+                <td>{{table.dataset.str_title}}</td>
+            {%else%}
+                <td colspan="2">{{table.step.pipeline.str_title}}</td>
+            {%endif%}
+            <td><b>{{table.str_name}}</b></td>
             <td>{{table.dth_start_at}}</td>
+            <td>{{table.str_frequency}}</td>
+            <td>{{table.str_mode}}</td>
+
             <td>
                 {% if table.layer == 'ingestion'%}
                     <span class="badge text-bg-primary">{{table.layer}}</span>            
@@ -48,7 +57,7 @@
                     <span class="badge text-bg-secondary">{{table.str_archive_type}}</span>
 
                 {% else %}
-                    <span class="badge text-bg-dark">N/A</span>
+                    <span class="badge text-bg-dark">Table</span>
                {% endif %}
             </td>
             <td><a href="{{table.detail_url}}"><button type="button" class="btn btn-light"><img src="{% static 'icons/pencil.svg' %}" width="20" height="20" alt="Card image"></button></a></td>

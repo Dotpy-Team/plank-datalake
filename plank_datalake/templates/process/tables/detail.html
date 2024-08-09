@@ -4,19 +4,21 @@
 
 <style>
     .tab-content {
-        height: 250px;
+        height: 385px;
         overflow-y:auto;
         overflow-x: hidden;
     }
 </style>
 
+<h2>Tabela</h2>
+
 <div class='row mt-4'>
-    <div class='col-md-2'>
-        <img src="{% static 'images/dotpy_logo.png' %}" alt="Logo" class="img-fluid" style="max-width: 150px;">
+    <div class='col-md-1'>
+        <img src="{% static 'icons/border-outer.svg' %}" width="75" height="75" alt="Card image">
     </div>
 
     <div class='col'>
-        <h4>Tabela</h4>
+        <h4>Nome da tabela:</h4>
         <h2 class='text-primary'>{{ table.str_name }}</h2>
     </div>
 
@@ -44,25 +46,25 @@
     <li class="nav-item">
         <a class="nav-link" href="#columns" data-toggle="tab">Colunas</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#executions" data-toggle="tab">Execuções</a>
+    </li>
 </ul>
 
 <div class="tab-content mt-4">
     <div id="description" class="tab-pane active">
         <p><strong>Descrição:</strong></p>
-        <p class="lead">{{ table.str_desc }}</p>
-
-        <p><strong>Key Words:</strong></p>
-        <p class="lead">{{ table.str_key_words }}</p>
-
+        <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style="height: 200px" disabled>{{ table.str_desc }}</textarea>
+        </div>
     </div>
     <div id="details" class="tab-pane fade">
-
         <div class='row'>
             <div class='col'>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Frequência: {{ table.str_frequency }}</li>
                     <li class="list-group-item">Modo: {{ table.str_mode }}</li>
-                    <li class="list-group-item">Descrição: {{ table.str_desc }}</li>
+                    <li class="list-group-item">Key Words: {{ table.str_key_words }}</li>
                     <li class="list-group-item">Tipo de Ingestão: {{ table.str_type }}</li>
                 </ul>
             </div>
@@ -89,14 +91,11 @@
                         {% endif %}
                     </li>
                 </ul>
-
             </div>
-
         </div>
-
     </div>
-    <div id="columns" class="tab-pane fade">
 
+    <div id="columns" class="tab-pane fade">
         <table class="table mt-4 table-striped table-bordered table-hover">
             <thead>
                 <tr>
@@ -134,64 +133,63 @@
                     <p>Não há colunas cadastradas.</p>
                 {% endfor %}
             </tbody>
-        </table> 
-
+        </table>
     </div>
-</div>
-
-<h4 class='mt-2'>Execuções</h4>
-
-<table class="table mt-4 table-striped table-bordered table-hover">
-    <thead>
-        <tr>
-            <th class="text-center" scope="col">ID</th>
-            <th class="text-center" scope="col">Dth Inicio</th>
-            <th class="text-center" scope="col">Dth Fim</th>
-            <th class="text-center" scope="col">Bucket Trigger</th>
-            <th class="text-center" scope="col">Event Trigger</th>
-            <th class="text-center" scope="col">Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for execution in executions %}
-            <tr>
-                <td class="text-center" scope="row">{{execution.job_id}}</td>
-                <td class="text-center" scope="row">{{execution.dth_start_at}}</td>
-                <td class="text-center" scope="row">{{execution.dth_last_updated}}</td>
-                <td class="text-center" scope="row">{{execution.str_event_bucket_trigger}}</td>
-                <td class="text-center" scope="row">{{execution.str_event_key_trigger}}</td>
-                <td class="text-center" scope="row">{{execution.str_status}}</td>
-            </tr>
-        {% empty %}
-            <p>Não há colunas cadastradas.</p>
-        {% endfor %}
-    </tbody>
-</table> 
-
-<!-- Paginação para executions -->
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-        {% if executions.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ executions.previous_page_number }}">Anterior</a>
-            </li>
-        {% endif %}
+    <div id="executions" class="tab-pane fade">
+        <table class="table mt-4 table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">ID</th>
+                    <th class="text-center" scope="col">Dth Inicio</th>
+                    <th class="text-center" scope="col">Dth Fim</th>
+                    <th class="text-center" scope="col">Bucket Trigger</th>
+                    <th class="text-center" scope="col">Event Trigger</th>
+                    <th class="text-center" scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for execution in executions %}
+                    <tr>
+                        <td class="text-center" scope="row">{{execution.job_id}}</td>
+                        <td class="text-center" scope="row">{{execution.dth_start_at}}</td>
+                        <td class="text-center" scope="row">{{execution.dth_last_updated}}</td>
+                        <td class="text-center" scope="row">{{execution.str_event_bucket_trigger}}</td>
+                        <td class="text-center" scope="row">{{execution.str_event_key_trigger}}</td>
+                        <td class="text-center" scope="row">{{execution.str_status}}</td>
+                    </tr>
+                {% empty %}
+                    <p>Não há colunas cadastradas.</p>
+                {% endfor %}
+            </tbody>
+        </table> 
         
-        {% for num in executions.paginator.page_range %}
-            {% if executions.number == num %}
-                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-            {% else %}
-                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-            {% endif %}
-        {% endfor %}
+        <!-- Paginação para executions -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if executions.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ executions.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+                
+                {% for num in executions.paginator.page_range %}
+                    {% if executions.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+        
+                {% if executions.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ executions.next_page_number }}">Próximo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 
-        {% if executions.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ executions.next_page_number }}">Próximo</a>
-            </li>
-        {% endif %}
-    </ul>
-</nav>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
