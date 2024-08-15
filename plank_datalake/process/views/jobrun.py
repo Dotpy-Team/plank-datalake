@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Tables, RaciActivity, JobRun
+from process.models import Tables, RaciActivity, JobRun, Log
 from business.models import Customer
 from process.forms import ColumnsForm, JobRunForm
 import base64
@@ -61,13 +61,13 @@ def new_execution(request, table_id):
 @login_required
 def detail_execution(request,job_id):
     job_id = uncrip(job_id)
-
     job = get_object_or_404(JobRun, job_id=job_id)
+    logs = Log.objects.filter(job_id=job_id)
     html_location = parse_html_path(JOB_PATH, 'detail')
     response_dict = {
-        'job': job
+        'job': job,
+        'logs': logs
     }
-
     return render(request, html_location, response_dict)
     
 @login_required

@@ -1,25 +1,40 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
-<div class="container justify-content-center">
-    <div class="card border-primary" style="max-width: 100rem;">
-        <div class='card-header'><b>Detalhes:</b></div>
-        <div class="card-body">
-            <h3 class="card-title text-primary">{{ customer.str_name }}</h3>
-            <h3 class="card-text-secondary-emphasis">Tabela:</h3>
-            <p class="card-text">{{ job.table.str_name }}</p>
-            
-            <h3 class="card-text-secondary-emphasis">Dataset:</h3>
-            <p class="card-text">{{ job.table.dataset.str_title }}</p>
 
-            <h3 class="card-text-secondary-emphasis">Descrição:</h3>
-            <p class="card-text">{{ job.table.str_desc }}</p>
-
-            <h3 class="card-text-secondary-emphasis">Status:</h3>
-            <p class="card-text">{{ job.str_status }}</p>
-
-        </div>
+<div class='row'>
+    <div class='col-md-2'>
+        <h4>{{ job.table.dataset.system.str_title }}_{{ job.table.dataset.str_title }}</h4>
+    </div>
+    <div class='col'>
+        <h4>{{ job.table.str_name }}</h4>
     </div>
 </div>
+
+<h4>Execução: {{ job.job_id }}</h4>
+
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="text-center" scope="col">ID</th>
+            <th class="text-center" scope="col">Data</th>
+            <th class="text-center" scope="col">Tipo</th>
+            <th class="text-center" scope="col">Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+            <tr>
+                <td class="text-center" scope="row">{{log.log_id}}</td>
+                <td class="text-center" scope="row">{{log.dth_event_at}}</td>
+                <td class="text-center" scope="row">{{log.str_type}}</td>
+                <td class="text-center" scope="row">{{log.str_desc}}</td>
+            </tr>
+        {% empty %}
+            <p>Não há execuções registradas.</p>
+        {% endfor %}
+    </tbody>
+</table> 
 
 {% endblock %}

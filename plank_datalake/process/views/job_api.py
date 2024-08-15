@@ -4,11 +4,9 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from business.models import Customer
-from process.models import Tables, JobRun
-from process.serializers import JobRunSerializer, jobrunserializer
-
+from process.models import Tables, JobRun, Log
+from process.serializers import JobRunSerializer, LogSerializer
 import json
-
 
 @api_view(["POST"])
 def post_job(request, table_id):
@@ -28,6 +26,25 @@ def post_job(request, table_id):
         return Response(job_serializer.data)
     else:
         return Response(job_serializer.errors, status=412)
+
+@api_view(["POST"])
+def post_log(request, job_id):
+    response = request.data
+
+    try:
+        job = JobRun.objects.get(job_id=job_id)
+        response["job"] = job.job_id
+    except JobRun.DoesNotExist:
+        error = {"job":[ 'Job Doesnt found.']}
+        return Response(error, status=412)
+
+    log_serializer = LogSerializer(data=response)
+
+    if log_serializer.is_valid():
+        log_serializer.save()
+        return Response(log_serializer.data)
+    else:
+        return Response(log_serializer.errors, status=412)
 
 
 @api_view(["GET"])

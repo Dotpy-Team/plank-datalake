@@ -167,6 +167,9 @@ def get_table(request,table_id):
 
         executions = executions.order_by('-job_id')
 
+        for execution in executions:
+            execution.detail_url = reverse('detail_execution',args=[crip(str(execution.job_id))])
+
         paginator = Paginator(executions, 6)  # 10 datasets por página
         page = request.GET.get('page')
         

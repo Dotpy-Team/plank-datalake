@@ -145,6 +145,7 @@
                     <th class="text-center" scope="col">Bucket Trigger</th>
                     <th class="text-center" scope="col">Event Trigger</th>
                     <th class="text-center" scope="col">Status</th>
+                    <th class="text-center" scope="col">Acoes</th>
                 </tr>
             </thead>
             <tbody>
@@ -152,13 +153,14 @@
                     <tr>
                         <td class="text-center" scope="row">{{execution.job_id}}</td>
                         <td class="text-center" scope="row">{{execution.dth_start_at}}</td>
-                        <td class="text-center" scope="row">{{execution.dth_last_updated}}</td>
+                        <td class="text-center" scope="row">{{execution.dth_ended_at}}</td>
                         <td class="text-center" scope="row">{{execution.str_event_bucket_trigger}}</td>
                         <td class="text-center" scope="row">{{execution.str_event_key_trigger}}</td>
                         <td class="text-center" scope="row">{{execution.str_status}}</td>
+                        <td><a href="{{execution.detail_url}}"><button type="button" class="btn btn-light"><img src="{% static 'icons/pencil.svg' %}" width="20" height="20" alt="Card image"></button></a></td>
                     </tr>
                 {% empty %}
-                    <p>Não há colunas cadastradas.</p>
+                    <p>Não há execuções registradas.</p>
                 {% endfor %}
             </tbody>
         </table> 
