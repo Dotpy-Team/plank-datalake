@@ -21,5 +21,5 @@ class JobRun(models.Model):
     str_event_key_trigger = models.CharField(max_length=100, null=True, blank=True)
     str_unique_execution_id = models.CharField(max_length=100,null=True, blank=True)
     str_jr_ingestion_id = models.CharField(max_length=100, null=True, blank=True)
-    str_context_id = models.CharField(max_length=100, null=True, blank=True)
+    str_jr_context_id = models.CharField(max_length=100, null=True, blank=True)
 
