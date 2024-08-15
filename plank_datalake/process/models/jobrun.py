@@ -7,15 +7,15 @@ class JobRun(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     table = models.ForeignKey(Tables, on_delete=models.CASCADE)
     dth_start_at = models.DateTimeField()
-    dth_ended_at = models.DateTimeField()
+    dth_ended_at = models.DateTimeField(null=True, blank=True)
     str_status = models.CharField(
         max_length=20, choices=[
             ('RUNNING', 'RUNNING'),
             ('FAILED', 'FAILED'),
             ('SUCCEEDED', 'SUCCEEDED')
         ],
-        null=True, 
-        blank=True
+        null=False,
+        default='RUNNING'
     )
     str_event_bucket_trigger = models.CharField(max_length=100, null=True, blank=True)
     str_event_key_trigger = models.CharField(max_length=100, null=True, blank=True)

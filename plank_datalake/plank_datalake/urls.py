@@ -150,7 +150,9 @@ urlpatterns = [
 
     #JOB EXECUTION API: 
     path('get-job/<str:table_id>', p.get_job, name="get_job_api"),
-    path('post-job/<str:table_id>', p.post_job, name="post_job_api"), 
+    path('create-new-execution/<str:table_id>', p.create_new_execution, name="create_new_execution"), 
+    path('update-execution/<str:job_id>', p.update_execution, name="update_execution"), 
+    path('finish-execution/<str:job_id>', p.finish_execution, name="finish_execution"), 
 
     #LOG API:
     path('post-log/<str:job_id>', p.post_log, name="post_log"), 
