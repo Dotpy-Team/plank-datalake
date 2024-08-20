@@ -155,7 +155,7 @@ urlpatterns = [
     path('finish-execution/<str:job_id>', p.finish_execution, name="finish_execution"), 
 
     #LOG API:
-    path('post-log/<str:job_id>', p.post_log, name="post_log"), 
+    path('new-log-execution/<str:job_id>', p.new_log_execution, name="new_log_execution"), 
     
     #CUSTOMER API: 
     path('customer-post/', b.post_customer, name="post_customer"),

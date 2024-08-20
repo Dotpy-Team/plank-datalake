@@ -75,8 +75,11 @@ def finish_execution(request, job_id):
 
 
 @api_view(["POST"])
-def post_log(request, job_id):
+def new_log_execution(request, job_id):
     response = request.data
+
+    now = datetime.now()
+    response['dth_event_at'] = now.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] + ' -0300'
 
     try:
         job = JobRun.objects.get(job_id=job_id)
