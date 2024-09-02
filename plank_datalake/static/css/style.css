@@ -3,6 +3,9 @@ body {
     font-family: "Kanit", sans-serif;
     font-weight: 300;
     font-style: normal;
+    transform: scale(0.8); /* Ajuste a escala conforme necessário, como 0.9 para 90% */
+    transform-origin: 0 0; /* Mantém a origem do zoom no canto superior esquerdo */
+    width: 125%; /* 100% dividido pela escala aplicada (0.9) */
 }
 
 h1, h2, h3, h4, h5, h6 {

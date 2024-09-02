@@ -1,7 +1,13 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<iframe width="1000" height="2500" src="https://lookerstudio.google.com/embed/reporting/1zixIQUuxgKQwPa8L2x4fSTvn677qrotc/page/eC8J" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+{% comment %} <iframe width="1000" height="2500" src="https://lookerstudio.google.com/embed/reporting/1zixIQUuxgKQwPa8L2x4fSTvn677qrotc/page/eC8J" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe> {% endcomment %}
+<h1>Dashboard</h1>
+<canvas id="myChart" width="100" height="50"></canvas>
+
+<!-- Inclua o arquivo JavaScript -->
+<script src="{% static 'js/charts.js' %}"></script>
 
 {% endblock %}
