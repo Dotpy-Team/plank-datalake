@@ -8,3 +8,4 @@ from .pipelineform import PipelineForm
 from .stepform import StepForm
 from .triggerform import TriggerForm
 from .systemform import *
+from .dashboardform import *

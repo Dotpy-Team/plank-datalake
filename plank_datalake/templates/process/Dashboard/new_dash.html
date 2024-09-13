@@ -1,0 +1,66 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+
+        <div class="row mt-2">
+            <h4 class='text-primary'>Adicionar novo Dashboard</h4>
+        </div>
+
+        <form method="post" class="form">
+
+            {% csrf_token %}
+
+            <small><p>Titulo.</p></small>
+            {{ form.str_title }}
+            {% if form.str_title.errors %}
+                <div class="text-danger">
+                    {{ form.str_title.errors }}
+                </div>
+            {% endif %}
+            
+            <div class='row'>
+                <div class='col'>
+                    {% if form.raci_activity.errors %}
+                        <div class="text-danger">
+                            {{ form.raci_activity.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class='col'>
+
+                    {% if form.str_title.errors %}
+                        <div class="text-danger">
+                            {{ form.str_title.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <small><p>Descrição.</p></small>
+            {{ form.str_desc }}
+            {% if form.str_desc.errors %}
+                <div class="text-danger">
+                    {{ form.str_desc.errors }}
+                </div>
+            {% endif %}
+
+            <div class="col" style="text-align: right;">
+                <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+{% endblock %}

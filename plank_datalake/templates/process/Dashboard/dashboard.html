@@ -1,13 +1,109 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block content %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+
+<link rel="stylesheet" href="{% static 'css/charts.css' %}">
+
+<!-- Inclua as bibliotecas necessárias -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@interactjs/interactjs/dist/interact.min.js"></script>
 
-{% comment %} <iframe width="1000" height="2500" src="https://lookerstudio.google.com/embed/reporting/1zixIQUuxgKQwPa8L2x4fSTvn677qrotc/page/eC8J" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe> {% endcomment %}
-<h1>Dashboard</h1>
-<canvas id="myChart" width="100" height="50"></canvas>
-
-<!-- Inclua o arquivo JavaScript -->
+<!-- Inclua seu script customizado -->
 <script src="{% static 'js/charts.js' %}"></script>
+
+<div id="slide" style="position: relative; width: 100%; height: 100%; display: grid; grid-template-rows: repeat(2, 1fr); grid-template-columns: repeat(2, 1fr); gap: 10px;">
+    <div class="resize-drag" id="item1" style="background-color: #ebf3fc; display: flex; justify-content: center; align-items: center;">
+        <canvas id="chart1"></canvas>
+    </div>
+    <div class="resize-drag" id="item2" style="background-color: #ebf3fc; display: flex; justify-content: center; align-items: center;">
+        <canvas id="chart2"></canvas>
+    </div>
+    <div class="resize-drag" id="item3" style="background-color: #ebf3fc; display: flex; justify-content: center; align-items: center;">
+        <canvas id="chart3"></canvas>
+    </div>
+    <div class="resize-drag" id="item4" style="background-color: #ebf3fc; display: flex; justify-content: center; align-items: center;">
+        <canvas id="chart4"></canvas>
+    </div>
+</div>
+
+<!-- Script para inicializar os gráficos e aplicar Interact.js -->
+<script>
+  // Função para inicializar gráficos
+  function initializeChart(ctx, label) {
+    return new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: label,
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      }
+    });
+  }
+
+  // Inicializando gráficos
+  initializeChart(document.getElementById('chart1').getContext('2d'), 'Dataset 1');
+  initializeChart(document.getElementById('chart2').getContext('2d'), 'Dataset 2');
+  initializeChart(document.getElementById('chart3').getContext('2d'), 'Dataset 3');
+  initializeChart(document.getElementById('chart4').getContext('2d'), 'Dataset 4');
+
+  // Aplicando Interact.js para arrastar e redimensionar
+  interact('.resize-drag')
+    .draggable({
+      onmove: dragMoveListener,
+    })
+    .resizable({
+      edges: { left: true, right: true, bottom: true, top: true },
+      listeners: {
+        move(event) {
+          let { x, y } = event.target.dataset;
+
+          x = (parseFloat(x) || 0) + event.deltaRect.left;
+          y = (parseFloat(y) || 0) + event.deltaRect.top;
+
+          Object.assign(event.target.style, {
+            width: `${event.rect.width}px`,
+            height: `${event.rect.height}px`,
+            transform: `translate(${x}px, ${y}px)`,
+          });
+
+          Object.assign(event.target.dataset, { x, y });
+        },
+      },
+      modifiers: [
+        interact.modifiers.restrictEdges({
+          outer: 'parent',
+        }),
+        interact.modifiers.restrictSize({
+          min: { width: 100, height: 50 },
+          max: { width: '100%', height: '100%' },
+        }),
+      ],
+      inertia: true,
+    });
+
+  function dragMoveListener(event) {
+    let { x, y } = event.target.dataset;
+
+    x = (parseFloat(x) || 0) + event.dx;
+    y = (parseFloat(y) || 0) + event.dy;
+
+    event.target.style.transform = `translate(${x}px, ${y}px)`;
+
+    Object.assign(event.target.dataset, { x, y });
+  }
+</script>
 
 {% endblock %}

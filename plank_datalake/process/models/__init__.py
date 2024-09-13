@@ -9,3 +9,4 @@ from .trigger import Trigger
 from .logrequest import LogRequest
 from .dataset import DataSet
 from .system import System
+from .dashboard import Dashboard

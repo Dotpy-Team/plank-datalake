@@ -1,0 +1,94 @@
+/* Container de slides */
+#slide {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px; /* Espaço entre os gráficos */
+    width: 100%;
+    height: 100%;
+}
+
+/* Container individual para cada gráfico */
+.resize-drag {
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o canvas, garantindo que se ajuste ao container */
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Container para os gráficos */
+.charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaço entre os gráficos */
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px; /* Define uma largura máxima para o container dos gráficos */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Container individual para cada gráfico */
+.chart-container {
+    width: 300px; /* Largura fixa do gráfico */
+    height: 300px; /* Altura fixa do gráfico */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total */
+    background-color: #f9f9f9; /* Cor de fundo para destaque */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ocultar slides não visíveis */
+.slide.hidden {
+    display: none; /* Usar display:none para garantir que os slides não visíveis não ocupem espaço */
+}
+
+/* Estilo do cabeçalho */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.header h1 {
+    margin: 0;
+    color: #333;
+    font-size: 2rem; /* Tamanho da fonte ajustado para o título */
+}
+
+.header p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* Estilo da navegação */
+.navigation {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.navigation button {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation button:hover {
+    background-color: #0056b3;
+}

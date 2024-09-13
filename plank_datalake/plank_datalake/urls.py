@@ -131,7 +131,10 @@ urlpatterns = [
     path('list-trigger/', p.list_trigger, name='list_trigger'),
 
     #mock dashboard
-    path('dashboard/', p.dashboard, name='dashboard'),
+    path('dashboard-teste/', p.dashboard, name='dashboard'),
+
+    path('dashboard/', p.list_dashboard, name='dashboard'),
+    path('add-dashboard/', p.add_dashboard, name='dashboard'),
 
     #TOKEN URLS: 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
