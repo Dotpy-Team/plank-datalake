@@ -3,6 +3,8 @@ from django.db import models
 
 class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
+    str_account_id = models.CharField(max_length=80, null=True, blank=True)
+    str_secret_key = models.CharField(max_length=80, null=True, blank=True)
     str_customer_type = models.CharField(
         max_length=20, choices=[
             ('Ativo', 'Ativo'),

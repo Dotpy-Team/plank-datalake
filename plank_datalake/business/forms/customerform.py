@@ -9,6 +9,7 @@ class CustomerForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
+
     str_cnpj = forms.CharField(
         label='CNPJ *',
         widget=forms.TextInput(attrs={'class': 'form-control','placeholder': '00.000.000/0001-00'}),
@@ -120,8 +121,14 @@ class CustomerForm(forms.ModelForm):
         required=True
     )
     
-    str_cod_aws_account = forms.CharField(
+    str_account_id = forms.CharField(
         label= "Código da conta AWS:",
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required= True
+    )
+
+    str_secret_key = forms.CharField(
+        label= "Secret Key",
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required= True
     )
@@ -144,5 +151,6 @@ class CustomerForm(forms.ModelForm):
             'str_finance_complement',
             'str_documents',
             'str_comments', 
-            'str_cod_aws_account'
+            'str_account_id',
+            'str_secret_key'
         ]

@@ -135,21 +135,20 @@
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                        {{ form.str_cod_aws_account }}
+                        {{ form.str_account_id }}
                         <small><p>Código da conta AWS.</p></small>
-                        {% if form.str_cod_aws_account.errors %}
+                        {% if form.str_account_id.errors %}
                             <div class="text-danger">
-                                {{ form.str_cod_aws_account.errors }}
+                                {{ form.str_account_id.errors }}
                             </div>
                         {% endif %}
                     </div>
-
-                    <div class='col'>
-                        {{ form.str_finance_complement }}
-                        <small><p>Complemento financeiro.</p></small>
-                        {% if form.str_finance_complement.errors %}
+                    <div class="col">
+                        {{ form.str_secret_key }}
+                        <small><p>Secret Key.</p></small>
+                        {% if form.str_secret_key.errors %}
                             <div class="text-danger">
-                                {{ form.str_finance_complement.errors }}
+                                {{ form.str_secret_key.errors }}
                             </div>
                         {% endif %}
                     </div>
@@ -158,20 +157,32 @@
                 <div class="row mt-2 justify-content-center">
 
                     <div class='col'>
+                        {{ form.str_finance_complement }}
+                        <small><p>Complemento Financeiro.</p></small>
+                        {% if form.str_finance_complement.errors %}
+                            <div class="text-danger">
+                                {{ form.str_finance_complement.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class='col'>
                         {{ form.str_contact }}
-                        <small><p>Outros contatos.</p></small>
+                        <small><p>Outros Contatos.</p></small>
                         {% if form.str_contact.errors %}
                             <div class="text-danger">
                                 {{ form.str_contact.errors }}
                             </div>
                         {% endif %}
                     </div>
-                    <div class='col'>
-                        {{ form.str_comments }}
-                        <small><p>Comentário.</p></small>
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_comments}}
+                        <small><p>Comentarios.</p></small>
                         {% if form.str_comments.errors %}
                             <div class="text-danger">
-                                {{ form.str_comments.errors }}
+                                {{ form.str_comments }}
                             </div>
                         {% endif %}
                     </div>

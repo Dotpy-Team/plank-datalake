@@ -34,6 +34,7 @@ class Tables(models.Model):
         blank=True
     )
 
+
     str_type_of = models.CharField(
         max_length=20, 
         choices=[
