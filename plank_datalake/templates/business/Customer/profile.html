@@ -45,14 +45,13 @@
     <div class='card-body'>
         <h4>Informações Básicas</h4>
 		<p><strong>CNPJ:</strong> {{customer.str_cnpj}}</p>
-        <p><strong>Código da conta AWS:</strong> {{customer.str_account_id}}</p>
+        <p><strong>AWS Account:</strong> {{customer.str_account_id}}</p>
         <p><strong>Secret Key:</strong> {{customer.str_secret_key}}</p>        
 		<p><strong>Telefone:</strong> {{customer.str_telefone}}</p>
 		<p><strong>E-mail:</strong> {{ customer.str_email }}</p>
 		<p><strong>Site:</strong> {{ customer.str_site }}</p>
 		<p><strong>Linkedin:</strong> {{ customer.str_linkedin_profile }}</p>
 		<p><strong>Setor:</strong> {{customer.get_str_setor_display}}</p>
-		<p><strong>AWS Account:</strong> {{ user.str_cod_aws_account }}</p>
 		<p><strong>Blaaaa:</strong> blaaaa</p>
 		<p><strong>Endereço:</strong> {{customer.str_address}} </p>
 		<button type="button" class="btn btn-primary">Editar</button>
