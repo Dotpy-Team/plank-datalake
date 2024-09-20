@@ -83,12 +83,16 @@
 
                 <div class="col-2">
                     <div class="mb-2">
-                        <p class="mb-1"><strong>Código AWS:</strong></p>
-                        <p class="mb-1">{{ customer.str_account_id }}</p>
+                        <p class="mb-1"><strong>AWS:</strong></p>
+                        <p class="mb-1">{{ customer.str_aws_account_id }}</p>
                     </div>
                     <div class="mb-2">
                         <p class="mb-1">Secret Key:</p>
-                        <p class="mb-1">{{ customer.str_secret_key }}</p>
+                        <p class="mb-1">{{ customer.str_aws_secret_ket }}</p>
+                    </div>
+                    <div class="mb-2">
+                        <p class="mb-1">Região:</p>
+                        <p class="mb-1">{{ customer.str_aws_region }}</p>
                     </div>
                 </div>
     

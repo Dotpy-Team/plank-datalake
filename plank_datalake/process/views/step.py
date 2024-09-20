@@ -9,7 +9,6 @@ from process.forms import StepForm, TablesStepForm
 import base64
 import json
 
-
 def crip(text):
     crip = base64.b64encode(text.encode()).decode()
     return crip
@@ -128,5 +127,4 @@ def list_step(request):
     }
 
     return render(request, html_location, response_dict)
-
 

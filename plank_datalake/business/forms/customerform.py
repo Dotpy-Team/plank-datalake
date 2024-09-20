@@ -121,15 +121,38 @@ class CustomerForm(forms.ModelForm):
         required=True
     )
     
-    str_account_id = forms.CharField(
+    str_aws_account_id = forms.CharField(
         label= "Código da conta AWS:",
         widget= forms.TextInput(attrs={'class': 'form-control'}),
         required= True
     )
 
-    str_secret_key = forms.CharField(
+    str_aws_secret_key = forms.CharField(
         label= "Secret Key",
         widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required= True
+    )
+
+    CHOICE_REGION = (
+        ('us-east-1', 'US East (N. Virginia)'),
+        ('us-east-2 ', 'US East (Ohio)'),
+        ('us-west-1', 'US West (N. California)'),
+        ('us-west-2', 'US West (Oregon)'),
+        ('ca-central-1', 'Canada (Central)'),
+        ('sa-east-1', 'South America (São Paulo)'),
+        ('eu-north-1 ', 'Europe (Stockholm)'),
+        ('eu-west-1', 'Europe (Ireland)'),
+        ('eu-west-2', 'Europe (London)'),
+        ('eu-west-3', 'Europe (Paris)'),
+        ('eu-central-1', 'Europe (Frankfurt)'),
+        ('eu-south-1', 'Europe (Milan)'),
+        ('eu-south-2', 'Europe (Spain)')
+    )
+
+    str_aws_region = forms.ChoiceField(
+        label="Região da Conta AWS",
+        choices= CHOICE_REGION,
+        widget= forms.Select(attrs={'class': 'form-select mt-1'}),
         required= True
     )
     
@@ -151,6 +174,7 @@ class CustomerForm(forms.ModelForm):
             'str_finance_complement',
             'str_documents',
             'str_comments', 
-            'str_account_id',
-            'str_secret_key'
+            'str_aws_account_id',
+            'str_aws_secret_key',
+            'str_aws_region'
         ]

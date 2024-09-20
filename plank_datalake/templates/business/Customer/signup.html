@@ -131,31 +131,48 @@
                     </div>
                 </div>
 
-                <h4>Outros.</h4>
+                <h4>Informações da conta AWS:</h4>
 
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
-                        {{ form.str_account_id }}
+                        {{ form.str_aws_account_id }}
                         <small><p>Código da conta AWS.</p></small>
-                        {% if form.str_account_id.errors %}
+                        {% if form.str_aws_account_id %}
                             <div class="text-danger">
-                                {{ form.str_account_id.errors }}
+                                {{ form.str_aws_account_id.errors }}
                             </div>
                         {% endif %}
                     </div>
+
                     <div class="col">
-                        {{ form.str_secret_key }}
-                        <small><p>Secret Key.</p></small>
-                        {% if form.str_secret_key.errors %}
+                        {{ form.str_aws_secret_key }}
+                        <small><p>Senha da conta AWS.</p></small>
+                        {% if form.str_aws_secret_key %}
                             <div class="text-danger">
-                                {{ form.str_secret_key.errors }}
+                                {{ form.str_aws_secret_key.errors }}
                             </div>
                         {% endif %}
                     </div>
                 </div>
 
                 <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        {{ form.str_aws_region }}
+                        <small><p>Região.</p></small>
+                        {% if form.str_aws_region %}
+                            <div class="text-danger">
+                                {{ form.str_aws_region.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col">
 
+                    </div>
+                </div>
+
+                <h4>Outros.</h4>
+
+                <div class="row mt-2 justify-content-center">
                     <div class='col'>
                         {{ form.str_finance_complement }}
                         <small><p>Complemento Financeiro.</p></small>
@@ -182,7 +199,7 @@
                         <small><p>Comentarios.</p></small>
                         {% if form.str_comments.errors %}
                             <div class="text-danger">
-                                {{ form.str_comments }}
+                                {{ form.str_comments.errors }}
                             </div>
                         {% endif %}
                     </div>
