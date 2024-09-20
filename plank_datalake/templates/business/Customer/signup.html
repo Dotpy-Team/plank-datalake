@@ -156,14 +156,17 @@
                 </div>
 
                 <div class="row mt-2 justify-content-center">
-                    <div class="col mb-5">
+                    <div class="col">
                         {{ form.str_aws_region }}
                         <small><p>Região.</p></small>
                         {% if form.str_aws_region %}
                             <div class="text-danger">
-                                {{ form;str_aws_region.errors }}
+                                {{ form.str_aws_region.errors }}
                             </div>
                         {% endif %}
+                    </div>
+                    <div class="col">
+
                     </div>
                 </div>
 
