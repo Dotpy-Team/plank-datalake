@@ -8,8 +8,6 @@ from business.models import Customer
 from process.forms import StepForm, TablesStepForm
 import base64
 import json
-import boto3
-
 
 def crip(text):
     crip = base64.b64encode(text.encode()).decode()
