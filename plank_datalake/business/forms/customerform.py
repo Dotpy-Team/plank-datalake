@@ -152,7 +152,7 @@ class CustomerForm(forms.ModelForm):
     str_aws_region = forms.ChoiceField(
         label="Região da Conta AWS",
         choices= CHOICE_REGION,
-        widget= forms.Select(attrs={'class': 'form-select mt-1'})
+        widget= forms.Select(attrs={'class': 'form-select mt-1'}),
         required= True
     )
     
