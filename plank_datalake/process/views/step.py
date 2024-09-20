@@ -8,6 +8,7 @@ from business.models import Customer
 from process.forms import StepForm, TablesStepForm
 import base64
 import json
+import boto3
 
 
 def crip(text):
@@ -128,5 +129,4 @@ def list_step(request):
     }
 
     return render(request, html_location, response_dict)
-
 
