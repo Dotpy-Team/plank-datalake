@@ -1,38 +1,90 @@
 {% load static %}
 
-<nav class="static-sidebar">
-  <ul class="static-itens">
-    <li>
-      <a href="/" class='mt-4'><img src="{% static 'icons/house-door-fill.svg' %}" width="30" height="30" alt="Card image"></a>
-    </li>
+<nav id="sidebar">
+  <div id="sidebar_content">
+        <a href="{% url 'home_page' %}">
+          <img src="{% static 'images/logo_black_blue.png' %}" style="max-width: 50px;" alt="Card image">
+        </a>
 
-    <li>
-      <a href="/customer-profile/"><img src="{% static 'icons/buildings-fill.svg' %}" width="30" height="30" alt="Card image"></a>
-    </li>
+      <ul id="side_items">
+          <li class="side-item">
+              <a href="{% url 'home_page' %}">
+                  <img src="{% static 'images/icone01.png' %}" style="max-width: 50px;">
+                  <span class="item-description">
+                      Início
+                  </span>
+              </a>
+          </li>
 
-    <li>
-      <a href="/raci-list/"><img src="{% static 'icons/layers-fill.svg' %}" width="30" height="30" alt="Card image"></a>
-    </li>
+          <li class="side-item">
+            <a href="{% url 'home_page' %}">
+              <img src="{% static 'images/icone02.png' %}" style="max-width: 50px;" alt="inicio">
+              <span class="item-description">
+                  Perfil da Empresa
+              </span>
+            </a>
+          </li>
 
-    <li>
-      <a href="/systems/"><img src="{% static 'icons/layout-text-window.svg' %}" width="30" height="30" alt="Card image"></a>
-    </li>
+          <li class="side-item">
+            <a href="{% url 'home_page' %}">
+              <img src="{% static 'images/icone03.png' %}" style="max-width: 50px;" alt="inicio">
+              <span class="item-description">
+                  Processos e Envolvidos
+              </span>
+            </a>
+          </li>
 
-    <li>
-      <a href="/search-tables/"><img src="{% static 'icons/border-outer.svg' %}" width="30" height="30" alt="Card image"></a>
-    </li>
+          <li class="side-item">
+            <a href="{% url 'home_page' %}">
+              <img src="{% static 'images/icone04.png' %}" style="max-width: 50px;" alt="inicio">
+              <span class="item-description">
+                 Sistemas
+              </span>
+            </a>
+          </li>
 
-    <li>
-      <a href="/list-pipeline/"><img src="{% static 'icons/bezier.svg' %}" width="30" height="30" alt="Card image"></a>
-    </li>
+          <li class="side-item">
+            <a href="{% url 'home_page' %}">
+              <img src="{% static 'images/icone05.png' %}" style="max-width: 50px;" alt="inicio">
+              <span class="item-description">
+                  Tabelas
+              </span>
+            </a>
+          </li>
 
-    <li>
-      <a href="/dashboard/"><img src="{% static 'icons/clipboard-data-fill.svg' %}" width="30" height="30" alt="Card image"></a>
-    </li>
-  </ul>
-  <form action="{% url 'user_logout'%}" method="post">
-    {% csrf_token %}
-      <button type="submit" class="btn btn-danger" value="logout">Sair</button>
+          <li class="side-item">
+            <a href="{% url 'home_page' %}">
+              <img src="{% static 'images/icone06.png' %}" style="max-width: 50px;" alt="inicio">
+              <span class="item-description">
+                  Transformações
+              </span>
+            </a>
+          </li>
+
+          <li class="side-item">
+            <a href="{% url 'home_page' %}">
+              <img src="{% static 'images/icone07.png' %}" style="max-width: 50px;" alt="inicio">
+              <span class="item-description">
+                  Dashboards
+              </span>
+            </a>
+          </li>
+      </ul>
+
+      <div class="open_btn_div">
+      <button id="open_btn">
+        <img src="{% static 'images/Vector.png' %}" style="max-width: 100px;" alt="inicio">
       </button>
-  </form>
+      </div>
+  </div>
+
+  <div id="logout">
+      <button id="logout_btn">
+        <img src="{% static 'images/sair.png' %}" style="max-width: 50px;" alt="inicio">
+          <span class="item-description">
+              Logout
+          </span>
+      </button>
+  </div>
 </nav>
+<script src="src/javascript/script.js"></script>

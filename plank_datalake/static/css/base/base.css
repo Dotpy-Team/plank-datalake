@@ -29,11 +29,8 @@ a, a:hover, a:focus {
 }
 
 .container-fluid {
-  background: #fff;
-  border: 1px solid #ccc; /* Define a cor e a espessura da borda */
-  border-radius: 15px; /* Arredonda os cantos da borda */
+  background: #F7F7F7;
   padding: 20px; /* Adiciona preenchimento interno */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
   transition: margin-left 0.3s; /* Transição suave para o conteúdo */
 }
 
@@ -45,7 +42,7 @@ a, a:hover, a:focus {
 
 #content {
   width: 100%;
-  padding: 0px 10px 20px 10px;
+  padding: 0px 0px 0px 0px;
   min-height: 100vh;
   transition: all 0.3s;
 }

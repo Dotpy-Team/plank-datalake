@@ -1,11 +1,7 @@
 {% load static %}
 
 <nav class="navbar">
-    <a href="{% url 'home_page' %}">
-        <img src="{% static 'images/logo_black_blue.png' %}" style="max-width: 50px;" alt="Card image">
-    </a>            
-
-    <div class="right-header">
+     <div class="right-header">
         <div class="interrogation">
             <a href="{% url 'home_page' %}">
                     <img src="{% static 'images/question-mark.png' %}" alt="interrogation-img">
@@ -29,7 +25,3 @@
         </div>
     </div>
 </nav>
-
-<button type="button" id="sidebarCollapse" class="btn btn-outline-primary">
-    <img src="{% static 'icons/arrow-left-right.svg' %}" width="20" height="20" alt="Card image">                    
-</button>
