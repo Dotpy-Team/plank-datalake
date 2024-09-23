@@ -1,0 +1,38 @@
+{% load static %}
+
+<nav class="static-sidebar">
+  <ul class="static-itens">
+    <li>
+      <a href="/" class='mt-4'><img src="{% static 'icons/house-door-fill.svg' %}" width="30" height="30" alt="Card image"></a>
+    </li>
+
+    <li>
+      <a href="/customer-profile/"><img src="{% static 'icons/buildings-fill.svg' %}" width="30" height="30" alt="Card image"></a>
+    </li>
+
+    <li>
+      <a href="/raci-list/"><img src="{% static 'icons/layers-fill.svg' %}" width="30" height="30" alt="Card image"></a>
+    </li>
+
+    <li>
+      <a href="/systems/"><img src="{% static 'icons/layout-text-window.svg' %}" width="30" height="30" alt="Card image"></a>
+    </li>
+
+    <li>
+      <a href="/search-tables/"><img src="{% static 'icons/border-outer.svg' %}" width="30" height="30" alt="Card image"></a>
+    </li>
+
+    <li>
+      <a href="/list-pipeline/"><img src="{% static 'icons/bezier.svg' %}" width="30" height="30" alt="Card image"></a>
+    </li>
+
+    <li>
+      <a href="/dashboard/"><img src="{% static 'icons/clipboard-data-fill.svg' %}" width="30" height="30" alt="Card image"></a>
+    </li>
+  </ul>
+  <form action="{% url 'user_logout'%}" method="post">
+    {% csrf_token %}
+      <button type="submit" class="btn btn-danger" value="logout">Sair</button>
+      </button>
+  </form>
+</nav>

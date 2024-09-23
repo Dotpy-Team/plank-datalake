@@ -1,0 +1,9 @@
+.static-sidebar {
+  justify-content: space-between;
+  background-color: #fff;
+  height: 1000px;
+}
+
+.static-itens {
+  list-style-type: none;
+}
