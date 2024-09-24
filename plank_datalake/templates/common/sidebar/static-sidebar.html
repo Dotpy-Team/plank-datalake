@@ -7,6 +7,10 @@
         </a>
 
       <ul id="side_items">
+
+          <button class="search-button">
+            <img src="{% static 'images/lupa.png' %}" alt="Lupa">
+          </button>
           <li class="side-item">
               <a href="{% url 'home_page' %}">
                   <img src="{% static 'images/icone01.png' %}" style="max-width: 50px;">
@@ -71,20 +75,19 @@
           </li>
       </ul>
 
-      <div class="open_btn_div">
       <button id="open_btn">
         <img src="{% static 'images/Vector.png' %}" style="max-width: 100px;" alt="inicio">
       </button>
-      </div>
   </div>
 
   <div id="logout">
-      <button id="logout_btn">
-        <img src="{% static 'images/sair.png' %}" style="max-width: 50px;" alt="inicio">
-          <span class="item-description">
-              Logout
-          </span>
-      </button>
-  </div>
+    <button id="logout_btn">
+      <img src="{% static 'images/sair.png' %}" style="max-width: 50px;" alt="inicio">
+        <span class="item-description">
+            Logout
+        </span>
+    </button>
+</div>
+
 </nav>
 <script src="src/javascript/script.js"></script>
