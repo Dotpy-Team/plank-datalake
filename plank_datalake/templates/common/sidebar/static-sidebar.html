@@ -21,7 +21,7 @@
           </li>
 
           <li class="side-item">
-            <a href="{% url 'home_page' %}">
+            <a href="{% url 'profile_customer' %}">
               <img src="{% static 'images/icone02.png' %}" style="max-width: 50px;" alt="inicio">
               <span class="item-description">
                   Perfil da Empresa
@@ -30,7 +30,7 @@
           </li>
 
           <li class="side-item">
-            <a href="{% url 'home_page' %}">
+            <a href="{% url 'list_activities' %}">
               <img src="{% static 'images/icone03.png' %}" style="max-width: 50px;" alt="inicio">
               <span class="item-description">
                   Processos e Envolvidos
@@ -39,7 +39,7 @@
           </li>
 
           <li class="side-item">
-            <a href="{% url 'home_page' %}">
+            <a href="{% url 'list_system' %}">
               <img src="{% static 'images/icone04.png' %}" style="max-width: 50px;" alt="inicio">
               <span class="item-description">
                  Sistemas
@@ -48,7 +48,7 @@
           </li>
 
           <li class="side-item">
-            <a href="{% url 'home_page' %}">
+            <a href="{% url 'view_tables' %}">
               <img src="{% static 'images/icone05.png' %}" style="max-width: 50px;" alt="inicio">
               <span class="item-description">
                   Tabelas
@@ -57,7 +57,7 @@
           </li>
 
           <li class="side-item">
-            <a href="{% url 'home_page' %}">
+            <a href="{% url 'list_pipeline' %}">
               <img src="{% static 'images/icone06.png' %}" style="max-width: 50px;" alt="inicio">
               <span class="item-description">
                   Transformações
@@ -66,7 +66,7 @@
           </li>
 
           <li class="side-item">
-            <a href="{% url 'home_page' %}">
+            <a href="{% url 'dashboard_teste' %}">
               <img src="{% static 'images/icone07.png' %}" style="max-width: 50px;" alt="inicio">
               <span class="item-description">
                   Dashboards
@@ -86,7 +86,14 @@
         <span class="item-description">
             Logout
         </span>
-    </button>
+    </button> 
+
+    <form action="{% url 'user_logout'%}" method="post">
+      {% csrf_token %}
+          <button type="submit" class="btn btn-danger" value="logout">Sair</button>
+          </button>
+    </form>
+      
 </div>
 
 </nav>
