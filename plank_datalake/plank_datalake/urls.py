@@ -164,4 +164,7 @@ urlpatterns = [
     path('customer-post/', b.post_customer, name="post_customer"),
     path('api-list-customer/', b.list_customer_api, name="list_customer_api"),
     path('get-customer-cnpj/<str:str_cnpj>', b.get_customer_by_cnpj, name="customer_by_cnpj"),
+
+    #STEP API:
+    path('step-query-execution/<str:step_id>', p.execute_query, name="query-execution"),
 ]

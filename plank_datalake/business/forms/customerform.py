@@ -175,6 +175,7 @@ class CustomerForm(forms.ModelForm):
             'str_documents',
             'str_comments', 
             'str_aws_account_id',
+            'str_aws_access_key_id',
             'str_aws_secret_key',
             'str_aws_region'
         ]

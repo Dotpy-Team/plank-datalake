@@ -136,7 +136,7 @@
                 <div class="row mt-2 justify-content-center">
                     <div class="col">
                         {{ form.str_aws_account_id }}
-                        <small><p>Código da conta AWS.</p></small>
+                        <small><p>ID conta AWS.</p></small>
                         {% if form.str_aws_account_id %}
                             <div class="text-danger">
                                 {{ form.str_aws_account_id.errors }}
@@ -144,6 +144,18 @@
                         {% endif %}
                     </div>
 
+                    <div class="col">
+                        {{ form.str_aws_access_key_id }}
+                        <small><p>Chave de acesso AWS.</p></small>
+                        {% if form.str_aws_access_key_id %}
+                            <div class="text-danger">
+                                {{ form.str_aws_access_key_id.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mt-2 justify-content-center">
                     <div class="col">
                         {{ form.str_aws_secret_key }}
                         <small><p>Senha da conta AWS.</p></small>
@@ -153,9 +165,6 @@
                             </div>
                         {% endif %}
                     </div>
-                </div>
-
-                <div class="row mt-2 justify-content-center">
                     <div class="col">
                         {{ form.str_aws_region }}
                         <small><p>Região.</p></small>

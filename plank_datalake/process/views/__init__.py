@@ -12,3 +12,4 @@ from .columns_api import *
 from .dataset import *
 from .system import *
 from .dashboard import *
+from .athena_aws import *

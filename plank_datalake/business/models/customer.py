@@ -4,9 +4,11 @@ from django.db import models
 class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
     str_aws_account_id = models.CharField(max_length=25, null=True, blank=True)
+    str_aws_access_key_id = models.CharField(max_length=50, null=True, blank=True)
     str_aws_secret_key = models.CharField(max_length=80, null=True, blank=True)
     str_aws_region = models.CharField(
-        max_length=30, 
+        max_length=30,
+        default= 'us-east-1',
         choices=[
             ('us-east-1', 'US East (N. Virginia)'),
             ('us-east-2 ', 'US East (Ohio)'),
