@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from business.models import Customer
 from business.serializers import CustomerSerializer
-from process.models import Step
+from process.models import Step, JobRun
 from process.serializers import StepSerializer
 import json
 from datetime import datetime
@@ -27,8 +27,8 @@ def execute_query(request, step_id):
 
     try:
         customer= Customer.objects.get(customer_id=customer_id)
-        aws_account_id = '121253776145'
-        aws_platform_acess_key_id = customer.str_aws_account_id
+        aws_account_id = customer.str_aws_account_id
+        aws_platform_acess_key_id = customer.str_aws_access_key_id
         aws_platform_secret_acess_key = customer.str_aws_secret_key
         aws_platform_region = customer.str_aws_region
     except Customer.DoesNotExist:
@@ -51,7 +51,17 @@ def execute_query(request, step_id):
     )
 
     query_execution_id = response['QueryExecutionId']
-    query_log = print(query_execution_id)
+
+    now = datetime.now()
+    dth_start_at = now.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] + ' -0300'
     
-    return Response(api_response)
-    
+    job_run = JobRun(
+        customer = customer,
+        step = step,
+        dth_start_at = dth_start_at,
+        str_athena_execution_id = query_execution_id
+    )
+
+    job_run.save()
+
+    return Response(response)
