@@ -155,7 +155,8 @@ urlpatterns = [
     path('get-job/<str:table_id>', p.get_job, name="get_job_api"),
     path('create-new-execution/<str:table_id>', p.create_new_execution, name="create_new_execution"), 
     path('update-execution/<str:job_id>', p.update_execution, name="update_execution"), 
-    path('finish-execution/<str:job_id>', p.finish_execution, name="finish_execution"), 
+    path('finish-execution/<str:job_id>', p.finish_execution, name="finish_execution"),
+    path('update_jorun/<str:job_id>', p.update_jorun_athena, name="update_jobrun_athena"), 
 
     #LOG API:
     path('new-log-execution/<str:job_id>', p.new_log_execution, name="new_log_execution"), 

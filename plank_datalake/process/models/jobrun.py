@@ -12,9 +12,11 @@ class JobRun(models.Model):
     dth_ended_at = models.DateTimeField(null=True, blank=True)
     str_status = models.CharField(
         max_length=20, choices=[
+            ('QUEUED', 'QUEUED'),
             ('RUNNING', 'RUNNING'),
             ('FAILED', 'FAILED'),
-            ('SUCCEEDED', 'SUCCEEDED')
+            ('SUCCEEDED', 'SUCCEEDED'),
+            ('CANCELLED', 'CANCELLED')
         ],
         null=False,
         default='RUNNING'
