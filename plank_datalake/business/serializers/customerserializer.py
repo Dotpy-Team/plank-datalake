@@ -23,5 +23,8 @@ class CustomerSerializer(serializers.ModelSerializer):
             "str_finance_complement",
             "str_documents",
             "str_comments",
-            "cod_aws_account"
+            'str_aws_account_id',
+            'str_aws_access_key_id',
+            'str_aws_secret_key',
+            'str_aws_region'
         ]

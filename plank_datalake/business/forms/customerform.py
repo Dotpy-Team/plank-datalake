@@ -127,6 +127,12 @@ class CustomerForm(forms.ModelForm):
         required= True
     )
 
+    str_aws_access_key_id = forms.CharField(
+        label='Chave de Acesso AWS.',
+        widget=forms.TextInput(attrs={'class': 'form-contrl'}),
+        required= True
+    )
+
     str_aws_secret_key = forms.CharField(
         label= "Secret Key",
         widget= forms.TextInput(attrs={'class': 'form-control'}),
@@ -175,6 +181,7 @@ class CustomerForm(forms.ModelForm):
             'str_documents',
             'str_comments', 
             'str_aws_account_id',
+            'str_aws_access_key_id',
             'str_aws_secret_key',
             'str_aws_region'
         ]

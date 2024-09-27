@@ -131,7 +131,7 @@ urlpatterns = [
     path('list-trigger/', p.list_trigger, name='list_trigger'),
 
     #mock dashboard
-    path('dashboard-teste/', p.dashboard, name='dashboard'),
+    path('dashboard-teste/', p.dashboard, name='dashboard_teste'),
 
     path('dashboard/', p.list_dashboard, name='dashboard'),
     path('add-dashboard/', p.add_dashboard, name='dashboard'),
@@ -155,7 +155,8 @@ urlpatterns = [
     path('get-job/<str:table_id>', p.get_job, name="get_job_api"),
     path('create-new-execution/<str:table_id>', p.create_new_execution, name="create_new_execution"), 
     path('update-execution/<str:job_id>', p.update_execution, name="update_execution"), 
-    path('finish-execution/<str:job_id>', p.finish_execution, name="finish_execution"), 
+    path('finish-execution/<str:job_id>', p.finish_execution, name="finish_execution"),
+    path('update_jorun/<str:job_id>', p.update_jorun_athena, name="update_jobrun_athena"), 
 
     #LOG API:
     path('new-log-execution/<str:job_id>', p.new_log_execution, name="new_log_execution"), 
@@ -164,4 +165,7 @@ urlpatterns = [
     path('customer-post/', b.post_customer, name="post_customer"),
     path('api-list-customer/', b.list_customer_api, name="list_customer_api"),
     path('get-customer-cnpj/<str:str_cnpj>', b.get_customer_by_cnpj, name="customer_by_cnpj"),
+
+    #STEP API:
+    path('step-query-execution/<str:step_id>', p.execute_query, name="query-execution"),
 ]
