@@ -3,11 +3,15 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: var(--bg02);
   position: relative;
-  transition: all .2s;
+  transition: width 0.5s ease-in-out, min-width 0.5s ease-in-out;
   min-width: 100px;
   z-index: 2;
+}
+
+#sidebar .logotipo {
+  margin-block-end: 10px ;
 }
 
 #sidebar_content {
@@ -15,10 +19,6 @@
   flex-direction: column;
   align-items: center;
   padding: 12px;
-}
-
-#sidebar_content img {
-  margin: 0 auto;
 }
 
 .search-button {
@@ -32,7 +32,19 @@
   padding: 10px 14px 10px 14px;
   opacity: 1px;
   cursor: pointer;
-  transition: width 0.3s, opacity 0.3s;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+  margin-block: 10px;
+}
+
+.search-content {
+  display: flex;
+  align-items: center;
+
+}
+
+.search-button img {
+  transition: transform 0.3s ease-in-out;
 }
 
 .search-text {
@@ -49,6 +61,8 @@
   font-size: 14px;
   padding: 5px;
   margin-left: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .search-input::placeholder {
@@ -61,11 +75,16 @@
   display: flex;
   align-items: center;
   width: 220px;
+  padding: 3px;
+}
+.search-button.expanded img {
+  transform: translateX(10px);
 }
 
 .search-button.expanded .search-input {
   display: inline;
   background-color: #f0f0f0;
+  opacity: 1;
 }
 
 #side_items {
@@ -83,13 +102,12 @@
   cursor: pointer;
 }
 
-.side-item:hover:not(.active),
-#logout_btn:hover {
-  background-color: #0500FF;
+.side-item:hover:not(.active) {
+  background-color: var(--principal-color);
 }
 
 #logout_btn:hover {
-  background-color: red;
+  background-color: var(--cores-de-apoio01);
 }
 
 .side-item a {
@@ -102,6 +120,10 @@
 
 .side-item.active a {
   color: #e3e9f7;
+}
+
+.side-item:hover:not(.active) .item-description {
+  color: var(--bg02);
 }
 
 .side-item a i {
@@ -128,6 +150,10 @@
   text-align: start;
   cursor: pointer;
   background-color: transparent;
+}
+
+#logout_btn img {
+  margin-inline-start: 20px;
 }
 
 #open_btn {
@@ -165,18 +191,33 @@
 }
 
 .item-description {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: #454F62;
   width: 0px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 14px;
   transition: width .6s;
   height: 0px;
 }
 
 #sidebar.open-sidebar {
-  min-width: 15%;
   width: 277px;
+}
+
+#sidebar.open-sidebar .logotipo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+#sidebar.open-sidebar .logotipo img {
+  margin-left: 14px;
 }
 
 #sidebar.open-sidebar .item-description {

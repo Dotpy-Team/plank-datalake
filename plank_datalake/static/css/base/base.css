@@ -4,11 +4,33 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg01: #F7F7F7 ;
+  --bg02: #FFFFFF;
+  --principal-color: #0500FF;
+  --desabilitado-color: #466BFF;
+  --hover-color: #0300A8;
+  --titulos-color: #111827;
+  --textos-gerais-color: #101828;
+  --textos-place-holder: #667085;
+  --icones: #3A3C40;
+  --cinza01: #4B5563;
+  --cinza02: #6B7280;
+  --cinza03: #9CA3B0;
+  --cinza04: #BEC3CD;
+  --cinza05: #E3E3E3;
+  --cinza06: #F2F2F2;
+  --cores-de-apoio01: #FB645A;
+  --cores-de-apoio02: #027A48;
+  --cores-de-apoio03: #FABD44;
+
+  --font-family: 'Inter', 'sans-serif';
+  --text: 400 14px/100% var(--font-family);
+}
+
 body {
-  background-color: #F5F8FF;
-  font-family: "Kanit", sans-serif;
-  font-weight: 300;
-  font-style: normal;
+  background-color: var(--bg01);
+  font: var(--text);
   transform: scale(0.8); /* Ajuste a escala conforme necessário, como 0.9 para 90% */
   transform-origin: 0 0; /* Mantém a origem do zoom no canto superior esquerdo */
   width: 125%; /* 100% dividido pela escala aplicada (0.9) */
@@ -48,7 +70,7 @@ a, a:hover, a:focus {
 }
 
 .container-fluid {
-  background: #F7F7F7;
+  background: var(--bg01);
   padding: 20px; /* Adiciona preenchimento interno */
   transition: margin-left 0.3s; /* Transição suave para o conteúdo */
 }
