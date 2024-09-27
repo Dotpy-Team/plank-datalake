@@ -88,6 +88,10 @@
   background-color: #0500FF;
 }
 
+#logout_btn:hover {
+  background-color: red;
+}
+
 .side-item a {
   text-decoration: none;
   display: flex;

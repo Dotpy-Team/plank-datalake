@@ -1,6 +1,7 @@
 {% load static %}
 
 <nav id="sidebar">
+
   <div id="sidebar_content">
         <a href="{% url 'home_page' %}">
           <img src="{% static 'images/logo_black_blue.png' %}" style="max-width: 50px;" alt="Card image">
@@ -83,23 +84,20 @@
       <button id="open_btn">
         <img src="{% static 'images/Vector.png' %}" style="max-width: 100px;" alt="inicio">
       </button>
+
   </div>
 
   <div id="logout">
-    <button id="logout_btn">
-      <img src="{% static 'images/sair.png' %}" style="max-width: 50px;" alt="inicio">
-        <span class="item-description">
-            Logout
-        </span>
-    </button> 
-
     <form action="{% url 'user_logout'%}" method="post">
       {% csrf_token %}
-          <button type="submit" class="btn btn-danger" value="logout">Sair</button>
-          </button>
+      <button id="logout_btn">
+        <img src="{% static 'images/sair.png' %}" style="max-width: 50px;" alt="inicio">
+          <span class="item-description">
+              Sair
+          </span>
+      </button>
     </form>
-      
-</div>
+  </div>
 
 </nav>
 <script src="src/javascript/script.js"></script>
