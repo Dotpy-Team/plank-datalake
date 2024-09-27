@@ -5,7 +5,7 @@
   align-items: center;
   background-color: #ffffff;
   position: relative;
-  transition: all .5s;
+  transition: all .2s;
   min-width: 100px;
   z-index: 2;
 }
@@ -18,29 +18,54 @@
 }
 
 #sidebar_content img {
-  margin: 0 auto; /* Garante que a imagem fique centralizada */
+  margin: 0 auto;
 }
 
 .search-button {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 52px;
   height: 40px;
-  top: 40px;
-  left: 32px;
   background-color: #f0f0f0;
   border: solid 1px #D0D5DD;
   border-radius: 8px;
   padding: 10px 14px 10px 14px;
-  opacity: 0px;
+  opacity: 1px;
   cursor: pointer;
+  transition: width 0.3s, opacity 0.3s;
 }
 
-.search-button img {
-  width: 24px;
-  height: 20px;
-  display: block;
+.search-text {
+  display: none;
+  font-size: 14px;
+  color: #B6BCC3;
+}
+
+.search-input {
+  width: 80px;
+  display: none;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 5px;
+  margin-left: 8px;
+}
+
+.search-input::placeholder {
+  color: #B6BCC3;
+  font-size: 14px;
+  opacity: 1;
+}
+
+.search-button.expanded {
+  display: flex;
+  align-items: center;
+  width: 220px;
+}
+
+.search-button.expanded .search-input {
+  display: inline;
+  background-color: #f0f0f0;
 }
 
 #side_items {
@@ -58,13 +83,9 @@
   cursor: pointer;
 }
 
-/* .side-item.active {
-  background-color: #4f46e5;
-} */
-
 .side-item:hover:not(.active),
 #logout_btn:hover {
-  background-color: #e3e9f7;
+  background-color: #0500FF;
 }
 
 .side-item a {
@@ -72,7 +93,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0a0a0a;
+  color: #454F62;
 }
 
 .side-item.active a {
@@ -119,11 +140,16 @@
   width: 20px;
   height: 20px;
   cursor: pointer;
+  transition: right 0.3s ease, transform 0.3s ease;
 }
 
 #open_btn img {
   max-width: 80%;
   max-height: 80%;
+}
+
+#sidebar.open-sidebar #open_btn {
+  right: -30px;
 }
 
 #open_btn_icon {
@@ -146,6 +172,7 @@
 
 #sidebar.open-sidebar {
   min-width: 15%;
+  width: 277px;
 }
 
 #sidebar.open-sidebar .item-description {

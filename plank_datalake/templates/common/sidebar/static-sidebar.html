@@ -6,11 +6,16 @@
           <img src="{% static 'images/logo_black_blue.png' %}" style="max-width: 50px;" alt="Card image">
         </a>
 
-      <ul id="side_items">
-
+        <div id="pesquisa">
           <button class="search-button">
-            <img src="{% static 'images/lupa.png' %}" alt="Lupa">
+            <div class="search-content">
+              <img src="{% static 'images/lupa.png' %}" alt="Lupa">
+              <input type="text" class="search-input" placeholder="Buscar" />
+            </div>
           </button>
+        </div>
+
+      <ul id="side_items">
           <li class="side-item">
               <a href="{% url 'home_page' %}">
                   <img src="{% static 'images/icone01.png' %}" style="max-width: 50px;">

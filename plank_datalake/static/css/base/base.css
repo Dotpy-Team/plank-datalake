@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #F5F8FF;
   font-family: "Kanit", sans-serif;
@@ -28,12 +34,6 @@ a, a:hover, a:focus {
   transition: all 0.3s;
 }
 
-.container-fluid {
-  background: #F7F7F7;
-  padding: 20px; /* Adiciona preenchimento interno */
-  transition: margin-left 0.3s; /* Transição suave para o conteúdo */
-}
-
 .wrapper {
   display: flex;
   align-items: stretch;
@@ -42,7 +42,13 @@ a, a:hover, a:focus {
 
 #content {
   width: 100%;
-  padding: 0px 0px 0px 0px;
+  padding: 0px;
   min-height: 100vh;
   transition: all 0.3s;
+}
+
+.container-fluid {
+  background: #F7F7F7;
+  padding: 20px; /* Adiciona preenchimento interno */
+  transition: margin-left 0.3s; /* Transição suave para o conteúdo */
 }
