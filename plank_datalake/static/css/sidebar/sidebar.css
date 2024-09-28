@@ -183,7 +183,7 @@
 }
 
 #open_btn_icon {
-  transition: transform .3s ease;
+  transition: transform 0.3s ease-in-out;
 }
 
 .open-sidebar #open_btn_icon {
