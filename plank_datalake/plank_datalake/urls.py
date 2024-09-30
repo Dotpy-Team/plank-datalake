@@ -156,7 +156,7 @@ urlpatterns = [
     path('create-new-execution/<str:table_id>', p.create_new_execution, name="create_new_execution"), 
     path('update-execution/<str:job_id>', p.update_execution, name="update_execution"), 
     path('finish-execution/<str:job_id>', p.finish_execution, name="finish_execution"),
-    path('update_jorun/<str:job_id>', p.update_jorun_athena, name="update_jobrun_athena"), 
+    path('update_jorun/<str:job_id>', p.update_jobrun_athena, name="update_jobrun_athena"), 
 
     #LOG API:
     path('new-log-execution/<str:job_id>', p.new_log_execution, name="new_log_execution"), 
@@ -167,5 +167,5 @@ urlpatterns = [
     path('get-customer-cnpj/<str:str_cnpj>', b.get_customer_by_cnpj, name="customer_by_cnpj"),
 
     #STEP API:
-    path('step-query-execution/<str:step_id>', p.execute_query, name="query-execution"),
+    path('step-query-execution/<str:step_id>', p.execute_query, name="query_execution"),
 ]

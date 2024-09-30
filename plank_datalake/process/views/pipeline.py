@@ -8,6 +8,7 @@ from process.models import Pipeline, RaciActivity, Step, Tables
 from business.models import Customer   
 from process.forms import PipelineForm, StepForm
 import base64
+import requests
 
 def crip(text):
     crip = base64.b64encode(text.encode()).decode()
@@ -68,15 +69,23 @@ def detail_pipeline(request, pipeline_id):
     html_location = parse_html_path(PIPELINE_PATH, 'detail_pipeline')
 
     steps = Step.objects.filter(pipeline_id=pipeline_id)
+    headers = {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': request.COOKIES.get('csrftoken'),
+    }
+
+
+
     for step in steps:
         step.new_child_table = reverse('new_child_table', args=[crip(str(step.step_id))])
+
         try:
             step.table = Tables.objects.get(step_id=step.step_id)
         except Tables.DoesNotExist:
             step.table = None
 
         step.save()
-    
+
     response_dict = {
         'pipeline': pipeline,
         'new_step': reverse('new_step', args=[crip(str(pipeline.pipeline_id))]),

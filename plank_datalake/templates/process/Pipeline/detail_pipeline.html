@@ -180,7 +180,7 @@
                                 <div class="row mt-2">
 
                                     <div class='col-md-1'>
-                                        <button type="button" class="btn btn-primary w-100">Executar</button>
+                                        <button type="button" class="btn btn-primary w-100" data-param="{{ step.step_id }}" onclick="triggerAction(this)">Executar</button>
                                     </div>
 
                                     <div class='col-md-1'>
@@ -308,6 +308,28 @@
         }
     });
 
+</script>
+    
+<script>
+    function triggerAction(button) {
+        const param = button.getAttribute('data-param')
+
+        const apiUrlBase = '/step-query-execution/'
+
+        const apiUrl = apiUrlBase + param
+
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+
+            body: JSON.stringify({
+                'param': param
+            })
+        })
+    }
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

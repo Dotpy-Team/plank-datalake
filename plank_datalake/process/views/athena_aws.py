@@ -11,6 +11,7 @@ import json
 from datetime import datetime
 import boto3
 
+
 @api_view(["POST"])
 def execute_query(request, step_id):
     api_response = request.data
@@ -67,7 +68,7 @@ def execute_query(request, step_id):
     return Response(response)
 
 @api_view(['POST'])
-def update_jorun_athena(request, job_id):
+def update_jobrun_athena(request, job_id):
     response = request.data
 
     try:
