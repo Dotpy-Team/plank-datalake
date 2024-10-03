@@ -9,6 +9,7 @@ from business.models import Customer
 from process.forms import PipelineForm, StepForm
 import base64
 import requests
+import boto3
 
 def crip(text):
     crip = base64.b64encode(text.encode()).decode()
@@ -66,15 +67,47 @@ def detail_pipeline(request, pipeline_id):
     pipeline_id = uncrip(pipeline_id)
     pipeline = get_object_or_404(Pipeline, pipeline_id=pipeline_id)
     
+    aws_access_key_id = pipeline.customer.str_aws_access_key_id
+    aws_secret_acces_key = pipeline.customer.str_aws_secret_key
+    aws_region_name = pipeline.customer.str_aws_region 
+
+    s3 = boto3.client(
+        's3',
+        aws_access_key_id= aws_access_key_id,
+        aws_secret_access_key=aws_secret_acces_key,
+        region_name= aws_region_name
+    )
+
+    bucket_name = 'aws-athena-query-results-us-east-1-121253776145'
+    object_key = '01c15cb1-f6d1-4dd4-8f2e-75268d153835.csv'
+
+    csv_obj = s3.get_object(Bucket=bucket_name, Key=object_key)
+    csv_data = csv_obj['Body'].read().decode('utf-8')
+
+    rows = csv_data.split('\n')
+
+    if rows:
+        data_header = rows[0].split(',')
+
+        data_rows = []
+        for row in rows[1:]:
+            data_rows.append(row.split(','))
+    else:
+        data_header = []
+        data_rows = []
+
+    print(data_header)
+    print(data_rows)
+
+
     html_location = parse_html_path(PIPELINE_PATH, 'detail_pipeline')
 
     steps = Step.objects.filter(pipeline_id=pipeline_id)
+
     headers = {
         'Content-Type': 'application/json',
         'X-CSRFToken': request.COOKIES.get('csrftoken'),
     }
-
-
 
     for step in steps:
         step.new_child_table = reverse('new_child_table', args=[crip(str(step.step_id))])
@@ -89,6 +122,8 @@ def detail_pipeline(request, pipeline_id):
     response_dict = {
         'pipeline': pipeline,
         'new_step': reverse('new_step', args=[crip(str(pipeline.pipeline_id))]),
+        'headers': data_header,
+        'rows': data_rows,
         'steps':steps
     }
 
