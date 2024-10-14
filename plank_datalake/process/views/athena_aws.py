@@ -5,11 +5,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from business.models import Customer
 from business.serializers import CustomerSerializer
-from process.models import Step, JobRun
+from process.models import Step, JobRun, Log
 from process.serializers import StepSerializer
 import json
 from datetime import datetime
 import boto3
+import botocore
 
 
 @api_view(["POST"])
@@ -23,7 +24,7 @@ def execute_query(request, step_id):
         customer_id = step.customer.customer_id
         query = step.str_query
     except Step.DoesNotExist:
-        pass
+        print('Query não encontrada.')
 
 
     try:
@@ -33,9 +34,9 @@ def execute_query(request, step_id):
         aws_platform_secret_acess_key = customer.str_aws_secret_key
         aws_platform_region = customer.str_aws_region
     except Customer.DoesNotExist:
-        pass
+        print('Cliente não encontrado.')
 
-    athena_client = boto3.client(
+    athena = boto3.client(
         'athena', 
         aws_access_key_id= aws_platform_acess_key_id,
         aws_secret_access_key=aws_platform_secret_acess_key,
@@ -46,24 +47,57 @@ def execute_query(request, step_id):
 
     s3_output = f's3://aws-athena-query-results-{aws_platform_region}-{aws_account_id}/'
 
-    response = athena_client.start_query_execution(
-        QueryString=query_string,
-        ResultConfiguration={'OutputLocation': s3_output}
-    )
+    query_execution_id = None
+    dth_start_at = None
 
-    query_execution_id = response['QueryExecutionId']
+    try:
+        query_execution = athena.start_query_execution(
+            QueryString=query_string,
+            ResultConfiguration={'OutputLocation': s3_output}
+        )
 
-    now = datetime.now()
-    dth_start_at = now.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] + ' -0300'
-    
-    job_run = JobRun(
-        customer = customer,
-        step = step,
-        dth_start_at = dth_start_at,
-        str_athena_execution_id = query_execution_id
-    )
+        query_execution_id = query_execution['QueryExecutionId']
+        print(query_execution_id)
 
-    job_run.save()
+        response = query_execution_id
+
+        now = datetime.now()
+        dth_start_at = now.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] + ' -0300'
+        
+        job_run = JobRun(
+            customer = customer,
+            step = step,
+            dth_start_at = dth_start_at,
+            str_athena_execution_id = query_execution_id
+        )
+
+        job_run.save()
+    except Exception as e:
+        error_message= str(e)
+
+        now = datetime.now()
+        dth_event_at = now.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] + ' -0300'
+        
+        job_run = JobRun(
+            customer=customer,
+            step=step,
+            str_status= 'FAILED',
+            dth_start_at = dth_event_at
+        )
+        
+        job_run.save()
+
+        log = Log(
+            job = job_run,
+            dth_event_at = dth_event_at,
+            str_type = 'ERROR',
+            str_desc = error_message
+        )
+
+        log.save()
+
+        response = error_message
+        print(response)
 
     return Response(response)
 

@@ -39,5 +39,5 @@ class Log(models.Model):
             ('ERROR', 'ERROR')
         ]
     )
-    str_desc = models.CharField(max_length=100, null=True, blank=True)    
+    str_desc = models.CharField(max_length=500, null=True, blank=True)    
 

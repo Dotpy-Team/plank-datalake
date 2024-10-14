@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.http import Http404
 from django.views import View
-from process.models import Pipeline, RaciActivity, Step, Tables
+from process.models import Pipeline, RaciActivity, Step, Tables, JobRun, Log
 from business.models import Customer   
 from process.forms import PipelineForm, StepForm
 import base64
@@ -87,18 +87,14 @@ def detail_pipeline(request, pipeline_id):
     rows = csv_data.split('\n')
 
     if rows:
-        data_header = rows[0].split(',')
+        aws_table_header = rows[0].split(',')
 
-        data_rows = []
+        aws_table_rows = []
         for row in rows[1:]:
-            data_rows.append(row.split(','))
+            aws_table_rows.append(row.split(','))
     else:
-        data_header = []
-        data_rows = []
-
-    print(data_header)
-    print(data_rows)
-
+        aws_table_header = []
+        aws_table_rows = []
 
     html_location = parse_html_path(PIPELINE_PATH, 'detail_pipeline')
 
@@ -119,11 +115,14 @@ def detail_pipeline(request, pipeline_id):
 
         step.save()
 
+    jobs = JobRun.objects.filter(job_id=step.job_id)
+
+
     response_dict = {
         'pipeline': pipeline,
         'new_step': reverse('new_step', args=[crip(str(pipeline.pipeline_id))]),
-        'headers': data_header,
-        'rows': data_rows,
+        'headers': aws_table_header,
+        'rows': aws_table_rows,
         'steps':steps
     }
 
