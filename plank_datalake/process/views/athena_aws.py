@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from business.models import Customer
 from business.serializers import CustomerSerializer
-from process.models import Step, JobRun, Log
+from process.models import Step, JobRun, Log, Tables
 from process.serializers import StepSerializer
 import json
 from datetime import datetime
@@ -21,11 +21,13 @@ def execute_query(request, step_id):
 
     try:
         step = Step.objects.get(step_id=step_id)
+        table = Tables.objects.get(step=step_id)
         customer_id = step.customer.customer_id
         query = step.str_query
     except Step.DoesNotExist:
         print('Query não encontrada.')
 
+    print(table)
 
     try:
         customer= Customer.objects.get(customer_id=customer_id)
@@ -67,6 +69,7 @@ def execute_query(request, step_id):
         job_run = JobRun(
             customer = customer,
             step = step,
+            table = table,
             dth_start_at = dth_start_at,
             str_athena_execution_id = query_execution_id
         )
@@ -81,6 +84,7 @@ def execute_query(request, step_id):
         job_run = JobRun(
             customer=customer,
             step=step,
+            table = table,
             str_status= 'FAILED',
             dth_start_at = dth_event_at
         )
@@ -97,7 +101,6 @@ def execute_query(request, step_id):
         log.save()
 
         response = error_message
-        print(response)
 
     return Response(response)
 

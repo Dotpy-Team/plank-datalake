@@ -6,7 +6,7 @@ from .step import Step
 class JobRun(models.Model):
     job_id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    step = models.ForeignKey(Step, on_delete=models.CASCADE, null=True, blank=True)
+    step = models.ForeignKey(Step, on_delete=models.CASCADE, null=True, blank=True) #TODO: excluir este relacionamento
     table = models.ForeignKey(Tables, on_delete=models.CASCADE, null=True, blank=True)
     dth_start_at = models.DateTimeField()
     dth_ended_at = models.DateTimeField(null=True, blank=True)

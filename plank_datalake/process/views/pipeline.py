@@ -105,17 +105,19 @@ def detail_pipeline(request, pipeline_id):
         'X-CSRFToken': request.COOKIES.get('csrftoken'),
     }
 
+    log_list = []
+
     for step in steps:
         step.new_child_table = reverse('new_child_table', args=[crip(str(step.step_id))])
 
         try:
             step.table = Tables.objects.get(step_id=step.step_id)
+            step.table.job = JobRun.objects.filter(table=step.table).order_by('job_id').last()
+            step.table.log = Log.objects.filter(job=step.table.job).order_by('log_id').last()
         except Tables.DoesNotExist:
             step.table = None
 
         step.save()
-
-    jobs = JobRun.objects.filter(job_id=step.job_id)
 
 
     response_dict = {
