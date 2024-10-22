@@ -1,116 +1,177 @@
 {% load static %}
 
 <nav id="sidebar">
+    {% if user.is_superuser == True %}
+    <div id="sidebar_content">
 
-  <div id="sidebar_content">
-        
-      <div class="logotipo">
-          <a href="{% url 'home_page' %}">
-            <img src="{% static 'images/logo_black_blue.svg' %}" style="max-width: 50px;" alt="Card image">
-          </a>
-      </div>
-
-        <div id="pesquisa">
-          <button class="search-button">
-            <div class="search-content">
-              <img src="{% static 'images/lupa.png' %}" alt="Lupa">
-              <input type="text" class="search-input" placeholder="Buscar" />
-            </div>
-          </button>
+        <div class="logotipo">
+            <a href="{% url 'home_page' %}">
+                <img src="{% static 'images/logo_black_blue.svg' %}" style="max-width: 50px;" alt="Card image">
+            </a>
         </div>
 
-      <ul id="side_items">
+        <div id="pesquisa">
+            <button class="search-button">
+                <div class="search-content">
+                    <img src="{% static 'images/lupa.png' %}" alt="Lupa">
+                    <input type="text" class="search-input" placeholder="Buscar" />
+                </div>
+            </button>
+        </div>
 
-        <li class="side-item">
-          <a href="{% url 'home_page' %}">
-              <img class="icon" src="{% static 'images/icone01.png' %}" style="max-width: 50px;"
-                  data-hover-src="{% static 'images/icone01-white.png' %}" 
-                  alt="Início">
-              <span class="item-description">
-                  Início
-              </span>
-          </a>
-      </li>
+        <button id="open_btn">
+            <img id="open_btn_icon" src="{% static 'images/Vector.png' %}" style="max-width: 100px;" alt="inicio">
+        </button>
+        
+        <ul id="side_items">
+
+            <li class="side-item">
+                <a href="{% url 'home_page' %}">
+                    <img class="icon" src="{% static 'images/icone01.png' %}" style="max-width: 50px;"
+                        data-hover-src="{% static 'images/icone01-white.png' %}" 
+                        alt="Início">
+                    <span class="item-description">
+                        Início
+                    </span>
+                </a>
+            </li>
+
+            <li class="side-item">
+                <a href="{% url 'new_customer' %}">
+                    <img class="icon" src="{% static 'images/icone02.png' %}" style="max-width: 50px;"
+                        data-hover-src="{% static 'images/icone02-white.png' %}" 
+                        alt="Novo Cliente">
+                    <span class="item-description">
+                        Novo Cliente
+                    </span>
+                </a>
+            </li>
+
+            <li class="side-item">
+                <a href="{% url 'admin_list_customers' %}">
+                    <img class="icon" src="{% static 'images/icone04.png' %}" style="max-width: 50px;"
+                        data-hover-src="{% static 'images/icone04-white.png' %}" 
+                        alt="Clientes Ativos">
+                    <span class="item-description">
+                        Clientes Ativos
+                    </span>
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+    {% else %}
+    <div id="sidebar_content">
+       
+        <div class="logotipo">
+            <a href="{% url 'home_page' %}">
+                <img src="{% static 'images/logo_black_blue.svg' %}" style="max-width: 50px;" alt="Card image">
+            </a>
+        </div>
+
+        <div id="pesquisa">
+            <button class="search-button">
+                <div class="search-content">
+                    <img src="{% static 'images/lupa.png' %}" alt="Lupa">
+                    <input type="text" class="search-input" placeholder="Buscar" />
+                </div>
+            </button>
+        </div>
+
+        <ul id="side_items">
+
+            <li class="side-item">
+                <a href="{% url 'home_page' %}">
+                    <img class="icon" src="{% static 'images/icone01.png' %}" style="max-width: 50px;"
+                        data-hover-src="{% static 'images/icone01-white.png' %}" 
+                        alt="Início">
+                    <span class="item-description">
+                        Início
+                    </span>
+                </a>
+            </li>
       
-      <li class="side-item">
-          <a href="{% url 'profile_customer' %}">
-              <img class="icon" src="{% static 'images/icone02.png' %}" style="max-width: 50px;" 
-                  data-hover-src="{% static 'images/icone02-white.png' %}" alt="Perfil da Empresa">
-              <span class="item-description">
-                  Perfil da Empresa
-              </span>
-          </a>
-      </li>
+            <li class="side-item">
+                <a href="{% url 'profile_customer' %}">
+                    <img class="icon" src="{% static 'images/icone02.png' %}" style="max-width: 50px;" 
+                        data-hover-src="{% static 'images/icone02-white.png' %}" alt="Perfil da Empresa">
+                    <span class="item-description">
+                        Perfil da Empresa
+                    </span>
+                </a>
+            </li>
       
-      <li class="side-item">
-          <a href="{% url 'list_activities' %}">
-              <img class="icon" src="{% static 'images/icone03.png' %}" style="max-width: 50px;" 
-                  data-hover-src="{% static 'images/icone03-white.png' %}" alt="Processos e Envolvidos">
-              <span class="item-description">
-                  Processos e Envolvidos
-              </span>
-          </a>
-      </li>
+            <li class="side-item">
+                <a href="{% url 'list_activities' %}">
+                    <img class="icon" src="{% static 'images/icone03.png' %}" style="max-width: 50px;" 
+                        data-hover-src="{% static 'images/icone03-white.png' %}" alt="Processos e Envolvidos">
+                    <span class="item-description">
+                        Processos e Envolvidos
+                    </span>
+                </a>
+            </li>
       
-      <li class="side-item">
-          <a href="{% url 'list_system' %}">
-              <img class="icon" src="{% static 'images/icone04.png' %}" style="max-width: 50px;" 
-                  data-hover-src="{% static 'images/icone04-white.png' %}" alt="Sistemas">
-              <span class="item-description">
-                  Sistemas
-              </span>
-          </a>
-      </li>
+            <li class="side-item">
+                <a href="{% url 'list_system' %}">
+                    <img class="icon" src="{% static 'images/icone04.png' %}" style="max-width: 50px;" 
+                        data-hover-src="{% static 'images/icone04-white.png' %}" alt="Sistemas">
+                    <span class="item-description">
+                        Sistemas
+                    </span>
+                </a>
+            </li>
       
-      <li class="side-item">
-          <a href="{% url 'view_tables' %}">
-              <img class="icon" src="{% static 'images/icone05.png' %}" style="max-width: 50px;" 
-                  data-hover-src="{% static 'images/icone05-white.png' %}" alt="Tabelas">
-              <span class="item-description">
-                  Tabelas
-              </span>
-          </a>
-      </li>
+            <li class="side-item">
+                <a href="{% url 'view_tables' %}">
+                    <img class="icon" src="{% static 'images/icone05.png' %}" style="max-width: 50px;" 
+                        data-hover-src="{% static 'images/icone05-white.png' %}" alt="Tabelas">
+                    <span class="item-description">
+                        Tabelas
+                    </span>
+                </a>
+            </li>
       
-      <li class="side-item">
-          <a href="{% url 'list_pipeline' %}">
-              <img class="icon" src="{% static 'images/icone06.png' %}" style="max-width: 50px;" 
-                  data-hover-src="{% static 'images/icone06-white.png' %}" alt="Transformações">
-              <span class="item-description">
-                  Transformações
-              </span>
-          </a>
-      </li>
+            <li class="side-item">
+                <a href="{% url 'list_pipeline' %}">
+                    <img class="icon" src="{% static 'images/icone06.png' %}" style="max-width: 50px;" 
+                        data-hover-src="{% static 'images/icone06-white.png' %}" alt="Transformações">
+                    <span class="item-description">
+                        Transformações
+                    </span>
+                </a>
+            </li>
       
-      <li class="side-item">
-          <a href="{% url 'dashboard_teste' %}">
-              <img class="icon" src="{% static 'images/icone07.png' %}" style="max-width: 50px;" 
-                  data-hover-src="{% static 'images/icone07-white.png' %}" alt="Dashboards">
-              <span class="item-description">
-                  Dashboards
-              </span>
-          </a>
-      </li>
+            <li class="side-item">
+                <a href="{% url 'dashboard_teste' %}">
+                    <img class="icon" src="{% static 'images/icone07.png' %}" style="max-width: 50px;"
+                    data-hover-src="{% static 'images/icone07-white.png' %}" alt="Dashboards">
+                    <span class="item-description">
+                        Dashboards
+                    </span>
+                </a>
+            </li>
       
-      </ul>
+        </ul>
 
       <button id="open_btn">
         <img id="open_btn_icon" src="{% static 'images/Vector.png' %}" style="max-width: 100px;" alt="inicio">
       </button>
 
-  </div>
+    </div>
 
-  <div id="logout">
-    <form action="{% url 'user_logout'%}" method="post">
-      {% csrf_token %}
-      <button id="logout_btn">
-        <img src="{% static 'images/sair.png' %}" style="max-width: 50px;" alt="inicio">
-          <span class="item-description">
-              Sair
-          </span>
-      </button>
-    </form>
-  </div>
+    {% endif %}
 
+    <div id="logout">
+        <form action="{% url 'user_logout'%}" method="post">
+        {% csrf_token %}
+            <button id="logout_btn">
+                <img src="{% static 'images/sair.png' %}" style="max-width: 50px;" alt="inicio">
+                <span class="item-description">
+                    Sair
+                </span>
+            </button>
+        </form>
+    </div>
 </nav>
+
 <script src="src/javascript/script.js"></script>

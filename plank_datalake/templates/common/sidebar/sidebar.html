@@ -15,7 +15,7 @@
         </li>
 
 
-        {% if user.is_superuser %}
+        {% if user.is_superuser == 'True' %}
             <li>
                 <a href="/customer/"><img src="{% static 'icons/building-fill-add.svg' %}" width="30" height="30" alt="Card image">Novo cliente</a>
             </li>
