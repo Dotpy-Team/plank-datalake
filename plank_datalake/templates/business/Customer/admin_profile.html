@@ -2,8 +2,294 @@
 {% load static %}
 {% block content %}
 
+<style>
+    .scroll-container {
+        height: 150px;
+        overflow-y: auto;
+    }
+    .tab-content {
+        height: 300px;
+    }
+</style>
 
-<div class="container">
+<div class="row">
+    <div class="col-md-1">
+        <h2>Cliente</h2>
+        <img src="{% static 'images/google-37.png' %}" width="75" height="75" alt="Card image">
+    </div>
+
+    <div class="col">
+        <h4>Nome do Cliente:</h4>
+        <h4 class="text-primary">{{ customer.str_name }}</h4>
+        <h5>{{ customer.str_setor }}</h5>
+
+        {% if customer.str_customer_type == 'Ativo' %}    
+            <span class="badge text-bg-success">Ativo</span>
+        {% elif customer.str_customer_type == 'Inativo' %}
+            <span class="badge text-bg-danger">Inativo</span>
+        {% else %}
+            <button type="button" class="btn btn-outline-dark">ERROR</button>
+        {% endif %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    Quantidade de Contatos
+                </p>
+                <div class="progress">
+                    <div class="progress-bar w-75"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    Chance de fechar
+                </p>
+                <div class="progress">
+                    <div class="progress-bar bg-success w-75"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    %
+                </p>
+                <div class="progress">
+                    <div class="progress-bar bg-danger w-75"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="nav mt-4 nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#client_data" data-toggle="tab">Dados do cliente</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#contracts" data-toggle="tab">Contratos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#contacts" data-toggle="tab">Contatos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#aws" data-toggle="tab">Dados da AWS</a>
+    </li>
+</ul>
+
+<div class="tab-content mt-4">
+    <div id="client_data" class="tab-pane active">
+        <div class="row">
+            <div class="col">
+                <p><strong>CNPJ</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="00.000.000/0000-000" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_cnpj }}</label>
+                </div>
+            </div>
+
+            <div class="col">
+                <p><strong>Endereço</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="Rua x, 191" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_address }}</label>
+                </div>
+            </div>
+            
+            <div class="col">
+                <p><strong>Telefone</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="00 (11) 0000-0000" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_telefone }}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p><strong>E-mail</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_email }}</label>
+                </div>
+            </div>
+
+            <div class="col">
+                <p><strong>Site</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="www.example.com" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_site }}</label>
+                </div>
+            </div>
+
+            <div class="col">
+                <p><strong>LinkedIn</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="www.linkedin.com/name" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_linkedin_profile }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="aws" class="tab-pane fade">
+        <div class="row">
+            <div class="col">
+                <p><strong>ID da Conta</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="01001001" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_aws_account_id }}</label>
+                </div>
+            </div>
+            <div class="col">
+                <p><strong>Região</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="us-east-01" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_aws_region }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contacts" class="tab-pane fade">
+
+        <h3 class="text-primary text-center mt-3">Contatos</h3>
+
+        <div class="row mt-3">
+            <div class="col">
+                <form role="search" method="get" action="{{ profile_contact }}">
+                    <input class="form-control" type="search" name="search" placeholder="Pesquisar" aria-label="Search" value="{{ request.GET.search }}">
+                </form>
+            </div>
+            <div class="col">
+                <a href="{{new_contact}}"><button type="submit" class="btn btn-primary text-rigth">Adicionar Contato</button></a>
+            </div>
+        </div>
+
+        <table class="table mt-4 table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#id</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Telefone</th>
+                    <th>Nível</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                <tr>
+                    <td><a href="{{contact.detail_url}}">{{ contact.dataset_id }}</a></td>
+                    <td>{{ contact.str_first_name }}</td>
+                    <td>{{ contact.str_last_name }}</td>
+                    <td>{{ contact.str_phone_number }}</td>
+                    <td>{{ contact.str_type_contact }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if contact.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ contact.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+                
+                {% for num in contact.paginator.page_range %}
+                    {% if contact.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+        
+                {% if contact.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ contact.next_page_number }}">Próximo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav> 
+    </div>
+
+    <div id="contracts" class="tab-pane fade">
+
+        <h3 class="text-primary text-center mt-3">Contratos</h3>
+
+        <div class="row mt-3">
+            <div class="col">
+                <form role="search" method="get" action="{{ profile_contract }}">
+                    <input class="form-control" type="search" name="search" placeholder="Pesquisar" aria-label="Search" value="{{ request.GET.search }}">
+                </form>
+            </div>
+            <div class="col">
+                <a href="{{new_contract}}"><button type="submit" class="btn btn-primary text-rigth">Adicionar Contrato</button></a>
+            </div>
+        </div>
+
+        <table class="table mt-4 table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#id</th>
+                    <th>Titulo</th>
+                    <th>Data de Inicio</th>
+                    <th>Data do Fim</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contract in contracts %}
+                <tr>
+                    <td><a href="{{contract.detail_url}}">{{ contract.dataset_id }}</a></td>
+                    <td>{{ contract.str_title }}</td>
+                    <td>{{ contract.dth_start_at }}</td>
+                    <td>{{ contract.dth_end_at }}</td>
+                    <td>{{ contract.str_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if contract.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ contract.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+                
+                {% for num in contract.paginator.page_range %}
+                    {% if contract.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+        
+                {% if contract.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ contract.next_page_number }}">Próximo</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav> 
+    </div>
+
+</div>
+
+<!-- <div class="container">
     <div class='row mt-4'>
         <div class="col-md-6">
             <div class="card">
@@ -204,7 +490,23 @@
             </div>
             </div>
         </div>
-</div>
+</div> -->
 
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function() {
+        var jumbotron = document.getElementById('jumbotron');
+        if (jumbotron.classList.contains('hidden')) {
+            jumbotron.classList.remove('hidden');
+            this.textContent = 'Hide Details';
+        } else {
+            jumbotron.classList.add('hidden');
+            this.textContent = 'Show Details';
+        }
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 {% endblock %}

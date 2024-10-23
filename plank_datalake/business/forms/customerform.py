@@ -129,7 +129,7 @@ class CustomerForm(forms.ModelForm):
 
     str_aws_access_key_id = forms.CharField(
         label='Chave de Acesso AWS.',
-        widget=forms.TextInput(attrs={'class': 'form-contrl'}),
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
         required= True
     )
 

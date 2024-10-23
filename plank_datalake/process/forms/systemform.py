@@ -238,6 +238,12 @@ class MySqlSystemForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         required=True
     )
+    
+    str_host = forms.CharField(       
+        label= 'Host',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        required=True
+    )
     str_desc = forms.CharField(
         label='Descricao *',
         widget=forms.TextInput(attrs={'class': 'form-control'}),

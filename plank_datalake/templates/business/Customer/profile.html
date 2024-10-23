@@ -2,60 +2,120 @@
 {% load static %}
 {% block content %}
 
-<div class='d-flex justify-content-center'>
-    <img src="{% static 'images/google-37.png'%}" alt="Bootstrap" width="150" height="150" class="rounded-circle mb-3">
+<style>
+    .scroll-container {
+        height: 150px;
+        overflow-y: auto;
+    }
+    .tab-content {
+        height: 300px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-1">
+        <h2>Cliente</h2>
+        <img src="{% static 'images/google-37.png' %}" width="75" height="75" alt="Card image">
+    </div>
+
+    <div class="col">
+        <h4>Nome do Cliente:</h4>
+        <h4 class="text-primary">{{ customer.str_name }}</h4>
+        <h5>Setor: {{ customer.str_setor }}</h5>
+
+        {% if customer.str_customer_type == 'Ativo' %}    
+            <span class="badge text-bg-success">Ativo</span>
+        {% elif customer.str_customer_type == 'Inativo' %}
+            <span class="badge text-bg-danger">Inativo</span>
+        {% else %}
+            <button type="button" class="btn btn-outline-dark">ERROR</button>
+        {% endif %}
+
+    </div>
+</div>
+
+<ul class="nav mt-4 nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#client_data" data-toggle="tab">Dados do cliente</a>
+    </li>
+</ul>
+
+<div class="tab-content mt-4">
+
+    <div id="client_data" class="tab-pane active">
+        <div class="row">
+            <div class="col">
+                <p><strong>CNPJ</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="00.000.000/0000-000" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_cnpj }}</label>
+                </div>
+            </div>
+
+            <div class="col">
+                <p><strong>Endereço</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="Rua x, 191" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_address }}</label>
+                </div>
+            </div>
+            
+            <div class="col">
+                <p><strong>Telefone</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="00 (11) 0000-0000" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_telefone }}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p><strong>E-mail</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_email }}</label>
+                </div>
+            </div>
+
+            <div class="col">
+                <p><strong>Site</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="www.example.com" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_site }}</label>
+                </div>
+            </div>
+
+            <div class="col">
+                <p><strong>LinkedIn</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="www.linkedin.com/name" disabled>
+                    <label for="floatingInputDisabled">{{ customer.str_linkedin_profile }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class='d-flex justify-content-center'>
     <h4>Uma Parceria Dotpy + {{customer.str_name}}!</h4>
 </div>
 
-<div class='row mt-2'>
-    <div class='col'>
-        <div class='card'>
-            <div class='card-body'>
-                <h4>Usuários</h4>
-                <p>Acesse o console de usuários e veja os usuários do sistema.</p>
-                <a href="{{users}}" class="btn btn-primary">Veja todos os usuarios da empresa</a>
-            </div>
-        </div>
-    </div>
-    <div class='col'>
-        <div class='card'>
-            <div class='card-body'>
-                <h4>Contratos</h4>
-                <p>Acesse seu contrato e veja os serviços contratados.</p>
-                <a href="{{list_contracts}}" class="btn btn-primary">Acesse os contratos</a>
-            </div>
-        </div>
-    </div>
-    {% comment %} <div class='col'>
-        <div class='card'>
-            <div class='card-body'>
-                <h4>Faturas</h4>
-                <p>Acesse sua fatura e veja o histórico de pagamentos realizados.</p>
-                <button type="button" class="btn btn-primary w-100">Ver Mais</button>
-            </div>
-        </div>
-    </div> {% endcomment %}
-</div>
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function() {
+        var jumbotron = document.getElementById('jumbotron');
+        if (jumbotron.classList.contains('hidden')) {
+            jumbotron.classList.remove('hidden');
+            this.textContent = 'Hide Details';
+        } else {
+            jumbotron.classList.add('hidden');
+            this.textContent = 'Show Details';
+        }
+    });
+</script>
 
-
-<div class="card mt-2">
-    <div class='card-body'>
-        <h4>Informações Básicas</h4>
-		<p><strong>CNPJ:</strong> {{customer.str_cnpj}}</p>
-        <p><strong>AWS Account:</strong> {{customer.str_aws_account_id}}</p>
-        <p><strong>Região da conta AWS:</strong> {{customer.str_aws_region}}</p>           
-		<p><strong>Telefone:</strong> {{customer.str_telefone}}</p>
-		<p><strong>E-mail:</strong> {{ customer.str_email }}</p>
-		<p><strong>Site:</strong> {{ customer.str_site }}</p>
-		<p><strong>Linkedin:</strong> {{ customer.str_linkedin_profile }}</p>
-		<p><strong>Setor:</strong> {{customer.get_str_setor_display}}</p>
-		<p><strong>Blaaaa:</strong> blaaaa</p>
-		<p><strong>Endereço:</strong> {{customer.str_address}} </p>
-		<button type="button" class="btn btn-primary">Editar</button>
-	</div>
-</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 {% endblock %}
