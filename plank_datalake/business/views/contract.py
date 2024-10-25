@@ -32,7 +32,7 @@ Contract PROFILE
 CONTRACT_PATH = 'business/Contract/'
 
 @login_required
-def new_contract(request,customer_id):
+def new_contract(request, customer_id):
     try:
         customer_id = uncrip(customer_id)
         customer_instance = Customer.objects.get(customer_id=customer_id)
@@ -64,13 +64,13 @@ def new_contract(request,customer_id):
 def profile_contract(request, contract_id):
     contract_id = uncrip(contract_id)
     contract = get_object_or_404(Contract, contract_id=contract_id)
-    itens = ContractItem.objects.filter(contract_id=contract_id) 
+    items = ContractItem.objects.filter(contract_id=contract_id) 
     contract_item = ContractItem.objects.select_related('contractitem__service').filter(contract_id=contract_id)
 
     html_location = parse_html_path(CONTRACT_PATH,'profile_contract')
     response_dict = {
         'contract': contract,
-        "itens": itens,
+        "items": items,
         # 'contractitem': contract_item,
         'new_contract_item':reverse('new_contract_item',args=[crip(str(contract.contract_id))])
     }
