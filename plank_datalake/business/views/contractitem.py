@@ -85,3 +85,4 @@ def new_contract_item(request, contract_id):
         }
 
         return render(request, html_location, response_dict)
+    
