@@ -1,0 +1,20 @@
+{
+    "Title":"Painel Gerencial de Vendas do Mês",
+    "description":"There are an description about bla bla bla",
+    "graphs":[
+        {
+            'id':'ausdhaudsa',
+            'x':'260',
+            'y':'855',
+            'width':'120',
+            'height':'80'
+        },
+        {
+            'id':'ausgdausd',
+            'x':'320',
+            'y':'400',
+            'width':'120',
+            'height':'80'
+        }
+    ]
+}

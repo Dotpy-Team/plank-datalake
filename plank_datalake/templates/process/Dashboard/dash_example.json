@@ -1,0 +1,25 @@
+{
+	"id":"aushduashduash",
+	"graph_type":"bar",
+	"source_table":"raw.marketing_contas_marketing_vendas",
+	"Title":"Vendas do mês",
+	"Description":"as vendas consolidadas do mês",
+	"groupped_columns":[
+		{
+			"referenced_column":"ano",
+			"alias":"ano"
+		},
+		{
+			"referenced_column":"ano",
+			"alias":"ano"
+		}
+	],
+	"agg_columns":[
+		{
+			"type":"sum",
+			"referenced_column":"",
+			"alias":"soma_total_mensal"
+
+		}
+	]
+}
