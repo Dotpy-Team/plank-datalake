@@ -1,53 +1,97 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
-<div class="container justify-content-center">
-    <div class="card border-primary" style="max-width: 100rem;">
-        <div class="card-body">
-            <div class="row mt-3">
-                <h3 class="card-title text-primary">{{ contact.str_first_name }} {{ contact.str_last_name}}</h3>
-            </div>
+<style>
+    .scroll-container {
+        height: 150px;
+        overflow-y: auto;
+    }
+    .tab-content {
+        height: 300px;
+    }
+</style>
 
-            <div class="row mt-3">
-                <h5 class="card-text-secondary-emphasis">Email:</h5>
-            </div>
+<div class="row mt-3">
+    <div class="col-md-1">
+        <h2>Contato</h2>
+        <img src="{% static 'images/google-37.png' %}" width="75" height="75" alt="Card image">
+    </div>
+    <div class="col">
+        <h4>Informações do contato:</h4>
+        <h4 class="text-primary">{{ contact.str_first_name }} {{ contact.str_last_name }}</h4>
+        <h5>Tipo do contanto: {{ contact.str_type_contact }}</h5>
+    </div>
+</div>
 
-            <div class="row mt-2 mb-2">
-                <div class="col">
-                    <small>E-mail: </small>{{ contact.str_email }}
+<ul class="nav mt-4 nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="#details" data-toggle="tab">Detalhes</a>
+    </li>
+</ul>
+
+<div class="tab-content mt-4">
+    <div id="details" class="tab-pane active">
+        <div class="row">
+            <div class="col">
+                <p><strong>E-mail:</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                    <label for="floatingInputDisabled">{{ contact.str_email }}</label>
                 </div>
-                <div class="col">
-                    <small>E-mail comercial: </small>{{ contact.str_comercial_email }}
-                </div>
             </div>
 
-            <div class="row mt-2">
-                <h5 class="card-text-secondary-emphasis">Telefone:</h5>
-            </div>
-
-            <div class="row mt-2 mb-2">
-                <div class="col">
-                    <small>Telefone: </small> {{ contact.str_phone_number }}
-                </div>
-                <div class="col">
-                    <small>Telefone Comercial: </small> {{ contact.str_comercial_phone_number }}
-                </div>
-                <div class="col">
-                    <small>WhatsApp: </small> {{ contact.str_whatsapp_number }}
+            <div class="col">
+                <p><strong>E-mail Comercial:</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                    <label for="floatingInputDisabled">{{ contact.str_comercial_email }}</label>
                 </div>
             </div>
+        </div>
 
-            <div class="row mt-2">  
-                <h5 class="card-text-secondary-emphasis">Cargo:</h5>
+        <div class="row">
+            <div class="col">
+                <p><strong>Telefone:</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="(11) 0000-1111" disabled>
+                    <label for="floatingInputDisabled">{{ contact.str_phone_number }}</label>
+                </div>
             </div>
-
-            <div class="row mt-2 mb-2">
-                <div class="col">
-                    <small>Setor: </small> {{ contact.str_type_contact }} 
-                </div>       
+            <div clas="col">
+                <p><strong>Telefone Comercial:</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="(11) 0000-1111" disabled>
+                    <label for="floatingInputDisabled">{{ contact.str_comercial_phone_number }}</label>
+                </div>
+            </div>
+            <div class="col">
+                <p><strong>Whats App:</strong></p>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="(11) 90000-1111" disabled>
+                    <label for="floatingInputDisabled">{{ contact.str_whatsapp_number }}</label>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function() {
+        var jumbotron = document.getElementById('jumbotron');
+        if (jumbotron.classList.contains('hidden')) {
+            jumbotron.classList.remove('hidden');
+            this.textContent = 'Hide Details';
+        } else {
+            jumbotron.classList.add('hidden');
+            this.textContent = 'Show Details';
+        }
+    });
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 {% endblock %}
