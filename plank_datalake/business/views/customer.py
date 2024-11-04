@@ -67,6 +67,24 @@ def admin_profile_customer(request,customer_id):
         contracts = Contract.objects.filter(customer_id=customer)
         contacts = Contacts.objects.filter(customer_id=customer_id)
         html_location = parse_html_path(CUSTUMER_PATH,'admin_profile')
+
+        for contract in contracts:
+            contract.detail_url = reverse(
+                'profile_contract',
+                args=[crip(str(contract.contract_id))]
+            )
+
+            contract.save()
+
+        for contact in contacts:
+            contact.detail_url = reverse(
+                'profile_contact',
+                args=[crip(str(contact.contact_id))]
+            )
+
+            contact.save()
+        
+
         response_dict = {
             'customer': customer,
             "contracts": contracts,

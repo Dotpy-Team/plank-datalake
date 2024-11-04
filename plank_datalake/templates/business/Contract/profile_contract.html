@@ -86,6 +86,9 @@
             <thead>
                 <tr>
                     <th>#id</th>
+                    <th>Titulo</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
                     <th>Data de Criação</th>
                     <th>Data de Atualização</th>
                 </tr>
@@ -94,6 +97,9 @@
                 {% for item in items %}
                 <tr>
                     <td>{{ item.contractitem_id }}</td>
+                    <td>{{ item.service.str_title }}</td>
+                    <td>{{ item.service.str_descr }}</td>
+                    <td>{{ item.service.int_price }}</td>
                     <td>{{ item.dth_created_at }}</td>
                     <td>{{ item.dth_updated_at }}</td>
                 </tr>
