@@ -2,6 +2,44 @@
 {% block content %}
 {% load static %}
 
+{% if user.is_superuser == True %}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/people-fill.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Processos e envolvidos</h4>
+                <p class="card-text">Clientes ativos.</p>
+                <a href="/admin-customer-profiles/" class="btn btn-primary">Veja Mais...</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/file-earmark-arrow-down.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Contratos</h4>
+                <p class="card-text">Contratos.</p>
+                <a href="/admin-contract-list/" class="btn btn-primary">Veja Mais...</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <img src="{% static 'icons/graph-up.svg' %}" width="50" height="50" alt="Card image">
+                <h4 class="card-title mt-3">Serviços</h4>
+                <p class="card-text">Serviços oferecidos pela DotPy</p>
+                <a href="/service/" class="btn btn-primary">Veja Mais...</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
 <div class='row'>
 
     <div class='col-md-4'>
@@ -74,8 +112,6 @@
         </div>
     </div>
 
-
-
 </div>
 
 <div class='row mt-2'>
@@ -101,9 +137,9 @@
             </div>
         </div>
     </div>
-
-
 </div>
+
+{% endif %}
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
