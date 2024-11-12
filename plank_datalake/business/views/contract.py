@@ -93,6 +93,12 @@ def profile_contract(request, contract_id):
 def admin_list_contracts(request):
     contracts = Contract.objects.all()
     html_location = parse_html_path(CONTRACT_PATH,'admin_list_contract')
+
+    search = request.GET.get('search')
+
+    if search:
+        contracts = Contract.objects.filter(str_title__icontains=search)
+    
     for contract in contracts:
         contract.detail_url = reverse(
             'profile_contract',

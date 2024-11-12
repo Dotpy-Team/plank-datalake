@@ -2,38 +2,31 @@
 {% block content %}
 
 
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="text-primary text-center">
-                Contratos
-            </h3>
-        </div>
+<h3 class="text-primary text-center">Contratos</h3>
 
-        <div class="card-body">
-            <div class="row mt-2">
-                <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#id</th>
-                    <th>Nome</th>
-                    <th>Objeto</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for contract in contracts %}
-                <tr>
-                    <td><a href="{{contract.detail_url}}">{{ contract.contract_id }}</a></td>
-                    <td>{{ contract.str_title }}</td>
-                    <td>{{ contract.str_object }}</td>             
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+<table class="table mt-4 table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#id</th>
+            <th>Cliente</th>
+            <th>Título</th>
+            <th>Data de Inicio</th>
+            <th>Data do Fim</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contract in contracts %}
+            <tr>
+                <td>{{ contract.contract_id }}</td>
+                <td>{{ contract.customer.str_name }}</td>
+                <td>{{ contract.str_title }}</td>
+                <td>{{ contract.dth_start_at}}</td>
+                <td>{{ contract.dth_end_at }}</td>
+                <td>{{ contract.str_status }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

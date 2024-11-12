@@ -1,4 +1,5 @@
 {% extends 'common/base.html' %}
+{% load static %}
 {% block content %}
 
 <h3 class="text-primary text-center">Contratos</h3>
@@ -18,20 +19,24 @@
     <thead>
         <tr>
             <th>#id</th>
+            <th>Cliente</th>
             <th>Título</th>
             <th>Data de Inicio</th>
             <th>Data do Fim</th>
             <th>Status</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         {% for contract in contracts %}
             <tr>
-                <td><a href="{{ contract.detail_url }}"></a>{{ contract.contract_id }}</td>
+                <td>{{ contract.contract_id }}</td>
+                <td>{{ contract.customer.str_name }}</td>
                 <td>{{ contract.str_title }}</td>
                 <td>{{ contract.dth_start_at}}</td>
                 <td>{{ contract.dth_end_at }}</td>
                 <td>{{ contract.str_status }}</td>
+                <td><a href="{{contract.detail_url}}"><button type="button" class="btn btn-light"><img src="{% static 'icons/pencil.svg' %}" width="20" height="20" alt="Card image"></button></a></td>
             </tr>
         {% endfor %}
     </tbody>
