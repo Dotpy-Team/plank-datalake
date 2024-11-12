@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
@@ -64,9 +65,33 @@ def admin_profile_customer(request,customer_id):
     try:
         customer_id = uncrip(customer_id)
         customer = get_object_or_404(Customer, customer_id=customer_id)
-        contracts = Contract.objects.filter(customer_id=customer)
-        contacts = Contacts.objects.filter(customer_id=customer_id)
+        contacts = Contacts.objects.filter(customer=customer_id)
+        contracts = Contract.objects.filter(customer=customer_id)
         html_location = parse_html_path(CUSTUMER_PATH,'admin_profile')
+
+        search = request.GET.get('search')
+
+        if search:
+            contacts = Contacts.objects.filter(str_first_name__icontains=search)
+            contracts = Contract.objects.filter(str_title__icontains=search)
+
+        contacts = contacts.order_by('contact_id')
+        contracts = contracts.order_by('contract_id')
+
+        contacts_paginator = Paginator(contacts, 6)
+        contract_paginator = Paginator(contracts, 6)
+        page = request.GET.get('page')
+
+        try:
+            contacts = contacts_paginator.page(page)
+            contracts = contract_paginator.page(page)
+        except PageNotAnInteger:
+            contacts = contacts_paginator.page(1)
+            contracts = contract_paginator.page(1)
+        except EmptyPage:
+            contacts = contacts_paginator.page(contacts_paginator.num_pages)
+            contracts = contract_paginator.page(contract_paginator.num_pages)
+        
 
         for contract in contracts:
             contract.detail_url = reverse(
@@ -96,7 +121,8 @@ def admin_profile_customer(request,customer_id):
             'new_task': reverse('new_task',args=[crip(str(customer_id))]),
             'new_contact': reverse('new_contact', args=[crip(str(customer_id))]),
             # 'view_tables': reverse('view_tables',args=[crip(str(id_customer))])
-            'new_contract': reverse('new_contract',args=[crip(str(customer_id))])
+            'new_contract': reverse('new_contract',args=[crip(str(customer_id))]),
+            'search': search
         }
         return render(request, html_location, response_dict)
     except Http404:
