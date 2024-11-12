@@ -38,7 +38,7 @@ def new_contact(request, customer_id):
             contact = form.save(commit=False)
             contact.customer = customer_instance
             contact.save()
-            return redirect('profile_contact', crip(str(contact.contact_id)))
+            return redirect('admin_profile_customer', crip(str(customer_instance.customer_id)))
         else:
             print(form.errors)
             response_dict = {'form': form}
