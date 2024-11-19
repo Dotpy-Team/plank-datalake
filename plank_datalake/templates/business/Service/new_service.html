@@ -1,105 +1,99 @@
 {% extends 'common/base.html' %}
 {% block content %}
-<div class="container">
-    <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Novo Serviço</h3>    
+
+<h3 class="text-primary">Adicionar Serviço</h3>
+
+<form method="post" class="form">
+
+    {% csrf_token %}
+
+    <h4>Informações do Serviço</h4>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+            {{form.str_title}}
+            <small><p>Titulo.</p></small>
+            {% if form.str_title.errors %}
+                <div class="text-danger">
+                    {{ form.str_title.errors }}
+                </div>
+             {% endif %}
         </div>
-
-        <div class="card-body">
-            <form method="post" class="form">
-            
-                {% csrf_token %}
-                
-                <h4>Informações de Serviço:</h4>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                        {{ form.str_title }}
-                        <small><p>Titulo.</p></small>
-                        {% if form.str_title.errors %}
-                            <div class="text-danger">
-                                {{ form.str_title.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_status }}
-                        <small><p>Status.</p></small>
-                        {% if form.str_status.errors %}
-                            <div class="text-danger">
-                                {{ form.str_status.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+        <div class="col">
+            {{form.str_status}}
+            <small><p>Status.</p></small>
+            {% if form.str_status.errors %}
+                <div class="text-danger">
+                    {{ form.str_status.errors }}
                 </div>
-
-               <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                        {{ form.int_price }}
-                        <small><p>Preço.</p></small>
-                        {% if form.int_price.errors %}
-                            <div class="text-danger">
-                                {{ form.int_price.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.int_qnt }}
-                        <small><p>Quantidade.</p></small>
-                        {% if form.int_qnt.errors %}
-                            <div class="text-danger">
-                                {{ form.int_qnt.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                        {{ form.str_descr }}
-                        <small><p>Descrição.</p></small>
-                        {% if form.str_descr.errors %}
-                            <div class="text-danger">
-                                {{ form.str_descr.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-            <div class="col" style="text-align: right;">
-                <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
-            </div>
-
-            </form>
+            {% endif %}
         </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#id</th>
-                    <th>Titulo</th>
-                    <th>Descricao</th>
-                    <th>Valor monetario</th>
-                    <th>Quantidade</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for service in services %}    
-                <tr>
-                    <td><a href="{{service.detail_url}}">{{ service.service_id }}</a></td>
-                    <td>{{ service.str_title }}</td>
-                    <td>{{ service.str_descr }}</td>
-                    <td>{{ service.int_price }}</td>
-                    <td>{{ service.int_qnt }}</td>
-                    <td>{{ service.str_status }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
     </div>
-</div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+            {{form.int_price}}
+            <small><p>Preço.</p></small>
+            {% if form.int_price.errors %}
+                <div class="text-danger">
+                    {{ form.int_price.errors }}
+                </div>
+             {% endif %}
+        </div>
+        <div class="col">
+            {{form.int_qnt}}
+            <small><p>Quantidade.</p></small>
+            {% if form.int_qnt.errors %}
+                <div class="text-danger">
+                    {{ form.int_qnt.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+            {{form.str_descr}}
+            <small><p>Descrição.</p></small>
+            {% if form.str_descr.errors %}
+                <div class="text-danger">
+                    {{ form.str_descr.errors }}
+                </div>
+             {% endif %}
+        </div>
+    </div>
+
+    <div class="col" style="text-align: right;">
+        <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
+    </div>
+
+</form>
+
+<h4 class="mt-2">Serviços disponíveis</h4>
+
+<table class="table mt-2table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for service in services %}
+        <tr>
+            <td>{{ service.str_title }}</td>
+            <td>{{ service.int_price }}</td>
+            <td>{{ service.int_qnt }}</td>
+            <td>{{ service.str_status }}</td>           
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 {% endblock %}
