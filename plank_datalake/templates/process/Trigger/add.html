@@ -1,60 +1,52 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container">
-    <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Adicionar Trigger</h3>    
+<h3 class="text-primary">Adicionar Trigger</h3>    
+
+<form method="post" class="form">
+
+    {% csrf_token %}
+    
+    <h4>Dados da tabela:</h4>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_title }}
+        <small><p>Titulo.</p></small>
+            {% if form.str_title.errors %}
+                <div class="text-danger">
+                    {{ form.str_title.errors }}
+                </div>
+            {% endif %}
         </div>
-
-        <div class="card-body">
-            <form method="post" class="form">
-
-                {% csrf_token %}
-                
-                <h4>Dados da tabela:</h4>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_title }}
-                    <small><p>Titulo.</p></small>
-                        {% if form.str_title.errors %}
-                            <div class="text-danger">
-                                {{ form.str_title.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_cron }}
-                        <small><p>Cron.</p></small>
-                        {% if form.str_cron.errors %}
-                            <div class="text-danger">
-                                {{ form.str_cron.errors }}
-                            </div>
-                        {% endif %}
-                    </div>   
+        <div class="col">
+            {{ form.str_cron }}
+            <small><p>Cron.</p></small>
+            {% if form.str_cron.errors %}
+                <div class="text-danger">
+                    {{ form.str_cron.errors }}
                 </div>
-
-                <div class="row mt-2 w-50 justify-content-center">
-                    <div class="col">
-                        {{ form.str_status }}
-                        <small><p>Status.</p></small>
-                        {% if form.str_status.errors %}
-                            <div class="text-danger">
-                                {{ form.str_status.errors }}
-                            </div>
-                        {% endif %}
-                    </div>   
-                </div>
-
-                <div class="col" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
-                </div>
-
-            </form>
-        </div>
+            {% endif %}
+        </div>   
     </div>
-</div>
+
+    <div class="row mt-2 w-50 justify-content-center">
+        <div class="col">
+            {{ form.str_status }}
+            <small><p>Status.</p></small>
+            {% if form.str_status.errors %}
+                <div class="text-danger">
+                    {{ form.str_status.errors }}
+                </div>
+            {% endif %}
+        </div>   
+    </div>
+
+    <div class="col" style="text-align: right;">
+        <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
+    </div>
+
+</form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
