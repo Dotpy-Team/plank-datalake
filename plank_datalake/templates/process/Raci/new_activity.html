@@ -1,82 +1,76 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="card">
-    <div class="card-body">
 
-        <div class="row mt-2">
-            <h4 class='text-primary'>Adicionar Processo</h4>
-        </div>
+<h3 class='text-primary'>Adicionar Processo</h3>
 
-        <form method="post" class="form">
+<form method="post" class="form">
 
-            {% csrf_token %}
+    {% csrf_token %}
 
-            <div class='row'>
-                <div class='col'>
-                    {{ form.str_title }}
-                    <small><p>Titulo.</p></small>
-                    {% if form.str_title.errors %}
-                        <div class="text-danger">
-                            {{ form.str_title.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class='col'>
-                    {{ form.responsible }}
-                    <small><p>Responsavel.</p></small>
-                    {% if form.responsible.errors %}
-                        <div class="text-danger">
-                            {{ form.responsible.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class='col'>
-                    {{ form.accountable }}
-                    <small><p>Aprovador.</p></small>
-                    {% if form.accountable.errors %}
-                        <div class="text-danger">
-                            {{ form.accountable.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class='row'>
-                <div class='col-md-3'>
-                    {{ form.str_shareable }}
-                    <small><p>Compartilhavel.</p></small>
-                    {% if form.str_shareable.errors %}
-                        <div class="text-danger">
-                            {{ form.str_shareable.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class='col-md-3'>
-                    {{ form.str_color }}
-                    <small><p>Cor.</p></small>
-                    {% if form.str_color.errors %}
-                        <div class="text-danger">
-                            {{ form.str_color.errors }}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-
-            {{ form.str_desc }}
-            {% if form.str_desc.errors %}
+    <div class='row'>
+        <div class='col'>
+            {{ form.str_title }}
+            <small><p>Titulo.</p></small>
+            {% if form.str_title.errors %}
                 <div class="text-danger">
-                    {{ form.str_desc.errors }}
+                    {{ form.str_title.errors }}
                 </div>
             {% endif %}
-
-            <div class="col" style="text-align: right;">
-                <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
-            </div>
-
-        </form>
+        </div>
+        <div class='col'>
+            {{ form.responsible }}
+            <small><p>Responsavel.</p></small>
+            {% if form.responsible.errors %}
+                <div class="text-danger">
+                    {{ form.responsible.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class='col'>
+            {{ form.accountable }}
+            <small><p>Aprovador.</p></small>
+            {% if form.accountable.errors %}
+                <div class="text-danger">
+                    {{ form.accountable.errors }}
+                </div>
+            {% endif %}
+        </div>
     </div>
-</div>
+
+    <div class='row'>
+        <div class='col-md-3'>
+            {{ form.str_shareable }}
+            <small><p>Compartilhavel.</p></small>
+            {% if form.str_shareable.errors %}
+                <div class="text-danger">
+                    {{ form.str_shareable.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class='col-md-3'>
+            {{ form.str_color }}
+            <small><p>Cor.</p></small>
+            {% if form.str_color.errors %}
+                <div class="text-danger">
+                    {{ form.str_color.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {{ form.str_desc }}
+    {% if form.str_desc.errors %}
+        <div class="text-danger">
+            {{ form.str_desc.errors }}
+        </div>
+    {% endif %}
+
+    <div class="col" style="text-align: right;">
+        <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
+    </div>
+
+</form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

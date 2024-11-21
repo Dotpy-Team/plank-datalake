@@ -1,81 +1,71 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container">
-    <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Adicionar Pipeline</h3>    
+<h3 class="text-primary">Adicionar Pipeline</h3>    
+
+<form method="post" class="form">
+    
+    <h4>Dados do pipeline:</h4>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.dth_start_at }}
+        <small><p>Data de inicio.</p></small>
+            {% if form.dth_start_at.errors %}
+                <div class="text-danger">
+                    {{ form.dth_start_at.errors }}
+                </div>
+            {% endif %}
         </div>
-
-        <div class="card-body">
-            <form method="post" class="form">
-
-                {% csrf_token %}
-                
-                <h4>Dados do pipeline:</h4>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.dth_start_at }}
-                    <small><p>Data de inicio.</p></small>
-                        {% if form.dth_start_at.errors %}
-                            <div class="text-danger">
-                                {{ form.dth_start_at.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.dth_end_at }}
-                        <small><p>Data do fim.</p></small>
-                        {% if form.dth_end_at.errors %}
-                            <div class="text-danger">
-                                {{ form.dth_end_at.errors }}
-                            </div>
-                        {% endif %}
-                    </div>   
+        <div class="col">
+            {{ form.dth_end_at }}
+            <small><p>Data do fim.</p></small>
+            {% if form.dth_end_at.errors %}
+                <div class="text-danger">
+                    {{ form.dth_end_at.errors }}
                 </div>
+            {% endif %}
+        </div>   
+    </div>
 
-                <div class="row mt-2 w-50 justify-content-center">
-                    <div class="col">
-                    {{ form.str_title }}
-                    <small><p>Titulo.</p></small>
-                        {% if form.str_title.errors %}
-                            <div class="text-danger">
-                                {{ form.str_title.errors }}
-                            </div>
-                        {% endif %}
-                    </div>  
-                    <div class='col'>
-                        {{ form.raci_activity }}
-                    <small><p>Raci.</p></small>
-                        {% if form.raci_activity.errors %}
-                            <div class="text-danger">
-                                {{ form.raci_activity.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+    <div class="row mt-2 w-50 justify-content-center">
+        <div class="col">
+        {{ form.str_title }}
+        <small><p>Titulo.</p></small>
+            {% if form.str_title.errors %}
+                <div class="text-danger">
+                    {{ form.str_title.errors }}
                 </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_desc }}
-                    <small><p>Descrição.</p></small>
-                        {% if form.str_desc.errors %}
-                            <div class="text-danger">
-                                {{ form.str_desc.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+            {% endif %}
+        </div>  
+        <div class='col'>
+            {{ form.raci_activity }}
+        <small><p>Raci.</p></small>
+            {% if form.raci_activity.errors %}
+                <div class="text-danger">
+                    {{ form.raci_activity.errors }}
                 </div>
-
-                <div class="col" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
-                </div>
-
-            </form>
+            {% endif %}
         </div>
     </div>
-</div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_desc }}
+        <small><p>Descrição.</p></small>
+            {% if form.str_desc.errors %}
+                <div class="text-danger">
+                    {{ form.str_desc.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col" style="text-align: right;">
+        <button type="submit" class="btn btn-primary mt-3 text-rigth">Salvar</button>
+    </div>
+
+</form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

@@ -1,177 +1,169 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container">
-    <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Novo Sistema</h3>    
+<h3 class="text-primary">Novo Sistema</h3>    
+
+<form method="post" class="form">
+
+    {% csrf_token %}
+    
+    <h4>Dados do Sistema:</h4>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_title }}
+        <small><p>Nome do Sistema.</p></small>
+            {% if form.str_title.errors %}
+                <div class="text-danger">
+                    {{ form.str_title.errors }}
+                </div>
+            {% endif %}
         </div>
-
-        <div class="card-body">
-            <form method="post" class="form">
-
-                {% csrf_token %}
-                
-                <h4>Dados do Sistema:</h4>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_title }}
-                    <small><p>Nome do Sistema.</p></small>
-                        {% if form.str_title.errors %}
-                            <div class="text-danger">
-                                {{ form.str_title.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_status }}
-                        <small><p>Status do Sistema.</p></small>
-                        {% if form.str_status.errors %}
-                            <div class="text-danger">
-                                {{ form.str_status.errors }}
-                            </div>
-                        {% endif %}
-                    </div>   
+        <div class="col">
+            {{ form.str_status }}
+            <small><p>Status do Sistema.</p></small>
+            {% if form.str_status.errors %}
+                <div class="text-danger">
+                    {{ form.str_status.errors }}
                 </div>
+            {% endif %}
+        </div>   
+    </div>
 
-                <div class='row mt-2 justify-content-center'>
-                    <div class="col">
-                        {{ form.str_desc }}
-                        <small><p>Descrição.</p></small>
-                        {% if form.str_desc.errors %}
-                            <div class="text-danger">
-                                {{ form.str_desc.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+    <div class='row mt-2 justify-content-center'>
+        <div class="col">
+            {{ form.str_desc }}
+            <small><p>Descrição.</p></small>
+            {% if form.str_desc.errors %}
+                <div class="text-danger">
+                    {{ form.str_desc.errors }}
                 </div>
-
-                <h4>Informações de conexão Google Sheets:</h4>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_type }}
-                    <small><p>Tipo.</p></small>
-                        {% if form.str_type.errors %}
-                            <div class="text-danger">
-                                {{ form.str_type.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_project_id }}
-                        <small><p>Project Id.</p></small>
-                        {% if form.str_project_id.errors %}
-                            <div class="text-danger">
-                                {{ form.str_project_id.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    <div class="col">
-                        {{ form.str_private_key_id }}
-                        <small><p>Private Key Id.</p></small>
-                        {% if form.str_private_key_id.errors %}
-                            <div class="text-danger">
-                                {{ form.str_private_key_id.errors }}
-                            </div>
-                        {% endif %}
-                    </div>    
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_private_key }}
-                    <small><p>Private Key.</p></small>
-                        {% if form.str_private_key.errors %}
-                            <div class="text-danger">
-                                {{ form.str_private_key.errors }}
-                            </div>
-                        {% endif %}
-                    </div>  
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_client_email }}
-                    <small><p>Client E-mail.</p></small>
-                        {% if form.str_client_email.errors %}
-                            <div class="text-danger">
-                                {{ form.str_client_email.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_client_id }}
-                        <small><p>Client Id.</p></small>
-                        {% if form.str_client_id.errors %}
-                            <div class="text-danger">
-                                {{ form.str_client_id.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_auth_uri }}
-                    <small><p>Auth Uri.</p></small>
-                        {% if form.str_auth_uri.errors %}
-                            <div class="text-danger">
-                                {{ form.str_auth_uri.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_token_uri }}
-                        <small><p>Token Uri.</p></small>
-                        {% if form.str_token_uri.errors %}
-                            <div class="text-danger">
-                                {{ form.str_token_uri.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_auth_provider_x509_cert_url }}
-                        <small><p>Auth Provider.</p></small>
-                        {% if form.str_auth_provider_x509_cert_url.errors %}
-                            <div class="text-danger">
-                                {{ form.str_auth_provider_x509_cert_url.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_client_x509_cert_url }}
-                    <small><p>Client cert url.</p></small>
-                        {% if form.str_client_x509_cert_url.errors %}
-                            <div class="text-danger">
-                                {{ form.str_client_x509_cert_url.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_universe_domain }}
-                        <small><p>Universe Domain.</p></small>
-                        {% if form.str_universe_domain.errors %}
-                            <div class="text-danger">
-                                {{ form.str_universe_domain.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="col" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
-                </div>
-
-            </form>
+            {% endif %}
         </div>
     </div>
-</div>
+
+    <h4>Informações de conexão Google Sheets:</h4>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_type }}
+        <small><p>Tipo.</p></small>
+            {% if form.str_type.errors %}
+                <div class="text-danger">
+                    {{ form.str_type.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_project_id }}
+            <small><p>Project Id.</p></small>
+            {% if form.str_project_id.errors %}
+                <div class="text-danger">
+                    {{ form.str_project_id.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col">
+            {{ form.str_private_key_id }}
+            <small><p>Private Key Id.</p></small>
+            {% if form.str_private_key_id.errors %}
+                <div class="text-danger">
+                    {{ form.str_private_key_id.errors }}
+                </div>
+            {% endif %}
+        </div>    
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_private_key }}
+        <small><p>Private Key.</p></small>
+            {% if form.str_private_key.errors %}
+                <div class="text-danger">
+                    {{ form.str_private_key.errors }}
+                </div>
+            {% endif %}
+        </div>  
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_client_email }}
+        <small><p>Client E-mail.</p></small>
+            {% if form.str_client_email.errors %}
+                <div class="text-danger">
+                    {{ form.str_client_email.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_client_id }}
+            <small><p>Client Id.</p></small>
+            {% if form.str_client_id.errors %}
+                <div class="text-danger">
+                    {{ form.str_client_id.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_auth_uri }}
+        <small><p>Auth Uri.</p></small>
+            {% if form.str_auth_uri.errors %}
+                <div class="text-danger">
+                    {{ form.str_auth_uri.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_token_uri }}
+            <small><p>Token Uri.</p></small>
+            {% if form.str_token_uri.errors %}
+                <div class="text-danger">
+                    {{ form.str_token_uri.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_auth_provider_x509_cert_url }}
+            <small><p>Auth Provider.</p></small>
+            {% if form.str_auth_provider_x509_cert_url.errors %}
+                <div class="text-danger">
+                    {{ form.str_auth_provider_x509_cert_url.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_client_x509_cert_url }}
+        <small><p>Client cert url.</p></small>
+            {% if form.str_client_x509_cert_url.errors %}
+                <div class="text-danger">
+                    {{ form.str_client_x509_cert_url.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_universe_domain }}
+            <small><p>Universe Domain.</p></small>
+            {% if form.str_universe_domain.errors %}
+                <div class="text-danger">
+                    {{ form.str_universe_domain.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col" style="text-align: right;">
+        <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+    </div>
+
+</form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

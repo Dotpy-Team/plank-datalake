@@ -1,125 +1,117 @@
 {% extends 'common/base.html' %}
 {% block content %}
 
-<div class="container">
-    <div class="card">
-        <div class='card-header text-center'>
-            <h3 class="text-primary">Novo Sistema</h3>    
+<h3 class="text-primary">Novo Sistema</h3>    
+
+<form method="post" class="form">
+
+    {% csrf_token %}
+    
+    <h4>Dados do Sistema:</h4>
+    <p>{{ form.errors }}</p>
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_title }}
+        <small><p>Nome do Sistema.</p></small>
+            {% if form.str_title.errors %}
+                <div class="text-danger">
+                    {{ form.str_title.errors }}
+                </div>
+            {% endif %}
         </div>
-
-        <div class="card-body">
-            <form method="post" class="form">
-
-                {% csrf_token %}
-                
-                <h4>Dados do Sistema:</h4>
-                <p>{{ form.errors }}</p>
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_title }}
-                    <small><p>Nome do Sistema.</p></small>
-                        {% if form.str_title.errors %}
-                            <div class="text-danger">
-                                {{ form.str_title.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_status }}
-                        <small><p>Status do Sistema.</p></small>
-                        {% if form.str_status.errors %}
-                            <div class="text-danger">
-                                {{ form.str_status.errors }}
-                            </div>
-                        {% endif %}
-                    </div>   
+        <div class="col">
+            {{ form.str_status }}
+            <small><p>Status do Sistema.</p></small>
+            {% if form.str_status.errors %}
+                <div class="text-danger">
+                    {{ form.str_status.errors }}
                 </div>
+            {% endif %}
+        </div>   
+    </div>
 
-                <div class='row mt-2 justify-content-center'>
-                    <div class="col">
-                        {{ form.str_desc }}
-                        <small><p>Descrição.</p></small>
-                        {% if form.str_desc.errors %}
-                            <div class="text-danger">
-                                {{ form.str_desc.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
+    <div class='row mt-2 justify-content-center'>
+        <div class="col">
+            {{ form.str_desc }}
+            <small><p>Descrição.</p></small>
+            {% if form.str_desc.errors %}
+                <div class="text-danger">
+                    {{ form.str_desc.errors }}
                 </div>
-
-                <h4>Informações de conexão PostGre:</h4>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_engine }}
-                    <small><p>Engine.</p></small>
-                        {% if form.str_engine.errors %}
-                            <div class="text-danger">
-                                {{ form.str_engine.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_name }}
-                        <small><p>Nome.</p></small>
-                        {% if form.str_name.errors %}
-                            <div class="text-danger">
-                                {{ form.str_name.errors }}
-                            </div>
-                        {% endif %}
-                    </div> 
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_user }}
-                    <small><p>User.</p></small>
-                        {% if form.str_user.errors %}
-                            <div class="text-danger">
-                                {{ form.str_user.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                    {{ form.str_password }}
-                    <small><p>Password.</p></small>
-                        {% if form.str_password.errors %}
-                            <div class="text-danger">
-                                {{ form.str_password.errors }}
-                            </div>
-                        {% endif %}
-                    </div>    
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                    {{ form.str_host }}
-                    <small><p>Host.</p></small>
-                        {% if form.str_host.errors %}
-                            <div class="text-danger">
-                                {{ form.str_host.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="col">
-                        {{ form.str_port }}
-                        <small><p>Port.</p></small>
-                        {% if form.str_port.errors %}
-                            <div class="text-danger">
-                                {{ form.str_port.errors }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div class="col" style="text-align: right;">
-                    <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
-                </div>
-
-            </form>
+            {% endif %}
         </div>
     </div>
-</div>
+
+    <h4>Informações de conexão PostGre:</h4>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_engine }}
+        <small><p>Engine.</p></small>
+            {% if form.str_engine.errors %}
+                <div class="text-danger">
+                    {{ form.str_engine.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_name }}
+            <small><p>Nome.</p></small>
+            {% if form.str_name.errors %}
+                <div class="text-danger">
+                    {{ form.str_name.errors }}
+                </div>
+            {% endif %}
+        </div> 
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_user }}
+        <small><p>User.</p></small>
+            {% if form.str_user.errors %}
+                <div class="text-danger">
+                    {{ form.str_user.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+        {{ form.str_password }}
+        <small><p>Password.</p></small>
+            {% if form.str_password.errors %}
+                <div class="text-danger">
+                    {{ form.str_password.errors }}
+                </div>
+            {% endif %}
+        </div>    
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        <div class="col">
+        {{ form.str_host }}
+        <small><p>Host.</p></small>
+            {% if form.str_host.errors %}
+                <div class="text-danger">
+                    {{ form.str_host.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ form.str_port }}
+            <small><p>Port.</p></small>
+            {% if form.str_port.errors %}
+                <div class="text-danger">
+                    {{ form.str_port.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col" style="text-align: right;">
+        <button type="submit" class="btn btn-primary mt-3 text-rigth">Cadastrar</button>
+    </div>
+
+</form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
